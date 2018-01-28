@@ -1,15 +1,7 @@
 {
   "name": "redux-blog-api",
   "version": "1.0.0",
-  "description": "",
-  "main": "src/index.js",
-  "scripts": {
-    "dev": "npm-run-all --parallel dev:*",
-    "dev:server": "nodemon --watch build --exec \"node build/bundle.js\"",
-    "dev:build-server": "webpack --config webpack.api.js --watch"
-  },
   "author": "Bryan Paronto <bparonto@gmail.com> (http://bryanparonto.com/)",
-  "license": "ISC",
   "dependencies": {
     "babel-cli": "6.26.0",
     "babel-core": "6.26.0",
@@ -33,5 +25,12 @@
   },
   "devDependencies": {
     "faker": "^4.1.0"
+  },
+  "license": "ISC",
+  "main": "src/index.js",
+  "scripts": {
+    "dev": "npm-run-all --parallel dev:*",
+    "dev:server": "nodemon --watch build --exec \"node build/bundle.js\"",
+    "dev:build-server": "webpack --config webpack.api.js --watch"
   }
 }

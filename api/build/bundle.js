@@ -60,7 +60,7 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 1);
+/******/ 	return __webpack_require__(__webpack_require__.s = 2);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -80,31 +80,67 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
+var _config = __webpack_require__(11);
+
+var _config2 = _interopRequireDefault(_config);
+
+var _knex = __webpack_require__(12);
+
+var _knex2 = _interopRequireDefault(_knex);
+
+var _bookshelf = __webpack_require__(13);
+
+var _bookshelf2 = _interopRequireDefault(_bookshelf);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+(0, _knex2.default)(_config2.default.db);
+var db = (0, _bookshelf2.default)(_knex2.default);
+
+db.plugin('registry');
+db.plugin('virtuals');
+db.plugin('visibility');
+
+exports.default = db;
+
+/***/ }),
+/* 2 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+__webpack_require__(3);
+
 var _express = __webpack_require__(0);
 
 var _express2 = _interopRequireDefault(_express);
 
-var _morgan = __webpack_require__(2);
+var _morgan = __webpack_require__(4);
 
 var _morgan2 = _interopRequireDefault(_morgan);
 
-var _bodyParser = __webpack_require__(3);
+var _bodyParser = __webpack_require__(5);
 
 var _bodyParser2 = _interopRequireDefault(_bodyParser);
 
-var _dotenv = __webpack_require__(4);
+var _dotenv = __webpack_require__(6);
 
 var _dotenv2 = _interopRequireDefault(_dotenv);
 
-var _responseHelpers = __webpack_require__(5);
+var _responseHelpers = __webpack_require__(7);
 
 var _responseHelpers2 = _interopRequireDefault(_responseHelpers);
 
-var _router = __webpack_require__(6);
+var _router = __webpack_require__(8);
 
 var _router2 = _interopRequireDefault(_router);
 
-var _database = __webpack_require__(7);
+var _database = __webpack_require__(1);
 
 var _database2 = _interopRequireDefault(_database);
 
@@ -151,25 +187,31 @@ app.listen(PORT, function () {
 exports.default = app;
 
 /***/ }),
-/* 2 */
-/***/ (function(module, exports) {
-
-module.exports = require("morgan");
-
-/***/ }),
 /* 3 */
 /***/ (function(module, exports) {
 
-module.exports = require("body-parser");
+module.exports = require("babel-polyfill");
 
 /***/ }),
 /* 4 */
 /***/ (function(module, exports) {
 
-module.exports = require("dotenv");
+module.exports = require("morgan");
 
 /***/ }),
 /* 5 */
+/***/ (function(module, exports) {
+
+module.exports = require("body-parser");
+
+/***/ }),
+/* 6 */
+/***/ (function(module, exports) {
+
+module.exports = require("dotenv");
+
+/***/ }),
+/* 7 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -342,19 +384,23 @@ module.exports = function () {
 };
 
 /***/ }),
-/* 6 */
+/* 8 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
 Object.defineProperty(exports, "__esModule", {
-    value: true
+  value: true
 });
 
 var _express = __webpack_require__(0);
 
 var _express2 = _interopRequireDefault(_express);
+
+var _PostsController = __webpack_require__(9);
+
+var _PostsController2 = _interopRequireDefault(_PostsController);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -366,20 +412,20 @@ var router = _express2.default.Router();
 // router.put('/users/:id', users.update);
 // router.delete('/users/:id', users.delete);
 
-// router.get('/pins', pins.list);
+router.get('/posts', _PostsController2.default.index);
 // router.post('/pins', pins.add);
-// router.get('/pins/:id', pins.get);
+router.get('/posts/:id', _PostsController2.default.show);
 // router.put('/pins/:id', pins.update);
 // router.delete('/pins/:id', pins.delete);
 
 router.get('/status', function (req, res) {
-    res.send("OK");
+  res.send("OK");
 });
 
 exports.default = router;
 
 /***/ }),
-/* 7 */
+/* 9 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -389,31 +435,136 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _config = __webpack_require__(8);
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-var _config2 = _interopRequireDefault(_config);
+var _post = __webpack_require__(10);
 
-var _knex = __webpack_require__(9);
-
-var _knex2 = _interopRequireDefault(_knex);
-
-var _bookshelf = __webpack_require__(10);
-
-var _bookshelf2 = _interopRequireDefault(_bookshelf);
+var _post2 = _interopRequireDefault(_post);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-(0, _knex2.default)(_config2.default.db);
-var db = (0, _bookshelf2.default)(_knex2.default);
+function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, arguments); return new Promise(function (resolve, reject) { function step(key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { return Promise.resolve(value).then(function (value) { step("next", value); }, function (err) { step("throw", err); }); } } return step("next"); }); }; }
 
-db.plugin('registry');
-db.plugin('virtuals');
-db.plugin('visibility');
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-exports.default = db;
+var PostsController = function () {
+  function PostsController() {
+    _classCallCheck(this, PostsController);
+  }
+
+  _createClass(PostsController, [{
+    key: 'index',
+    value: function () {
+      var _ref = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee(req, res) {
+        var posts;
+        return regeneratorRuntime.wrap(function _callee$(_context) {
+          while (1) {
+            switch (_context.prev = _context.next) {
+              case 0:
+                _context.prev = 0;
+                _context.next = 3;
+                return _post2.default.fetchAll();
+
+              case 3:
+                posts = _context.sent;
+
+                res.json(posts.toJSON());
+                _context.next = 10;
+                break;
+
+              case 7:
+                _context.prev = 7;
+                _context.t0 = _context['catch'](0);
+
+                res.serverError(new Error(_context.t0.message));
+
+              case 10:
+              case 'end':
+                return _context.stop();
+            }
+          }
+        }, _callee, this, [[0, 7]]);
+      }));
+
+      function index(_x, _x2) {
+        return _ref.apply(this, arguments);
+      }
+
+      return index;
+    }()
+  }, {
+    key: 'show',
+    value: function () {
+      var _ref2 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee2(req, res) {
+        var id, post;
+        return regeneratorRuntime.wrap(function _callee2$(_context2) {
+          while (1) {
+            switch (_context2.prev = _context2.next) {
+              case 0:
+                id = req.params.id;
+                _context2.prev = 1;
+                _context2.next = 4;
+                return _post2.default.where('id', id).fetch();
+
+              case 4:
+                post = _context2.sent;
+
+                res.send(post.toJSON());
+                _context2.next = 11;
+                break;
+
+              case 8:
+                _context2.prev = 8;
+                _context2.t0 = _context2['catch'](1);
+
+                res.serverError(new Error(_context2.t0.message));
+
+              case 11:
+              case 'end':
+                return _context2.stop();
+            }
+          }
+        }, _callee2, this, [[1, 8]]);
+      }));
+
+      function show(_x3, _x4) {
+        return _ref2.apply(this, arguments);
+      }
+
+      return show;
+    }()
+  }]);
+
+  return PostsController;
+}();
+
+exports.default = new PostsController();
 
 /***/ }),
-/* 8 */
+/* 10 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _database = __webpack_require__(1);
+
+var _database2 = _interopRequireDefault(_database);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var Post = _database2.default.Model.extend({
+  tableName: 'posts'
+});
+
+exports.default = _database2.default.model('Post', Post);
+
+/***/ }),
+/* 11 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -445,13 +596,13 @@ exports.default = {
 };
 
 /***/ }),
-/* 9 */
+/* 12 */
 /***/ (function(module, exports) {
 
 module.exports = require("knex");
 
 /***/ }),
-/* 10 */
+/* 13 */
 /***/ (function(module, exports) {
 
 module.exports = require("bookshelf");

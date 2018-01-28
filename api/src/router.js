@@ -1,4 +1,5 @@
 import express  from 'express';
+import postsController from './controllers/PostsController'
 
 const router = express.Router();
 
@@ -8,14 +9,14 @@ const router = express.Router();
 // router.put('/users/:id', users.update);
 // router.delete('/users/:id', users.delete);
 
-// router.get('/pins', pins.list);
+router.get('/posts', postsController.index);
 // router.post('/pins', pins.add);
-// router.get('/pins/:id', pins.get);
+router.get('/posts/:id', postsController.show);
 // router.put('/pins/:id', pins.update);
 // router.delete('/pins/:id', pins.delete);
 
 router.get('/status', function(req, res) {
-    res.send("OK");
+  res.send("OK");
 });
 
 export default router;
