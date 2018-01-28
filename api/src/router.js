@@ -3,21 +3,17 @@ import postsController from './controllers/PostsController'
 
 const router = express.Router();
 
-// router.get('/users', users.list);
-// router.post('/users', users.add);
-// router.get('/users/:id', users.get);
-// router.put('/users/:id', users.update);
-// router.delete('/users/:id', users.delete);
+// router.get('/users', usersController.list);
+// router.get('/users/:id', usersController.show);
+// router.post('/users', usersController.add);
+// router.put('/users/:id', usersController.update);
+// router.delete('/users/:id', usersController.delete);
 
 router.get('/posts', postsController.index);
-// router.post('/pins', pins.add);
 router.get('/posts/:id', postsController.show);
-// router.put('/pins/:id', pins.update);
-// router.delete('/pins/:id', pins.delete);
-
-router.get('/status', function(req, res) {
-  res.send("OK");
-});
+// router.post('/posts', postsController.add);
+// router.put('/posts/:id', postsController.update);
+// router.delete('/posts/:id', postsController.delete);
 
 export default router;
 

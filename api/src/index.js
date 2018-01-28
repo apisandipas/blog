@@ -14,7 +14,7 @@ const { PORT } = process.env
 const app = express()
 app.set('db', db);
 
-// Load middleare
+// Load middleware
 app.use(morgan('dev'))
 app.use(bodyParser.json())
 app.use(responseHelpers())

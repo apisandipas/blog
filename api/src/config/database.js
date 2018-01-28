@@ -2,6 +2,7 @@ import config from './config'
 import knex from 'knex'
 import bookshelf from 'bookshelf'
 
+
 knex(config.db)
 const db = bookshelf(knex)
 
