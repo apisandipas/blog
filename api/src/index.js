@@ -2,6 +2,7 @@ import 'babel-polyfill'
 import express from 'express'
 import morgan from 'morgan'
 import bodyParser from 'body-parser'
+import expressValidator from 'express-validator'
 import env from 'dotenv'
 import responseHelpers from './middleware/response-helpers'
 import router from './router'
@@ -18,6 +19,7 @@ app.set('db', db);
 app.use(morgan('dev'))
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: false }))
+app.use(expressValidator())
 app.use(responseHelpers())
 
 app.get('/', (req, res) => {
