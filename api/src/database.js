@@ -1,10 +1,10 @@
 import knexConfig from '../knexfile'
-import knex from 'knex'
+import Knex from 'knex'
 import bookshelf from 'bookshelf'
 
 const env = process.env.NODE_ENV || 'development'
+const knex = Knex(knexConfig[env])
 
-knex(knexConfig[env])
 const db = bookshelf(knex)
 
 db.plugin('registry');
