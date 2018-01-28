@@ -4,7 +4,7 @@ exports.up = function(knex, Promise) {
     .createTable('posts', function(table) {
       table.increments('id').primary();
       table.string('title');
-      table.string('body');
+      table.text('body');
     });
 };
 
