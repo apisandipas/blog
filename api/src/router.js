@@ -12,9 +12,9 @@ const router = express.Router();
 
 router.get('/posts', postsController.index);
 router.get('/posts/:id', postsController.show);
-// router.post('/posts', postsController.add);
-// router.put('/posts/:id', postsController.update);
-// router.delete('/posts/:id', postsController.delete);
+router.post('/posts', postsController.add);
+router.put('/posts/:id', postsController.update);
+router.delete('/posts/:id', postsController.delete);
 
 export default router;
 
