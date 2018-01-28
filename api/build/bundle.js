@@ -198,7 +198,7 @@ var Status = {
  * @param status
  * @returns {string}
  */
-function statusMessage(status) {
+var statusMessage = function statusMessage(status) {
   switch (status) {
     case Status.BAD_REQUEST:
       return 'Bad Request';
@@ -213,7 +213,7 @@ function statusMessage(status) {
     case Status.SERVER_ERROR:
       return 'Internal Server Error';
   }
-}
+};
 
 /**
  * Helper for sending JSON responses
