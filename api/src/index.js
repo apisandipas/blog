@@ -5,7 +5,7 @@ import bodyParser from 'body-parser'
 import env from 'dotenv'
 import responseHelpers from './middleware/response-helpers'
 import router from './router'
-import db from './config/database'
+import db from './database'
 
 // Load .env file
 env.config()

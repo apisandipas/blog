@@ -1,4 +1,7 @@
 // Update with your config settings.
+const env = require('dotenv')
+env.config()
+
 const {
   DB_DRIVER,
   DB_HOST,

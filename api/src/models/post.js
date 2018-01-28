@@ -1,4 +1,4 @@
-import db from '../config/database'
+import db from '../database'
 
 const Post = db.Model.extend({
   tableName: 'posts'
