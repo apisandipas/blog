@@ -22,8 +22,10 @@ class PostsController {
   }
 
   async add (req, res) {
-    const { title, body } = req.body
     try {
+      const errors = validatePost(req.body)
+      if (errors.length) res.invalid(errors)
+      const { title, body } = req.body
       const post = await Post.forge({
         title, 
         body
@@ -59,7 +61,19 @@ class PostsController {
       res.serverError(new Error(err.message))
     }
   }
+}
 
+const validatePost = ({ title, body }) => {
+  let errors = []
+  if (!title || title.legth == 0){
+    errors.push("Title is a required field")
+  }
+
+  if (!body || body.legth == 0){
+    errors.push("Body is a required field")
+  }
+
+  return errors
 }
 
 export default new PostsController()

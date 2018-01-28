@@ -7,8 +7,8 @@ const knex = Knex(knexConfig[env])
 
 const db = bookshelf(knex)
 
-db.plugin('registry');
-db.plugin('virtuals');
-db.plugin('visibility');
+db.plugin('registry')
+db.plugin('virtuals')
+db.plugin('visibility')
 
 export default db
