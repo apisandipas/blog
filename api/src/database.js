@@ -10,5 +10,6 @@ const db = bookshelf(knex)
 db.plugin('registry')
 db.plugin('virtuals')
 db.plugin('visibility')
+db.plugin('pagination')
 
 export default db

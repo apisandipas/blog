@@ -11,7 +11,9 @@ exports.seed = function(knex, Promise) {
         return  {
           id: i, 
           title: faker.lorem.words(), 
-          body: faker.lorem.paragraphs()
+          body: faker.lorem.paragraphs(),
+          createdAt: new Date(),
+          updatedAt: new Date()
         }
       })
       return knex('posts').insert(posts);

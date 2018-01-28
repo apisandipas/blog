@@ -1,10 +1,16 @@
 import Post from '../models/post'
 
+const PAGE_SIZE = 10
+
 class PostsController {
 
   async index (req, res) { 
     try {
-      const posts = await Post.fetchAll()
+      const { page } = req.query
+      const posts = await Post.fetchPage({
+        page,
+        pageSize: PAGE_SIZE
+      })
       res.json(posts.toJSON())
     } catch(err){
       res.serverError(new Error(err.message))
@@ -25,6 +31,7 @@ class PostsController {
     try {
       const errors = validatePost(req.body)
       if (errors.length) res.invalid(errors)
+
       const { title, body } = req.body
       const post = await Post.forge({
         title, 
