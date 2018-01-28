@@ -20,6 +20,7 @@ app.use(bodyParser.json())
 app.use(responseHelpers())
 
 app.get('/', (req, res) => {
+  console.log(process.env.DB_DRIVER)
   res.send("Status OK")
 })
 
