@@ -1,12 +1,12 @@
 import express  from 'express';
 import postsController from './controllers/PostsController'
+import usersController from './controllers/UsersController'
 
 const router = express.Router();
 
-// TODO: write users controller
-// router.get('/users', usersController.list);
-// router.get('/users/:id', usersController.show);
-// router.post('/users', usersController.add);
+router.get('/users', usersController.index);
+router.get('/users/:id', usersController.show);
+router.post('/users', usersController.add);
 // router.put('/users/:id', usersController.update);
 // router.delete('/users/:id', usersController.delete);
 
