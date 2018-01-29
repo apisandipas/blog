@@ -26,7 +26,7 @@ class UsersController {
     req.checkBody('email', 'Email must be a valid email address').isEmail()
     req.checkBody('email', 'Email must be between 4 and 100 characters long').len(4, 100)
     req.checkBody('password', 'Password is required.').notEmpty()
-    req.checkBody('password', 'Password must be between 8 and 100 characters long.').len(8, 100)
+    req.checkBody('password', 'Password must be between 8 and 72 characters long.').len(8, 72)
     req.checkBody('passwordConfirm', 'Password Confirm must match password').equals(req.body.password)
     
     const errors = req.validationErrors()
@@ -42,6 +42,14 @@ class UsersController {
     } catch(err) {
       res.serverError(new Error(err.message))
     }
+  }
+
+  async update (req, res) {
+
+  }
+
+  async delete (req, res) {
+
   }
 
 }

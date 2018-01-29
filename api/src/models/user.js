@@ -3,7 +3,7 @@ import db from '../database'
 
 const User = db.Model.extend({
   tableName: 'users',
-  hidden: ['password'],
+  // hidden: ['password'],
   hasTimestamps: ['createdAt', 'updatedAt'],
   initialize () {
     this.on('creating', this.hashPassword, this)
@@ -16,6 +16,11 @@ const User = db.Model.extend({
         resolve(hash)
       });
     });
+  },
+  comparePassword (passwordCandidate) {
+    console.log('passwordCandidate', passwordCandidate)
+    console.log('this.password', this.password)
+    return bcrypt.compare(passwordCandidate, this.password)
   }
 })
 
