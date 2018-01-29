@@ -7,9 +7,9 @@ const User = db.Model.extend({
   hasSecurePassword: true,
   hidden: ['password_digest'],
   hasTimestamps: ['created_at', 'updated_at'],
-  // posts () {
-  //   return this.hasMany(Post);
-  // }
+  posts () {
+    return this.hasMany(Post);
+  }
 })
 
 export default db.model('User', User)

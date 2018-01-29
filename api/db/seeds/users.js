@@ -5,7 +5,7 @@ exports.seed = function(knex, Promise) {
   // Deletes ALL existing entries
   return knex('users').del()
     .then(function () {
-      const posts = map(range(1, 100, 1), (i) => {
+      const posts = map(range(1, 10, 1), (i) => {
         return  {
           id: i, 
           email: faker.internet.email(), 

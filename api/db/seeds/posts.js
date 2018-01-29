@@ -7,10 +7,10 @@ exports.seed = function(knex, Promise) {
   return knex('posts').del()
     .then(function () {
       const posts = map(range(1, 100, 1), (i) => {
-        // const user_id = random(1, 100)
+        const user_id = random(1, 10)
         return  {
           id: i, 
-          // user_id,
+          user_id,
           title: faker.lorem.words(), 
           body: faker.lorem.paragraphs(),
           created_at: new Date(),
