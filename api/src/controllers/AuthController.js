@@ -8,12 +8,14 @@ class AuthController {
       
       req.session.isAuthenticated = true
       let matchingUser = match.toJSON()
+      
       delete matchingUser.password_digest
+      delete matchingUser.password
+
       req.session.user = matchingUser
-      console.log(req.session)
-      res.send(match)
+      res.send(matchingUser)
     } catch(err) {
-      res.serverError(new Error(err.message))
+      res.unauthorized()  
     }
 
   }
