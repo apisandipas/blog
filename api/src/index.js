@@ -4,10 +4,12 @@ import morgan from 'morgan'
 import bodyParser from 'body-parser'
 import cors from 'cors'
 import cookieSession from 'cookie-session'
+import passport from 'passport'
 import expressValidator from 'express-validator'
 import env from 'dotenv'
 import responseHelpers from './middleware/response-helpers'
 import router from './router'
+import './services/passport'
 
 // Load .env file
 env.config()
@@ -26,6 +28,8 @@ app.use(cookieSession({
   maxAge: 30 * 24 * 60 * 60 * 1000,
   keys: [COOKIE_KEY]
 }))
+app.use(passport.initialize())
+app.use(passport.session())
 
 app.get('/', (req, res) => {
   res.send("Status OK")
