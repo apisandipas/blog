@@ -7,6 +7,6 @@ exports.up = function(knex, Promise) {
 
 exports.down = function(knex, Promise) {
   return knex.schema.table('posts', function(table) {
-    table.dropColumn('user_id').references('users.id')
+    table.dropColumn('user_id')
   });
 };
