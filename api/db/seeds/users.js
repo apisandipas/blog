@@ -1,22 +1,19 @@
 const faker = require('faker')
 const range = require('lodash.range')
 const map = require('lodash.map')
-const random = require('lodash.random')
 exports.seed = function(knex, Promise) {
   // Deletes ALL existing entries
-  return knex('posts').del()
+  return knex('users').del()
     .then(function () {
       const posts = map(range(1, 100, 1), (i) => {
-        // const user_id = random(1, 100)
         return  {
           id: i, 
-          // user_id,
-          title: faker.lorem.words(), 
-          body: faker.lorem.paragraphs(),
+          email: faker.internet.email(), 
+          password_digest: faker.random.uuid(),
           created_at: new Date(),
           updated_at: new Date()
         }
       })
-      return knex('posts').insert(posts);
+      return knex('users').insert(posts);
     });
 };

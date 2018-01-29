@@ -7,6 +7,6 @@ exports.up = function(knex, Promise) {
 
 exports.down = function(knex, Promise) {
   return knex.schema.table('users', function(table) {
-     // table.dropIndex('email');
+     table.dropIndex('email');
   });
 };

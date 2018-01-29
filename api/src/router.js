@@ -12,6 +12,7 @@ router.post('/login',
   authController.login
 )
 router.get('/logout', authController.logout);
+router.post('/register', authController.register);
 
 router.get('/users', usersController.index);
 router.get('/users/:id', usersController.show);
@@ -19,7 +20,10 @@ router.post('/users', usersController.add);
 router.put('/users/:id', usersController.update);
 router.delete('/users/:id', usersController.delete);
 
-router.get('/posts', requireLogin, postsController.index);
+router.get('/posts', 
+  // requireLogin, //for demo purposes only
+  postsController.index
+);
 router.get('/posts/:id', postsController.show);
 router.post('/posts', postsController.add);
 router.put('/posts/:id', postsController.update);

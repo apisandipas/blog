@@ -9,7 +9,8 @@ class PostsController {
       const { page } = req.query
       const posts = await Post.fetchPage({
         page,
-        pageSize: PAGE_SIZE
+        pageSize: PAGE_SIZE,
+        withRelated: 'user'  
       })
       res.json(posts.toJSON())
     } catch(err){
