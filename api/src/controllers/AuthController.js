@@ -2,13 +2,18 @@ import User from '../models/user'
 
 class AuthController {
   login (req, res) {
-    console.log('LOGIN ROUTE HIT!')
     res.redirect('/')
   }
 
   logout (req, res) {
     req.logout();
     res.redirect('/');
+  }
+
+  currentUser (req, res) {
+    if (req.isAuthenticated()) {
+      res.send(req.user)
+    }
   }
 
   async register (req, res) {

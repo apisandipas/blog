@@ -1,10 +1,8 @@
 import { combineReducers } from 'redux'
-import usersReducer from './usersReducer'
 import authReducer from './authReducer'
-import adminReducer from './adminReducer'
+import postsReducer from './postsReducer'
 
 export default combineReducers({
-  users: usersReducer,
   auth: authReducer,
-  admins: adminReducer
+  posts: postsReducer
 })

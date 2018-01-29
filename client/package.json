@@ -36,7 +36,7 @@
     "webpack-node-externals": "1.6.0"
   },
   "license": "MIT",
-  "main": "index.js",
+  "main": "src/index.js",
   "scripts": {
     "dev": "npm-run-all --parallel dev:*",
     "dev:server": "nodemon --watch build --exec \"node build/bundle.js\"",

@@ -3,11 +3,9 @@ import thunk from 'redux-thunk'
 import axios from 'axios'
 import reducers from '../client/reducers'
 
-
-
 export default (req) => {
   const axiosInstance = axios.create({
-    baseURL: 'http://react-ssr-api.herokuapp.com/',
+    baseURL: 'http://localhost:3001/',
     headers: { cookie: req.get('cookie') || '' }
   })
 

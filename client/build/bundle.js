@@ -154,9 +154,9 @@ var fetchCurrentUser = exports.fetchCurrentUser = function fetchCurrentUser() {
   }();
 };
 
-var FETCH_ADMINS = exports.FETCH_ADMINS = 'fetch_admins';
+var FETCH_POSTS = exports.FETCH_POSTS = 'fetch_posts';
 
-var fetchAdmins = exports.fetchAdmins = function fetchAdmins() {
+var fetchPosts = exports.fetchPosts = function fetchPosts() {
   return function () {
     var _ref3 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee3(dispatch, getState, api) {
       var res;
@@ -165,14 +165,14 @@ var fetchAdmins = exports.fetchAdmins = function fetchAdmins() {
           switch (_context3.prev = _context3.next) {
             case 0:
               _context3.next = 2;
-              return api.get('/admins');
+              return api.get('/api/posts');
 
             case 2:
               res = _context3.sent;
 
 
               dispatch({
-                type: FETCH_ADMINS,
+                type: FETCH_POSTS,
                 payload: res
               });
 
@@ -186,6 +186,42 @@ var fetchAdmins = exports.fetchAdmins = function fetchAdmins() {
 
     return function (_x7, _x8, _x9) {
       return _ref3.apply(this, arguments);
+    };
+  }();
+};
+
+var FETCH_ADMINS = exports.FETCH_ADMINS = 'fetch_admins';
+
+var fetchAdmins = exports.fetchAdmins = function fetchAdmins() {
+  return function () {
+    var _ref4 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee4(dispatch, getState, api) {
+      var res;
+      return regeneratorRuntime.wrap(function _callee4$(_context4) {
+        while (1) {
+          switch (_context4.prev = _context4.next) {
+            case 0:
+              _context4.next = 2;
+              return api.get('/admins');
+
+            case 2:
+              res = _context4.sent;
+
+
+              dispatch({
+                type: FETCH_ADMINS,
+                payload: res
+              });
+
+            case 4:
+            case 'end':
+              return _context4.stop();
+          }
+        }
+      }, _callee4, undefined);
+    }));
+
+    return function (_x10, _x11, _x12) {
+      return _ref4.apply(this, arguments);
     };
   }();
 };
@@ -239,14 +275,6 @@ var _HomePage = __webpack_require__(16);
 
 var _HomePage2 = _interopRequireDefault(_HomePage);
 
-var _UsersListPage = __webpack_require__(17);
-
-var _UsersListPage2 = _interopRequireDefault(_UsersListPage);
-
-var _AdminsListPage = __webpack_require__(18);
-
-var _AdminsListPage2 = _interopRequireDefault(_AdminsListPage);
-
 var _NotFoundPage = __webpack_require__(20);
 
 var _NotFoundPage2 = _interopRequireDefault(_NotFoundPage);
@@ -257,10 +285,6 @@ exports.default = [_extends({}, _App2.default, {
   routes: [_extends({}, _HomePage2.default, {
     path: '/',
     exact: true
-  }), _extends({}, _UsersListPage2.default, {
-    path: '/users'
-  }), _extends({}, _AdminsListPage2.default, {
-    path: '/admins'
   }), _extends({}, _NotFoundPage2.default)]
 })];
 
@@ -293,7 +317,7 @@ var _createStore2 = _interopRequireDefault(_createStore);
 
 var _reactRouterConfig = __webpack_require__(5);
 
-var _expressHttpProxy = __webpack_require__(28);
+var _expressHttpProxy = __webpack_require__(29);
 
 var _expressHttpProxy2 = _interopRequireDefault(_expressHttpProxy);
 
@@ -305,9 +329,9 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 var app = (0, _express2.default)();
 
-app.use('/api', (0, _expressHttpProxy2.default)('http://react-ssr-api.herokuapp.com', {
+app.use('/api', (0, _expressHttpProxy2.default)('http://localhost:3001', {
   proxyReqOptDecorator: function proxyReqOptDecorator(opts) {
-    opts.headers['x-forwarded-host'] = 'localhost:3000';
+    opts.headers['x-forwarded-host'] = 'localhost:3002';
     return opts;
   }
 }));
@@ -412,7 +436,7 @@ exports.default = function (req, store, context) {
 
   var hemlet = _reactHelmet.Helmet.renderStatic();
 
-  return '\n    <html>\n      <head>\n        ' + hemlet.title.toString() + '\n        ' + hemlet.meta.toString() + '\n        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">\n      </head>\n      <body>\n        <div id="root">' + content + '</div>\n        <script>window.INITIAL_STATE = ' + (0, _serializeJavascript2.default)(store.getState()) + '</script>\n        <script src="bundle.js"></script>\n       </body>\n    </html>  \n  ';
+  return '\n    <html>\n      <head>\n        ' + hemlet.title.toString() + '\n        ' + hemlet.meta.toString() + '\n  \n      </head>\n      <body>\n        <div id="root">' + content + '</div>\n        <script>window.INITIAL_STATE = ' + (0, _serializeJavascript2.default)(store.getState()) + '</script>\n        <script src="bundle.js"></script>\n       </body>\n    </html>  \n  ';
 };
 
 /***/ }),
@@ -464,11 +488,8 @@ var App = function App(_ref) {
 };
 
 exports.default = {
-  component: App,
-  loadData: function loadData(_ref2) {
-    var dispatch = _ref2.dispatch;
-    return dispatch((0, _actions.fetchCurrentUser)());
-  }
+  component: App
+  // loadData: ({ dispatch }) => dispatch(fetchCurrentUser())
 };
 
 /***/ }),
@@ -492,8 +513,11 @@ var _reactRedux = __webpack_require__(2);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 var Header = function Header(_ref) {
   var auth = _ref.auth;
+
 
   var authButton = auth ? _react2.default.createElement(
     'a',
@@ -501,47 +525,25 @@ var Header = function Header(_ref) {
     'Logout'
   ) : _react2.default.createElement(
     'a',
-    { href: '/api/auth/google' },
+    { href: '/api/login' },
     'Login'
   );
 
   return _react2.default.createElement(
     'nav',
-    null,
+    { className: 'navbar' },
     _react2.default.createElement(
-      'div',
-      { className: 'nav-wrapper' },
+      _reactRouterDom.Link,
+      _defineProperty({ to: '/', className: 'navbar-brand' }, 'to', '/'),
+      'NERDPress'
+    ),
+    _react2.default.createElement(
+      'ul',
+      { className: 'navbar-nav' },
       _react2.default.createElement(
-        _reactRouterDom.Link,
-        { to: '/', className: 'brand-logo' },
-        'React SSR'
-      ),
-      _react2.default.createElement(
-        'ul',
-        { id: 'nav-mobile', className: 'right' },
-        _react2.default.createElement(
-          'li',
-          null,
-          _react2.default.createElement(
-            _reactRouterDom.Link,
-            { to: '/users' },
-            'Users'
-          )
-        ),
-        _react2.default.createElement(
-          'li',
-          null,
-          _react2.default.createElement(
-            _reactRouterDom.Link,
-            { to: '/admins' },
-            'Admin'
-          )
-        ),
-        _react2.default.createElement(
-          'li',
-          null,
-          authButton
-        )
+        'li',
+        null,
+        authButton
       )
     )
   );
@@ -568,65 +570,15 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _react = __webpack_require__(0);
-
-var _react2 = _interopRequireDefault(_react);
-
-var _reactHelmet = __webpack_require__(3);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-var Home = function Home() {
-  return _react2.default.createElement(
-    'div',
-    { className: 'center-align', style: { marginTop: '200px' } },
-    _react2.default.createElement(
-      _reactHelmet.Helmet,
-      null,
-      _react2.default.createElement(
-        'title',
-        null,
-        'React SSR | Home Page'
-      ),
-      _react2.default.createElement('meta', { property: 'og:title', content: 'React SSR | Home Page' })
-    ),
-    _react2.default.createElement(
-      'h3',
-      null,
-      'Welcome'
-    ),
-    _react2.default.createElement(
-      'p',
-      null,
-      'Check out these awesome features!'
-    )
-  );
-};
-
-exports.default = {
-  component: Home
-};
-
-/***/ }),
-/* 17 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _reactRedux = __webpack_require__(2);
-
 var _reactHelmet = __webpack_require__(3);
+
+var _reactRedux = __webpack_require__(2);
 
 var _index = __webpack_require__(1);
 
@@ -638,44 +590,30 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var UsersList = function (_Component) {
-  _inherits(UsersList, _Component);
+var HomePage = function (_Component) {
+  _inherits(HomePage, _Component);
 
-  function UsersList() {
-    _classCallCheck(this, UsersList);
+  function HomePage() {
+    _classCallCheck(this, HomePage);
 
-    return _possibleConstructorReturn(this, (UsersList.__proto__ || Object.getPrototypeOf(UsersList)).apply(this, arguments));
+    return _possibleConstructorReturn(this, (HomePage.__proto__ || Object.getPrototypeOf(HomePage)).apply(this, arguments));
   }
 
-  _createClass(UsersList, [{
+  _createClass(HomePage, [{
     key: 'componentDidMount',
     value: function componentDidMount() {
-      this.props.fetchUsers();
+      this.props.fetchPosts();
     }
   }, {
-    key: 'renderUsers',
-    value: function renderUsers() {
-      return this.props.users.map(function (user) {
+    key: 'renderPosts',
+    value: function renderPosts() {
+      return this.props.posts.map(function (post) {
         return _react2.default.createElement(
           'li',
-          { key: user.id },
-          user.name
+          { key: post.id },
+          post.title
         );
       });
-    }
-  }, {
-    key: 'head',
-    value: function head() {
-      return _react2.default.createElement(
-        _reactHelmet.Helmet,
-        null,
-        _react2.default.createElement(
-          'title',
-          null,
-          'React SSR | Users List ' + this.props.users.length
-        ),
-        _react2.default.createElement('meta', { property: 'og:title', content: 'React SSR | Users List' })
-      );
     }
   }, {
     key: 'render',
@@ -683,213 +621,47 @@ var UsersList = function (_Component) {
       return _react2.default.createElement(
         'div',
         null,
-        this.head(),
-        'Heres a list of users',
         _react2.default.createElement(
-          'ul',
+          _reactHelmet.Helmet,
           null,
-          this.renderUsers()
-        )
-      );
-    }
-  }]);
-
-  return UsersList;
-}(_react.Component);
-
-function mapStateToProps(state) {
-  return {
-    users: state.users
-  };
-}
-
-function loadData(store) {
-  return store.dispatch((0, _index.fetchUsers)());
-}
-
-exports.default = {
-  component: (0, _reactRedux.connect)(mapStateToProps, { fetchUsers: _index.fetchUsers })(UsersList),
-  loadData: loadData
-};
-
-/***/ }),
-/* 18 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-var _react = __webpack_require__(0);
-
-var _react2 = _interopRequireDefault(_react);
-
-var _reactRedux = __webpack_require__(2);
-
-var _reactHelmet = __webpack_require__(3);
-
-var _index = __webpack_require__(1);
-
-var _requireAuth = __webpack_require__(19);
-
-var _requireAuth2 = _interopRequireDefault(_requireAuth);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-var AdminsList = function (_Component) {
-  _inherits(AdminsList, _Component);
-
-  function AdminsList() {
-    _classCallCheck(this, AdminsList);
-
-    return _possibleConstructorReturn(this, (AdminsList.__proto__ || Object.getPrototypeOf(AdminsList)).apply(this, arguments));
-  }
-
-  _createClass(AdminsList, [{
-    key: 'componentDidMount',
-    value: function componentDidMount() {
-      this.props.fetchAdmins();
-    }
-  }, {
-    key: 'renderAdmins',
-    value: function renderAdmins() {
-      return this.props.admins.map(function (admin) {
-        return _react2.default.createElement(
-          'li',
-          { key: admin.id },
-          admin.name
-        );
-      });
-    }
-  }, {
-    key: 'head',
-    value: function head() {
-      return _react2.default.createElement(
-        _reactHelmet.Helmet,
-        null,
-        _react2.default.createElement(
-          'title',
-          null,
-          'React SSR | Admins List'
+          _react2.default.createElement(
+            'title',
+            null,
+            'React SSR | Home Page'
+          ),
+          _react2.default.createElement('meta', { property: 'og:title', content: 'React SSR | Home Page' })
         ),
-        _react2.default.createElement('meta', { property: 'og:title', content: 'React SSR | Admins List' })
-      );
-    }
-  }, {
-    key: 'render',
-    value: function render() {
-      return _react2.default.createElement(
-        'div',
-        null,
-        this.head(),
-        'Heres a list of admins',
         _react2.default.createElement(
-          'ul',
+          'div',
           null,
-          this.renderAdmins()
+          this.renderPosts()
         )
       );
     }
   }]);
 
-  return AdminsList;
+  return HomePage;
 }(_react.Component);
 
 function mapStateToProps(state) {
   return {
-    admins: state.admins
+    posts: state.posts
   };
 }
 
 exports.default = {
-  component: (0, _reactRedux.connect)(mapStateToProps, { fetchAdmins: _index.fetchAdmins })((0, _requireAuth2.default)(AdminsList)),
+  component: (0, _reactRedux.connect)(mapStateToProps, { fetchPosts: _index.fetchPosts })(HomePage),
   loadData: function loadData(_ref) {
     var dispatch = _ref.dispatch;
-    return dispatch((0, _index.fetchAdmins)());
+    return dispatch((0, _index.fetchPosts)());
   }
+
 };
 
 /***/ }),
-/* 19 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-var _react = __webpack_require__(0);
-
-var _react2 = _interopRequireDefault(_react);
-
-var _reactRedux = __webpack_require__(2);
-
-var _reactRouterDom = __webpack_require__(4);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-exports.default = function (ChildComponent) {
-  var RequireAuth = function (_Component) {
-    _inherits(RequireAuth, _Component);
-
-    function RequireAuth() {
-      _classCallCheck(this, RequireAuth);
-
-      return _possibleConstructorReturn(this, (RequireAuth.__proto__ || Object.getPrototypeOf(RequireAuth)).apply(this, arguments));
-    }
-
-    _createClass(RequireAuth, [{
-      key: 'render',
-      value: function render() {
-        switch (this.props.auth) {
-          case false:
-            return _react2.default.createElement(_reactRouterDom.Redirect, { to: '/' });
-          case null:
-            return _react2.default.createElement(
-              'div',
-              null,
-              'Loading... '
-            );
-          default:
-            return _react2.default.createElement(ChildComponent, this.props);
-        }
-      }
-    }]);
-
-    return RequireAuth;
-  }(_react.Component);
-
-  function mapStateToProps(_ref) {
-    var auth = _ref.auth;
-
-    return { auth: auth };
-  }
-
-  return (0, _reactRedux.connect)(mapStateToProps)(RequireAuth);
-};
-
-/***/ }),
+/* 17 */,
+/* 18 */,
+/* 19 */,
 /* 20 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -951,7 +723,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 exports.default = function (req) {
   var axiosInstance = _axios2.default.create({
-    baseURL: 'http://react-ssr-api.herokuapp.com/',
+    baseURL: 'http://localhost:3001/',
     headers: { cookie: req.get('cookie') || '' }
   });
 
@@ -984,52 +756,23 @@ Object.defineProperty(exports, "__esModule", {
 
 var _redux = __webpack_require__(7);
 
-var _usersReducer = __webpack_require__(25);
-
-var _usersReducer2 = _interopRequireDefault(_usersReducer);
-
 var _authReducer = __webpack_require__(26);
 
 var _authReducer2 = _interopRequireDefault(_authReducer);
 
-var _adminReducer = __webpack_require__(27);
+var _postsReducer = __webpack_require__(28);
 
-var _adminReducer2 = _interopRequireDefault(_adminReducer);
+var _postsReducer2 = _interopRequireDefault(_postsReducer);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 exports.default = (0, _redux.combineReducers)({
-  users: _usersReducer2.default,
   auth: _authReducer2.default,
-  admins: _adminReducer2.default
+  posts: _postsReducer2.default
 });
 
 /***/ }),
-/* 25 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _actions = __webpack_require__(1);
-
-exports.default = function () {
-  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
-  var action = arguments[1];
-
-  switch (action.type) {
-    case _actions.FETCH_USERS:
-      return action.payload.data;
-    default:
-      return state;
-  }
-};
-
-/***/ }),
+/* 25 */,
 /* 26 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -1055,7 +798,8 @@ exports.default = function () {
 };
 
 /***/ }),
-/* 27 */
+/* 27 */,
+/* 28 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1072,7 +816,7 @@ exports.default = function () {
   var action = arguments[1];
 
   switch (action.type) {
-    case _actions.FETCH_ADMINS:
+    case _actions.FETCH_POSTS:
       return action.payload.data;
     default:
       return state;
@@ -1080,7 +824,7 @@ exports.default = function () {
 };
 
 /***/ }),
-/* 28 */
+/* 29 */
 /***/ (function(module, exports) {
 
 module.exports = require("express-http-proxy");
