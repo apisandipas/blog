@@ -1,12 +1,12 @@
 
-exports.up = function(knex, Promise) { 
+exports.up = function(knex, Promise) {
   return knex.schema.table('users', function(table) {
-     table.unique('email');
+    table.dropColumn('password');
   });
 };
 
 exports.down = function(knex, Promise) {
   return knex.schema.table('users', function(table) {
-     // table.dropIndex('email');
+    table.text('password');
   });
 };

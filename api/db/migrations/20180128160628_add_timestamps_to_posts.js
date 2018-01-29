@@ -1,14 +1,14 @@
 
 exports.up = function(knex, Promise) {
   return knex.schema.table('posts', function(table) {
-    table.dateTime('createdAt').notNull();
-    table.dateTime('updatedAt').nullable();
+    table.dateTime('created_at').notNull();
+    table.dateTime('updated_at').nullable();
   });
 };
 
 exports.down = function(knex, Promise) {
   return knex.schema.table('posts', function(table) {
-    table.dropColumn('createdAt');
-    table.dropColumn('updatedAt');
+    table.dropColumn('created_at');
+    table.dropColumn('updated_at');
   });
 };

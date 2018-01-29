@@ -2,28 +2,32 @@ import 'babel-polyfill'
 import express from 'express'
 import morgan from 'morgan'
 import bodyParser from 'body-parser'
+import cors from 'cors'
+import cookieSession from 'cookie-session'
 import expressValidator from 'express-validator'
 import env from 'dotenv'
 import responseHelpers from './middleware/response-helpers'
 import router from './router'
-import db from './database'
 
 // Load .env file
 env.config()
 
-const { PORT } = process.env
+const { PORT, COOKIE_KEY } = process.env
 const app = express()
-app.set('db', db);
 
 // Load middleware
 app.use(morgan('dev'))
+app.use(cors())
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(expressValidator())
 app.use(responseHelpers())
+app.use(cookieSession({
+  maxAge: 30 * 24 * 60 * 60 * 1000,
+  keys: [COOKIE_KEY]
+}))
 
 app.get('/', (req, res) => {
-  console.log(process.env.DB_DRIVER)
   res.send("Status OK")
 })
 
@@ -45,7 +49,7 @@ app.use(function(err, req, res, next) {
 });
 
 app.listen(PORT, () => {
-  console.log('API is listening on port %d', process.env.PORT)
+  console.log('API is listening on port %d', PORT)
 })
 
 export default app
