@@ -22,6 +22,7 @@ class UsersController {
   }
 
   async add (req, res) {
+    req.checkBody('name', 'Name is required.').notEmpty()
     req.checkBody('email', 'Email is required.').notEmpty()
     req.checkBody('email', 'Email must be a valid email address').isEmail()
     req.checkBody('email', 'Email must be between 4 and 100 characters long').len(4, 100)
@@ -33,8 +34,9 @@ class UsersController {
     if (errors.length) res.invalid(errors)
 
     try {
-      const { email, password } = req.body
+      const { name, email, password } = req.body
       const user = await User.forge({
+        name,
         email, 
         password
       }).save()

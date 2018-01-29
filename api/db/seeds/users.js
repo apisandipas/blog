@@ -9,6 +9,7 @@ exports.seed = function(knex, Promise) {
         return  {
           id: i, 
           email: faker.internet.email(), 
+          name: `${faker.name.firstName()} ${faker.name.lastName()} `,
           password_digest: faker.random.uuid(),
           created_at: new Date(),
           updated_at: new Date()

@@ -30,13 +30,15 @@ class PostsController {
 
   async add (req, res) {
     req.checkBody('title', 'Title is required.').notEmpty()
+    req.checkBody('excerpt', 'Excerpt is required.').notEmpty()
     req.checkBody('body', 'Body is required.').notEmpty()
     const errors = req.validationErrors()
     if (errors.length) res.invalid(errors)
 
     try {
-      const { title, body } = req.body
+      const { excerpt, title, body } = req.body
       const post = await Post.forge({
+        excerpt, 
         title, 
         body
       }).save()
