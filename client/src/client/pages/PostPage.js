@@ -13,10 +13,10 @@ class PostPage extends Component {
     this.props.fetchPost(id)
   }
 
-
   render() {
     const { post } = this.props
     const user = post.user
+
     return (
       <div>
         <Helmet>
@@ -49,7 +49,6 @@ class PostPage extends Component {
 }
 
 function mapStateToProps(state) {
-  console.log('state:', state)
   return {
     post: state.post
   }

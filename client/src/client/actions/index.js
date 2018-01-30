@@ -27,7 +27,6 @@ export const fetchPost = (id) => async (dispatch, getState, api) => {
   } catch(err) {
     console.log(err)
   }
-
 }
 
 export const loginUser = ({ email, password }) => async (dispatch, getState, api) => {

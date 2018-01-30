@@ -43908,6 +43908,7 @@ var PostPage = function (_Component) {
       var post = this.props.post;
 
       var user = post.user;
+
       return _react2.default.createElement(
         'div',
         null,
@@ -43966,7 +43967,6 @@ var PostPage = function (_Component) {
 }(_react.Component);
 
 function mapStateToProps(state) {
-  console.log('state:', state);
   return {
     post: state.post
   };
