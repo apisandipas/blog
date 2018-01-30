@@ -1,10 +1,17 @@
 import React, { Component } from 'react'
 import { Helmet } from 'react-helmet'
 import { Link } from 'react-router-dom'
+import { Field, reduxForm } from 'redux-form'
 
 class LoginPage extends Component {
+  handleSubmit (values) {
+    console.log(values)
+  }
   
-  render() {
+  render () {
+
+    const { handleSubmit } = this.props
+
     return (
       <div>
         <Helmet>
@@ -19,20 +26,33 @@ class LoginPage extends Component {
                   <h3 className="title has-text-grey">Login</h3>
                   <p className="subtitle has-text-grey">Please login to proceed.</p>
                   <div className="box">
-                    <form>
+                    <form onSubmit={handleSubmit(this.handleSubmit)}>
                       <div className="field">
                         <div className="control">
-                          <input className="input is-large" type="email" placeholder="Your Email" autoFocus="" />
+                          <Field 
+                            name="email" 
+                            component="input" 
+                            type="email" 
+                            className="input is-large" 
+                            placeholder="Your Email" 
+                            autoFocus="true" 
+                          />
                         </div>
                       </div>
 
                       <div className="field">
                         <div className="control">
-                          <input className="input is-large" type="password" placeholder="Your Password" />
+                          <Field 
+                            name="password" 
+                            component="input" 
+                            type="password" 
+                            className="input is-large" 
+                            placeholder="Your Password" 
+                          />
                         </div>
                       </div>
       
-                      <a className="button is-block is-info is-large">Login</a>
+                      <input type="submit" value="Login" className="button is-block is-info is-large" style={{width: '100%'}} />
                     </form>
                   </div>
                   <p className="has-text-grey">
@@ -51,5 +71,7 @@ class LoginPage extends Component {
 }
 
 export default {
-  component: LoginPage
+  component: reduxForm({
+    form: 'loginPage'
+  })(LoginPage)
 };

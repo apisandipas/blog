@@ -11,7 +11,7 @@ export const fetchCurrentUser = () => async (dispatch, getState, api) => {
 
 export const fetchPosts = () => async (dispatch, getState, api) => {
   const res = await api.get('/api/posts')
-
+  console.log(res.data)
   dispatch({
     type: FETCH_POSTS,
     payload: res

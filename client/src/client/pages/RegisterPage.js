@@ -3,7 +3,7 @@ import { Helmet } from 'react-helmet'
 import { Link } from 'react-router-dom'
 
 class RegisterPage extends Component {
-  
+
   render() {
     return (
       <div>
@@ -19,7 +19,7 @@ class RegisterPage extends Component {
                   <h3 className="title has-text-grey">Register</h3>
                   <p className="subtitle has-text-grey">Please register for an account.</p>
                   <div className="box">
-                    <form>
+                    <form onSubmit={this.handleSubmit}>
                       <div className="field">
                         <div className="control">
                           <input className="input is-large" type="text" placeholder="Your Name" autoFocus="true" />
