@@ -1,6 +1,7 @@
-import React, { Component } from 'react';
+import React, { Component } from 'react'
 import { Helmet } from 'react-helmet'
 import { connect } from 'react-redux'
+import { Link } from 'react-router-dom'
 import nl2br from 'react-nl2br'
 import titleCase from 'title-case'
 import dateFormat from 'dateformat'
@@ -16,7 +17,9 @@ class HomePage extends Component {
       return (
         <div className="card article" key={post.id} style={{marginBottom: '50px'}}>
           <div className="card-content">
-            <p className="title article-title">{titleCase(post.title)}</p>
+            <p className="title article-title">
+              <Link to={'/'+post.slug}>{titleCase(post.title)}</Link>
+            </p>
             <p className="subtitle is-6 article-subtitle">
               <a href="#">{post.user.name}</a> on {dateFormat(post.created_at, "dddd, mmmm dS, yyyy, h:MM:ss TT")}
             </p>

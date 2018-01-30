@@ -12,6 +12,7 @@ exports.seed = function(knex, Promise) {
           id: i, 
           user_id,
           title: faker.lorem.words(), 
+          slug: faker.lorem.slug(),
           excerpt: faker.lorem.paragraph(),
           body: faker.lorem.paragraphs(),
           created_at: new Date(),

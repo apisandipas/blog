@@ -612,6 +612,8 @@ var _reactHelmet = __webpack_require__(5);
 
 var _reactRedux = __webpack_require__(3);
 
+var _reactRouterDom = __webpack_require__(4);
+
 var _reactNl2br = __webpack_require__(25);
 
 var _reactNl2br2 = _interopRequireDefault(_reactNl2br);
@@ -661,7 +663,11 @@ var HomePage = function (_Component) {
             _react2.default.createElement(
               'p',
               { className: 'title article-title' },
-              (0, _titleCase2.default)(post.title)
+              _react2.default.createElement(
+                _reactRouterDom.Link,
+                { to: '/' + post.slug },
+                (0, _titleCase2.default)(post.title)
+              )
             ),
             _react2.default.createElement(
               'p',

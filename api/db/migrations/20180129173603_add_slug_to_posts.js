@@ -1,12 +1,12 @@
 
 exports.up = function(knex, Promise) {
   return knex.schema.table('posts', function(table) {
-    table.integer('user_id').notNull().defaultTo(0);
+    table.string('slug').nullable()
   });
 };
 
 exports.down = function(knex, Promise) {
   return knex.schema.table('posts', function(table) {
-    table.dropColumn('user_id')
+    table.dropColumn('slug')
   });
 };
