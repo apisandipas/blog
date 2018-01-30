@@ -26,6 +26,7 @@ class PostPage extends Component {
          
         <section className="article">
           <div className="column is-8 is-offset-2">
+            <div className="card">
               <div className="card-content">
                 <p className="title article-title">
                   {titleCase(post.title)}
@@ -36,9 +37,9 @@ class PostPage extends Component {
                 <div className="content article-body">
                   {nl2br(post.body)}
                 </div>
-             </div>
-           </div>
-           
+              </div>
+            </div>
+          </div>  
         </section>
          
       </div>

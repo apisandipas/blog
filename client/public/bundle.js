@@ -42733,6 +42733,7 @@ var HomePage = function (_Component) {
 }(_react.Component);
 
 function mapStateToProps(state) {
+  console.log('state:', state);
   return {
     posts: state.posts
   };
@@ -43928,27 +43929,31 @@ var PostPage = function (_Component) {
             { className: 'column is-8 is-offset-2' },
             _react2.default.createElement(
               'div',
-              { className: 'card-content' },
-              _react2.default.createElement(
-                'p',
-                { className: 'title article-title' },
-                (0, _titleCase2.default)(post.title)
-              ),
-              _react2.default.createElement(
-                'p',
-                { className: 'subtitle is-6 article-subtitle' },
-                _react2.default.createElement(
-                  'a',
-                  { href: '#' },
-                  user && user.name
-                ),
-                ' on ',
-                (0, _dateformat2.default)(post.created_at, "dddd, mmmm dS, yyyy, h:MM:ss TT")
-              ),
+              { className: 'card' },
               _react2.default.createElement(
                 'div',
-                { className: 'content article-body' },
-                (0, _reactNl2br2.default)(post.body)
+                { className: 'card-content' },
+                _react2.default.createElement(
+                  'p',
+                  { className: 'title article-title' },
+                  (0, _titleCase2.default)(post.title)
+                ),
+                _react2.default.createElement(
+                  'p',
+                  { className: 'subtitle is-6 article-subtitle' },
+                  _react2.default.createElement(
+                    'a',
+                    { href: '#' },
+                    user && user.name
+                  ),
+                  ' on ',
+                  (0, _dateformat2.default)(post.created_at, "dddd, mmmm dS, yyyy, h:MM:ss TT")
+                ),
+                _react2.default.createElement(
+                  'div',
+                  { className: 'content article-body' },
+                  (0, _reactNl2br2.default)(post.body)
+                )
               )
             )
           )
