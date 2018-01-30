@@ -16,20 +16,20 @@ export default (req, store, context) => {
     </Provider>
   )
 
-  const hemlet = Helmet.renderStatic()
+  const helmet = Helmet.renderStatic()
 
   return `
     <html>
       <head>
-        ${hemlet.title.toString()}
-        ${hemlet.meta.toString()}
+        ${helmet.title.toString()}
+        ${helmet.meta.toString()}
         <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.6.2/css/bulma.css">  
         <link rel="stylesheet" type="text/css" href="/styles.css">  
       </head>
       <body>
         <div id="root">${content}</div>
         <script>window.INITIAL_STATE = ${serialize(store.getState())}</script>
-        <script src="bundle.js"></script>
+        <script src="/bundle.js"></script>
        </body>
     </html>  
   `

@@ -1,6 +1,7 @@
 import React from 'react'
 import App from './App'
 import HomePage from './pages/HomePage'
+import PostPage from './pages/PostPage'
 import LoginPage from './pages/LoginPage'
 import RegisterPage from './pages/RegisterPage'
 import NotFoundPage from './pages/NotFoundPage'
@@ -13,6 +14,10 @@ export default [
         ...HomePage,
         path: '/',
         exact: true
+      },
+      {
+        ...PostPage,
+        path: '/posts/:id'
       },
       {
         ...LoginPage,

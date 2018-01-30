@@ -21,7 +21,9 @@ class PostsController {
   async show (req, res) {
     const { id } = req.params
     try {
-      const post = await Post.where('id', id).fetch()
+      const post = await Post.where('id', id).fetch({
+        withRelated: ['user']
+      })
       res.send(post.toJSON());
     } catch(err) {
       res.serverError(new Error(err.message))

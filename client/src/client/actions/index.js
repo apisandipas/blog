@@ -1,7 +1,7 @@
-import { FETCH_POSTS, FETCH_CURRENT_USER, AUTH_USER } from './types'
+import { FETCH_POSTS, FETCH_POST, FETCH_CURRENT_USER, AUTH_USER } from './types'
 
 export const fetchCurrentUser = () => async (dispatch, getState, api) => {
-  const res = await api.get('/current_user')
+  const res = await api.get('/api/current-user')
 
   dispatch({
     type: FETCH_CURRENT_USER,
@@ -11,11 +11,23 @@ export const fetchCurrentUser = () => async (dispatch, getState, api) => {
 
 export const fetchPosts = () => async (dispatch, getState, api) => {
   const res = await api.get('/api/posts')
-  console.log(res.data)
   dispatch({
     type: FETCH_POSTS,
     payload: res
   })
+}
+
+export const fetchPost = (id) => async (dispatch, getState, api) => {
+  try {
+    const res = await api.get(`/api/posts/${id}`)
+    dispatch({
+      type: FETCH_POST,
+      payload: res
+    })
+  } catch(err) {
+    console.log(err)
+  }
+
 }
 
 export const loginUser = ({ email, password }) => async (dispatch, getState, api) => {

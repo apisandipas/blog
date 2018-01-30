@@ -18,7 +18,7 @@ class HomePage extends Component {
         <div className="card article" key={post.id}>
           <div className="card-content">
             <p className="title article-title">
-              <Link to={`/${post.slug}`}>{titleCase(post.title)}</Link>
+              <Link to={`/posts/${post.id}`}>{titleCase(post.title)}</Link>
             </p>
             <p className="subtitle is-6 article-subtitle">
               <a href="#">{post.user.name}</a> on {dateFormat(post.created_at, "dddd, mmmm dS, yyyy, h:MM:ss TT")}
@@ -46,7 +46,7 @@ class HomePage extends Component {
     return (
       <div>
         <Helmet>
-          <title>React SSR | Home Page</title>
+          <title>NERDPress | Home Page</title>
           <meta property="og:title" content="NERDPress | Home Page" />
         </Helmet>
          
