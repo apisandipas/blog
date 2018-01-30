@@ -11,29 +11,31 @@ const Header = ({ auth }) => {
   )
 
   return (
-    <nav className="navbar" role="navigation" aria-label="main navigation">
+    <nav className="navbar is-white">
       <div className="navbar-brand">
-        <Link to="/" className="navbar-item">
-          NERDPress
+        <Link className="navbar-item brand-text" to="/">  
+          NERDPress          
         </Link>
+        <div className="navbar-burger burger" data-target="navMenu">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
       </div>
-
-      <div className="navbar-menu">
+      <div id="navMenu" className="navbar-menu">
         <div className="navbar-start">
-          <li className="navbar-item">
-            <Link to="/">Home</Link>
-          </li>        
-      
-          <li className="navbar-item">
-            <Link to="/">Archives</Link>
-          </li>        
-            
+          <Link className="navbar-item" to="/">  
+            Home
+          </Link>
+          <Link className="navbar-item" to="/archives">  
+            Archives
+          </Link>
         </div>
 
         <div className="navbar-end">
-          <ul className="navbar-nav">
-            <li>{authButton}</li>        
-          </ul>
+          <Link className="navbar-item" to="/login">  
+            Login
+          </Link>
         </div>
       </div>
     </nav>

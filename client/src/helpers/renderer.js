@@ -23,8 +23,8 @@ export default (req, store, context) => {
       <head>
         ${hemlet.title.toString()}
         ${hemlet.meta.toString()}
-        ${hemlet.link.toString()}
         <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.6.2/css/bulma.css">  
+        <link rel="stylesheet" type="text/css" href="/styles.css">  
       </head>
       <body>
         <div id="root">${content}</div>

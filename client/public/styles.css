@@ -1,0 +1,34 @@
+html,body {
+  font-family: 'Open Sans', sans-serif;
+  font-size: 14px;
+  background: #F0F2F4;
+}
+.navbar.is-white {
+  background: #F0F2F4;
+}
+.navbar-brand .brand-text {
+  font-size: 1.11rem;
+  font-weight: bold;
+}
+.articles {
+  margin: 5rem 0;
+}
+.articles .content p {
+    line-height: 1.9;
+    margin: 15px 0;
+}
+
+.article, .promo-block {
+  margin-top: 3rem;
+}
+div.column.is-8:first-child {
+  padding-top: 0;
+  margin-top: 0;
+}
+.article-subtitle {
+  color: #909AA0;
+  margin-bottom: 3rem;
+}
+.promo-block .container {
+  margin: 1rem 5rem;
+}

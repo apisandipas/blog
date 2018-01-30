@@ -436,7 +436,7 @@ exports.default = function (req, store, context) {
 
   var hemlet = _reactHelmet.Helmet.renderStatic();
 
-  return '\n    <html>\n      <head>\n        ' + hemlet.title.toString() + '\n        ' + hemlet.meta.toString() + '\n        ' + hemlet.link.toString() + '\n        <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.6.2/css/bulma.css">  \n      </head>\n      <body>\n        <div id="root">' + content + '</div>\n        <script>window.INITIAL_STATE = ' + (0, _serializeJavascript2.default)(store.getState()) + '</script>\n        <script src="bundle.js"></script>\n       </body>\n    </html>  \n  ';
+  return '\n    <html>\n      <head>\n        ' + hemlet.title.toString() + '\n        ' + hemlet.meta.toString() + '\n        <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.6.2/css/bulma.css">  \n        <link rel="stylesheet" type="text/css" href="/styles.css">  \n      </head>\n      <body>\n        <div id="root">' + content + '</div>\n        <script>window.INITIAL_STATE = ' + (0, _serializeJavascript2.default)(store.getState()) + '</script>\n        <script src="bundle.js"></script>\n       </body>\n    </html>  \n  ';
 };
 
 /***/ }),
@@ -529,52 +529,47 @@ var Header = function Header(_ref) {
 
   return _react2.default.createElement(
     'nav',
-    { className: 'navbar', role: 'navigation', 'aria-label': 'main navigation' },
+    { className: 'navbar is-white' },
     _react2.default.createElement(
       'div',
       { className: 'navbar-brand' },
       _react2.default.createElement(
         _reactRouterDom.Link,
-        { to: '/', className: 'navbar-item' },
+        { className: 'navbar-item brand-text', to: '/' },
         'NERDPress'
+      ),
+      _react2.default.createElement(
+        'div',
+        { className: 'navbar-burger burger', 'data-target': 'navMenu' },
+        _react2.default.createElement('span', null),
+        _react2.default.createElement('span', null),
+        _react2.default.createElement('span', null)
       )
     ),
     _react2.default.createElement(
       'div',
-      { className: 'navbar-menu' },
+      { id: 'navMenu', className: 'navbar-menu' },
       _react2.default.createElement(
         'div',
         { className: 'navbar-start' },
         _react2.default.createElement(
-          'li',
-          { className: 'navbar-item' },
-          _react2.default.createElement(
-            _reactRouterDom.Link,
-            { to: '/' },
-            'Home'
-          )
+          _reactRouterDom.Link,
+          { className: 'navbar-item', to: '/' },
+          'Home'
         ),
         _react2.default.createElement(
-          'li',
-          { className: 'navbar-item' },
-          _react2.default.createElement(
-            _reactRouterDom.Link,
-            { to: '/' },
-            'Archives'
-          )
+          _reactRouterDom.Link,
+          { className: 'navbar-item', to: '/archives' },
+          'Archives'
         )
       ),
       _react2.default.createElement(
         'div',
         { className: 'navbar-end' },
         _react2.default.createElement(
-          'ul',
-          { className: 'navbar-nav' },
-          _react2.default.createElement(
-            'li',
-            null,
-            authButton
-          )
+          _reactRouterDom.Link,
+          { className: 'navbar-item', to: '/login' },
+          'Login'
         )
       )
     )
@@ -656,7 +651,7 @@ var HomePage = function (_Component) {
       return this.props.posts.map(function (post) {
         return _react2.default.createElement(
           'div',
-          { className: 'card article', key: post.id, style: { marginBottom: '50px' } },
+          { className: 'card article', key: post.id },
           _react2.default.createElement(
             'div',
             { className: 'card-content' },
@@ -690,6 +685,24 @@ var HomePage = function (_Component) {
       });
     }
   }, {
+    key: 'renderPagination',
+    value: function renderPagination() {
+      return _react2.default.createElement(
+        'nav',
+        { className: 'pagination', role: 'navigation', 'aria-label': 'pagination', style: { marginTop: '25px' } },
+        _react2.default.createElement(
+          'a',
+          { className: 'pagination-previous' },
+          'Previous'
+        ),
+        _react2.default.createElement(
+          'a',
+          { className: 'pagination-next' },
+          'Next page'
+        )
+      );
+    }
+  }, {
     key: 'render',
     value: function render() {
       return _react2.default.createElement(
@@ -703,8 +716,7 @@ var HomePage = function (_Component) {
             null,
             'React SSR | Home Page'
           ),
-          _react2.default.createElement('meta', { property: 'og:title', content: 'React SSR | Home Page' }),
-          _react2.default.createElement('link', { href: '/blog.scss' })
+          _react2.default.createElement('meta', { property: 'og:title', content: 'NERDPress | Home Page' })
         ),
         _react2.default.createElement(
           'section',
@@ -712,7 +724,8 @@ var HomePage = function (_Component) {
           _react2.default.createElement(
             'div',
             { className: 'column is-8 is-offset-2' },
-            this.renderPosts()
+            this.renderPosts(),
+            this.renderPagination()
           )
         )
       );

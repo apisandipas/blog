@@ -39126,52 +39126,47 @@ var Header = function Header(_ref) {
 
   return _react2.default.createElement(
     'nav',
-    { className: 'navbar', role: 'navigation', 'aria-label': 'main navigation' },
+    { className: 'navbar is-white' },
     _react2.default.createElement(
       'div',
       { className: 'navbar-brand' },
       _react2.default.createElement(
         _reactRouterDom.Link,
-        { to: '/', className: 'navbar-item' },
+        { className: 'navbar-item brand-text', to: '/' },
         'NERDPress'
+      ),
+      _react2.default.createElement(
+        'div',
+        { className: 'navbar-burger burger', 'data-target': 'navMenu' },
+        _react2.default.createElement('span', null),
+        _react2.default.createElement('span', null),
+        _react2.default.createElement('span', null)
       )
     ),
     _react2.default.createElement(
       'div',
-      { className: 'navbar-menu' },
+      { id: 'navMenu', className: 'navbar-menu' },
       _react2.default.createElement(
         'div',
         { className: 'navbar-start' },
         _react2.default.createElement(
-          'li',
-          { className: 'navbar-item' },
-          _react2.default.createElement(
-            _reactRouterDom.Link,
-            { to: '/' },
-            'Home'
-          )
+          _reactRouterDom.Link,
+          { className: 'navbar-item', to: '/' },
+          'Home'
         ),
         _react2.default.createElement(
-          'li',
-          { className: 'navbar-item' },
-          _react2.default.createElement(
-            _reactRouterDom.Link,
-            { to: '/' },
-            'Archives'
-          )
+          _reactRouterDom.Link,
+          { className: 'navbar-item', to: '/archives' },
+          'Archives'
         )
       ),
       _react2.default.createElement(
         'div',
         { className: 'navbar-end' },
         _react2.default.createElement(
-          'ul',
-          { className: 'navbar-nav' },
-          _react2.default.createElement(
-            'li',
-            null,
-            authButton
-          )
+          _reactRouterDom.Link,
+          { className: 'navbar-item', to: '/login' },
+          'Login'
         )
       )
     )
@@ -39253,7 +39248,7 @@ var HomePage = function (_Component) {
       return this.props.posts.map(function (post) {
         return _react2.default.createElement(
           'div',
-          { className: 'card article', key: post.id, style: { marginBottom: '50px' } },
+          { className: 'card article', key: post.id },
           _react2.default.createElement(
             'div',
             { className: 'card-content' },
@@ -39287,6 +39282,24 @@ var HomePage = function (_Component) {
       });
     }
   }, {
+    key: 'renderPagination',
+    value: function renderPagination() {
+      return _react2.default.createElement(
+        'nav',
+        { className: 'pagination', role: 'navigation', 'aria-label': 'pagination', style: { marginTop: '25px' } },
+        _react2.default.createElement(
+          'a',
+          { className: 'pagination-previous' },
+          'Previous'
+        ),
+        _react2.default.createElement(
+          'a',
+          { className: 'pagination-next' },
+          'Next page'
+        )
+      );
+    }
+  }, {
     key: 'render',
     value: function render() {
       return _react2.default.createElement(
@@ -39300,8 +39313,7 @@ var HomePage = function (_Component) {
             null,
             'React SSR | Home Page'
           ),
-          _react2.default.createElement('meta', { property: 'og:title', content: 'React SSR | Home Page' }),
-          _react2.default.createElement('link', { href: '/blog.scss' })
+          _react2.default.createElement('meta', { property: 'og:title', content: 'NERDPress | Home Page' })
         ),
         _react2.default.createElement(
           'section',
@@ -39309,7 +39321,8 @@ var HomePage = function (_Component) {
           _react2.default.createElement(
             'div',
             { className: 'column is-8 is-offset-2' },
-            this.renderPosts()
+            this.renderPosts(),
+            this.renderPagination()
           )
         )
       );
