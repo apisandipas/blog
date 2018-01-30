@@ -79,12 +79,13 @@ module.exports = require("react");
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
+exports.fetchPosts = exports.fetchCurrentUser = undefined;
+
+var _types = __webpack_require__(36);
 
 function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, arguments); return new Promise(function (resolve, reject) { function step(key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { return Promise.resolve(value).then(function (value) { step("next", value); }, function (err) { step("throw", err); }); } } return step("next"); }); }; }
 
-var FETCH_USERS = exports.FETCH_USERS = 'fetch_users';
-
-var fetchUsers = exports.fetchUsers = function fetchUsers() {
+var fetchCurrentUser = exports.fetchCurrentUser = function fetchCurrentUser() {
   return function () {
     var _ref = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee(dispatch, getState, api) {
       var res;
@@ -93,14 +94,14 @@ var fetchUsers = exports.fetchUsers = function fetchUsers() {
           switch (_context.prev = _context.next) {
             case 0:
               _context.next = 2;
-              return api.get('/users');
+              return api.get('/current_user');
 
             case 2:
               res = _context.sent;
 
 
               dispatch({
-                type: FETCH_USERS,
+                type: _types.FETCH_CURRENT_USER,
                 payload: res
               });
 
@@ -118,9 +119,7 @@ var fetchUsers = exports.fetchUsers = function fetchUsers() {
   }();
 };
 
-var FETCH_CURRENT_USER = exports.FETCH_CURRENT_USER = 'fetch_current_user';
-
-var fetchCurrentUser = exports.fetchCurrentUser = function fetchCurrentUser() {
+var fetchPosts = exports.fetchPosts = function fetchPosts() {
   return function () {
     var _ref2 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee2(dispatch, getState, api) {
       var res;
@@ -129,14 +128,14 @@ var fetchCurrentUser = exports.fetchCurrentUser = function fetchCurrentUser() {
           switch (_context2.prev = _context2.next) {
             case 0:
               _context2.next = 2;
-              return api.get('/current_user');
+              return api.get('/api/posts');
 
             case 2:
               res = _context2.sent;
 
 
               dispatch({
-                type: FETCH_CURRENT_USER,
+                type: _types.FETCH_POSTS,
                 payload: res
               });
 
@@ -150,78 +149,6 @@ var fetchCurrentUser = exports.fetchCurrentUser = function fetchCurrentUser() {
 
     return function (_x4, _x5, _x6) {
       return _ref2.apply(this, arguments);
-    };
-  }();
-};
-
-var FETCH_POSTS = exports.FETCH_POSTS = 'fetch_posts';
-
-var fetchPosts = exports.fetchPosts = function fetchPosts() {
-  return function () {
-    var _ref3 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee3(dispatch, getState, api) {
-      var res;
-      return regeneratorRuntime.wrap(function _callee3$(_context3) {
-        while (1) {
-          switch (_context3.prev = _context3.next) {
-            case 0:
-              _context3.next = 2;
-              return api.get('/api/posts');
-
-            case 2:
-              res = _context3.sent;
-
-
-              dispatch({
-                type: FETCH_POSTS,
-                payload: res
-              });
-
-            case 4:
-            case 'end':
-              return _context3.stop();
-          }
-        }
-      }, _callee3, undefined);
-    }));
-
-    return function (_x7, _x8, _x9) {
-      return _ref3.apply(this, arguments);
-    };
-  }();
-};
-
-var FETCH_ADMINS = exports.FETCH_ADMINS = 'fetch_admins';
-
-var fetchAdmins = exports.fetchAdmins = function fetchAdmins() {
-  return function () {
-    var _ref4 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee4(dispatch, getState, api) {
-      var res;
-      return regeneratorRuntime.wrap(function _callee4$(_context4) {
-        while (1) {
-          switch (_context4.prev = _context4.next) {
-            case 0:
-              _context4.next = 2;
-              return api.get('/admins');
-
-            case 2:
-              res = _context4.sent;
-
-
-              dispatch({
-                type: FETCH_ADMINS,
-                payload: res
-              });
-
-            case 4:
-            case 'end':
-              return _context4.stop();
-          }
-        }
-      }, _callee4, undefined);
-    }));
-
-    return function (_x10, _x11, _x12) {
-      return _ref4.apply(this, arguments);
     };
   }();
 };
@@ -275,6 +202,14 @@ var _HomePage = __webpack_require__(16);
 
 var _HomePage2 = _interopRequireDefault(_HomePage);
 
+var _LoginPage = __webpack_require__(34);
+
+var _LoginPage2 = _interopRequireDefault(_LoginPage);
+
+var _RegisterPage = __webpack_require__(35);
+
+var _RegisterPage2 = _interopRequireDefault(_RegisterPage);
+
 var _NotFoundPage = __webpack_require__(17);
 
 var _NotFoundPage2 = _interopRequireDefault(_NotFoundPage);
@@ -285,6 +220,10 @@ exports.default = [_extends({}, _App2.default, {
   routes: [_extends({}, _HomePage2.default, {
     path: '/',
     exact: true
+  }), _extends({}, _LoginPage2.default, {
+    path: '/login'
+  }), _extends({}, _RegisterPage2.default, {
+    path: '/register'
   }), _extends({}, _NotFoundPage2.default)]
 })];
 
@@ -1381,6 +1320,300 @@ function kindOf(val) {
   }
 })(this);
 
+
+/***/ }),
+/* 34 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = __webpack_require__(0);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _reactHelmet = __webpack_require__(5);
+
+var _reactRouterDom = __webpack_require__(4);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var LoginPage = function (_Component) {
+  _inherits(LoginPage, _Component);
+
+  function LoginPage() {
+    _classCallCheck(this, LoginPage);
+
+    return _possibleConstructorReturn(this, (LoginPage.__proto__ || Object.getPrototypeOf(LoginPage)).apply(this, arguments));
+  }
+
+  _createClass(LoginPage, [{
+    key: 'render',
+    value: function render() {
+      return _react2.default.createElement(
+        'div',
+        null,
+        _react2.default.createElement(
+          _reactHelmet.Helmet,
+          null,
+          _react2.default.createElement(
+            'title',
+            null,
+            'NERDPress | Login'
+          ),
+          _react2.default.createElement('meta', { property: 'og:title', content: 'NERDPress | Login' })
+        ),
+        _react2.default.createElement(
+          'section',
+          { className: 'hero is-success is-fullheight' },
+          _react2.default.createElement(
+            'div',
+            { className: 'hero-body' },
+            _react2.default.createElement(
+              'div',
+              { className: 'container has-text-centered' },
+              _react2.default.createElement(
+                'div',
+                { className: 'column is-4 is-offset-4' },
+                _react2.default.createElement(
+                  'h3',
+                  { className: 'title has-text-grey' },
+                  'Login'
+                ),
+                _react2.default.createElement(
+                  'p',
+                  { className: 'subtitle has-text-grey' },
+                  'Please login to proceed.'
+                ),
+                _react2.default.createElement(
+                  'div',
+                  { className: 'box' },
+                  _react2.default.createElement(
+                    'form',
+                    null,
+                    _react2.default.createElement(
+                      'div',
+                      { className: 'field' },
+                      _react2.default.createElement(
+                        'div',
+                        { className: 'control' },
+                        _react2.default.createElement('input', { className: 'input is-large', type: 'email', placeholder: 'Your Email', autoFocus: '' })
+                      )
+                    ),
+                    _react2.default.createElement(
+                      'div',
+                      { className: 'field' },
+                      _react2.default.createElement(
+                        'div',
+                        { className: 'control' },
+                        _react2.default.createElement('input', { className: 'input is-large', type: 'password', placeholder: 'Your Password' })
+                      )
+                    ),
+                    _react2.default.createElement(
+                      'a',
+                      { className: 'button is-block is-info is-large' },
+                      'Login'
+                    )
+                  )
+                ),
+                _react2.default.createElement(
+                  'p',
+                  { className: 'has-text-grey' },
+                  _react2.default.createElement(
+                    _reactRouterDom.Link,
+                    { to: '/register' },
+                    'Register'
+                  )
+                )
+              )
+            )
+          )
+        )
+      );
+    }
+  }]);
+
+  return LoginPage;
+}(_react.Component);
+
+exports.default = {
+  component: LoginPage
+};
+
+/***/ }),
+/* 35 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = __webpack_require__(0);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _reactHelmet = __webpack_require__(5);
+
+var _reactRouterDom = __webpack_require__(4);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var RegisterPage = function (_Component) {
+  _inherits(RegisterPage, _Component);
+
+  function RegisterPage() {
+    _classCallCheck(this, RegisterPage);
+
+    return _possibleConstructorReturn(this, (RegisterPage.__proto__ || Object.getPrototypeOf(RegisterPage)).apply(this, arguments));
+  }
+
+  _createClass(RegisterPage, [{
+    key: 'render',
+    value: function render() {
+      return _react2.default.createElement(
+        'div',
+        null,
+        _react2.default.createElement(
+          _reactHelmet.Helmet,
+          null,
+          _react2.default.createElement(
+            'title',
+            null,
+            'NERDPress | Register'
+          ),
+          _react2.default.createElement('meta', { property: 'og:title', content: 'NERDPress | Register' })
+        ),
+        _react2.default.createElement(
+          'section',
+          { className: 'hero is-success is-fullheight' },
+          _react2.default.createElement(
+            'div',
+            { className: 'hero-body' },
+            _react2.default.createElement(
+              'div',
+              { className: 'container has-text-centered' },
+              _react2.default.createElement(
+                'div',
+                { className: 'column is-4 is-offset-4' },
+                _react2.default.createElement(
+                  'h3',
+                  { className: 'title has-text-grey' },
+                  'Register'
+                ),
+                _react2.default.createElement(
+                  'p',
+                  { className: 'subtitle has-text-grey' },
+                  'Please register for an account.'
+                ),
+                _react2.default.createElement(
+                  'div',
+                  { className: 'box' },
+                  _react2.default.createElement(
+                    'form',
+                    null,
+                    _react2.default.createElement(
+                      'div',
+                      { className: 'field' },
+                      _react2.default.createElement(
+                        'div',
+                        { className: 'control' },
+                        _react2.default.createElement('input', { className: 'input is-large', type: 'text', placeholder: 'Your Name', autoFocus: 'true' })
+                      )
+                    ),
+                    _react2.default.createElement(
+                      'div',
+                      { className: 'field' },
+                      _react2.default.createElement(
+                        'div',
+                        { className: 'control' },
+                        _react2.default.createElement('input', { className: 'input is-large', type: 'email', placeholder: 'Your Email' })
+                      )
+                    ),
+                    _react2.default.createElement(
+                      'div',
+                      { className: 'field' },
+                      _react2.default.createElement(
+                        'div',
+                        { className: 'control' },
+                        _react2.default.createElement('input', { className: 'input is-large', type: 'password', placeholder: 'Your Password' })
+                      )
+                    ),
+                    _react2.default.createElement(
+                      'div',
+                      { className: 'field' },
+                      _react2.default.createElement(
+                        'div',
+                        { className: 'control' },
+                        _react2.default.createElement('input', { className: 'input is-large', type: 'password', placeholder: 'Confirm Password' })
+                      )
+                    ),
+                    _react2.default.createElement(
+                      'a',
+                      { className: 'button is-block is-info is-large' },
+                      'Register'
+                    )
+                  )
+                ),
+                _react2.default.createElement(
+                  'p',
+                  { className: 'has-text-grey' },
+                  _react2.default.createElement(
+                    _reactRouterDom.Link,
+                    { to: '/login' },
+                    'Login'
+                  ),
+                  ' \xA0\xB7\xA0'
+                )
+              )
+            )
+          )
+        )
+      );
+    }
+  }]);
+
+  return RegisterPage;
+}(_react.Component);
+
+exports.default = {
+  component: RegisterPage
+};
+
+/***/ }),
+/* 36 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+var FETCH_CURRENT_USER = exports.FETCH_CURRENT_USER = 'fetch_current_user';
+var FETCH_POSTS = exports.FETCH_POSTS = 'fetch_posts';
 
 /***/ })
 /******/ ]);

@@ -3,6 +3,8 @@ html,body {
   font-size: 14px;
   background: #F0F2F4;
 }
+
+/* Home Page Styles */
 .navbar.is-white {
   background: #F0F2F4;
 }
@@ -31,4 +33,25 @@ div.column.is-8:first-child {
 }
 .promo-block .container {
   margin: 1rem 5rem;
+}
+
+/* Login Page / Register Styles */
+.hero.is-success {
+  background: #f0f2f4;;
+}
+.hero .nav, .hero.is-success .nav {
+  -webkit-box-shadow: none;
+  box-shadow: none;
+}
+.box {
+  margin-top: 5rem;
+}
+input {
+  font-weight: 300;
+}
+p {
+  font-weight: 700;
+}
+p.subtitle {
+  padding-top: 1rem;
 }
