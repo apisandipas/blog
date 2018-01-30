@@ -79,7 +79,7 @@ module.exports = require("react");
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.fetchPosts = exports.fetchCurrentUser = undefined;
+exports.authError = exports.loginUser = exports.fetchPosts = exports.fetchCurrentUser = undefined;
 
 var _types = __webpack_require__(36);
 
@@ -151,6 +151,57 @@ var fetchPosts = exports.fetchPosts = function fetchPosts() {
       return _ref2.apply(this, arguments);
     };
   }();
+};
+
+var loginUser = exports.loginUser = function loginUser(_ref3) {
+  var email = _ref3.email,
+      password = _ref3.password;
+  return function () {
+    var _ref4 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee3(dispatch, getState, api) {
+      var res;
+      return regeneratorRuntime.wrap(function _callee3$(_context3) {
+        while (1) {
+          switch (_context3.prev = _context3.next) {
+            case 0:
+              _context3.prev = 0;
+              _context3.next = 3;
+              return api.get('/api/login', { email: email, password: password });
+
+            case 3:
+              res = _context3.sent;
+
+              dispatch({
+                type: _types.AUTH_USER,
+                payload: res.data
+              });
+              _context3.next = 10;
+              break;
+
+            case 7:
+              _context3.prev = 7;
+              _context3.t0 = _context3['catch'](0);
+
+              dispatch(authError('Bad Login Info'));
+
+            case 10:
+            case 'end':
+              return _context3.stop();
+          }
+        }
+      }, _callee3, undefined, [[0, 7]]);
+    }));
+
+    return function (_x7, _x8, _x9) {
+      return _ref4.apply(this, arguments);
+    };
+  }();
+};
+
+var authError = exports.authError = function authError(error) {
+  return {
+    type: AUTH_ERROR,
+    payload: error
+  };
 };
 
 /***/ }),
@@ -810,6 +861,8 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
 var _actions = __webpack_require__(1);
 
 exports.default = function () {
@@ -819,6 +872,8 @@ exports.default = function () {
   switch (action.type) {
     case _actions.FETCH_CURRENT_USER:
       return action.payload.data || false;
+    case _actions.AUTH_ERROR:
+      return _extends({}, state, { error: action.payload });
     default:
       return state;
   }
@@ -1614,6 +1669,9 @@ Object.defineProperty(exports, "__esModule", {
 });
 var FETCH_CURRENT_USER = exports.FETCH_CURRENT_USER = 'fetch_current_user';
 var FETCH_POSTS = exports.FETCH_POSTS = 'fetch_posts';
+
+var AUTH_USER = exports.AUTH_USER = 'auth_user';
+var AUTH_ERROR = exports.AUTH_ERROR = 'auth_error';
 
 /***/ })
 /******/ ]);
