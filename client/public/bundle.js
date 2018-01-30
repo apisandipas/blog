@@ -42733,7 +42733,6 @@ var HomePage = function (_Component) {
 }(_react.Component);
 
 function mapStateToProps(state) {
-  console.log('state:', state);
   return {
     posts: state.posts
   };
@@ -43979,7 +43978,7 @@ exports.default = {
     var path = _ref2.path;
 
     var id = path.split('/')[2];
-    dispatch((0, _index.fetchPost)(id));
+    return dispatch((0, _index.fetchPost)(id));
   }
 
 };

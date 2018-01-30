@@ -58,7 +58,7 @@ export default {
   component: connect(mapStateToProps, { fetchPost })(PostPage),
   loadData: ({ dispatch }, { path }) => {
     const id = path.split('/')[2]
-    dispatch(fetchPost(id))
+    return dispatch(fetchPost(id))
   }
 
 };

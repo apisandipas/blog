@@ -64,7 +64,6 @@ class HomePage extends Component {
 }
 
 function mapStateToProps(state) {
-  console.log('state:', state)
   return {
     posts: state.posts
   }
