@@ -11,7 +11,7 @@ exports.seed = function(knex, Promise) {
         return  {
           id: i, 
           user_id,
-          title: faker.lorem.words(), 
+          title: i + ' ' + faker.lorem.words(), 
           slug: faker.lorem.slug(),
           excerpt: faker.lorem.paragraphs(2),
           body: faker.lorem.paragraphs(5),
