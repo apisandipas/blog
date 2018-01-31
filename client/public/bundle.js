@@ -44063,6 +44063,24 @@ var LoginPage = function (_Component) {
       console.log(values);
     }
   }, {
+    key: 'renderField',
+    value: function renderField(field) {
+      return _react2.default.createElement(
+        'div',
+        { className: 'field' },
+        _react2.default.createElement(
+          'div',
+          { className: 'control' },
+          _react2.default.createElement('input', {
+            name: field.name,
+            type: field.type,
+            className: 'input is-large',
+            placeholder: field.placeholder
+          })
+        )
+      );
+    }
+  }, {
     key: 'render',
     value: function render() {
       var handleSubmit = this.props.handleSubmit;
@@ -44109,37 +44127,18 @@ var LoginPage = function (_Component) {
                   _react2.default.createElement(
                     'form',
                     { onSubmit: handleSubmit(this.handleSubmit) },
-                    _react2.default.createElement(
-                      'div',
-                      { className: 'field' },
-                      _react2.default.createElement(
-                        'div',
-                        { className: 'control' },
-                        _react2.default.createElement(_reduxForm.Field, {
-                          name: 'email',
-                          component: 'input',
-                          type: 'email',
-                          className: 'input is-large',
-                          placeholder: 'Your Email',
-                          autoFocus: 'true'
-                        })
-                      )
-                    ),
-                    _react2.default.createElement(
-                      'div',
-                      { className: 'field' },
-                      _react2.default.createElement(
-                        'div',
-                        { className: 'control' },
-                        _react2.default.createElement(_reduxForm.Field, {
-                          name: 'password',
-                          component: 'input',
-                          type: 'password',
-                          className: 'input is-large',
-                          placeholder: 'Your Password'
-                        })
-                      )
-                    ),
+                    _react2.default.createElement(_reduxForm.Field, {
+                      name: 'Email',
+                      component: this.renderField,
+                      type: 'email',
+                      placeholder: 'Your Email'
+                    }),
+                    _react2.default.createElement(_reduxForm.Field, {
+                      name: 'password',
+                      component: this.renderField,
+                      type: 'password',
+                      placeholder: 'Your Password'
+                    }),
                     _react2.default.createElement('input', { type: 'submit', value: 'Login', className: 'button is-block is-info is-large', style: { width: '100%' } })
                   )
                 ),

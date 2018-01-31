@@ -7,6 +7,22 @@ class LoginPage extends Component {
   handleSubmit (values) {
     console.log(values)
   }
+
+  renderField(field) {
+    return (
+      <div className="field">
+        <div className="control">
+          <input 
+            name={field.name}  
+            type={field.type} 
+            className="input is-large" 
+            placeholder={field.placeholder} 
+          />
+        </div>
+      </div>
+    )
+    
+  }
   
   render () {
 
@@ -27,30 +43,19 @@ class LoginPage extends Component {
                   <p className="subtitle has-text-grey">Please login to proceed.</p>
                   <div className="box">
                     <form onSubmit={handleSubmit(this.handleSubmit)}>
-                      <div className="field">
-                        <div className="control">
-                          <Field 
-                            name="email" 
-                            component="input" 
-                            type="email" 
-                            className="input is-large" 
-                            placeholder="Your Email" 
-                            autoFocus="true" 
-                          />
-                        </div>
-                      </div>
+                      <Field 
+                        name="Email" 
+                        component={this.renderField} 
+                        type="email" 
+                        placeholder="Your Email" 
+                      />
 
-                      <div className="field">
-                        <div className="control">
-                          <Field 
-                            name="password" 
-                            component="input" 
-                            type="password" 
-                            className="input is-large" 
-                            placeholder="Your Password" 
-                          />
-                        </div>
-                      </div>
+                      <Field 
+                        name="password" 
+                        component={this.renderField} 
+                        type="password" 
+                        placeholder="Your Password" 
+                      />
       
                       <input type="submit" value="Login" className="button is-block is-info is-large" style={{width: '100%'}} />
                     </form>
