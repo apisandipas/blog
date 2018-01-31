@@ -61,18 +61,18 @@ class HomePage extends Component {
       <nav className="pagination" role="navigation" aria-label="pagination" style={{marginTop: '25px'}}>
         { currentPage > 1 
           ? <a className="pagination-previous" onClick={() => this.prevPage()}>Previous</a>
-          : <a className="pagination-previous" style={{cursor: 'not-allowed'}}>Previous</a> }
+          : <a></a> }
          
         { currentPage < numPages
           ? <a className="pagination-next" onClick={() => this.nextPage()}>Next page</a>
-          : <a className="pagination-next" style={{cursor: 'not-allowed'}}>Next page</a>}
+          : <a></a>}
         
       </nav>
     )
   }
 
   render() {
-    const posts_per_page = 5
+    const posts_per_page = 10
     const posts = chunk(this.props.posts, posts_per_page)[this.state.page - 1]
     const numPages = Math.round(this.props.posts.length / posts_per_page)
 
