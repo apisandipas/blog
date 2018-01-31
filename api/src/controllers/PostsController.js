@@ -7,9 +7,13 @@ class PostsController {
   async index (req, res) { 
     try {
       const { page } = req.query
-      const posts = await Post.fetchPage({
-        page,
-        pageSize: PAGE_SIZE,
+      // const posts = await Post.fetchPage({
+      //   page,
+      //   pageSize: PAGE_SIZE,
+      //   withRelated: 'user'  
+      // })
+      // 
+      const posts = await Post.fetchAll({
         withRelated: 'user'  
       })
       res.json(posts.toJSON())

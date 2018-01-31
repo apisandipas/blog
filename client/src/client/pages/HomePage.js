@@ -2,18 +2,40 @@ import React, { Component } from 'react'
 import { Helmet } from 'react-helmet'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
+import chunk from 'lodash.chunk'
 import nl2br from 'react-nl2br'
 import titleCase from 'title-case'
 import dateFormat from 'dateformat'
 import { fetchPosts } from "../actions/index"
 
 class HomePage extends Component {
+
+  constructor(props){
+    super(props)
+
+    this.state = {
+      page: 1
+    }
+  }
+
   componentDidMount () {
     this.props.fetchPosts()
   }
 
-  renderPosts () {
-    return this.props.posts.map(post => {
+  prevPage () {
+    this.setState({
+      page: this.state.page - 1
+    })
+  }
+
+  nextPage () {
+    this.setState({
+      page: this.state.page + 1
+    })
+  }
+
+  renderPosts (posts) {
+    return posts.map(post => {
       return (
         <div className="card article" key={post.id}>
           <div className="card-content">
@@ -33,16 +55,27 @@ class HomePage extends Component {
     })
   }
 
-  renderPagination () {
+  renderPagination (numPages) {
+    const currentPage = this.state.page
     return (
       <nav className="pagination" role="navigation" aria-label="pagination" style={{marginTop: '25px'}}>
-        <a className="pagination-previous">Previous</a>
-        <a className="pagination-next">Next page</a>
+        { currentPage > 1 
+          ? <a className="pagination-previous" onClick={() => this.prevPage()}>Previous</a>
+          : <a></a> }
+         
+        { currentPage < numPages
+          ? <a className="pagination-next" onClick={() => this.nextPage()}>Next page</a>
+          : <a></a>}
+        
       </nav>
     )
   }
 
   render() {
+    const posts_per_page = 10
+    const posts = chunk(this.props.posts, posts_per_page)[this.state.page - 1]
+    const numPages = Math.round(this.props.posts.length / posts_per_page)
+
     return (
       <div>
         <Helmet>
@@ -52,8 +85,8 @@ class HomePage extends Component {
          
         <section className="articles">
           <div className="column is-8 is-offset-2">
-            {this.renderPosts()}
-            {this.renderPagination()}
+            {this.renderPosts(posts)}
+            {this.renderPagination(numPages)}
           </div>
         </section>
          
