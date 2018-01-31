@@ -17,7 +17,7 @@ export default [
       },
       {
         ...PostPage,
-        path: '/posts/:id'
+        path: '/posts/:slug'
       },
       {
         ...LoginPage,

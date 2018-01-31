@@ -1,18 +1,10 @@
 import Post from '../models/post'
 
-const PAGE_SIZE = 10
-
 class PostsController {
 
   async index (req, res) { 
     try {
       const { page } = req.query
-      // const posts = await Post.fetchPage({
-      //   page,
-      //   pageSize: PAGE_SIZE,
-      //   withRelated: 'user'  
-      // })
-      // 
       const posts = await Post.fetchAll({
         withRelated: 'user'  
       })
@@ -23,9 +15,9 @@ class PostsController {
   }
 
   async show (req, res) {
-    const { id } = req.params
+    const { slug } = req.params
     try {
-      const post = await Post.where('id', id).fetch({
+      const post = await Post.where('slug', slug).fetch({
         withRelated: ['user']
       })
       res.send(post.toJSON());
@@ -55,10 +47,10 @@ class PostsController {
   }
 
   async update (req, res) {
-    const { id } = req.params
+    const { slug } = req.params
     const { body } = req;
     try {
-      const post = await Post.where('id', id).fetch()
+      const post = await Post.where('slug', slug).fetch()
       if (post) {
         const savedModel = await post.save(body, { patch: true })
         res.send(savedModel.toJSON())       
@@ -71,9 +63,9 @@ class PostsController {
   }
 
   async delete (req, res) {
-    const { id } = req.params
+    const { slug } = req.params
     try {
-      const post = await Post.where('id', id).destroy()
+      const post = await Post.where('slug', slug).destroy()
       res.send(post.toJSON())
     } catch(err) {
       res.serverError(new Error(err.message))

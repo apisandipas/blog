@@ -9,8 +9,8 @@ import { fetchPost } from "../actions/index"
 
 class PostPage extends Component {
   componentDidMount () {
-    const {id} = this.props.match.params
-    this.props.fetchPost(id)
+    const {slug} = this.props.match.params
+    this.props.fetchPost(slug)
   }
 
   render() {
@@ -57,8 +57,8 @@ function mapStateToProps(state) {
 export default {
   component: connect(mapStateToProps, { fetchPost })(PostPage),
   loadData: ({ dispatch }, { path }) => {
-    const id = path.split('/')[2]
-    return dispatch(fetchPost(id))
+    const slug = path.split('/')[2]
+    return dispatch(fetchPost(slug))
   }
 
 };

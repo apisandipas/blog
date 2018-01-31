@@ -193,7 +193,7 @@ var fetchPosts = exports.fetchPosts = function fetchPosts() {
   }();
 };
 
-var fetchPost = exports.fetchPost = function fetchPost(id) {
+var fetchPost = exports.fetchPost = function fetchPost(slug) {
   return function () {
     var _ref3 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee3(dispatch, getState, api) {
       var res;
@@ -203,7 +203,7 @@ var fetchPost = exports.fetchPost = function fetchPost(id) {
             case 0:
               _context3.prev = 0;
               _context3.next = 3;
-              return api.get('/api/posts/' + id);
+              return api.get('/api/posts/' + slug);
 
             case 3:
               res = _context3.sent;
@@ -334,7 +334,7 @@ exports.default = [_extends({}, _App2.default, {
     path: '/',
     exact: true
   }), _extends({}, _PostPage2.default, {
-    path: '/posts/:id'
+    path: '/posts/:slug'
   }), _extends({}, _LoginPage2.default, {
     path: '/login'
   }), _extends({}, _RegisterPage2.default, {
@@ -760,7 +760,7 @@ var HomePage = function (_Component) {
               { className: 'title article-title' },
               _react2.default.createElement(
                 _reactRouterDom.Link,
-                { to: '/posts/' + post.id },
+                { to: '/posts/' + post.slug },
                 (0, _titleCase2.default)(post.title)
               )
             ),
@@ -918,9 +918,9 @@ var PostPage = function (_Component) {
   _createClass(PostPage, [{
     key: 'componentDidMount',
     value: function componentDidMount() {
-      var id = this.props.match.params.id;
+      var slug = this.props.match.params.slug;
 
-      this.props.fetchPost(id);
+      this.props.fetchPost(slug);
     }
   }, {
     key: 'render',
@@ -998,8 +998,8 @@ exports.default = {
     var dispatch = _ref.dispatch;
     var path = _ref2.path;
 
-    var id = path.split('/')[2];
-    return dispatch((0, _index.fetchPost)(id));
+    var slug = path.split('/')[2];
+    return dispatch((0, _index.fetchPost)(slug));
   }
 
 };

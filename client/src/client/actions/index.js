@@ -17,9 +17,9 @@ export const fetchPosts = () => async (dispatch, getState, api) => {
   })
 }
 
-export const fetchPost = (id) => async (dispatch, getState, api) => {
+export const fetchPost = (slug) => async (dispatch, getState, api) => {
   try {
-    const res = await api.get(`/api/posts/${id}`)
+    const res = await api.get(`/api/posts/${slug}`)
     dispatch({
       type: FETCH_POST,
       payload: res

@@ -25,10 +25,10 @@ router.get('/posts',
   // requireLogin, //for demo purposes only
   postsController.index
 );
-router.get('/posts/:id', postsController.show);
+router.get('/posts/:slug', postsController.show);
 router.post('/posts', postsController.add);
-router.put('/posts/:id', postsController.update);
-router.delete('/posts/:id', postsController.delete);
+router.put('/posts/:slug', postsController.update);
+router.delete('/posts/:slug', postsController.delete);
 
 export default router;
 
