@@ -1,5 +1,6 @@
 import passport from 'passport'
-import { Strategy } from 'passport-local'
+import { Strategy as LocalStrategy } from 'passport-local'
+import { Strategy as JwtStrategy, ExtractJwt } from 'passport-jwt'
 import User from '../models/user'
 
 passport.serializeUser((user, done) => {
@@ -11,9 +12,31 @@ passport.deserializeUser(async (id, done) => {
   done(null, user)
 })
 
-passport.use(new Strategy({ usernameField: 'email' },async (email, password, done) => {
+passport.use(new LocalStrategy({ usernameField: 'email' }, async (payload, done) => {
   try {
-    const user = await User.where('email', email).fetch()
+    const user = await User.where('id', payload.sub).fetch()
+    if (!user){
+      return done(null, false)
+    }
+
+    const authenticated = await user.authenticate(password)
+    if (!authenticated) {
+      return done(null, false)
+    }
+
+    return done(null, user)
+  } catch(err) {
+    done(err)
+  }
+}))
+
+const jwtOptions = {
+  jwtFromRequest: ExtractJwt.fromHeader('authorization'),
+  secretOrKey: process.env.JWT_SECRET
+}
+passport.use(new JwtStrategy(jwtOptions, async (payload, done) => {
+  try {
+    const user = await User.where('id', payload.sub).fetch()
     if (!user){
       return done(null, false)
     }

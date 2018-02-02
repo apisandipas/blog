@@ -4,7 +4,7 @@ class UsersController {
 
   async index (req, res) { 
     try {
-      const users = await User.fetch()
+      const users = await User.fetchAll()
       res.json(users.toJSON())
     } catch(err){
       res.serverError(new Error(err.message))
