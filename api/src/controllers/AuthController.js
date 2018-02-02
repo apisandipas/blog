@@ -2,7 +2,12 @@ import User from '../models/user'
 
 class AuthController {
   login (req, res) {
-    res.redirect('/')
+    res.json({      
+      success: true,
+      message: 'Enjoy your token!',
+      token: '2136788fwbdsj0ioudik0ioji'
+    })
+    // res.redirect('/')
   }
 
   logout (req, res) {

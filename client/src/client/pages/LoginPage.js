@@ -2,10 +2,20 @@ import React, { Component } from 'react'
 import { Helmet } from 'react-helmet'
 import { Link } from 'react-router-dom'
 import { Field, reduxForm } from 'redux-form'
+import { connect } from 'react-redux'
+import { loginUser } from '../actions'
 
 class LoginPage extends Component {
+
+  constructor (props) {
+    super(props)
+    this.handleSubmit = this.handleSubmit.bind(this)
+  }
+
   handleSubmit (values) {
-    console.log(values)
+    // console.log(values)
+
+    this.props.loginUser(values)
   }
 
   renderField(field) {
@@ -13,6 +23,7 @@ class LoginPage extends Component {
       <div className="field">
         <div className="control">
           <input 
+            {...field.input}
             name={field.name}  
             type={field.type} 
             className="input is-large" 
@@ -44,7 +55,7 @@ class LoginPage extends Component {
                   <div className="box">
                     <form onSubmit={handleSubmit(this.handleSubmit)}>
                       <Field 
-                        name="Email" 
+                        name="email" 
                         component={this.renderField} 
                         type="email" 
                         placeholder="Your Email" 
@@ -77,6 +88,8 @@ class LoginPage extends Component {
 
 export default {
   component: reduxForm({
-    form: 'loginPage'
-  })(LoginPage)
+    form: 'loginForm'
+  })(
+    connect(null, { loginUser })(LoginPage)
+  )
 };

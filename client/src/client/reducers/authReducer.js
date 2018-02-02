@@ -1,11 +1,14 @@
-import { FETCH_CURRENT_USER, AUTH_ERROR } from "../actions/types"
+import { FETCH_CURRENT_USER, AUTH_ERROR, AUTH_USER } from "../actions/types"
 
 export default (state = null, action) => {
   switch (action.type) {
     case FETCH_CURRENT_USER:
       return action.payload.data || false
     case AUTH_ERROR:
-      return { ...state, error: action.payload };
+      return { ...state, error: action.payload }
+    case AUTH_USER:
+      console.log(action)
+      return { ...state, token: action.payload.token }
     default:
       return state
   }

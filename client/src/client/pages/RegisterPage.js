@@ -1,10 +1,32 @@
 import React, { Component } from 'react'
 import { Helmet } from 'react-helmet'
 import { Link } from 'react-router-dom'
+import { Field, reduxForm } from 'redux-form'
 
 class RegisterPage extends Component {
 
+  handleSubmit (values) {
+
+  }
+
+  renderField(field) {
+    return (
+      <div className="field">
+        <div className="control">
+          <input 
+            {...field.input}
+            name={field.name}  
+            type={field.type} 
+            className="input is-large" 
+            placeholder={field.placeholder} 
+          />
+        </div>
+      </div>
+    ) 
+  }
+
   render() {
+    const { handleSubmit } = this.props   
     return (
       <div>
         <Helmet>
@@ -19,31 +41,35 @@ class RegisterPage extends Component {
                   <h3 className="title has-text-grey">Register</h3>
                   <p className="subtitle has-text-grey">Please register for an account.</p>
                   <div className="box">
-                    <form onSubmit={this.handleSubmit}>
-                      <div className="field">
-                        <div className="control">
-                          <input className="input is-large" type="text" placeholder="Your Name" autoFocus="true" />
-                        </div>
-                      </div>
+                    <form onSubmit={handleSubmit(this.handleSubmit)}>
+                      <Field 
+                        name="name" 
+                        component={this.renderField} 
+                        type="text" 
+                        placeholder="Your Name" 
+                      />
 
-                      <div className="field">
-                        <div className="control">
-                          <input className="input is-large" type="email" placeholder="Your Email" />
-                        </div>
-                      </div>
+                      <Field 
+                        name="email" 
+                        component={this.renderField} 
+                        type="email" 
+                        placeholder="Your Email" 
+                      />
 
-                      <div className="field">
-                        <div className="control">
-                          <input className="input is-large" type="password" placeholder="Your Password" />
-                        </div>
-                      </div>
+                      <Field 
+                        name="password" 
+                        component={this.renderField} 
+                        type="password" 
+                        placeholder="Your Password" 
+                      />
 
-                      <div className="field">
-                        <div className="control">
-                          <input className="input is-large" type="password" placeholder="Confirm Password" />
-                        </div>
-                      </div>
-      
+                      <Field 
+                        name="passwordConfirm" 
+                        component={this.renderField} 
+                        type="password" 
+                        placeholder="Confirm Password" 
+                      />
+
                       <a className="button is-block is-info is-large">Register</a>
                     </form>
                   </div>
@@ -63,5 +89,7 @@ class RegisterPage extends Component {
 }
 
 export default {
-  component: RegisterPage
+  component: reduxForm({
+    form: 'registrationForm'
+  })(RegisterPage)
 };

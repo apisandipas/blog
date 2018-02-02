@@ -1,4 +1,4 @@
-import { FETCH_POSTS, FETCH_POST, FETCH_CURRENT_USER, AUTH_USER } from './types'
+import { FETCH_POSTS, FETCH_POST, FETCH_CURRENT_USER, AUTH_USER, AUTH_ERROR } from './types'
 
 export const fetchCurrentUser = () => async (dispatch, getState, api) => {
   const res = await api.get('/api/current-user')
@@ -29,14 +29,15 @@ export const fetchPost = (slug) => async (dispatch, getState, api) => {
   }
 }
 
-export const loginUser = ({ email, password }) => async (dispatch, getState, api) => {
+export const loginUser = (values) => async (dispatch, getState, api) => {
   try {
-    const res = await api.get('/api/login', { email, password })
+    const res = await api.post('/api/login', values)
     dispatch({
       type: AUTH_USER,
       payload: res.data
     })
   } catch(err) {
+    console.log(err)
     dispatch(authError('Bad Login Info'));
   }
 }

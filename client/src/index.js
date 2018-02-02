@@ -7,15 +7,15 @@ import proxy from 'express-http-proxy'
 import Routes from './client/Routes'
 const app = express()
 
-app.use(
-  '/api',
-  proxy('http://localhost:3001', {
-    proxyReqOptDecorator(opts) {
-      opts.headers['x-forwarded-host'] = 'localhost:3002'
-      return opts
-    }
-  })
-)
+// app.use(
+//   '/api',
+//   proxy('http://localhost:3001', {
+//     proxyReqOptDecorator(opts) {
+//       opts.headers['x-forwarded-host'] = 'localhost:3002'
+//       return opts
+//     }
+//   })
+// )
 
 app.use(express.static('public'))
 
