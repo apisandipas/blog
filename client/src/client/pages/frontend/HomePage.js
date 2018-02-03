@@ -6,7 +6,7 @@ import chunk from 'lodash.chunk'
 import nl2br from 'react-nl2br'
 import titleCase from 'title-case'
 import dateFormat from 'dateformat'
-import { fetchPosts } from "../actions/index"
+import { fetchPosts } from "../../actions/index"
 
 class HomePage extends Component {
 

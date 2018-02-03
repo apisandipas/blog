@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom'
 import nl2br from 'react-nl2br'
 import titleCase from 'title-case'
 import dateFormat from 'dateformat'
-import { fetchPost } from "../actions/index"
+import { fetchPost } from "../../actions/index"
 
 class PostPage extends Component {
   componentDidMount () {

@@ -3,17 +3,17 @@ import { Helmet } from 'react-helmet'
 import { Link, Redirect } from 'react-router-dom'
 import { Field, reduxForm } from 'redux-form'
 import { connect } from 'react-redux'
-import { registerUser } from '../actions'
-class RegisterPage extends Component {
-  
+import { loginUser } from '../../actions'
+
+class LoginPage extends Component {
+
   constructor (props) {
     super(props)
     this.handleSubmit = this.handleSubmit.bind(this)
   }
 
   handleSubmit (values) {
-    console.log(values)
-    this.props.registerUser(values)
+    this.props.loginUser(values)
   }
 
   renderField(field) {
@@ -29,38 +29,33 @@ class RegisterPage extends Component {
           />
         </div>
       </div>
-    ) 
-  }
-
-  render() {
-    const { handleSubmit, auth } = this.props
+    )
     
+  }
+  
+  render () {
+
+    const { handleSubmit, auth } = this.props
+
     if (auth) {
       return <Redirect to='/admin' />
     }
- 
+
     return (
       <div>
         <Helmet>
-          <title>NERDPress | Register</title>
-          <meta property="og:title" content="NERDPress | Register" />
+          <title>NERDPress | Login</title>
+          <meta property="og:title" content="NERDPress | Login" />
         </Helmet>
          
         <section className="hero is-success is-fullheight">
             <div className="hero-body">
               <div className="container has-text-centered">
                 <div className="column is-4 is-offset-4">
-                  <h3 className="title has-text-grey">Register</h3>
-                  <p className="subtitle has-text-grey">Please register for an account.</p>
+                  <h3 className="title has-text-grey">Login</h3>
+                  <p className="subtitle has-text-grey">Please login to proceed.</p>
                   <div className="box">
                     <form onSubmit={handleSubmit(this.handleSubmit)}>
-                      <Field 
-                        name="name" 
-                        component={this.renderField} 
-                        type="text" 
-                        placeholder="Your Name" 
-                      />
-
                       <Field 
                         name="email" 
                         component={this.renderField} 
@@ -74,20 +69,13 @@ class RegisterPage extends Component {
                         type="password" 
                         placeholder="Your Password" 
                       />
-
-                      <Field 
-                        name="passwordConfirm" 
-                        component={this.renderField} 
-                        type="password" 
-                        placeholder="Confirm Password" 
-                      />
-
-                      <input type="submit" value="Register" className="button is-block is-info is-large" style={{width: '100%'}} />
+      
+                      <input type="submit" value="Login" className="button is-block is-info is-large" style={{width: '100%'}} />
                     </form>
                   </div>
                   <p className="has-text-grey">
-                    <Link to="/login">Login</Link> &nbsp;·&nbsp;
-                    {/*<Link to="#">Forgot PLinkssword</Link> &nbsp;·&nbsp;*/}
+                    <Link to="/register">Register</Link>
+                    {/*  &nbsp;·&nbsp;<Link to="#">Forgot Password</Link> &nbsp;·&nbsp;*/}
                   </p>
                 </div>
               </div>
@@ -108,8 +96,8 @@ const mapStateToProps = (state) => {
 
 export default {
   component: reduxForm({
-    form: 'registrationForm'
+    form: 'loginForm'
   })(
-    connect(mapStateToProps, { registerUser })(RegisterPage)
+    connect(mapStateToProps, { loginUser })(LoginPage)
   )
 };
