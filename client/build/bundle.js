@@ -60,305 +60,1806 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 13);
+/******/ 	return __webpack_require__(__webpack_require__.s = 14);
 /******/ })
 /************************************************************************/
 /******/ ([
 /* 0 */
 /***/ (function(module, exports) {
 
-eval("module.exports = require(\"react\");\n\n//////////////////\n// WEBPACK FOOTER\n// external \"react\"\n// module id = 0\n// module chunks = 0\n\n//# sourceURL=webpack:///external_%22react%22?");
+module.exports = require("react");
 
 /***/ }),
 /* 1 */
 /***/ (function(module, exports) {
 
-eval("module.exports = require(\"react-router-dom\");\n\n//////////////////\n// WEBPACK FOOTER\n// external \"react-router-dom\"\n// module id = 1\n// module chunks = 0\n\n//# sourceURL=webpack:///external_%22react-router-dom%22?");
+module.exports = require("react-router-dom");
 
 /***/ }),
 /* 2 */
 /***/ (function(module, exports) {
 
-eval("module.exports = require(\"react-redux\");\n\n//////////////////\n// WEBPACK FOOTER\n// external \"react-redux\"\n// module id = 2\n// module chunks = 0\n\n//# sourceURL=webpack:///external_%22react-redux%22?");
+module.exports = require("react-redux");
 
 /***/ }),
 /* 3 */
 /***/ (function(module, exports) {
 
-eval("module.exports = require(\"react-helmet\");\n\n//////////////////\n// WEBPACK FOOTER\n// external \"react-helmet\"\n// module id = 3\n// module chunks = 0\n\n//# sourceURL=webpack:///external_%22react-helmet%22?");
+module.exports = require("react-helmet");
 
 /***/ }),
 /* 4 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-eval("\n\nObject.defineProperty(exports, \"__esModule\", {\n  value: true\n});\nexports.authError = exports.registerUser = exports.logOut = exports.loginUser = exports.fetchPost = exports.fetchPosts = exports.fetchCurrentUser = undefined;\n\nvar _types = __webpack_require__(5);\n\nvar _isomorphicCookie = __webpack_require__(38);\n\nvar _isomorphicCookie2 = _interopRequireDefault(_isomorphicCookie);\n\nfunction _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }\n\nfunction _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, arguments); return new Promise(function (resolve, reject) { function step(key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { return Promise.resolve(value).then(function (value) { step(\"next\", value); }, function (err) { step(\"throw\", err); }); } } return step(\"next\"); }); }; }\n\nvar fetchCurrentUser = exports.fetchCurrentUser = function fetchCurrentUser() {\n  return function () {\n    var _ref = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee(dispatch, getState, api) {\n      var res;\n      return regeneratorRuntime.wrap(function _callee$(_context) {\n        while (1) {\n          switch (_context.prev = _context.next) {\n            case 0:\n              _context.next = 2;\n              return api.get('/api/current-user');\n\n            case 2:\n              res = _context.sent;\n\n\n              dispatch({\n                type: _types.FETCH_CURRENT_USER,\n                payload: res\n              });\n\n            case 4:\n            case 'end':\n              return _context.stop();\n          }\n        }\n      }, _callee, undefined);\n    }));\n\n    return function (_x, _x2, _x3) {\n      return _ref.apply(this, arguments);\n    };\n  }();\n};\n\nvar fetchPosts = exports.fetchPosts = function fetchPosts() {\n  return function () {\n    var _ref2 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee2(dispatch, getState, api) {\n      var res;\n      return regeneratorRuntime.wrap(function _callee2$(_context2) {\n        while (1) {\n          switch (_context2.prev = _context2.next) {\n            case 0:\n              _context2.next = 2;\n              return api.get('/api/posts');\n\n            case 2:\n              res = _context2.sent;\n\n              dispatch({\n                type: _types.FETCH_POSTS,\n                payload: res\n              });\n\n            case 4:\n            case 'end':\n              return _context2.stop();\n          }\n        }\n      }, _callee2, undefined);\n    }));\n\n    return function (_x4, _x5, _x6) {\n      return _ref2.apply(this, arguments);\n    };\n  }();\n};\n\nvar fetchPost = exports.fetchPost = function fetchPost(slug) {\n  return function () {\n    var _ref3 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee3(dispatch, getState, api) {\n      var res;\n      return regeneratorRuntime.wrap(function _callee3$(_context3) {\n        while (1) {\n          switch (_context3.prev = _context3.next) {\n            case 0:\n              _context3.prev = 0;\n              _context3.next = 3;\n              return api.get('/api/posts/' + slug);\n\n            case 3:\n              res = _context3.sent;\n\n              dispatch({\n                type: _types.FETCH_POST,\n                payload: res\n              });\n              _context3.next = 10;\n              break;\n\n            case 7:\n              _context3.prev = 7;\n              _context3.t0 = _context3['catch'](0);\n\n              console.log(_context3.t0);\n\n            case 10:\n            case 'end':\n              return _context3.stop();\n          }\n        }\n      }, _callee3, undefined, [[0, 7]]);\n    }));\n\n    return function (_x7, _x8, _x9) {\n      return _ref3.apply(this, arguments);\n    };\n  }();\n};\n\nvar loginUser = exports.loginUser = function loginUser(values) {\n  return function () {\n    var _ref4 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee4(dispatch, getState, api) {\n      var res;\n      return regeneratorRuntime.wrap(function _callee4$(_context4) {\n        while (1) {\n          switch (_context4.prev = _context4.next) {\n            case 0:\n              _context4.prev = 0;\n              _context4.next = 3;\n              return api.post('/api/login', values);\n\n            case 3:\n              res = _context4.sent;\n\n              dispatch({\n                type: _types.AUTH_USER,\n                payload: res.data\n              });\n              _isomorphicCookie2.default.save('token', res.data.token, { secure: false });\n              _context4.next = 12;\n              break;\n\n            case 8:\n              _context4.prev = 8;\n              _context4.t0 = _context4['catch'](0);\n\n              console.log(_context4.t0);\n              dispatch(authError('Bad Login Info'));\n\n            case 12:\n            case 'end':\n              return _context4.stop();\n          }\n        }\n      }, _callee4, undefined, [[0, 8]]);\n    }));\n\n    return function (_x10, _x11, _x12) {\n      return _ref4.apply(this, arguments);\n    };\n  }();\n};\n\nvar logOut = exports.logOut = function logOut() {\n  return function () {\n    var _ref5 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee5(dispatch) {\n      return regeneratorRuntime.wrap(function _callee5$(_context5) {\n        while (1) {\n          switch (_context5.prev = _context5.next) {\n            case 0:\n              _isomorphicCookie2.default.remove('token', null, { secure: false });\n              dispatch({\n                type: _types.UNAUTH_USER\n              });\n\n            case 2:\n            case 'end':\n              return _context5.stop();\n          }\n        }\n      }, _callee5, undefined);\n    }));\n\n    return function (_x13) {\n      return _ref5.apply(this, arguments);\n    };\n  }();\n};\n\nvar registerUser = exports.registerUser = function registerUser(values) {\n  return function () {\n    var _ref6 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee6(dispatch, getState, api) {\n      var res;\n      return regeneratorRuntime.wrap(function _callee6$(_context6) {\n        while (1) {\n          switch (_context6.prev = _context6.next) {\n            case 0:\n              _context6.prev = 0;\n              _context6.next = 3;\n              return api.post('/api/register', values);\n\n            case 3:\n              res = _context6.sent;\n\n              dispatch({\n                type: _types.AUTH_USER,\n                payload: res.data\n              });\n              _isomorphicCookie2.default.save('token', res.data.token, { secure: false });\n              _context6.next = 12;\n              break;\n\n            case 8:\n              _context6.prev = 8;\n              _context6.t0 = _context6['catch'](0);\n\n              console.log(_context6.t0);\n              dispatch(authError('Bad Login Info'));\n\n            case 12:\n            case 'end':\n              return _context6.stop();\n          }\n        }\n      }, _callee6, undefined, [[0, 8]]);\n    }));\n\n    return function (_x14, _x15, _x16) {\n      return _ref6.apply(this, arguments);\n    };\n  }();\n};\n\nvar authError = exports.authError = function authError(error) {\n  return {\n    type: _types.AUTH_ERROR,\n    payload: error\n  };\n};\n\n//////////////////\n// WEBPACK FOOTER\n// ./src/client/actions/index.js\n// module id = 4\n// module chunks = 0\n\n//# sourceURL=webpack:///./src/client/actions/index.js?");
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.authError = exports.registerUser = exports.logOut = exports.loginUser = exports.fetchPost = exports.fetchPosts = exports.fetchCurrentUser = undefined;
+
+var _types = __webpack_require__(5);
+
+var _isomorphicCookie = __webpack_require__(9);
+
+var _isomorphicCookie2 = _interopRequireDefault(_isomorphicCookie);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, arguments); return new Promise(function (resolve, reject) { function step(key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { return Promise.resolve(value).then(function (value) { step("next", value); }, function (err) { step("throw", err); }); } } return step("next"); }); }; }
+
+var fetchCurrentUser = exports.fetchCurrentUser = function fetchCurrentUser() {
+  return function () {
+    var _ref = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee(dispatch, getState, api) {
+      var res;
+      return regeneratorRuntime.wrap(function _callee$(_context) {
+        while (1) {
+          switch (_context.prev = _context.next) {
+            case 0:
+              _context.next = 2;
+              return api.get('/api/current-user');
+
+            case 2:
+              res = _context.sent;
+
+
+              dispatch({
+                type: _types.FETCH_CURRENT_USER,
+                payload: res
+              });
+
+            case 4:
+            case 'end':
+              return _context.stop();
+          }
+        }
+      }, _callee, undefined);
+    }));
+
+    return function (_x, _x2, _x3) {
+      return _ref.apply(this, arguments);
+    };
+  }();
+};
+
+var fetchPosts = exports.fetchPosts = function fetchPosts() {
+  return function () {
+    var _ref2 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee2(dispatch, getState, api) {
+      var res;
+      return regeneratorRuntime.wrap(function _callee2$(_context2) {
+        while (1) {
+          switch (_context2.prev = _context2.next) {
+            case 0:
+              _context2.next = 2;
+              return api.get('/api/posts');
+
+            case 2:
+              res = _context2.sent;
+
+              dispatch({
+                type: _types.FETCH_POSTS,
+                payload: res
+              });
+
+            case 4:
+            case 'end':
+              return _context2.stop();
+          }
+        }
+      }, _callee2, undefined);
+    }));
+
+    return function (_x4, _x5, _x6) {
+      return _ref2.apply(this, arguments);
+    };
+  }();
+};
+
+var fetchPost = exports.fetchPost = function fetchPost(slug) {
+  return function () {
+    var _ref3 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee3(dispatch, getState, api) {
+      var res;
+      return regeneratorRuntime.wrap(function _callee3$(_context3) {
+        while (1) {
+          switch (_context3.prev = _context3.next) {
+            case 0:
+              _context3.prev = 0;
+              _context3.next = 3;
+              return api.get('/api/posts/' + slug);
+
+            case 3:
+              res = _context3.sent;
+
+              dispatch({
+                type: _types.FETCH_POST,
+                payload: res
+              });
+              _context3.next = 10;
+              break;
+
+            case 7:
+              _context3.prev = 7;
+              _context3.t0 = _context3['catch'](0);
+
+              console.log(_context3.t0);
+
+            case 10:
+            case 'end':
+              return _context3.stop();
+          }
+        }
+      }, _callee3, undefined, [[0, 7]]);
+    }));
+
+    return function (_x7, _x8, _x9) {
+      return _ref3.apply(this, arguments);
+    };
+  }();
+};
+
+var loginUser = exports.loginUser = function loginUser(values) {
+  return function () {
+    var _ref4 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee4(dispatch, getState, api) {
+      var res;
+      return regeneratorRuntime.wrap(function _callee4$(_context4) {
+        while (1) {
+          switch (_context4.prev = _context4.next) {
+            case 0:
+              _context4.prev = 0;
+              _context4.next = 3;
+              return api.post('/api/login', values);
+
+            case 3:
+              res = _context4.sent;
+
+              dispatch({
+                type: _types.AUTH_USER,
+                payload: res.data
+              });
+              _isomorphicCookie2.default.save('token', res.data.token, { secure: false });
+              _context4.next = 12;
+              break;
+
+            case 8:
+              _context4.prev = 8;
+              _context4.t0 = _context4['catch'](0);
+
+              console.log(_context4.t0);
+              dispatch(authError('Bad Login Info'));
+
+            case 12:
+            case 'end':
+              return _context4.stop();
+          }
+        }
+      }, _callee4, undefined, [[0, 8]]);
+    }));
+
+    return function (_x10, _x11, _x12) {
+      return _ref4.apply(this, arguments);
+    };
+  }();
+};
+
+var logOut = exports.logOut = function logOut() {
+  return function () {
+    var _ref5 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee5(dispatch) {
+      return regeneratorRuntime.wrap(function _callee5$(_context5) {
+        while (1) {
+          switch (_context5.prev = _context5.next) {
+            case 0:
+              _isomorphicCookie2.default.remove('token', null, { secure: false });
+              dispatch({
+                type: _types.UNAUTH_USER
+              });
+
+            case 2:
+            case 'end':
+              return _context5.stop();
+          }
+        }
+      }, _callee5, undefined);
+    }));
+
+    return function (_x13) {
+      return _ref5.apply(this, arguments);
+    };
+  }();
+};
+
+var registerUser = exports.registerUser = function registerUser(values) {
+  return function () {
+    var _ref6 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee6(dispatch, getState, api) {
+      var res;
+      return regeneratorRuntime.wrap(function _callee6$(_context6) {
+        while (1) {
+          switch (_context6.prev = _context6.next) {
+            case 0:
+              _context6.prev = 0;
+              _context6.next = 3;
+              return api.post('/api/register', values);
+
+            case 3:
+              res = _context6.sent;
+
+              dispatch({
+                type: _types.AUTH_USER,
+                payload: res.data
+              });
+              _isomorphicCookie2.default.save('token', res.data.token, { secure: false });
+              _context6.next = 12;
+              break;
+
+            case 8:
+              _context6.prev = 8;
+              _context6.t0 = _context6['catch'](0);
+
+              console.log(_context6.t0);
+              dispatch(authError('Bad Login Info'));
+
+            case 12:
+            case 'end':
+              return _context6.stop();
+          }
+        }
+      }, _callee6, undefined, [[0, 8]]);
+    }));
+
+    return function (_x14, _x15, _x16) {
+      return _ref6.apply(this, arguments);
+    };
+  }();
+};
+
+var authError = exports.authError = function authError(error) {
+  return {
+    type: _types.AUTH_ERROR,
+    payload: error
+  };
+};
 
 /***/ }),
 /* 5 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-eval("\n\nObject.defineProperty(exports, \"__esModule\", {\n  value: true\n});\nvar FETCH_CURRENT_USER = exports.FETCH_CURRENT_USER = 'fetch_current_user';\nvar FETCH_POSTS = exports.FETCH_POSTS = 'fetch_posts';\nvar FETCH_POST = exports.FETCH_POST = 'fetch_post';\n\nvar AUTH_USER = exports.AUTH_USER = 'auth_user';\nvar UNAUTH_USER = exports.UNAUTH_USER = 'unauth_user';\nvar AUTH_ERROR = exports.AUTH_ERROR = 'auth_error';\n\n//////////////////\n// WEBPACK FOOTER\n// ./src/client/actions/types.js\n// module id = 5\n// module chunks = 0\n\n//# sourceURL=webpack:///./src/client/actions/types.js?");
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+var FETCH_CURRENT_USER = exports.FETCH_CURRENT_USER = 'fetch_current_user';
+var FETCH_POSTS = exports.FETCH_POSTS = 'fetch_posts';
+var FETCH_POST = exports.FETCH_POST = 'fetch_post';
+
+var AUTH_USER = exports.AUTH_USER = 'auth_user';
+var UNAUTH_USER = exports.UNAUTH_USER = 'unauth_user';
+var AUTH_ERROR = exports.AUTH_ERROR = 'auth_error';
 
 /***/ }),
 /* 6 */
 /***/ (function(module, exports) {
 
-eval("module.exports = require(\"react-router-config\");\n\n//////////////////\n// WEBPACK FOOTER\n// external \"react-router-config\"\n// module id = 6\n// module chunks = 0\n\n//# sourceURL=webpack:///external_%22react-router-config%22?");
+module.exports = require("react-router-config");
 
 /***/ }),
 /* 7 */
 /***/ (function(module, exports) {
 
-eval("module.exports = require(\"redux-form\");\n\n//////////////////\n// WEBPACK FOOTER\n// external \"redux-form\"\n// module id = 7\n// module chunks = 0\n\n//# sourceURL=webpack:///external_%22redux-form%22?");
+module.exports = require("redux-form");
 
 /***/ }),
 /* 8 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-eval("\n\nObject.defineProperty(exports, \"__esModule\", {\n  value: true\n});\n\nvar _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };\n\nvar _react = __webpack_require__(0);\n\nvar _react2 = _interopRequireDefault(_react);\n\nvar _App = __webpack_require__(19);\n\nvar _App2 = _interopRequireDefault(_App);\n\nvar _HomePage = __webpack_require__(21);\n\nvar _HomePage2 = _interopRequireDefault(_HomePage);\n\nvar _PostPage = __webpack_require__(23);\n\nvar _PostPage2 = _interopRequireDefault(_PostPage);\n\nvar _LoginPage = __webpack_require__(24);\n\nvar _LoginPage2 = _interopRequireDefault(_LoginPage);\n\nvar _AdminPage = __webpack_require__(44);\n\nvar _AdminPage2 = _interopRequireDefault(_AdminPage);\n\nvar _RegisterPage = __webpack_require__(25);\n\nvar _RegisterPage2 = _interopRequireDefault(_RegisterPage);\n\nvar _NotFoundPage = __webpack_require__(26);\n\nvar _NotFoundPage2 = _interopRequireDefault(_NotFoundPage);\n\nfunction _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }\n\nexports.default = [_extends({}, _App2.default, {\n  routes: [_extends({}, _HomePage2.default, {\n    path: '/',\n    exact: true\n  }), _extends({}, _PostPage2.default, {\n    path: '/posts/:slug'\n  }), _extends({}, _LoginPage2.default, {\n    path: '/login'\n  }), _extends({}, _RegisterPage2.default, {\n    path: '/register'\n  }), _extends({}, _AdminPage2.default, {\n    path: '/admin'\n  }), _extends({}, _NotFoundPage2.default)]\n})];\n\n//////////////////\n// WEBPACK FOOTER\n// ./src/client/Routes.js\n// module id = 8\n// module chunks = 0\n\n//# sourceURL=webpack:///./src/client/Routes.js?");
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+var _react = __webpack_require__(0);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _App = __webpack_require__(20);
+
+var _App2 = _interopRequireDefault(_App);
+
+var _HomePage = __webpack_require__(22);
+
+var _HomePage2 = _interopRequireDefault(_HomePage);
+
+var _PostPage = __webpack_require__(24);
+
+var _PostPage2 = _interopRequireDefault(_PostPage);
+
+var _LoginPage = __webpack_require__(25);
+
+var _LoginPage2 = _interopRequireDefault(_LoginPage);
+
+var _AdminPage = __webpack_require__(26);
+
+var _AdminPage2 = _interopRequireDefault(_AdminPage);
+
+var _RegisterPage = __webpack_require__(28);
+
+var _RegisterPage2 = _interopRequireDefault(_RegisterPage);
+
+var _NotFoundPage = __webpack_require__(29);
+
+var _NotFoundPage2 = _interopRequireDefault(_NotFoundPage);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+exports.default = [_extends({}, _App2.default, {
+  routes: [_extends({}, _HomePage2.default, {
+    path: '/',
+    exact: true
+  }), _extends({}, _PostPage2.default, {
+    path: '/posts/:slug'
+  }), _extends({}, _LoginPage2.default, {
+    path: '/login'
+  }), _extends({}, _RegisterPage2.default, {
+    path: '/register'
+  }), _extends({}, _AdminPage2.default, {
+    path: '/admin'
+  }), _extends({}, _NotFoundPage2.default)]
+})];
 
 /***/ }),
 /* 9 */
 /***/ (function(module, exports) {
 
-eval("module.exports = require(\"react-nl2br\");\n\n//////////////////\n// WEBPACK FOOTER\n// external \"react-nl2br\"\n// module id = 9\n// module chunks = 0\n\n//# sourceURL=webpack:///external_%22react-nl2br%22?");
+module.exports = require("isomorphic-cookie");
 
 /***/ }),
 /* 10 */
 /***/ (function(module, exports) {
 
-eval("module.exports = require(\"title-case\");\n\n//////////////////\n// WEBPACK FOOTER\n// external \"title-case\"\n// module id = 10\n// module chunks = 0\n\n//# sourceURL=webpack:///external_%22title-case%22?");
+module.exports = require("react-nl2br");
 
 /***/ }),
 /* 11 */
 /***/ (function(module, exports) {
 
-eval("module.exports = require(\"dateformat\");\n\n//////////////////\n// WEBPACK FOOTER\n// external \"dateformat\"\n// module id = 11\n// module chunks = 0\n\n//# sourceURL=webpack:///external_%22dateformat%22?");
+module.exports = require("title-case");
 
 /***/ }),
 /* 12 */
 /***/ (function(module, exports) {
 
-eval("module.exports = require(\"redux\");\n\n//////////////////\n// WEBPACK FOOTER\n// external \"redux\"\n// module id = 12\n// module chunks = 0\n\n//# sourceURL=webpack:///external_%22redux%22?");
+module.exports = require("dateformat");
 
 /***/ }),
 /* 13 */
-/***/ (function(module, exports, __webpack_require__) {
+/***/ (function(module, exports) {
 
-"use strict";
-eval("\n\n__webpack_require__(14);\n\nvar _express = __webpack_require__(15);\n\nvar _express2 = _interopRequireDefault(_express);\n\nvar _renderer = __webpack_require__(16);\n\nvar _renderer2 = _interopRequireDefault(_renderer);\n\nvar _createStore = __webpack_require__(27);\n\nvar _createStore2 = _interopRequireDefault(_createStore);\n\nvar _reactRouterConfig = __webpack_require__(6);\n\nvar _isomorphicCookie = __webpack_require__(38);\n\nvar _isomorphicCookie2 = _interopRequireDefault(_isomorphicCookie);\n\nvar _Routes = __webpack_require__(8);\n\nvar _Routes2 = _interopRequireDefault(_Routes);\n\nfunction _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }\n\nvar app = (0, _express2.default)();\n\napp.use(_express2.default.static('public'));\n\napp.get('*', function (req, res) {\n  var store = (0, _createStore2.default)(req);\n\n  var cookie = _isomorphicCookie2.default.load('token', req);\n  if (cookie) {\n    store.dispatch({ type: 'auth_user', payload: { token: cookie } });\n  }\n\n  var promises = (0, _reactRouterConfig.matchRoutes)(_Routes2.default, req.path).map(function (_ref) {\n    var route = _ref.route;\n\n    return route.loadData ? route.loadData(store, req) : Promise.resolve(null);\n  });\n\n  Promise.all(promises).then(function () {\n    var context = {};\n    var content = (0, _renderer2.default)(req, store, context);\n\n    if (context.url) {\n      return res.redirect(301, context.url);\n    }\n    if (context.notFound) {\n      res.status(404);\n    }\n\n    res.send(content);\n  });\n});\n\napp.listen(3002, function () {\n  console.log('listening on port 3002');\n});\n\n//////////////////\n// WEBPACK FOOTER\n// ./src/index.js\n// module id = 13\n// module chunks = 0\n\n//# sourceURL=webpack:///./src/index.js?");
+module.exports = require("redux");
 
 /***/ }),
 /* 14 */
-/***/ (function(module, exports) {
+/***/ (function(module, exports, __webpack_require__) {
 
-eval("module.exports = require(\"babel-polyfill\");\n\n//////////////////\n// WEBPACK FOOTER\n// external \"babel-polyfill\"\n// module id = 14\n// module chunks = 0\n\n//# sourceURL=webpack:///external_%22babel-polyfill%22?");
+"use strict";
+
+
+__webpack_require__(15);
+
+var _express = __webpack_require__(16);
+
+var _express2 = _interopRequireDefault(_express);
+
+var _renderer = __webpack_require__(17);
+
+var _renderer2 = _interopRequireDefault(_renderer);
+
+var _createStore = __webpack_require__(30);
+
+var _createStore2 = _interopRequireDefault(_createStore);
+
+var _reactRouterConfig = __webpack_require__(6);
+
+var _isomorphicCookie = __webpack_require__(9);
+
+var _isomorphicCookie2 = _interopRequireDefault(_isomorphicCookie);
+
+var _Routes = __webpack_require__(8);
+
+var _Routes2 = _interopRequireDefault(_Routes);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var app = (0, _express2.default)();
+
+app.use(_express2.default.static('public'));
+
+app.get('*', function (req, res) {
+  var store = (0, _createStore2.default)(req);
+
+  var cookie = _isomorphicCookie2.default.load('token', req);
+  if (cookie) {
+    store.dispatch({ type: 'auth_user', payload: { token: cookie } });
+  }
+
+  var promises = (0, _reactRouterConfig.matchRoutes)(_Routes2.default, req.path).map(function (_ref) {
+    var route = _ref.route;
+
+    return route.loadData ? route.loadData(store, req) : Promise.resolve(null);
+  });
+
+  Promise.all(promises).then(function () {
+    var context = {};
+    var content = (0, _renderer2.default)(req, store, context);
+
+    if (context.url) {
+      return res.redirect(301, context.url);
+    }
+    if (context.notFound) {
+      res.status(404);
+    }
+
+    res.send(content);
+  });
+});
+
+app.listen(3002, function () {
+  console.log('listening on port 3002');
+});
 
 /***/ }),
 /* 15 */
 /***/ (function(module, exports) {
 
-eval("module.exports = require(\"express\");\n\n//////////////////\n// WEBPACK FOOTER\n// external \"express\"\n// module id = 15\n// module chunks = 0\n\n//# sourceURL=webpack:///external_%22express%22?");
+module.exports = require("babel-polyfill");
 
 /***/ }),
 /* 16 */
-/***/ (function(module, exports, __webpack_require__) {
+/***/ (function(module, exports) {
 
-"use strict";
-eval("\n\nObject.defineProperty(exports, \"__esModule\", {\n  value: true\n});\n\nvar _react = __webpack_require__(0);\n\nvar _react2 = _interopRequireDefault(_react);\n\nvar _server = __webpack_require__(17);\n\nvar _reactRouterDom = __webpack_require__(1);\n\nvar _reactRouterConfig = __webpack_require__(6);\n\nvar _serializeJavascript = __webpack_require__(18);\n\nvar _serializeJavascript2 = _interopRequireDefault(_serializeJavascript);\n\nvar _reactRedux = __webpack_require__(2);\n\nvar _reactHelmet = __webpack_require__(3);\n\nvar _Routes = __webpack_require__(8);\n\nvar _Routes2 = _interopRequireDefault(_Routes);\n\nfunction _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }\n\nexports.default = function (req, store, context) {\n  var content = (0, _server.renderToString)(_react2.default.createElement(\n    _reactRedux.Provider,\n    { store: store },\n    _react2.default.createElement(\n      _reactRouterDom.StaticRouter,\n      { location: req.path, context: context },\n      _react2.default.createElement(\n        'div',\n        null,\n        (0, _reactRouterConfig.renderRoutes)(_Routes2.default)\n      )\n    )\n  ));\n\n  var helmet = _reactHelmet.Helmet.renderStatic();\n\n  return '\\n    <html>\\n      <head>\\n        ' + helmet.title.toString() + '\\n        ' + helmet.meta.toString() + '\\n        <link rel=\"stylesheet\" type=\"text/css\" href=\"https://cdnjs.cloudflare.com/ajax/libs/bulma/0.6.2/css/bulma.css\">  \\n        <link rel=\"stylesheet\" type=\"text/css\" href=\"/styles.css\">  \\n      </head>\\n      <body>\\n        <div id=\"root\">' + content + '</div>\\n        <script>window.INITIAL_STATE = ' + (0, _serializeJavascript2.default)(store.getState()) + '</script>\\n        <script src=\"/bundle.js\"></script>\\n       </body>\\n    </html>  \\n  ';\n};\n\n//////////////////\n// WEBPACK FOOTER\n// ./src/helpers/renderer.js\n// module id = 16\n// module chunks = 0\n\n//# sourceURL=webpack:///./src/helpers/renderer.js?");
+module.exports = require("express");
 
 /***/ }),
 /* 17 */
-/***/ (function(module, exports) {
+/***/ (function(module, exports, __webpack_require__) {
 
-eval("module.exports = require(\"react-dom/server\");\n\n//////////////////\n// WEBPACK FOOTER\n// external \"react-dom/server\"\n// module id = 17\n// module chunks = 0\n\n//# sourceURL=webpack:///external_%22react-dom/server%22?");
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _react = __webpack_require__(0);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _server = __webpack_require__(18);
+
+var _reactRouterDom = __webpack_require__(1);
+
+var _reactRouterConfig = __webpack_require__(6);
+
+var _serializeJavascript = __webpack_require__(19);
+
+var _serializeJavascript2 = _interopRequireDefault(_serializeJavascript);
+
+var _reactRedux = __webpack_require__(2);
+
+var _reactHelmet = __webpack_require__(3);
+
+var _Routes = __webpack_require__(8);
+
+var _Routes2 = _interopRequireDefault(_Routes);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+exports.default = function (req, store, context) {
+  var content = (0, _server.renderToString)(_react2.default.createElement(
+    _reactRedux.Provider,
+    { store: store },
+    _react2.default.createElement(
+      _reactRouterDom.StaticRouter,
+      { location: req.path, context: context },
+      _react2.default.createElement(
+        'div',
+        null,
+        (0, _reactRouterConfig.renderRoutes)(_Routes2.default)
+      )
+    )
+  ));
+
+  var helmet = _reactHelmet.Helmet.renderStatic();
+
+  return '\n    <html>\n      <head>\n        ' + helmet.title.toString() + '\n        ' + helmet.meta.toString() + '\n        <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.6.2/css/bulma.css">  \n        <link rel="stylesheet" type="text/css" href="/styles.css">  \n      </head>\n      <body>\n        <div id="root">' + content + '</div>\n        <script>window.INITIAL_STATE = ' + (0, _serializeJavascript2.default)(store.getState()) + '</script>\n        <script src="/bundle.js"></script>\n       </body>\n    </html>  \n  ';
+};
 
 /***/ }),
 /* 18 */
 /***/ (function(module, exports) {
 
-eval("module.exports = require(\"serialize-javascript\");\n\n//////////////////\n// WEBPACK FOOTER\n// external \"serialize-javascript\"\n// module id = 18\n// module chunks = 0\n\n//# sourceURL=webpack:///external_%22serialize-javascript%22?");
+module.exports = require("react-dom/server");
 
 /***/ }),
 /* 19 */
-/***/ (function(module, exports, __webpack_require__) {
+/***/ (function(module, exports) {
 
-"use strict";
-eval("\n\nObject.defineProperty(exports, \"__esModule\", {\n  value: true\n});\n\nvar _react = __webpack_require__(0);\n\nvar _react2 = _interopRequireDefault(_react);\n\nvar _reactRouterConfig = __webpack_require__(6);\n\nvar _Header = __webpack_require__(20);\n\nvar _Header2 = _interopRequireDefault(_Header);\n\nvar _actions = __webpack_require__(4);\n\nfunction _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }\n\nvar App = function App(_ref) {\n  var route = _ref.route;\n\n  return _react2.default.createElement(\n    'div',\n    { className: 'container' },\n    _react2.default.createElement(_Header2.default, null),\n    (0, _reactRouterConfig.renderRoutes)(route.routes)\n  );\n};\n\nexports.default = {\n  component: App\n  // loadData: ({ dispatch }) => dispatch(fetchCurrentUser())\n};\n\n//////////////////\n// WEBPACK FOOTER\n// ./src/client/App.js\n// module id = 19\n// module chunks = 0\n\n//# sourceURL=webpack:///./src/client/App.js?");
+module.exports = require("serialize-javascript");
 
 /***/ }),
 /* 20 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-eval("\n\nObject.defineProperty(exports, \"__esModule\", {\n  value: true\n});\n\nvar _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if (\"value\" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();\n\nvar _react = __webpack_require__(0);\n\nvar _react2 = _interopRequireDefault(_react);\n\nvar _reactRouterDom = __webpack_require__(1);\n\nvar _reactRedux = __webpack_require__(2);\n\nvar _actions = __webpack_require__(4);\n\nfunction _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }\n\nfunction _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError(\"Cannot call a class as a function\"); } }\n\nfunction _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError(\"this hasn't been initialised - super() hasn't been called\"); } return call && (typeof call === \"object\" || typeof call === \"function\") ? call : self; }\n\nfunction _inherits(subClass, superClass) { if (typeof superClass !== \"function\" && superClass !== null) { throw new TypeError(\"Super expression must either be null or a function, not \" + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }\n\nvar Header = function (_Component) {\n  _inherits(Header, _Component);\n\n  function Header() {\n    _classCallCheck(this, Header);\n\n    return _possibleConstructorReturn(this, (Header.__proto__ || Object.getPrototypeOf(Header)).apply(this, arguments));\n  }\n\n  _createClass(Header, [{\n    key: 'logOut',\n    value: function logOut() {\n      this.props.logOut();\n    }\n  }, {\n    key: 'render',\n    value: function render() {\n      var _this2 = this;\n\n      var auth = this.props.auth;\n\n      var authButton = auth && auth.token ? _react2.default.createElement(\n        'a',\n        { onClick: function onClick() {\n            return _this2.logOut();\n          }, className: 'navbar-item' },\n        'Logout'\n      ) : [_react2.default.createElement(\n        _reactRouterDom.Link,\n        { className: 'navbar-item', to: '/register', key: 'register' },\n        'Register'\n      ), _react2.default.createElement(\n        _reactRouterDom.Link,\n        { className: 'navbar-item', to: '/login', key: 'login' },\n        'Login'\n      )];\n      return _react2.default.createElement(\n        'nav',\n        { className: 'navbar is-white' },\n        _react2.default.createElement(\n          'div',\n          { className: 'navbar-brand' },\n          _react2.default.createElement(\n            _reactRouterDom.Link,\n            { className: 'navbar-item brand-text', to: '/' },\n            'NERDPress'\n          ),\n          _react2.default.createElement(\n            'div',\n            { className: 'navbar-burger burger', 'data-target': 'navMenu' },\n            _react2.default.createElement('span', null),\n            _react2.default.createElement('span', null),\n            _react2.default.createElement('span', null)\n          )\n        ),\n        _react2.default.createElement(\n          'div',\n          { id: 'navMenu', className: 'navbar-menu' },\n          _react2.default.createElement(\n            'div',\n            { className: 'navbar-start' },\n            _react2.default.createElement(\n              _reactRouterDom.Link,\n              { className: 'navbar-item', to: '/' },\n              'Home'\n            ),\n            _react2.default.createElement(\n              _reactRouterDom.Link,\n              { className: 'navbar-item', to: '/archives' },\n              'Archives'\n            )\n          ),\n          _react2.default.createElement(\n            'div',\n            { className: 'navbar-end' },\n            authButton\n          )\n        )\n      );\n    }\n  }]);\n\n  return Header;\n}(_react.Component);\n\nfunction mapStateToProps(_ref) {\n  var auth = _ref.auth;\n\n  return {\n    auth: auth\n  };\n}\n\nexports.default = (0, _reactRedux.connect)(mapStateToProps, { logOut: _actions.logOut })(Header);\n\n//////////////////\n// WEBPACK FOOTER\n// ./src/client/components/Header.js\n// module id = 20\n// module chunks = 0\n\n//# sourceURL=webpack:///./src/client/components/Header.js?");
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _react = __webpack_require__(0);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _reactRouterConfig = __webpack_require__(6);
+
+var _Header = __webpack_require__(21);
+
+var _Header2 = _interopRequireDefault(_Header);
+
+var _actions = __webpack_require__(4);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var App = function App(_ref) {
+  var route = _ref.route;
+
+  return _react2.default.createElement(
+    'div',
+    { className: 'container' },
+    _react2.default.createElement(_Header2.default, null),
+    (0, _reactRouterConfig.renderRoutes)(route.routes)
+  );
+};
+
+exports.default = {
+  component: App
+  // loadData: ({ dispatch }) => dispatch(fetchCurrentUser())
+};
 
 /***/ }),
 /* 21 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-eval("\n\nObject.defineProperty(exports, \"__esModule\", {\n  value: true\n});\n\nvar _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if (\"value\" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();\n\nvar _react = __webpack_require__(0);\n\nvar _react2 = _interopRequireDefault(_react);\n\nvar _reactHelmet = __webpack_require__(3);\n\nvar _reactRedux = __webpack_require__(2);\n\nvar _reactRouterDom = __webpack_require__(1);\n\nvar _lodash = __webpack_require__(22);\n\nvar _lodash2 = _interopRequireDefault(_lodash);\n\nvar _reactNl2br = __webpack_require__(9);\n\nvar _reactNl2br2 = _interopRequireDefault(_reactNl2br);\n\nvar _titleCase = __webpack_require__(10);\n\nvar _titleCase2 = _interopRequireDefault(_titleCase);\n\nvar _dateformat = __webpack_require__(11);\n\nvar _dateformat2 = _interopRequireDefault(_dateformat);\n\nvar _index = __webpack_require__(4);\n\nfunction _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }\n\nfunction _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError(\"Cannot call a class as a function\"); } }\n\nfunction _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError(\"this hasn't been initialised - super() hasn't been called\"); } return call && (typeof call === \"object\" || typeof call === \"function\") ? call : self; }\n\nfunction _inherits(subClass, superClass) { if (typeof superClass !== \"function\" && superClass !== null) { throw new TypeError(\"Super expression must either be null or a function, not \" + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }\n\nvar HomePage = function (_Component) {\n  _inherits(HomePage, _Component);\n\n  function HomePage(props) {\n    _classCallCheck(this, HomePage);\n\n    var _this = _possibleConstructorReturn(this, (HomePage.__proto__ || Object.getPrototypeOf(HomePage)).call(this, props));\n\n    _this.state = {\n      page: 1\n    };\n    return _this;\n  }\n\n  _createClass(HomePage, [{\n    key: 'componentDidMount',\n    value: function componentDidMount() {\n      this.props.fetchPosts();\n    }\n  }, {\n    key: 'prevPage',\n    value: function prevPage() {\n      this.setState({\n        page: this.state.page - 1\n      });\n    }\n  }, {\n    key: 'nextPage',\n    value: function nextPage() {\n      this.setState({\n        page: this.state.page + 1\n      });\n    }\n  }, {\n    key: 'renderPosts',\n    value: function renderPosts(posts) {\n      return posts.map(function (post) {\n        return _react2.default.createElement(\n          'div',\n          { className: 'card article', key: post.id },\n          _react2.default.createElement(\n            'div',\n            { className: 'card-content' },\n            _react2.default.createElement(\n              'p',\n              { className: 'title article-title' },\n              _react2.default.createElement(\n                _reactRouterDom.Link,\n                { to: '/posts/' + post.slug },\n                (0, _titleCase2.default)(post.title)\n              )\n            ),\n            _react2.default.createElement(\n              'p',\n              { className: 'subtitle is-6 article-subtitle' },\n              _react2.default.createElement(\n                'a',\n                { href: '#' },\n                post.user.name\n              ),\n              ' on ',\n              (0, _dateformat2.default)(post.created_at, \"dddd, mmmm dS, yyyy, h:MM:ss TT\")\n            ),\n            _react2.default.createElement(\n              'div',\n              { className: 'content article-body' },\n              (0, _reactNl2br2.default)(post.excerpt)\n            )\n          )\n        );\n      });\n    }\n  }, {\n    key: 'renderPagination',\n    value: function renderPagination(numPages) {\n      var _this2 = this;\n\n      var currentPage = this.state.page;\n      return _react2.default.createElement(\n        'nav',\n        { className: 'pagination', role: 'navigation', 'aria-label': 'pagination', style: { marginTop: '25px' } },\n        currentPage > 1 ? _react2.default.createElement(\n          'a',\n          { className: 'pagination-previous', onClick: function onClick() {\n              return _this2.prevPage();\n            } },\n          'Previous'\n        ) : _react2.default.createElement('a', null),\n        currentPage < numPages ? _react2.default.createElement(\n          'a',\n          { className: 'pagination-next', onClick: function onClick() {\n              return _this2.nextPage();\n            } },\n          'Next page'\n        ) : _react2.default.createElement('a', null)\n      );\n    }\n  }, {\n    key: 'render',\n    value: function render() {\n      var posts_per_page = 10;\n      var posts = (0, _lodash2.default)(this.props.posts, posts_per_page)[this.state.page - 1];\n      var numPages = Math.round(this.props.posts.length / posts_per_page);\n\n      return _react2.default.createElement(\n        'div',\n        null,\n        _react2.default.createElement(\n          _reactHelmet.Helmet,\n          null,\n          _react2.default.createElement(\n            'title',\n            null,\n            'NERDPress | Home Page'\n          ),\n          _react2.default.createElement('meta', { property: 'og:title', content: 'NERDPress | Home Page' })\n        ),\n        _react2.default.createElement(\n          'section',\n          { className: 'articles' },\n          _react2.default.createElement(\n            'div',\n            { className: 'column is-8 is-offset-2' },\n            this.renderPosts(posts),\n            this.renderPagination(numPages)\n          )\n        )\n      );\n    }\n  }]);\n\n  return HomePage;\n}(_react.Component);\n\nfunction mapStateToProps(state) {\n  return {\n    posts: state.posts\n  };\n}\n\nexports.default = {\n  component: (0, _reactRedux.connect)(mapStateToProps, { fetchPosts: _index.fetchPosts })(HomePage),\n  loadData: function loadData(_ref) {\n    var dispatch = _ref.dispatch;\n    return dispatch((0, _index.fetchPosts)());\n  }\n\n};\n\n//////////////////\n// WEBPACK FOOTER\n// ./src/client/pages/HomePage.js\n// module id = 21\n// module chunks = 0\n\n//# sourceURL=webpack:///./src/client/pages/HomePage.js?");
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = __webpack_require__(0);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _reactRouterDom = __webpack_require__(1);
+
+var _reactRedux = __webpack_require__(2);
+
+var _actions = __webpack_require__(4);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var Header = function (_Component) {
+  _inherits(Header, _Component);
+
+  function Header() {
+    _classCallCheck(this, Header);
+
+    return _possibleConstructorReturn(this, (Header.__proto__ || Object.getPrototypeOf(Header)).apply(this, arguments));
+  }
+
+  _createClass(Header, [{
+    key: 'logOut',
+    value: function logOut() {
+      this.props.logOut();
+    }
+  }, {
+    key: 'render',
+    value: function render() {
+      var _this2 = this;
+
+      var auth = this.props.auth;
+
+      var authButton = auth && auth.token ? [_react2.default.createElement(
+        _reactRouterDom.Link,
+        { className: 'navbar-item', to: '/admin', key: 'admin' },
+        'Admin'
+      ), _react2.default.createElement(
+        'a',
+        { onClick: function onClick() {
+            return _this2.logOut();
+          }, className: 'navbar-item', key: 'logout' },
+        'Logout'
+      )] : [_react2.default.createElement(
+        _reactRouterDom.Link,
+        { className: 'navbar-item', to: '/register', key: 'register' },
+        'Register'
+      ), _react2.default.createElement(
+        _reactRouterDom.Link,
+        { className: 'navbar-item', to: '/login', key: 'login' },
+        'Login'
+      )];
+      return _react2.default.createElement(
+        'nav',
+        { className: 'navbar is-white' },
+        _react2.default.createElement(
+          'div',
+          { className: 'navbar-brand' },
+          _react2.default.createElement(
+            _reactRouterDom.Link,
+            { className: 'navbar-item brand-text', to: '/' },
+            'NERDPress'
+          ),
+          _react2.default.createElement(
+            'div',
+            { className: 'navbar-burger burger', 'data-target': 'navMenu' },
+            _react2.default.createElement('span', null),
+            _react2.default.createElement('span', null),
+            _react2.default.createElement('span', null)
+          )
+        ),
+        _react2.default.createElement(
+          'div',
+          { id: 'navMenu', className: 'navbar-menu' },
+          _react2.default.createElement(
+            'div',
+            { className: 'navbar-start' },
+            _react2.default.createElement(
+              _reactRouterDom.Link,
+              { className: 'navbar-item', to: '/' },
+              'Home'
+            ),
+            _react2.default.createElement(
+              _reactRouterDom.Link,
+              { className: 'navbar-item', to: '/archives' },
+              'Archives'
+            )
+          ),
+          _react2.default.createElement(
+            'div',
+            { className: 'navbar-end' },
+            authButton
+          )
+        )
+      );
+    }
+  }]);
+
+  return Header;
+}(_react.Component);
+
+function mapStateToProps(_ref) {
+  var auth = _ref.auth;
+
+  return {
+    auth: auth
+  };
+}
+
+exports.default = (0, _reactRedux.connect)(mapStateToProps, { logOut: _actions.logOut })(Header);
 
 /***/ }),
 /* 22 */
-/***/ (function(module, exports) {
-
-eval("module.exports = require(\"lodash.chunk\");\n\n//////////////////\n// WEBPACK FOOTER\n// external \"lodash.chunk\"\n// module id = 22\n// module chunks = 0\n\n//# sourceURL=webpack:///external_%22lodash.chunk%22?");
-
-/***/ }),
-/* 23 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-eval("\n\nObject.defineProperty(exports, \"__esModule\", {\n  value: true\n});\n\nvar _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if (\"value\" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();\n\nvar _react = __webpack_require__(0);\n\nvar _react2 = _interopRequireDefault(_react);\n\nvar _reactHelmet = __webpack_require__(3);\n\nvar _reactRedux = __webpack_require__(2);\n\nvar _reactRouterDom = __webpack_require__(1);\n\nvar _reactNl2br = __webpack_require__(9);\n\nvar _reactNl2br2 = _interopRequireDefault(_reactNl2br);\n\nvar _titleCase = __webpack_require__(10);\n\nvar _titleCase2 = _interopRequireDefault(_titleCase);\n\nvar _dateformat = __webpack_require__(11);\n\nvar _dateformat2 = _interopRequireDefault(_dateformat);\n\nvar _index = __webpack_require__(4);\n\nfunction _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }\n\nfunction _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError(\"Cannot call a class as a function\"); } }\n\nfunction _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError(\"this hasn't been initialised - super() hasn't been called\"); } return call && (typeof call === \"object\" || typeof call === \"function\") ? call : self; }\n\nfunction _inherits(subClass, superClass) { if (typeof superClass !== \"function\" && superClass !== null) { throw new TypeError(\"Super expression must either be null or a function, not \" + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }\n\nvar PostPage = function (_Component) {\n  _inherits(PostPage, _Component);\n\n  function PostPage() {\n    _classCallCheck(this, PostPage);\n\n    return _possibleConstructorReturn(this, (PostPage.__proto__ || Object.getPrototypeOf(PostPage)).apply(this, arguments));\n  }\n\n  _createClass(PostPage, [{\n    key: 'componentDidMount',\n    value: function componentDidMount() {\n      var slug = this.props.match.params.slug;\n\n      this.props.fetchPost(slug);\n    }\n  }, {\n    key: 'render',\n    value: function render() {\n      var post = this.props.post;\n\n      var user = post.user;\n\n      return _react2.default.createElement(\n        'div',\n        null,\n        _react2.default.createElement(\n          _reactHelmet.Helmet,\n          null,\n          _react2.default.createElement(\n            'title',\n            null,\n            'NERDPress | Post Page'\n          ),\n          _react2.default.createElement('meta', { property: 'og:title', content: 'NERDPress | Post Page' })\n        ),\n        _react2.default.createElement(\n          'section',\n          { className: 'article' },\n          _react2.default.createElement(\n            'div',\n            { className: 'column is-8 is-offset-2' },\n            _react2.default.createElement(\n              'div',\n              { className: 'card' },\n              _react2.default.createElement(\n                'div',\n                { className: 'card-content' },\n                _react2.default.createElement(\n                  'p',\n                  { className: 'title article-title' },\n                  (0, _titleCase2.default)(post.title)\n                ),\n                _react2.default.createElement(\n                  'p',\n                  { className: 'subtitle is-6 article-subtitle' },\n                  _react2.default.createElement(\n                    'a',\n                    { href: '#' },\n                    user && user.name\n                  ),\n                  ' on ',\n                  (0, _dateformat2.default)(post.created_at, \"dddd, mmmm dS, yyyy, h:MM:ss TT\")\n                ),\n                _react2.default.createElement(\n                  'div',\n                  { className: 'content article-body' },\n                  (0, _reactNl2br2.default)(post.body)\n                )\n              )\n            )\n          )\n        )\n      );\n    }\n  }]);\n\n  return PostPage;\n}(_react.Component);\n\nfunction mapStateToProps(state) {\n  return {\n    post: state.post\n  };\n}\n\nexports.default = {\n  component: (0, _reactRedux.connect)(mapStateToProps, { fetchPost: _index.fetchPost })(PostPage),\n  loadData: function loadData(_ref, _ref2) {\n    var dispatch = _ref.dispatch;\n    var path = _ref2.path;\n\n    var slug = path.split('/')[2];\n    return dispatch((0, _index.fetchPost)(slug));\n  }\n\n};\n\n//////////////////\n// WEBPACK FOOTER\n// ./src/client/pages/PostPage.js\n// module id = 23\n// module chunks = 0\n\n//# sourceURL=webpack:///./src/client/pages/PostPage.js?");
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = __webpack_require__(0);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _reactHelmet = __webpack_require__(3);
+
+var _reactRedux = __webpack_require__(2);
+
+var _reactRouterDom = __webpack_require__(1);
+
+var _lodash = __webpack_require__(23);
+
+var _lodash2 = _interopRequireDefault(_lodash);
+
+var _reactNl2br = __webpack_require__(10);
+
+var _reactNl2br2 = _interopRequireDefault(_reactNl2br);
+
+var _titleCase = __webpack_require__(11);
+
+var _titleCase2 = _interopRequireDefault(_titleCase);
+
+var _dateformat = __webpack_require__(12);
+
+var _dateformat2 = _interopRequireDefault(_dateformat);
+
+var _index = __webpack_require__(4);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var HomePage = function (_Component) {
+  _inherits(HomePage, _Component);
+
+  function HomePage(props) {
+    _classCallCheck(this, HomePage);
+
+    var _this = _possibleConstructorReturn(this, (HomePage.__proto__ || Object.getPrototypeOf(HomePage)).call(this, props));
+
+    _this.state = {
+      isLoading: true,
+      page: 1
+    };
+    return _this;
+  }
+
+  _createClass(HomePage, [{
+    key: 'componentDidMount',
+    value: function componentDidMount() {
+      var _this2 = this;
+
+      this.props.fetchPosts().then(function () {
+        _this2.setState({
+          isLoading: false
+        });
+      });
+    }
+  }, {
+    key: 'prevPage',
+    value: function prevPage() {
+      this.setState({
+        page: this.state.page - 1
+      });
+    }
+  }, {
+    key: 'nextPage',
+    value: function nextPage() {
+      this.setState({
+        page: this.state.page + 1
+      });
+    }
+  }, {
+    key: 'renderPosts',
+    value: function renderPosts(posts) {
+      return posts.map(function (post) {
+        return _react2.default.createElement(
+          'div',
+          { className: 'card article', key: post.id },
+          _react2.default.createElement(
+            'div',
+            { className: 'card-content' },
+            _react2.default.createElement(
+              'p',
+              { className: 'title article-title' },
+              _react2.default.createElement(
+                _reactRouterDom.Link,
+                { to: '/posts/' + post.slug },
+                (0, _titleCase2.default)(post.title)
+              )
+            ),
+            _react2.default.createElement(
+              'p',
+              { className: 'subtitle is-6 article-subtitle' },
+              _react2.default.createElement(
+                'a',
+                { href: '#' },
+                post.user.name
+              ),
+              ' on ',
+              (0, _dateformat2.default)(post.created_at, "dddd, mmmm dS, yyyy, h:MM:ss TT")
+            ),
+            _react2.default.createElement(
+              'div',
+              { className: 'content article-body' },
+              (0, _reactNl2br2.default)(post.excerpt)
+            )
+          )
+        );
+      });
+    }
+  }, {
+    key: 'renderPagination',
+    value: function renderPagination(numPages) {
+      var _this3 = this;
+
+      var currentPage = this.state.page;
+      return _react2.default.createElement(
+        'nav',
+        { className: 'pagination', role: 'navigation', 'aria-label': 'pagination', style: { marginTop: '25px' }, key: 'nav' },
+        currentPage > 1 ? _react2.default.createElement(
+          'a',
+          { className: 'pagination-previous', onClick: function onClick() {
+              return _this3.prevPage();
+            } },
+          'Previous'
+        ) : _react2.default.createElement(
+          'a',
+          { className: 'pagination-previous', style: { cursor: 'not-allowed' } },
+          'Previous'
+        ),
+        currentPage < numPages ? _react2.default.createElement(
+          'a',
+          { className: 'pagination-next', onClick: function onClick() {
+              return _this3.nextPage();
+            } },
+          'Next page'
+        ) : _react2.default.createElement(
+          'a',
+          { className: 'pagination-previous', style: { cursor: 'not-allowed' } },
+          'Next page'
+        )
+      );
+    }
+  }, {
+    key: 'render',
+    value: function render() {
+      var posts_per_page = 10;
+      var posts = (0, _lodash2.default)(this.props.posts, posts_per_page)[this.state.page - 1];
+      var numPages = Math.round(this.props.posts.length / posts_per_page);
+
+      return _react2.default.createElement(
+        'div',
+        null,
+        _react2.default.createElement(
+          _reactHelmet.Helmet,
+          null,
+          _react2.default.createElement(
+            'title',
+            null,
+            'NERDPress | Home Page'
+          ),
+          _react2.default.createElement('meta', { property: 'og:title', content: 'NERDPress | Home Page' })
+        ),
+        _react2.default.createElement(
+          'section',
+          { className: 'articles' },
+          _react2.default.createElement(
+            'div',
+            { className: 'column is-8 is-offset-2' },
+            this.state.isLoading ? _react2.default.createElement(
+              'p',
+              null,
+              'Loading... '
+            ) : [this.renderPosts(posts), this.renderPagination(numPages)]
+          )
+        )
+      );
+    }
+  }]);
+
+  return HomePage;
+}(_react.Component);
+
+function mapStateToProps(state) {
+  return {
+    posts: state.posts
+  };
+}
+
+exports.default = {
+  component: (0, _reactRedux.connect)(mapStateToProps, { fetchPosts: _index.fetchPosts })(HomePage),
+  loadData: function loadData(_ref) {
+    var dispatch = _ref.dispatch;
+    return dispatch((0, _index.fetchPosts)());
+  }
+
+};
+
+/***/ }),
+/* 23 */
+/***/ (function(module, exports) {
+
+module.exports = require("lodash.chunk");
 
 /***/ }),
 /* 24 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-eval("\n\nObject.defineProperty(exports, \"__esModule\", {\n  value: true\n});\n\nvar _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };\n\nvar _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if (\"value\" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();\n\nvar _react = __webpack_require__(0);\n\nvar _react2 = _interopRequireDefault(_react);\n\nvar _reactHelmet = __webpack_require__(3);\n\nvar _reactRouterDom = __webpack_require__(1);\n\nvar _reduxForm = __webpack_require__(7);\n\nvar _reactRedux = __webpack_require__(2);\n\nvar _actions = __webpack_require__(4);\n\nfunction _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }\n\nfunction _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError(\"Cannot call a class as a function\"); } }\n\nfunction _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError(\"this hasn't been initialised - super() hasn't been called\"); } return call && (typeof call === \"object\" || typeof call === \"function\") ? call : self; }\n\nfunction _inherits(subClass, superClass) { if (typeof superClass !== \"function\" && superClass !== null) { throw new TypeError(\"Super expression must either be null or a function, not \" + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }\n\nvar LoginPage = function (_Component) {\n  _inherits(LoginPage, _Component);\n\n  function LoginPage(props) {\n    _classCallCheck(this, LoginPage);\n\n    var _this = _possibleConstructorReturn(this, (LoginPage.__proto__ || Object.getPrototypeOf(LoginPage)).call(this, props));\n\n    _this.handleSubmit = _this.handleSubmit.bind(_this);\n    return _this;\n  }\n\n  _createClass(LoginPage, [{\n    key: 'handleSubmit',\n    value: function handleSubmit(values) {\n      this.props.loginUser(values);\n    }\n  }, {\n    key: 'renderField',\n    value: function renderField(field) {\n      return _react2.default.createElement(\n        'div',\n        { className: 'field' },\n        _react2.default.createElement(\n          'div',\n          { className: 'control' },\n          _react2.default.createElement('input', _extends({}, field.input, {\n            name: field.name,\n            type: field.type,\n            className: 'input is-large',\n            placeholder: field.placeholder\n          }))\n        )\n      );\n    }\n  }, {\n    key: 'render',\n    value: function render() {\n      var _props = this.props,\n          handleSubmit = _props.handleSubmit,\n          auth = _props.auth;\n\n\n      if (auth) {\n        return _react2.default.createElement(_reactRouterDom.Redirect, { to: '/admin' });\n      }\n\n      return _react2.default.createElement(\n        'div',\n        null,\n        _react2.default.createElement(\n          _reactHelmet.Helmet,\n          null,\n          _react2.default.createElement(\n            'title',\n            null,\n            'NERDPress | Login'\n          ),\n          _react2.default.createElement('meta', { property: 'og:title', content: 'NERDPress | Login' })\n        ),\n        _react2.default.createElement(\n          'section',\n          { className: 'hero is-success is-fullheight' },\n          _react2.default.createElement(\n            'div',\n            { className: 'hero-body' },\n            _react2.default.createElement(\n              'div',\n              { className: 'container has-text-centered' },\n              _react2.default.createElement(\n                'div',\n                { className: 'column is-4 is-offset-4' },\n                _react2.default.createElement(\n                  'h3',\n                  { className: 'title has-text-grey' },\n                  'Login'\n                ),\n                _react2.default.createElement(\n                  'p',\n                  { className: 'subtitle has-text-grey' },\n                  'Please login to proceed.'\n                ),\n                _react2.default.createElement(\n                  'div',\n                  { className: 'box' },\n                  _react2.default.createElement(\n                    'form',\n                    { onSubmit: handleSubmit(this.handleSubmit) },\n                    _react2.default.createElement(_reduxForm.Field, {\n                      name: 'email',\n                      component: this.renderField,\n                      type: 'email',\n                      placeholder: 'Your Email'\n                    }),\n                    _react2.default.createElement(_reduxForm.Field, {\n                      name: 'password',\n                      component: this.renderField,\n                      type: 'password',\n                      placeholder: 'Your Password'\n                    }),\n                    _react2.default.createElement('input', { type: 'submit', value: 'Login', className: 'button is-block is-info is-large', style: { width: '100%' } })\n                  )\n                ),\n                _react2.default.createElement(\n                  'p',\n                  { className: 'has-text-grey' },\n                  _react2.default.createElement(\n                    _reactRouterDom.Link,\n                    { to: '/register' },\n                    'Register'\n                  )\n                )\n              )\n            )\n          )\n        )\n      );\n    }\n  }]);\n\n  return LoginPage;\n}(_react.Component);\n\nvar mapStateToProps = function mapStateToProps(state) {\n  return {\n    auth: state.auth && state.auth.token\n  };\n};\n\nexports.default = {\n  component: (0, _reduxForm.reduxForm)({\n    form: 'loginForm'\n  })((0, _reactRedux.connect)(mapStateToProps, { loginUser: _actions.loginUser })(LoginPage))\n};\n\n//////////////////\n// WEBPACK FOOTER\n// ./src/client/pages/LoginPage.js\n// module id = 24\n// module chunks = 0\n\n//# sourceURL=webpack:///./src/client/pages/LoginPage.js?");
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = __webpack_require__(0);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _reactHelmet = __webpack_require__(3);
+
+var _reactRedux = __webpack_require__(2);
+
+var _reactRouterDom = __webpack_require__(1);
+
+var _reactNl2br = __webpack_require__(10);
+
+var _reactNl2br2 = _interopRequireDefault(_reactNl2br);
+
+var _titleCase = __webpack_require__(11);
+
+var _titleCase2 = _interopRequireDefault(_titleCase);
+
+var _dateformat = __webpack_require__(12);
+
+var _dateformat2 = _interopRequireDefault(_dateformat);
+
+var _index = __webpack_require__(4);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var PostPage = function (_Component) {
+  _inherits(PostPage, _Component);
+
+  function PostPage() {
+    _classCallCheck(this, PostPage);
+
+    return _possibleConstructorReturn(this, (PostPage.__proto__ || Object.getPrototypeOf(PostPage)).apply(this, arguments));
+  }
+
+  _createClass(PostPage, [{
+    key: 'componentDidMount',
+    value: function componentDidMount() {
+      var slug = this.props.match.params.slug;
+
+      this.props.fetchPost(slug);
+    }
+  }, {
+    key: 'render',
+    value: function render() {
+      var post = this.props.post;
+
+      var user = post.user;
+
+      return _react2.default.createElement(
+        'div',
+        null,
+        _react2.default.createElement(
+          _reactHelmet.Helmet,
+          null,
+          _react2.default.createElement(
+            'title',
+            null,
+            'NERDPress | Post Page'
+          ),
+          _react2.default.createElement('meta', { property: 'og:title', content: 'NERDPress | Post Page' })
+        ),
+        _react2.default.createElement(
+          'section',
+          { className: 'article' },
+          _react2.default.createElement(
+            'div',
+            { className: 'column is-8 is-offset-2' },
+            _react2.default.createElement(
+              'div',
+              { className: 'card' },
+              _react2.default.createElement(
+                'div',
+                { className: 'card-content' },
+                _react2.default.createElement(
+                  'p',
+                  { className: 'title article-title' },
+                  (0, _titleCase2.default)(post.title)
+                ),
+                _react2.default.createElement(
+                  'p',
+                  { className: 'subtitle is-6 article-subtitle' },
+                  _react2.default.createElement(
+                    'a',
+                    { href: '#' },
+                    user && user.name
+                  ),
+                  ' on ',
+                  (0, _dateformat2.default)(post.created_at, "dddd, mmmm dS, yyyy, h:MM:ss TT")
+                ),
+                _react2.default.createElement(
+                  'div',
+                  { className: 'content article-body' },
+                  (0, _reactNl2br2.default)(post.body)
+                )
+              )
+            )
+          )
+        )
+      );
+    }
+  }]);
+
+  return PostPage;
+}(_react.Component);
+
+function mapStateToProps(state) {
+  return {
+    post: state.post
+  };
+}
+
+exports.default = {
+  component: (0, _reactRedux.connect)(mapStateToProps, { fetchPost: _index.fetchPost })(PostPage),
+  loadData: function loadData(_ref, _ref2) {
+    var dispatch = _ref.dispatch;
+    var path = _ref2.path;
+
+    var slug = path.split('/')[2];
+    return dispatch((0, _index.fetchPost)(slug));
+  }
+
+};
 
 /***/ }),
 /* 25 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-eval("\n\nObject.defineProperty(exports, \"__esModule\", {\n  value: true\n});\n\nvar _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };\n\nvar _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if (\"value\" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();\n\nvar _react = __webpack_require__(0);\n\nvar _react2 = _interopRequireDefault(_react);\n\nvar _reactHelmet = __webpack_require__(3);\n\nvar _reactRouterDom = __webpack_require__(1);\n\nvar _reduxForm = __webpack_require__(7);\n\nvar _reactRedux = __webpack_require__(2);\n\nvar _actions = __webpack_require__(4);\n\nfunction _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }\n\nfunction _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError(\"Cannot call a class as a function\"); } }\n\nfunction _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError(\"this hasn't been initialised - super() hasn't been called\"); } return call && (typeof call === \"object\" || typeof call === \"function\") ? call : self; }\n\nfunction _inherits(subClass, superClass) { if (typeof superClass !== \"function\" && superClass !== null) { throw new TypeError(\"Super expression must either be null or a function, not \" + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }\n\nvar RegisterPage = function (_Component) {\n  _inherits(RegisterPage, _Component);\n\n  function RegisterPage(props) {\n    _classCallCheck(this, RegisterPage);\n\n    var _this = _possibleConstructorReturn(this, (RegisterPage.__proto__ || Object.getPrototypeOf(RegisterPage)).call(this, props));\n\n    _this.handleSubmit = _this.handleSubmit.bind(_this);\n    return _this;\n  }\n\n  _createClass(RegisterPage, [{\n    key: 'handleSubmit',\n    value: function handleSubmit(values) {\n      console.log(values);\n      this.props.registerUser(values);\n    }\n  }, {\n    key: 'renderField',\n    value: function renderField(field) {\n      return _react2.default.createElement(\n        'div',\n        { className: 'field' },\n        _react2.default.createElement(\n          'div',\n          { className: 'control' },\n          _react2.default.createElement('input', _extends({}, field.input, {\n            name: field.name,\n            type: field.type,\n            className: 'input is-large',\n            placeholder: field.placeholder\n          }))\n        )\n      );\n    }\n  }, {\n    key: 'render',\n    value: function render() {\n      var _props = this.props,\n          handleSubmit = _props.handleSubmit,\n          auth = _props.auth;\n\n\n      if (auth) {\n        return _react2.default.createElement(_reactRouterDom.Redirect, { to: '/admin' });\n      }\n\n      return _react2.default.createElement(\n        'div',\n        null,\n        _react2.default.createElement(\n          _reactHelmet.Helmet,\n          null,\n          _react2.default.createElement(\n            'title',\n            null,\n            'NERDPress | Register'\n          ),\n          _react2.default.createElement('meta', { property: 'og:title', content: 'NERDPress | Register' })\n        ),\n        _react2.default.createElement(\n          'section',\n          { className: 'hero is-success is-fullheight' },\n          _react2.default.createElement(\n            'div',\n            { className: 'hero-body' },\n            _react2.default.createElement(\n              'div',\n              { className: 'container has-text-centered' },\n              _react2.default.createElement(\n                'div',\n                { className: 'column is-4 is-offset-4' },\n                _react2.default.createElement(\n                  'h3',\n                  { className: 'title has-text-grey' },\n                  'Register'\n                ),\n                _react2.default.createElement(\n                  'p',\n                  { className: 'subtitle has-text-grey' },\n                  'Please register for an account.'\n                ),\n                _react2.default.createElement(\n                  'div',\n                  { className: 'box' },\n                  _react2.default.createElement(\n                    'form',\n                    { onSubmit: handleSubmit(this.handleSubmit) },\n                    _react2.default.createElement(_reduxForm.Field, {\n                      name: 'name',\n                      component: this.renderField,\n                      type: 'text',\n                      placeholder: 'Your Name'\n                    }),\n                    _react2.default.createElement(_reduxForm.Field, {\n                      name: 'email',\n                      component: this.renderField,\n                      type: 'email',\n                      placeholder: 'Your Email'\n                    }),\n                    _react2.default.createElement(_reduxForm.Field, {\n                      name: 'password',\n                      component: this.renderField,\n                      type: 'password',\n                      placeholder: 'Your Password'\n                    }),\n                    _react2.default.createElement(_reduxForm.Field, {\n                      name: 'passwordConfirm',\n                      component: this.renderField,\n                      type: 'password',\n                      placeholder: 'Confirm Password'\n                    }),\n                    _react2.default.createElement('input', { type: 'submit', value: 'Register', className: 'button is-block is-info is-large', style: { width: '100%' } })\n                  )\n                ),\n                _react2.default.createElement(\n                  'p',\n                  { className: 'has-text-grey' },\n                  _react2.default.createElement(\n                    _reactRouterDom.Link,\n                    { to: '/login' },\n                    'Login'\n                  ),\n                  ' \\xA0\\xB7\\xA0'\n                )\n              )\n            )\n          )\n        )\n      );\n    }\n  }]);\n\n  return RegisterPage;\n}(_react.Component);\n\nvar mapStateToProps = function mapStateToProps(state) {\n  return {\n    auth: state.auth && state.auth.token\n  };\n};\n\nexports.default = {\n  component: (0, _reduxForm.reduxForm)({\n    form: 'registrationForm'\n  })((0, _reactRedux.connect)(mapStateToProps, { registerUser: _actions.registerUser })(RegisterPage))\n};\n\n//////////////////\n// WEBPACK FOOTER\n// ./src/client/pages/RegisterPage.js\n// module id = 25\n// module chunks = 0\n\n//# sourceURL=webpack:///./src/client/pages/RegisterPage.js?");
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = __webpack_require__(0);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _reactHelmet = __webpack_require__(3);
+
+var _reactRouterDom = __webpack_require__(1);
+
+var _reduxForm = __webpack_require__(7);
+
+var _reactRedux = __webpack_require__(2);
+
+var _actions = __webpack_require__(4);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var LoginPage = function (_Component) {
+  _inherits(LoginPage, _Component);
+
+  function LoginPage(props) {
+    _classCallCheck(this, LoginPage);
+
+    var _this = _possibleConstructorReturn(this, (LoginPage.__proto__ || Object.getPrototypeOf(LoginPage)).call(this, props));
+
+    _this.handleSubmit = _this.handleSubmit.bind(_this);
+    return _this;
+  }
+
+  _createClass(LoginPage, [{
+    key: 'handleSubmit',
+    value: function handleSubmit(values) {
+      this.props.loginUser(values);
+    }
+  }, {
+    key: 'renderField',
+    value: function renderField(field) {
+      return _react2.default.createElement(
+        'div',
+        { className: 'field' },
+        _react2.default.createElement(
+          'div',
+          { className: 'control' },
+          _react2.default.createElement('input', _extends({}, field.input, {
+            name: field.name,
+            type: field.type,
+            className: 'input is-large',
+            placeholder: field.placeholder
+          }))
+        )
+      );
+    }
+  }, {
+    key: 'render',
+    value: function render() {
+      var _props = this.props,
+          handleSubmit = _props.handleSubmit,
+          auth = _props.auth;
+
+
+      if (auth) {
+        return _react2.default.createElement(_reactRouterDom.Redirect, { to: '/admin' });
+      }
+
+      return _react2.default.createElement(
+        'div',
+        null,
+        _react2.default.createElement(
+          _reactHelmet.Helmet,
+          null,
+          _react2.default.createElement(
+            'title',
+            null,
+            'NERDPress | Login'
+          ),
+          _react2.default.createElement('meta', { property: 'og:title', content: 'NERDPress | Login' })
+        ),
+        _react2.default.createElement(
+          'section',
+          { className: 'hero is-success is-fullheight' },
+          _react2.default.createElement(
+            'div',
+            { className: 'hero-body' },
+            _react2.default.createElement(
+              'div',
+              { className: 'container has-text-centered' },
+              _react2.default.createElement(
+                'div',
+                { className: 'column is-4 is-offset-4' },
+                _react2.default.createElement(
+                  'h3',
+                  { className: 'title has-text-grey' },
+                  'Login'
+                ),
+                _react2.default.createElement(
+                  'p',
+                  { className: 'subtitle has-text-grey' },
+                  'Please login to proceed.'
+                ),
+                _react2.default.createElement(
+                  'div',
+                  { className: 'box' },
+                  _react2.default.createElement(
+                    'form',
+                    { onSubmit: handleSubmit(this.handleSubmit) },
+                    _react2.default.createElement(_reduxForm.Field, {
+                      name: 'email',
+                      component: this.renderField,
+                      type: 'email',
+                      placeholder: 'Your Email'
+                    }),
+                    _react2.default.createElement(_reduxForm.Field, {
+                      name: 'password',
+                      component: this.renderField,
+                      type: 'password',
+                      placeholder: 'Your Password'
+                    }),
+                    _react2.default.createElement('input', { type: 'submit', value: 'Login', className: 'button is-block is-info is-large', style: { width: '100%' } })
+                  )
+                ),
+                _react2.default.createElement(
+                  'p',
+                  { className: 'has-text-grey' },
+                  _react2.default.createElement(
+                    _reactRouterDom.Link,
+                    { to: '/register' },
+                    'Register'
+                  )
+                )
+              )
+            )
+          )
+        )
+      );
+    }
+  }]);
+
+  return LoginPage;
+}(_react.Component);
+
+var mapStateToProps = function mapStateToProps(state) {
+  return {
+    auth: state.auth && state.auth.token
+  };
+};
+
+exports.default = {
+  component: (0, _reduxForm.reduxForm)({
+    form: 'loginForm'
+  })((0, _reactRedux.connect)(mapStateToProps, { loginUser: _actions.loginUser })(LoginPage))
+};
 
 /***/ }),
 /* 26 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-eval("\n\nObject.defineProperty(exports, \"__esModule\", {\n  value: true\n});\n\nvar _react = __webpack_require__(0);\n\nvar _react2 = _interopRequireDefault(_react);\n\nfunction _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }\n\nvar NotFoundPage = function NotFoundPage(_ref) {\n  var _ref$staticContext = _ref.staticContext,\n      staticContext = _ref$staticContext === undefined ? {} : _ref$staticContext;\n\n  staticContext.notFound = true;\n  return _react2.default.createElement(\n    'h1',\n    { className: 'center-align', style: { marginTop: '200px' } },\n    'Not Found'\n  );\n};\n\nexports.default = {\n  component: NotFoundPage\n};\n\n//////////////////\n// WEBPACK FOOTER\n// ./src/client/pages/NotFoundPage.js\n// module id = 26\n// module chunks = 0\n\n//# sourceURL=webpack:///./src/client/pages/NotFoundPage.js?");
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = __webpack_require__(0);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _reactHelmet = __webpack_require__(3);
+
+var _reactRedux = __webpack_require__(2);
+
+var _reactRouterDom = __webpack_require__(1);
+
+var _requireAuth = __webpack_require__(27);
+
+var _requireAuth2 = _interopRequireDefault(_requireAuth);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var AdminPage = function (_Component) {
+  _inherits(AdminPage, _Component);
+
+  function AdminPage() {
+    _classCallCheck(this, AdminPage);
+
+    return _possibleConstructorReturn(this, (AdminPage.__proto__ || Object.getPrototypeOf(AdminPage)).apply(this, arguments));
+  }
+
+  _createClass(AdminPage, [{
+    key: 'render',
+    value: function render() {
+
+      return _react2.default.createElement(
+        'div',
+        null,
+        _react2.default.createElement(
+          _reactHelmet.Helmet,
+          null,
+          _react2.default.createElement(
+            'title',
+            null,
+            'NERDPress | Admin Page'
+          ),
+          _react2.default.createElement('meta', { property: 'og:title', content: 'NERDPress | Admin Page' })
+        ),
+        _react2.default.createElement(
+          'section',
+          { className: 'articles' },
+          _react2.default.createElement(
+            'div',
+            { className: 'column is-8 is-offset-2' },
+            _react2.default.createElement(
+              'h1',
+              null,
+              'Admin Page'
+            )
+          )
+        )
+      );
+    }
+  }]);
+
+  return AdminPage;
+}(_react.Component);
+
+exports.default = {
+  component: (0, _reactRedux.connect)(null, null)((0, _requireAuth2.default)(AdminPage))
+  // loadData: ({ dispatch }) => dispatch(fetchPosts())
+
+};
 
 /***/ }),
 /* 27 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-eval("\n\nObject.defineProperty(exports, \"__esModule\", {\n  value: true\n});\n\nvar _redux = __webpack_require__(12);\n\nvar _reduxThunk = __webpack_require__(28);\n\nvar _reduxThunk2 = _interopRequireDefault(_reduxThunk);\n\nvar _axios = __webpack_require__(29);\n\nvar _axios2 = _interopRequireDefault(_axios);\n\nvar _reducers = __webpack_require__(30);\n\nvar _reducers2 = _interopRequireDefault(_reducers);\n\nfunction _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }\n\nexports.default = function (req) {\n  var axiosInstance = _axios2.default.create({\n    baseURL: 'http://localhost:3001/',\n    headers: { cookie: req.get('cookie') || '' }\n  });\n\n  var store = (0, _redux.createStore)(_reducers2.default, {}, (0, _redux.applyMiddleware)(_reduxThunk2.default.withExtraArgument(axiosInstance)));\n  return store;\n};\n\n//////////////////\n// WEBPACK FOOTER\n// ./src/helpers/createStore.js\n// module id = 27\n// module chunks = 0\n\n//# sourceURL=webpack:///./src/helpers/createStore.js?");
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = __webpack_require__(0);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _reactRedux = __webpack_require__(2);
+
+var _reactRouterDom = __webpack_require__(1);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+exports.default = function (ChildComponent) {
+  var RequireAuth = function (_Component) {
+    _inherits(RequireAuth, _Component);
+
+    function RequireAuth() {
+      _classCallCheck(this, RequireAuth);
+
+      return _possibleConstructorReturn(this, (RequireAuth.__proto__ || Object.getPrototypeOf(RequireAuth)).apply(this, arguments));
+    }
+
+    _createClass(RequireAuth, [{
+      key: 'render',
+      value: function render() {
+        switch (this.props.auth) {
+          case false:
+            return _react2.default.createElement(_reactRouterDom.Redirect, { to: '/' });
+          case null:
+            return _react2.default.createElement(
+              'div',
+              null,
+              'Loading... '
+            );
+          default:
+            return _react2.default.createElement(ChildComponent, this.props);
+        }
+      }
+    }]);
+
+    return RequireAuth;
+  }(_react.Component);
+
+  function mapStateToProps(_ref) {
+    var auth = _ref.auth;
+
+    return { auth: auth };
+  }
+
+  return (0, _reactRedux.connect)(mapStateToProps)(RequireAuth);
+};
 
 /***/ }),
 /* 28 */
-/***/ (function(module, exports) {
+/***/ (function(module, exports, __webpack_require__) {
 
-eval("module.exports = require(\"redux-thunk\");\n\n//////////////////\n// WEBPACK FOOTER\n// external \"redux-thunk\"\n// module id = 28\n// module chunks = 0\n\n//# sourceURL=webpack:///external_%22redux-thunk%22?");
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = __webpack_require__(0);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _reactHelmet = __webpack_require__(3);
+
+var _reactRouterDom = __webpack_require__(1);
+
+var _reduxForm = __webpack_require__(7);
+
+var _reactRedux = __webpack_require__(2);
+
+var _actions = __webpack_require__(4);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var RegisterPage = function (_Component) {
+  _inherits(RegisterPage, _Component);
+
+  function RegisterPage(props) {
+    _classCallCheck(this, RegisterPage);
+
+    var _this = _possibleConstructorReturn(this, (RegisterPage.__proto__ || Object.getPrototypeOf(RegisterPage)).call(this, props));
+
+    _this.handleSubmit = _this.handleSubmit.bind(_this);
+    return _this;
+  }
+
+  _createClass(RegisterPage, [{
+    key: 'handleSubmit',
+    value: function handleSubmit(values) {
+      console.log(values);
+      this.props.registerUser(values);
+    }
+  }, {
+    key: 'renderField',
+    value: function renderField(field) {
+      return _react2.default.createElement(
+        'div',
+        { className: 'field' },
+        _react2.default.createElement(
+          'div',
+          { className: 'control' },
+          _react2.default.createElement('input', _extends({}, field.input, {
+            name: field.name,
+            type: field.type,
+            className: 'input is-large',
+            placeholder: field.placeholder
+          }))
+        )
+      );
+    }
+  }, {
+    key: 'render',
+    value: function render() {
+      var _props = this.props,
+          handleSubmit = _props.handleSubmit,
+          auth = _props.auth;
+
+
+      if (auth) {
+        return _react2.default.createElement(_reactRouterDom.Redirect, { to: '/admin' });
+      }
+
+      return _react2.default.createElement(
+        'div',
+        null,
+        _react2.default.createElement(
+          _reactHelmet.Helmet,
+          null,
+          _react2.default.createElement(
+            'title',
+            null,
+            'NERDPress | Register'
+          ),
+          _react2.default.createElement('meta', { property: 'og:title', content: 'NERDPress | Register' })
+        ),
+        _react2.default.createElement(
+          'section',
+          { className: 'hero is-success is-fullheight' },
+          _react2.default.createElement(
+            'div',
+            { className: 'hero-body' },
+            _react2.default.createElement(
+              'div',
+              { className: 'container has-text-centered' },
+              _react2.default.createElement(
+                'div',
+                { className: 'column is-4 is-offset-4' },
+                _react2.default.createElement(
+                  'h3',
+                  { className: 'title has-text-grey' },
+                  'Register'
+                ),
+                _react2.default.createElement(
+                  'p',
+                  { className: 'subtitle has-text-grey' },
+                  'Please register for an account.'
+                ),
+                _react2.default.createElement(
+                  'div',
+                  { className: 'box' },
+                  _react2.default.createElement(
+                    'form',
+                    { onSubmit: handleSubmit(this.handleSubmit) },
+                    _react2.default.createElement(_reduxForm.Field, {
+                      name: 'name',
+                      component: this.renderField,
+                      type: 'text',
+                      placeholder: 'Your Name'
+                    }),
+                    _react2.default.createElement(_reduxForm.Field, {
+                      name: 'email',
+                      component: this.renderField,
+                      type: 'email',
+                      placeholder: 'Your Email'
+                    }),
+                    _react2.default.createElement(_reduxForm.Field, {
+                      name: 'password',
+                      component: this.renderField,
+                      type: 'password',
+                      placeholder: 'Your Password'
+                    }),
+                    _react2.default.createElement(_reduxForm.Field, {
+                      name: 'passwordConfirm',
+                      component: this.renderField,
+                      type: 'password',
+                      placeholder: 'Confirm Password'
+                    }),
+                    _react2.default.createElement('input', { type: 'submit', value: 'Register', className: 'button is-block is-info is-large', style: { width: '100%' } })
+                  )
+                ),
+                _react2.default.createElement(
+                  'p',
+                  { className: 'has-text-grey' },
+                  _react2.default.createElement(
+                    _reactRouterDom.Link,
+                    { to: '/login' },
+                    'Login'
+                  ),
+                  ' \xA0\xB7\xA0'
+                )
+              )
+            )
+          )
+        )
+      );
+    }
+  }]);
+
+  return RegisterPage;
+}(_react.Component);
+
+var mapStateToProps = function mapStateToProps(state) {
+  return {
+    auth: state.auth && state.auth.token
+  };
+};
+
+exports.default = {
+  component: (0, _reduxForm.reduxForm)({
+    form: 'registrationForm'
+  })((0, _reactRedux.connect)(mapStateToProps, { registerUser: _actions.registerUser })(RegisterPage))
+};
 
 /***/ }),
 /* 29 */
-/***/ (function(module, exports) {
+/***/ (function(module, exports, __webpack_require__) {
 
-eval("module.exports = require(\"axios\");\n\n//////////////////\n// WEBPACK FOOTER\n// external \"axios\"\n// module id = 29\n// module chunks = 0\n\n//# sourceURL=webpack:///external_%22axios%22?");
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _react = __webpack_require__(0);
+
+var _react2 = _interopRequireDefault(_react);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var NotFoundPage = function NotFoundPage(_ref) {
+  var _ref$staticContext = _ref.staticContext,
+      staticContext = _ref$staticContext === undefined ? {} : _ref$staticContext;
+
+  staticContext.notFound = true;
+  return _react2.default.createElement(
+    'h1',
+    { className: 'center-align', style: { marginTop: '200px' } },
+    'Not Found'
+  );
+};
+
+exports.default = {
+  component: NotFoundPage
+};
 
 /***/ }),
 /* 30 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-eval("\n\nObject.defineProperty(exports, \"__esModule\", {\n  value: true\n});\n\nvar _redux = __webpack_require__(12);\n\nvar _reduxForm = __webpack_require__(7);\n\nvar _authReducer = __webpack_require__(31);\n\nvar _authReducer2 = _interopRequireDefault(_authReducer);\n\nvar _postsReducer = __webpack_require__(32);\n\nvar _postsReducer2 = _interopRequireDefault(_postsReducer);\n\nvar _postReducer = __webpack_require__(33);\n\nvar _postReducer2 = _interopRequireDefault(_postReducer);\n\nfunction _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }\n\nexports.default = (0, _redux.combineReducers)({\n  auth: _authReducer2.default,\n  posts: _postsReducer2.default,\n  post: _postReducer2.default,\n  form: _reduxForm.reducer\n});\n\n//////////////////\n// WEBPACK FOOTER\n// ./src/client/reducers/index.js\n// module id = 30\n// module chunks = 0\n\n//# sourceURL=webpack:///./src/client/reducers/index.js?");
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _redux = __webpack_require__(13);
+
+var _reduxThunk = __webpack_require__(31);
+
+var _reduxThunk2 = _interopRequireDefault(_reduxThunk);
+
+var _axios = __webpack_require__(32);
+
+var _axios2 = _interopRequireDefault(_axios);
+
+var _reducers = __webpack_require__(33);
+
+var _reducers2 = _interopRequireDefault(_reducers);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+exports.default = function (req) {
+  var axiosInstance = _axios2.default.create({
+    baseURL: 'http://localhost:3001/',
+    headers: { cookie: req.get('cookie') || '' }
+  });
+
+  var store = (0, _redux.createStore)(_reducers2.default, {}, (0, _redux.applyMiddleware)(_reduxThunk2.default.withExtraArgument(axiosInstance)));
+  return store;
+};
 
 /***/ }),
 /* 31 */
-/***/ (function(module, exports, __webpack_require__) {
+/***/ (function(module, exports) {
 
-"use strict";
-eval("\n\nObject.defineProperty(exports, \"__esModule\", {\n  value: true\n});\n\nvar _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };\n\nvar _types = __webpack_require__(5);\n\nexports.default = function () {\n  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : false;\n  var action = arguments[1];\n\n  switch (action.type) {\n    case _types.FETCH_CURRENT_USER:\n      return action.payload.data || false;\n    case _types.AUTH_ERROR:\n      return _extends({}, state, { error: action.payload });\n    case _types.AUTH_USER:\n      return _extends({}, state, { token: action.payload.token });\n    case _types.UNAUTH_USER:\n      return false;\n    default:\n      return state;\n  }\n};\n\n//////////////////\n// WEBPACK FOOTER\n// ./src/client/reducers/authReducer.js\n// module id = 31\n// module chunks = 0\n\n//# sourceURL=webpack:///./src/client/reducers/authReducer.js?");
+module.exports = require("redux-thunk");
 
 /***/ }),
 /* 32 */
-/***/ (function(module, exports, __webpack_require__) {
+/***/ (function(module, exports) {
 
-"use strict";
-eval("\n\nObject.defineProperty(exports, \"__esModule\", {\n  value: true\n});\n\nvar _types = __webpack_require__(5);\n\nexports.default = function () {\n  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];\n  var action = arguments[1];\n\n  switch (action.type) {\n    case _types.FETCH_POSTS:\n      return action.payload.data;\n    default:\n      return state;\n  }\n};\n\n//////////////////\n// WEBPACK FOOTER\n// ./src/client/reducers/postsReducer.js\n// module id = 32\n// module chunks = 0\n\n//# sourceURL=webpack:///./src/client/reducers/postsReducer.js?");
+module.exports = require("axios");
 
 /***/ }),
 /* 33 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-eval("\n\nObject.defineProperty(exports, \"__esModule\", {\n  value: true\n});\n\nvar _types = __webpack_require__(5);\n\nexports.default = function () {\n  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};\n  var action = arguments[1];\n\n  switch (action.type) {\n    case _types.FETCH_POST:\n      return action.payload.data;\n    default:\n      return state;\n  }\n};\n\n//////////////////\n// WEBPACK FOOTER\n// ./src/client/reducers/postReducer.js\n// module id = 33\n// module chunks = 0\n\n//# sourceURL=webpack:///./src/client/reducers/postReducer.js?");
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _redux = __webpack_require__(13);
+
+var _reduxForm = __webpack_require__(7);
+
+var _authReducer = __webpack_require__(34);
+
+var _authReducer2 = _interopRequireDefault(_authReducer);
+
+var _postsReducer = __webpack_require__(35);
+
+var _postsReducer2 = _interopRequireDefault(_postsReducer);
+
+var _postReducer = __webpack_require__(36);
+
+var _postReducer2 = _interopRequireDefault(_postReducer);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+exports.default = (0, _redux.combineReducers)({
+  auth: _authReducer2.default,
+  posts: _postsReducer2.default,
+  post: _postReducer2.default,
+  form: _reduxForm.reducer
+});
 
 /***/ }),
-/* 34 */,
-/* 35 */
-/***/ (function(module, exports) {
+/* 34 */
+/***/ (function(module, exports, __webpack_require__) {
 
-eval("module.exports = require(\"cookie\");\n\n//////////////////\n// WEBPACK FOOTER\n// external \"cookie\"\n// module id = 35\n// module chunks = 0\n\n//# sourceURL=webpack:///external_%22cookie%22?");
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+var _types = __webpack_require__(5);
+
+exports.default = function () {
+  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : false;
+  var action = arguments[1];
+
+  switch (action.type) {
+    case _types.FETCH_CURRENT_USER:
+      return action.payload.data || false;
+    case _types.AUTH_ERROR:
+      return _extends({}, state, { error: action.payload });
+    case _types.AUTH_USER:
+      return _extends({}, state, { token: action.payload.token });
+    case _types.UNAUTH_USER:
+      return false;
+    default:
+      return state;
+  }
+};
+
+/***/ }),
+/* 35 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _types = __webpack_require__(5);
+
+exports.default = function () {
+  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
+  var action = arguments[1];
+
+  switch (action.type) {
+    case _types.FETCH_POSTS:
+      return action.payload.data;
+    default:
+      return state;
+  }
+};
 
 /***/ }),
 /* 36 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-eval("\n\nObject.defineProperty(exports, \"__esModule\", {\n  value: true\n});\n\nvar _typeof = typeof Symbol === \"function\" && typeof Symbol.iterator === \"symbol\" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === \"function\" && obj.constructor === Symbol ? \"symbol\" : typeof obj; };\n\nexports.encode = encode;\nexports.decode = decode;\n/**\n * @file encoding\n * @description this holds encoding and decoding logic in a centralized place\n */\n\nvar base64Matcher = new RegExp(\"^(?:[A-Za-z0-9+/]{4})*(?:[A-Za-z0-9+/]{2}==|[A-Za-z0-9+/]{3}=|[A-Za-z0-9+/]{4})([=]{1,2})?$\");\n\n/**\n * checks for base64 encoding by trying to decode\n */\nfunction isBase64(string) {\n  return base64Matcher.test(string);\n}\n\n/**\n * this handles encoding so that encoding and decoding logic are co-located\n */\nfunction encode(value) {\n  var returnValue = value;\n\n  // convert objects to strings first\n  if ((typeof returnValue === \"undefined\" ? \"undefined\" : _typeof(returnValue)) === 'object') {\n    returnValue = JSON.stringify(returnValue);\n  }\n\n  // if it's not base64 encoded, we need to uri encode it\n  if (!isBase64(returnValue)) {\n    returnValue = encodeURIComponent(returnValue);\n  }\n\n  return returnValue;\n}\n\nfunction decode(value, doNotParse) {\n  var returnValue = value;\n\n  // if they passed a base64 value, we didn't encode and won't mess\n  if (returnValue && !isBase64(returnValue)) {\n    // if it wasn't base64, we uri encoded when setting, so decode\n    returnValue = decodeURIComponent(returnValue);\n  }\n\n  // check if it's JSON\n  if (!doNotParse) {\n    try {\n      returnValue = JSON.parse(returnValue);\n    } catch (e) {\n      // leave it be, it's a string\n    }\n  }\n\n  return returnValue;\n}\n\n//////////////////\n// WEBPACK FOOTER\n// ./node_modules/isomorphic-cookie/dist/encoding.js\n// module id = 36\n// module chunks = 0\n\n//# sourceURL=webpack:///./node_modules/isomorphic-cookie/dist/encoding.js?");
 
-/***/ }),
-/* 37 */
-/***/ (function(module, exports, __webpack_require__) {
 
-"use strict";
-eval("\n\nObject.defineProperty(exports, \"__esModule\", {\n  value: true\n});\nexports.isResWritable = isResWritable;\n/**\n * @file util\n * @description some utility functions\n */\n\nfunction isResWritable(res) {\n  if (!res) {\n    return false;\n  }\n\n  // TODO: check if this is the same in Hapi\n  if (res.headersSent === true) {\n    return false;\n  }\n\n  return true;\n}\n\n//////////////////\n// WEBPACK FOOTER\n// ./node_modules/isomorphic-cookie/dist/util.js\n// module id = 37\n// module chunks = 0\n\n//# sourceURL=webpack:///./node_modules/isomorphic-cookie/dist/util.js?");
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
 
-/***/ }),
-/* 38 */
-/***/ (function(module, exports, __webpack_require__) {
+var _types = __webpack_require__(5);
 
-"use strict";
-eval("\n\nvar _save = __webpack_require__(39);\n\nvar _save2 = _interopRequireDefault(_save);\n\nvar _load = __webpack_require__(41);\n\nvar _load2 = _interopRequireDefault(_load);\n\nvar _remove = __webpack_require__(42);\n\nvar _remove2 = _interopRequireDefault(_remove);\n\nfunction _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }\n\n__webpack_require__(43);\n\nmodule.exports = {\n  load: _load2.default,\n  save: _save2.default,\n  remove: _remove2.default\n};\n\n//////////////////\n// WEBPACK FOOTER\n// ./node_modules/isomorphic-cookie/dist/index.js\n// module id = 38\n// module chunks = 0\n\n//# sourceURL=webpack:///./node_modules/isomorphic-cookie/dist/index.js?");
+exports.default = function () {
+  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+  var action = arguments[1];
 
-/***/ }),
-/* 39 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-eval("\n\nObject.defineProperty(exports, \"__esModule\", {\n  value: true\n});\nexports.defaultHapiOpts = exports.defaultExpressOpts = exports.defaultBrowserOpts = undefined;\n\nvar _encoding = __webpack_require__(36);\n\nvar _util = __webpack_require__(37);\n\n/**\n * @function save\n * @description This handles saving a cookie in the browser and in memory/headers for server\n */\n\nvar cookie = __webpack_require__(35);\nvar _pick = __webpack_require__(40);\n\nvar whiteListOpts = ['domain', 'expires', 'path', 'secure', 'httpOnly'];\n\nvar defaultBrowserOpts = exports.defaultBrowserOpts = {\n  path: '/',\n  secure: true\n};\n\nvar defaultExpressOpts = exports.defaultExpressOpts = {\n  path: '/',\n  secure: true\n};\n\nvar defaultHapiOpts = exports.defaultHapiOpts = {\n  path: '/',\n  isSecure: true\n};\n\nexports.default = function (name, val) {\n  var opt = arguments.length <= 2 || arguments[2] === undefined ? {} : arguments[2];\n  var res = arguments[3];\n\n  var options = _pick(opt, whiteListOpts);\n\n  // browser\n  if (typeof document !== 'undefined') {\n    document.cookie = cookie.serialize(name, (0, _encoding.encode)(val), Object.assign({}, defaultBrowserOpts, options));\n  }\n\n  // express\n  if ((0, _util.isResWritable)(res) && res.cookie) {\n    res.cookie(name, (0, _encoding.encode)(val), Object.assign({}, defaultExpressOpts, options));\n  }\n\n  // hapi\n  if ((0, _util.isResWritable)(res) && res.state) {\n    if ('undefined' !== options.secure) {\n      options.isSecure = options.secure;\n    }\n    res.state(name, (0, _encoding.encode)(val), Object.assign({}, defaultHapiOpts, options));\n  }\n};\n\n//////////////////\n// WEBPACK FOOTER\n// ./node_modules/isomorphic-cookie/dist/save.js\n// module id = 39\n// module chunks = 0\n\n//# sourceURL=webpack:///./node_modules/isomorphic-cookie/dist/save.js?");
-
-/***/ }),
-/* 40 */
-/***/ (function(module, exports) {
-
-eval("module.exports = require(\"lodash/pick\");\n\n//////////////////\n// WEBPACK FOOTER\n// external \"lodash/pick\"\n// module id = 40\n// module chunks = 0\n\n//# sourceURL=webpack:///external_%22lodash/pick%22?");
-
-/***/ }),
-/* 41 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-eval("\n\nObject.defineProperty(exports, \"__esModule\", {\n  value: true\n});\n\nvar _cookie = __webpack_require__(35);\n\nvar _cookie2 = _interopRequireDefault(_cookie);\n\nvar _encoding = __webpack_require__(36);\n\nfunction _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }\n\n/**\n * @function load\n * @description this loads a cookie\n */\n\nexports.default = function (name, request, doNotParse) {\n  var cookies = void 0;\n\n  if (typeof document !== 'undefined') {\n    cookies = _cookie2.default.parse(document.cookie);\n  } else if (request) {\n    // grab cookies from the request if they pass it\n    // @TODO: find out and comment exactly which servers and such these support\n    if (request.cookie) {\n      cookies = request.cookie;\n    } else if (request.cookies) {\n      cookies = request.cookies;\n    } else if (request.headers && request.headers.cookie) {\n      cookies = _cookie2.default.parse(request.headers.cookie);\n    }\n  }\n\n  var cookieVal = cookies && (0, _encoding.decode)(cookies[name], doNotParse);\n\n  return cookieVal;\n};\n\n//////////////////\n// WEBPACK FOOTER\n// ./node_modules/isomorphic-cookie/dist/load.js\n// module id = 41\n// module chunks = 0\n\n//# sourceURL=webpack:///./node_modules/isomorphic-cookie/dist/load.js?");
-
-/***/ }),
-/* 42 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-eval("\n\nObject.defineProperty(exports, \"__esModule\", {\n  value: true\n});\n\nvar _cookie = __webpack_require__(35);\n\nvar _cookie2 = _interopRequireDefault(_cookie);\n\nvar _util = __webpack_require__(37);\n\nfunction _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }\n\n/**\n * @function remove\n * @description this removes a cookie\n */\n\nexports.default = function (name, opt, res) {\n  var options = opt = Object.assign({}, opt || {});\n\n  if (typeof document !== 'undefined') {\n    opt.expires = new Date(1970, 1, 1, 0, 0, 1);\n    document.cookie = _cookie2.default.serialize(name, '', options);\n  }\n\n  if ((0, _util.isResWritable)(res) && res.clearCookie) {\n    res.clearCookie(name, options);\n  }\n\n  // hapi\n  if ((0, _util.isResWritable)(res) && res.unstate) {\n    res.unstate(name);\n  }\n};\n\n//////////////////\n// WEBPACK FOOTER\n// ./node_modules/isomorphic-cookie/dist/remove.js\n// module id = 42\n// module chunks = 0\n\n//# sourceURL=webpack:///./node_modules/isomorphic-cookie/dist/remove.js?");
-
-/***/ }),
-/* 43 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-eval("\n\nif (typeof Object.assign !== 'function') {\n  Object.assign = function (target) {\n    'use strict';\n\n    if (target == null) {\n      throw new TypeError('Cannot convert undefined or null to object');\n    }\n\n    target = Object(target);\n    for (var index = 1; index < arguments.length; index++) {\n      var source = arguments[index];\n      if (source != null) {\n        for (var key in source) {\n          if (Object.prototype.hasOwnProperty.call(source, key)) {\n            target[key] = source[key];\n          }\n        }\n      }\n    }\n    return target;\n  };\n}\n\n//////////////////\n// WEBPACK FOOTER\n// ./node_modules/isomorphic-cookie/dist/polyfill.js\n// module id = 43\n// module chunks = 0\n\n//# sourceURL=webpack:///./node_modules/isomorphic-cookie/dist/polyfill.js?");
-
-/***/ }),
-/* 44 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-eval("\n\nObject.defineProperty(exports, \"__esModule\", {\n  value: true\n});\n\nvar _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if (\"value\" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();\n\nvar _react = __webpack_require__(0);\n\nvar _react2 = _interopRequireDefault(_react);\n\nvar _reactHelmet = __webpack_require__(3);\n\nvar _reactRedux = __webpack_require__(2);\n\nvar _reactRouterDom = __webpack_require__(1);\n\nvar _requireAuth = __webpack_require__(45);\n\nvar _requireAuth2 = _interopRequireDefault(_requireAuth);\n\nfunction _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }\n\nfunction _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError(\"Cannot call a class as a function\"); } }\n\nfunction _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError(\"this hasn't been initialised - super() hasn't been called\"); } return call && (typeof call === \"object\" || typeof call === \"function\") ? call : self; }\n\nfunction _inherits(subClass, superClass) { if (typeof superClass !== \"function\" && superClass !== null) { throw new TypeError(\"Super expression must either be null or a function, not \" + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }\n\nvar AdminPage = function (_Component) {\n  _inherits(AdminPage, _Component);\n\n  function AdminPage() {\n    _classCallCheck(this, AdminPage);\n\n    return _possibleConstructorReturn(this, (AdminPage.__proto__ || Object.getPrototypeOf(AdminPage)).apply(this, arguments));\n  }\n\n  _createClass(AdminPage, [{\n    key: 'render',\n    value: function render() {\n\n      return _react2.default.createElement(\n        'div',\n        null,\n        _react2.default.createElement(\n          _reactHelmet.Helmet,\n          null,\n          _react2.default.createElement(\n            'title',\n            null,\n            'NERDPress | Admin Page'\n          ),\n          _react2.default.createElement('meta', { property: 'og:title', content: 'NERDPress | Admin Page' })\n        ),\n        _react2.default.createElement(\n          'section',\n          { className: 'articles' },\n          _react2.default.createElement(\n            'div',\n            { className: 'column is-8 is-offset-2' },\n            _react2.default.createElement(\n              'h1',\n              null,\n              'Admin Page'\n            )\n          )\n        )\n      );\n    }\n  }]);\n\n  return AdminPage;\n}(_react.Component);\n\nexports.default = {\n  component: (0, _reactRedux.connect)(null, null)((0, _requireAuth2.default)(AdminPage))\n  // loadData: ({ dispatch }) => dispatch(fetchPosts())\n\n};\n\n//////////////////\n// WEBPACK FOOTER\n// ./src/client/pages/AdminPage.js\n// module id = 44\n// module chunks = 0\n\n//# sourceURL=webpack:///./src/client/pages/AdminPage.js?");
-
-/***/ }),
-/* 45 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-eval("\n\nObject.defineProperty(exports, \"__esModule\", {\n  value: true\n});\n\nvar _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if (\"value\" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();\n\nvar _react = __webpack_require__(0);\n\nvar _react2 = _interopRequireDefault(_react);\n\nvar _reactRedux = __webpack_require__(2);\n\nvar _reactRouterDom = __webpack_require__(1);\n\nfunction _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }\n\nfunction _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError(\"Cannot call a class as a function\"); } }\n\nfunction _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError(\"this hasn't been initialised - super() hasn't been called\"); } return call && (typeof call === \"object\" || typeof call === \"function\") ? call : self; }\n\nfunction _inherits(subClass, superClass) { if (typeof superClass !== \"function\" && superClass !== null) { throw new TypeError(\"Super expression must either be null or a function, not \" + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }\n\nexports.default = function (ChildComponent) {\n  var RequireAuth = function (_Component) {\n    _inherits(RequireAuth, _Component);\n\n    function RequireAuth() {\n      _classCallCheck(this, RequireAuth);\n\n      return _possibleConstructorReturn(this, (RequireAuth.__proto__ || Object.getPrototypeOf(RequireAuth)).apply(this, arguments));\n    }\n\n    _createClass(RequireAuth, [{\n      key: 'render',\n      value: function render() {\n        switch (this.props.auth) {\n          case false:\n            return _react2.default.createElement(_reactRouterDom.Redirect, { to: '/' });\n          case null:\n            return _react2.default.createElement(\n              'div',\n              null,\n              'Loading... '\n            );\n          default:\n            return _react2.default.createElement(ChildComponent, this.props);\n        }\n      }\n    }]);\n\n    return RequireAuth;\n  }(_react.Component);\n\n  function mapStateToProps(_ref) {\n    var auth = _ref.auth;\n\n    return { auth: auth };\n  }\n\n  return (0, _reactRedux.connect)(mapStateToProps)(RequireAuth);\n};\n\n//////////////////\n// WEBPACK FOOTER\n// ./src/client/components/hocs/requireAuth.js\n// module id = 45\n// module chunks = 0\n\n//# sourceURL=webpack:///./src/client/components/hocs/requireAuth.js?");
+  switch (action.type) {
+    case _types.FETCH_POST:
+      return action.payload.data;
+    default:
+      return state;
+  }
+};
 
 /***/ })
 /******/ ]);

@@ -11,8 +11,13 @@ class Header extends Component {
 
   render () {
     const { auth } = this.props
-    const authButton = auth && auth.token ? (
-        <a onClick={() => this.logOut()} className="navbar-item">Logout</a>
+    const authButton = auth && auth.token ? ([
+          <Link className="navbar-item" to="/admin" key='admin'>  
+            Admin
+          </Link>,
+          <a onClick={() => this.logOut()} className="navbar-item" key='logout'>Logout</a>
+        ]
+        
       ) : (
         [
         <Link className="navbar-item" to="/register" key='register'>  

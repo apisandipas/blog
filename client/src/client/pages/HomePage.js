@@ -14,12 +14,17 @@ class HomePage extends Component {
     super(props)
 
     this.state = {
+      isLoading: true,
       page: 1
     }
   }
 
   componentDidMount () {
-    this.props.fetchPosts()
+    this.props.fetchPosts().then(() => {
+      this.setState({
+        isLoading: false
+      })
+    })
   }
 
   prevPage () {
@@ -58,14 +63,14 @@ class HomePage extends Component {
   renderPagination (numPages) {
     const currentPage = this.state.page
     return (
-      <nav className="pagination" role="navigation" aria-label="pagination" style={{marginTop: '25px'}}>
+      <nav className="pagination" role="navigation" aria-label="pagination" style={{marginTop: '25px'}} key='nav'>
         { currentPage > 1 
           ? <a className="pagination-previous" onClick={() => this.prevPage()}>Previous</a>
-          : <a></a> }
+          : <a className="pagination-previous" style={{cursor: 'not-allowed'}}>Previous</a> }
          
         { currentPage < numPages
           ? <a className="pagination-next" onClick={() => this.nextPage()}>Next page</a>
-          : <a></a>}
+          : <a className="pagination-previous" style={{cursor: 'not-allowed'}}>Next page</a> }
         
       </nav>
     )
@@ -85,8 +90,14 @@ class HomePage extends Component {
          
         <section className="articles">
           <div className="column is-8 is-offset-2">
-            {this.renderPosts(posts)}
-            {this.renderPagination(numPages)}
+            { this.state.isLoading 
+              ? <p>Loading... </p>
+              : (
+                  [
+                    this.renderPosts(posts),
+                    this.renderPagination(numPages)
+                  ]
+                )}
           </div>
         </section>
          
