@@ -1,18 +1,21 @@
 import User from '../models/user'
+import jwt from 'jwt-simple'
+
+const tokenForUser = (user) => {
+  const timestamp = new Date().getTime()
+  const secret = process.env.JWT_SECRET
+  return jwt.encode({ sub: user.id, iat: timestamp }, secret)
+}
 
 class AuthController {
   login (req, res) {
-    res.json({      
-      success: true,
-      message: 'Enjoy your token!',
-      token: '2136788fwbdsj0ioudik0ioji'
+    res.json({
+      token: tokenForUser(req.user)
     })
-    // res.redirect('/')
   }
 
   logout (req, res) {
     req.logout();
-    res.redirect('/');
   }
 
   currentUser (req, res) {
@@ -21,7 +24,7 @@ class AuthController {
     }
   }
 
-  async register (req, res) {
+  async register (req, res, next) {
     req.checkBody('name', 'Name is required.').notEmpty()
     req.checkBody('email', 'Email is required.').notEmpty()
     req.checkBody('email', 'Email must be a valid email address').isEmail()
@@ -36,7 +39,7 @@ class AuthController {
     try {
       const { name, email, password } = req.body
 
-      // Check for existing accound with email
+      // Check for existing account with email
       const existingUser = await User.where('email', email).fetch()
       if (existingUser) {
         res.invalid("Email is already taken")
@@ -48,7 +51,9 @@ class AuthController {
         }).save()
         req.login(user, function(err) {
           if (err) { return next(err); }
-          return res.send(user.toJSON())
+          res.json({
+            token: tokenForUser(user)
+          })
         });
       }
     } catch(err) {

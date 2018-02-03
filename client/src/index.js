@@ -3,24 +3,22 @@ import express from 'express';
 import renderer from './helpers/renderer'
 import createStore from './helpers/createStore'
 import { matchRoutes } from 'react-router-config'
-import proxy from 'express-http-proxy'
+import isomorphicCookie from 'isomorphic-cookie'
 import Routes from './client/Routes'
-const app = express()
 
-// app.use(
-//   '/api',
-//   proxy('http://localhost:3001', {
-//     proxyReqOptDecorator(opts) {
-//       opts.headers['x-forwarded-host'] = 'localhost:3002'
-//       return opts
-//     }
-//   })
-// )
+
+const app = express()
 
 app.use(express.static('public'))
 
 app.get('*', (req, res) => {
   const store = createStore(req)
+
+  const cookie = isomorphicCookie.load('token', req)
+  if (cookie) {
+    store.dispatch({ type: 'auth_user', payload: { token: cookie}})
+  }
+
   const promises = matchRoutes(Routes, req.path).map(({ route }) => {
     return route.loadData ? route.loadData(store, req) : null
   }).map((promise) => {

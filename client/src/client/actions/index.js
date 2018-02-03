@@ -1,4 +1,5 @@
-import { FETCH_POSTS, FETCH_POST, FETCH_CURRENT_USER, AUTH_USER, AUTH_ERROR } from './types'
+import { FETCH_POSTS, FETCH_POST, FETCH_CURRENT_USER, AUTH_USER, UNAUTH_USER, AUTH_ERROR } from './types'
+import isomorphicCookie from 'isomorphic-cookie'
 
 export const fetchCurrentUser = () => async (dispatch, getState, api) => {
   const res = await api.get('/api/current-user')
@@ -36,6 +37,28 @@ export const loginUser = (values) => async (dispatch, getState, api) => {
       type: AUTH_USER,
       payload: res.data
     })
+    isomorphicCookie.save('token', res.data.token, {secure: false})
+  } catch(err) {
+    console.log(err)
+    dispatch(authError('Bad Login Info'));
+  }
+}
+
+export const logOut = () => async (dispatch) => {
+  isomorphicCookie.remove('token', null, {secure: false})   
+  dispatch({
+    type: UNAUTH_USER
+  })
+}
+
+export const registerUser = (values) => async (dispatch, getState, api) => {
+  try {
+    const res = await api.post('/api/register', values)
+    dispatch({
+      type: AUTH_USER,
+      payload: res.data
+    })
+    isomorphicCookie.save('token', res.data.token, {secure: false})
   } catch(err) {
     console.log(err)
     dispatch(authError('Bad Login Info'));

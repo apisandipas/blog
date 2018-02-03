@@ -1,45 +1,58 @@
-import React from 'react'
+import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
+import { logOut } from '../actions'
 
-const Header = ({ auth }) => {
+class Header extends Component {
+  
+  logOut(){
+    this.props.logOut()
+  }
 
-  const authButton = auth ? (
-    <a href="/api/logout" className="navbar-item">Logout</a>
-  ) : (
-    <a href="/api/login" className="navbar-item">Login</a>
-  )
-
-  return (
-    <nav className="navbar is-white">
-      <div className="navbar-brand">
-        <Link className="navbar-item brand-text" to="/">  
-          NERDPress          
+  render () {
+    const { auth } = this.props
+    const authButton = auth && auth.token ? (
+        <a onClick={() => this.logOut()} className="navbar-item">Logout</a>
+      ) : (
+        [
+        <Link className="navbar-item" to="/register" key='register'>  
+          Register
+        </Link>,
+        <Link className="navbar-item" to="/login" key='login'>  
+          Login
         </Link>
-        <div className="navbar-burger burger" data-target="navMenu">
-          <span></span>
-          <span></span>
-          <span></span>
-        </div>
-      </div>
-      <div id="navMenu" className="navbar-menu">
-        <div className="navbar-start">
-          <Link className="navbar-item" to="/">  
-            Home
+        ]
+      )
+    return (
+      <nav className="navbar is-white">
+        <div className="navbar-brand">
+          <Link className="navbar-item brand-text" to="/">  
+            NERDPress          
           </Link>
-          <Link className="navbar-item" to="/archives">  
-            Archives
-          </Link>
+          <div className="navbar-burger burger" data-target="navMenu">
+            <span></span>
+            <span></span>
+            <span></span>
+          </div>
         </div>
+        <div id="navMenu" className="navbar-menu">
+          <div className="navbar-start">
+            <Link className="navbar-item" to="/">  
+              Home
+            </Link>
+            <Link className="navbar-item" to="/archives">  
+              Archives
+            </Link>
+          </div>
 
-        <div className="navbar-end">
-          <Link className="navbar-item" to="/login">  
-            Login
-          </Link>
+          <div className="navbar-end">
+            {authButton}
+          </div>
         </div>
-      </div>
-    </nav>
-  )
+      </nav>
+    )
+  }
+ 
 }
 
 function mapStateToProps({ auth }) {
@@ -48,4 +61,4 @@ function mapStateToProps({ auth }) {
   }
 }
 
-export default connect(mapStateToProps)(Header)
+export default connect(mapStateToProps, { logOut })(Header)

@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { Helmet } from 'react-helmet'
-import { Link } from 'react-router-dom'
+import { Link, Redirect } from 'react-router-dom'
 import { Field, reduxForm } from 'redux-form'
 import { connect } from 'react-redux'
 import { loginUser } from '../actions'
@@ -13,8 +13,6 @@ class LoginPage extends Component {
   }
 
   handleSubmit (values) {
-    // console.log(values)
-
     this.props.loginUser(values)
   }
 
@@ -37,7 +35,11 @@ class LoginPage extends Component {
   
   render () {
 
-    const { handleSubmit } = this.props
+    const { handleSubmit, auth } = this.props
+
+    if (auth) {
+      return <Redirect to='/admin' />
+    }
 
     return (
       <div>
@@ -86,10 +88,16 @@ class LoginPage extends Component {
   
 }
 
+const mapStateToProps = (state) => {
+  return {
+    auth: state.auth && state.auth.token
+  }
+}
+
 export default {
   component: reduxForm({
     form: 'loginForm'
   })(
-    connect(null, { loginUser })(LoginPage)
+    connect(mapStateToProps, { loginUser })(LoginPage)
   )
 };

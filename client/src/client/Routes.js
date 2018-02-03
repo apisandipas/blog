@@ -3,6 +3,7 @@ import App from './App'
 import HomePage from './pages/HomePage'
 import PostPage from './pages/PostPage'
 import LoginPage from './pages/LoginPage'
+import AdminPage from './pages/AdminPage'
 import RegisterPage from './pages/RegisterPage'
 import NotFoundPage from './pages/NotFoundPage'
 
@@ -26,6 +27,10 @@ export default [
       {
         ...RegisterPage,
         path: '/register',
+      },
+      {
+        ...AdminPage,
+        path: '/admin',
       },
       {
         ...NotFoundPage

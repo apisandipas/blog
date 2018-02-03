@@ -8,14 +8,14 @@ import authController from './controllers/authController'
 const router = express.Router();
 
 router.post('/login', 
-  passport.authenticate('local'),
+  passport.authenticate('local', { session: false }),
   authController.login
 )
 router.get('/logout', authController.logout);
 router.post('/register', authController.register);
 router.get('/current-user', authController.currentUser);
 
-router.get('/users', usersController.index);
+router.get('/users', passport.authenticate('jwt', { session: false }), usersController.index);
 router.get('/users/:id', usersController.show);
 router.post('/users', usersController.add);
 router.put('/users/:id', usersController.update);

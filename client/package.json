@@ -7,7 +7,7 @@
     "compression": "1.7.0",
     "dateformat": "^3.0.2",
     "express": "4.15.4",
-    "express-http-proxy": "1.0.6",
+    "isomorphic-cookie": "^1.2.3",
     "lodash": "4.17.4",
     "lodash.chunk": "^4.2.0",
     "react": "16.0.0",
