@@ -21,6 +21,8 @@ class AuthController {
   currentUser (req, res) {
     if (req.isAuthenticated()) {
       res.send(req.user)
+    } else {
+      res.serverError(new Error('Something went wrong'))
     }
   }
 

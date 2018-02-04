@@ -16,7 +16,7 @@ app.get('*', (req, res) => {
 
   const cookie = isomorphicCookie.load('token', req)
   if (cookie) {
-    store.dispatch({ type: 'auth_user', payload: { token: cookie}})
+    store.dispatch({ type: 'auth_user', payload: { token: cookie }})
   }
 
   const promises = matchRoutes(Routes, req.path).map(({ route }) => {

@@ -99,7 +99,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.authError = exports.registerUser = exports.logOut = exports.loginUser = exports.fetchPost = exports.fetchPosts = exports.fetchCurrentUser = undefined;
 
-var _types = __webpack_require__(6);
+var _types = __webpack_require__(5);
 
 var _isomorphicCookie = __webpack_require__(9);
 
@@ -111,16 +111,22 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
 
 var fetchCurrentUser = exports.fetchCurrentUser = function fetchCurrentUser() {
   return function () {
-    var _ref = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee(dispatch, getState, api) {
-      var res;
+    var _ref2 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee(dispatch, getState, _ref) {
+      var api = _ref.api,
+          req = _ref.req;
+      var cookie, res;
       return regeneratorRuntime.wrap(function _callee$(_context) {
         while (1) {
           switch (_context.prev = _context.next) {
             case 0:
-              _context.next = 2;
-              return api.get('/api/current-user');
+              _context.prev = 0;
+              cookie = _isomorphicCookie2.default.load('token', req);
+              _context.next = 4;
+              return api.get('/api/current-user', {
+                headers: { authorization: cookie }
+              });
 
-            case 2:
+            case 4:
               res = _context.sent;
 
 
@@ -128,24 +134,34 @@ var fetchCurrentUser = exports.fetchCurrentUser = function fetchCurrentUser() {
                 type: _types.FETCH_CURRENT_USER,
                 payload: res
               });
+              _context.next = 11;
+              break;
 
-            case 4:
+            case 8:
+              _context.prev = 8;
+              _context.t0 = _context['catch'](0);
+
+              console.log('error', _context.t0);
+
+            case 11:
             case 'end':
               return _context.stop();
           }
         }
-      }, _callee, undefined);
+      }, _callee, undefined, [[0, 8]]);
     }));
 
     return function (_x, _x2, _x3) {
-      return _ref.apply(this, arguments);
+      return _ref2.apply(this, arguments);
     };
   }();
 };
 
 var fetchPosts = exports.fetchPosts = function fetchPosts() {
   return function () {
-    var _ref2 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee2(dispatch, getState, api) {
+    var _ref4 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee2(dispatch, getState, _ref3) {
+      var api = _ref3.api,
+          req = _ref3.req;
       var res;
       return regeneratorRuntime.wrap(function _callee2$(_context2) {
         while (1) {
@@ -171,14 +187,16 @@ var fetchPosts = exports.fetchPosts = function fetchPosts() {
     }));
 
     return function (_x4, _x5, _x6) {
-      return _ref2.apply(this, arguments);
+      return _ref4.apply(this, arguments);
     };
   }();
 };
 
 var fetchPost = exports.fetchPost = function fetchPost(slug) {
   return function () {
-    var _ref3 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee3(dispatch, getState, api) {
+    var _ref6 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee3(dispatch, getState, _ref5) {
+      var api = _ref5.api,
+          req = _ref5.req;
       var res;
       return regeneratorRuntime.wrap(function _callee3$(_context3) {
         while (1) {
@@ -213,14 +231,16 @@ var fetchPost = exports.fetchPost = function fetchPost(slug) {
     }));
 
     return function (_x7, _x8, _x9) {
-      return _ref3.apply(this, arguments);
+      return _ref6.apply(this, arguments);
     };
   }();
 };
 
 var loginUser = exports.loginUser = function loginUser(values) {
   return function () {
-    var _ref4 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee4(dispatch, getState, api) {
+    var _ref8 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee4(dispatch, getState, _ref7) {
+      var api = _ref7.api,
+          req = _ref7.req;
       var res;
       return regeneratorRuntime.wrap(function _callee4$(_context4) {
         while (1) {
@@ -257,14 +277,14 @@ var loginUser = exports.loginUser = function loginUser(values) {
     }));
 
     return function (_x10, _x11, _x12) {
-      return _ref4.apply(this, arguments);
+      return _ref8.apply(this, arguments);
     };
   }();
 };
 
 var logOut = exports.logOut = function logOut() {
   return function () {
-    var _ref5 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee5(dispatch) {
+    var _ref9 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee5(dispatch) {
       return regeneratorRuntime.wrap(function _callee5$(_context5) {
         while (1) {
           switch (_context5.prev = _context5.next) {
@@ -283,14 +303,16 @@ var logOut = exports.logOut = function logOut() {
     }));
 
     return function (_x13) {
-      return _ref5.apply(this, arguments);
+      return _ref9.apply(this, arguments);
     };
   }();
 };
 
 var registerUser = exports.registerUser = function registerUser(values) {
   return function () {
-    var _ref6 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee6(dispatch, getState, api) {
+    var _ref11 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee6(dispatch, getState, _ref10) {
+      var api = _ref10.api,
+          req = _ref10.req;
       var res;
       return regeneratorRuntime.wrap(function _callee6$(_context6) {
         while (1) {
@@ -327,7 +349,7 @@ var registerUser = exports.registerUser = function registerUser(values) {
     }));
 
     return function (_x14, _x15, _x16) {
-      return _ref6.apply(this, arguments);
+      return _ref11.apply(this, arguments);
     };
   }();
 };
@@ -341,12 +363,6 @@ var authError = exports.authError = function authError(error) {
 
 /***/ }),
 /* 5 */
-/***/ (function(module, exports) {
-
-module.exports = require("react-router-config");
-
-/***/ }),
-/* 6 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -362,6 +378,12 @@ var FETCH_POST = exports.FETCH_POST = 'fetch_post';
 var AUTH_USER = exports.AUTH_USER = 'auth_user';
 var UNAUTH_USER = exports.UNAUTH_USER = 'unauth_user';
 var AUTH_ERROR = exports.AUTH_ERROR = 'auth_error';
+
+/***/ }),
+/* 6 */
+/***/ (function(module, exports) {
+
+module.exports = require("react-router-config");
 
 /***/ }),
 /* 7 */
@@ -495,7 +517,7 @@ var _createStore = __webpack_require__(32);
 
 var _createStore2 = _interopRequireDefault(_createStore);
 
-var _reactRouterConfig = __webpack_require__(5);
+var _reactRouterConfig = __webpack_require__(6);
 
 var _isomorphicCookie = __webpack_require__(9);
 
@@ -575,7 +597,7 @@ var _server = __webpack_require__(18);
 
 var _reactRouterDom = __webpack_require__(1);
 
-var _reactRouterConfig = __webpack_require__(5);
+var _reactRouterConfig = __webpack_require__(6);
 
 var _serializeJavascript = __webpack_require__(19);
 
@@ -642,7 +664,7 @@ var _reactHelmet = __webpack_require__(3);
 
 var _reactHelmet2 = _interopRequireDefault(_reactHelmet);
 
-var _reactRouterConfig = __webpack_require__(5);
+var _reactRouterConfig = __webpack_require__(6);
 
 var _Header = __webpack_require__(21);
 
@@ -1570,15 +1592,19 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
 var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
+
+var _reactRedux = __webpack_require__(2);
 
 var _reactHelmet = __webpack_require__(3);
 
 var _reactRouterDom = __webpack_require__(1);
 
-var _reactRouterConfig = __webpack_require__(5);
+var _reactRouterConfig = __webpack_require__(6);
 
 var _actions = __webpack_require__(4);
 
@@ -1588,93 +1614,68 @@ var _Header2 = _interopRequireDefault(_Header);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var Backend = function Backend(_ref) {
-  var route = _ref.route;
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-  return _react2.default.createElement(
-    'div',
-    null,
-    _react2.default.createElement(
-      _reactHelmet.Helmet,
-      null,
-      _react2.default.createElement('link', { href: 'https://fonts.googleapis.com/css?family=Open+Sans:300,400,700', rel: 'stylesheet' }),
-      _react2.default.createElement('link', { rel: 'stylesheet', type: 'text/css', href: '/admin.css' })
-    ),
-    _react2.default.createElement(_Header2.default, null),
-    _react2.default.createElement(
-      'div',
-      { className: 'container' },
-      _react2.default.createElement(
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var Backend = function (_Component) {
+  _inherits(Backend, _Component);
+
+  function Backend() {
+    _classCallCheck(this, Backend);
+
+    return _possibleConstructorReturn(this, (Backend.__proto__ || Object.getPrototypeOf(Backend)).apply(this, arguments));
+  }
+
+  _createClass(Backend, [{
+    key: 'componentDidMount',
+    value: function componentDidMount() {
+      this.props.fetchCurrentUser();
+    }
+  }, {
+    key: 'render',
+    value: function render() {
+      var route = this.props.route;
+
+      return _react2.default.createElement(
         'div',
-        { className: 'columns' },
+        null,
+        _react2.default.createElement(
+          _reactHelmet.Helmet,
+          null,
+          _react2.default.createElement('link', { href: 'https://fonts.googleapis.com/css?family=Open+Sans:300,400,700', rel: 'stylesheet' }),
+          _react2.default.createElement('link', { rel: 'stylesheet', type: 'text/css', href: '/admin.css' })
+        ),
+        _react2.default.createElement(_Header2.default, null),
         _react2.default.createElement(
           'div',
-          { className: 'column is-3' },
+          { className: 'container' },
           _react2.default.createElement(
-            'aside',
-            { className: 'menu' },
+            'div',
+            { className: 'columns' },
             _react2.default.createElement(
-              'p',
-              { className: 'menu-label' },
-              'General'
-            ),
-            _react2.default.createElement(
-              'ul',
-              { className: 'menu-list' },
+              'div',
+              { className: 'column is-3' },
               _react2.default.createElement(
-                'li',
-                null,
+                'aside',
+                { className: 'menu' },
                 _react2.default.createElement(
-                  'a',
-                  { className: 'is-active' },
-                  'Dashboard'
-                )
-              ),
-              _react2.default.createElement(
-                'li',
-                null,
-                _react2.default.createElement(
-                  'a',
-                  null,
-                  'Customers'
-                )
-              )
-            ),
-            _react2.default.createElement(
-              'p',
-              { className: 'menu-label' },
-              'Administration'
-            ),
-            _react2.default.createElement(
-              'ul',
-              { className: 'menu-list' },
-              _react2.default.createElement(
-                'li',
-                null,
-                _react2.default.createElement(
-                  'a',
-                  null,
-                  'Team Settings'
-                )
-              ),
-              _react2.default.createElement(
-                'li',
-                null,
-                _react2.default.createElement(
-                  'a',
-                  null,
-                  'Manage Your Team'
+                  'p',
+                  { className: 'menu-label' },
+                  'General'
                 ),
                 _react2.default.createElement(
                   'ul',
-                  null,
+                  { className: 'menu-list' },
                   _react2.default.createElement(
                     'li',
                     null,
                     _react2.default.createElement(
                       'a',
-                      null,
-                      'Members'
+                      { className: 'is-active' },
+                      'Dashboard'
                     )
                   ),
                   _react2.default.createElement(
@@ -1683,7 +1684,25 @@ var Backend = function Backend(_ref) {
                     _react2.default.createElement(
                       'a',
                       null,
-                      'Plugins'
+                      'Customers'
+                    )
+                  )
+                ),
+                _react2.default.createElement(
+                  'p',
+                  { className: 'menu-label' },
+                  'Administration'
+                ),
+                _react2.default.createElement(
+                  'ul',
+                  { className: 'menu-list' },
+                  _react2.default.createElement(
+                    'li',
+                    null,
+                    _react2.default.createElement(
+                      'a',
+                      null,
+                      'Team Settings'
                     )
                   ),
                   _react2.default.createElement(
@@ -1692,90 +1711,126 @@ var Backend = function Backend(_ref) {
                     _react2.default.createElement(
                       'a',
                       null,
-                      'Add a member'
+                      'Manage Your Team'
+                    ),
+                    _react2.default.createElement(
+                      'ul',
+                      null,
+                      _react2.default.createElement(
+                        'li',
+                        null,
+                        _react2.default.createElement(
+                          'a',
+                          null,
+                          'Members'
+                        )
+                      ),
+                      _react2.default.createElement(
+                        'li',
+                        null,
+                        _react2.default.createElement(
+                          'a',
+                          null,
+                          'Plugins'
+                        )
+                      ),
+                      _react2.default.createElement(
+                        'li',
+                        null,
+                        _react2.default.createElement(
+                          'a',
+                          null,
+                          'Add a member'
+                        )
+                      )
+                    )
+                  ),
+                  _react2.default.createElement(
+                    'li',
+                    null,
+                    _react2.default.createElement(
+                      'a',
+                      null,
+                      'Invitations'
+                    )
+                  ),
+                  _react2.default.createElement(
+                    'li',
+                    null,
+                    _react2.default.createElement(
+                      'a',
+                      null,
+                      'Cloud Storage Environment Settings'
+                    )
+                  ),
+                  _react2.default.createElement(
+                    'li',
+                    null,
+                    _react2.default.createElement(
+                      'a',
+                      null,
+                      'Authentication'
+                    )
+                  )
+                ),
+                _react2.default.createElement(
+                  'p',
+                  { className: 'menu-label' },
+                  'Transactions'
+                ),
+                _react2.default.createElement(
+                  'ul',
+                  { className: 'menu-list' },
+                  _react2.default.createElement(
+                    'li',
+                    null,
+                    _react2.default.createElement(
+                      'a',
+                      null,
+                      'Payments'
+                    )
+                  ),
+                  _react2.default.createElement(
+                    'li',
+                    null,
+                    _react2.default.createElement(
+                      'a',
+                      null,
+                      'Transfers'
+                    )
+                  ),
+                  _react2.default.createElement(
+                    'li',
+                    null,
+                    _react2.default.createElement(
+                      'a',
+                      null,
+                      'Balance'
                     )
                   )
                 )
-              ),
-              _react2.default.createElement(
-                'li',
-                null,
-                _react2.default.createElement(
-                  'a',
-                  null,
-                  'Invitations'
-                )
-              ),
-              _react2.default.createElement(
-                'li',
-                null,
-                _react2.default.createElement(
-                  'a',
-                  null,
-                  'Cloud Storage Environment Settings'
-                )
-              ),
-              _react2.default.createElement(
-                'li',
-                null,
-                _react2.default.createElement(
-                  'a',
-                  null,
-                  'Authentication'
-                )
               )
             ),
             _react2.default.createElement(
-              'p',
-              { className: 'menu-label' },
-              'Transactions'
-            ),
-            _react2.default.createElement(
-              'ul',
-              { className: 'menu-list' },
-              _react2.default.createElement(
-                'li',
-                null,
-                _react2.default.createElement(
-                  'a',
-                  null,
-                  'Payments'
-                )
-              ),
-              _react2.default.createElement(
-                'li',
-                null,
-                _react2.default.createElement(
-                  'a',
-                  null,
-                  'Transfers'
-                )
-              ),
-              _react2.default.createElement(
-                'li',
-                null,
-                _react2.default.createElement(
-                  'a',
-                  null,
-                  'Balance'
-                )
-              )
+              'div',
+              { className: 'column is-9' },
+              (0, _reactRouterConfig.renderRoutes)(route.routes)
             )
           )
-        ),
-        _react2.default.createElement(
-          'div',
-          { className: 'column is-9' },
-          (0, _reactRouterConfig.renderRoutes)(route.routes)
         )
-      )
-    )
-  );
-};
+      );
+    }
+  }]);
+
+  return Backend;
+}(_react.Component);
 
 exports.default = {
-  component: Backend
-  // loadData: ({ dispatch }) => dispatch(fetchCurrentUser())
+  component: (0, _reactRedux.connect)(null, { fetchCurrentUser: _actions.fetchCurrentUser })(Backend),
+  loadData: function loadData(_ref) {
+    var dispatch = _ref.dispatch;
+    return dispatch((0, _actions.fetchCurrentUser)());
+  }
 };
 
 /***/ }),
@@ -2080,12 +2135,11 @@ var _reducers2 = _interopRequireDefault(_reducers);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 exports.default = function (req) {
-  var axiosInstance = _axios2.default.create({
-    baseURL: 'http://localhost:3001/',
-    headers: { cookie: req.get('cookie') || '' }
+  var api = _axios2.default.create({
+    baseURL: 'http://localhost:3001/'
   });
 
-  var store = (0, _redux.createStore)(_reducers2.default, {}, (0, _redux.applyMiddleware)(_reduxThunk2.default.withExtraArgument(axiosInstance)));
+  var store = (0, _redux.createStore)(_reducers2.default, {}, (0, _redux.applyMiddleware)(_reduxThunk2.default.withExtraArgument({ api: api, req: req })));
   return store;
 };
 
@@ -2128,12 +2182,17 @@ var _postReducer = __webpack_require__(38);
 
 var _postReducer2 = _interopRequireDefault(_postReducer);
 
+var _userReducer = __webpack_require__(39);
+
+var _userReducer2 = _interopRequireDefault(_userReducer);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 exports.default = (0, _redux.combineReducers)({
   auth: _authReducer2.default,
   posts: _postsReducer2.default,
   post: _postReducer2.default,
+  user: _userReducer2.default,
   form: _reduxForm.reducer
 });
 
@@ -2150,15 +2209,13 @@ Object.defineProperty(exports, "__esModule", {
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
-var _types = __webpack_require__(6);
+var _types = __webpack_require__(5);
 
 exports.default = function () {
   var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : false;
   var action = arguments[1];
 
   switch (action.type) {
-    case _types.FETCH_CURRENT_USER:
-      return action.payload.data || false;
     case _types.AUTH_ERROR:
       return _extends({}, state, { error: action.payload });
     case _types.AUTH_USER:
@@ -2181,7 +2238,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _types = __webpack_require__(6);
+var _types = __webpack_require__(5);
 
 exports.default = function () {
   var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
@@ -2206,7 +2263,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _types = __webpack_require__(6);
+var _types = __webpack_require__(5);
 
 exports.default = function () {
   var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
@@ -2215,6 +2272,31 @@ exports.default = function () {
   switch (action.type) {
     case _types.FETCH_POST:
       return action.payload.data;
+    default:
+      return state;
+  }
+};
+
+/***/ }),
+/* 39 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _types = __webpack_require__(5);
+
+exports.default = function () {
+  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+  var action = arguments[1];
+
+  switch (action.type) {
+    case _types.FETCH_CURRENT_USER:
+      return action.payload.data || false;
     default:
       return state;
   }

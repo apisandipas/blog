@@ -13,7 +13,7 @@ import axios from 'axios'
 import Routes from './Routes'
 import reducers from './reducers'
 
-const axiosInstance = axios.create({
+const api = axios.create({
   baseURL: 'http://localhost:3001'
 })
 
@@ -21,7 +21,7 @@ const store = createStore(
   reducers,
   window.INITIAL_STATE,
   composeWithDevTools(
-    applyMiddleware(thunk.withExtraArgument(axiosInstance))
+    applyMiddleware(thunk.withExtraArgument({ api, req: false }))
   )
 )
 

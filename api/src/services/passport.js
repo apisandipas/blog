@@ -44,11 +44,6 @@ passport.use(new JwtStrategy(jwtOptions, async (payload, done) => {
       return done(null, false)
     }
 
-    const authenticated = await user.authenticate(password)
-    if (!authenticated) {
-      return done(null, false)
-    }
-
     return done(null, user)
   } catch(err) {
     done(err)

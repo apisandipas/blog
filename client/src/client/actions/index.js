@@ -1,16 +1,23 @@
 import { FETCH_POSTS, FETCH_POST, FETCH_CURRENT_USER, AUTH_USER, UNAUTH_USER, AUTH_ERROR } from './types'
 import isomorphicCookie from 'isomorphic-cookie'
 
-export const fetchCurrentUser = () => async (dispatch, getState, api) => {
-  const res = await api.get('/api/current-user')
+export const fetchCurrentUser = () => async (dispatch, getState, { api, req }) => {
+  try {
+    const cookie = isomorphicCookie.load('token', req)
+    const res = await api.get('/api/current-user', {
+      headers: { authorization: cookie }
+    })
 
-  dispatch({
-    type: FETCH_CURRENT_USER,
-    payload: res
-  })
+    dispatch({
+      type: FETCH_CURRENT_USER,
+      payload: res
+    })
+  } catch(err) {
+    console.log('error', err)
+  }
 }
 
-export const fetchPosts = () => async (dispatch, getState, api) => {
+export const fetchPosts = () => async (dispatch, getState, { api, req }) => {
   const res = await api.get('/api/posts')
   dispatch({
     type: FETCH_POSTS,
@@ -18,7 +25,7 @@ export const fetchPosts = () => async (dispatch, getState, api) => {
   })
 }
 
-export const fetchPost = (slug) => async (dispatch, getState, api) => {
+export const fetchPost = (slug) => async (dispatch, getState, { api, req }) => {
   try {
     const res = await api.get(`/api/posts/${slug}`)
     dispatch({
@@ -30,7 +37,7 @@ export const fetchPost = (slug) => async (dispatch, getState, api) => {
   }
 }
 
-export const loginUser = (values) => async (dispatch, getState, api) => {
+export const loginUser = (values) => async (dispatch, getState, { api, req }) => {
   try {
     const res = await api.post('/api/login', values)
     dispatch({
@@ -51,7 +58,7 @@ export const logOut = () => async (dispatch) => {
   })
 }
 
-export const registerUser = (values) => async (dispatch, getState, api) => {
+export const registerUser = (values) => async (dispatch, getState, { api, req }) => {
   try {
     const res = await api.post('/api/register', values)
     dispatch({
