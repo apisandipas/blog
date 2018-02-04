@@ -10,7 +10,6 @@ const Post = db.Model.extend({
     this.on('creating', this.slugifyTitle, this);
   },
   slugifyTitle (model, attrs, options) {
-    console.log('model.attributes.title:', model.attributes.title)
     model.set('slug', slugify(model.attributes.title))
   },
   user () {

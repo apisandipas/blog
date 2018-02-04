@@ -34,11 +34,12 @@ class UsersController {
     if (errors.length) res.invalid(errors)
 
     try {
-      const { name, email, password } = req.body
-      const user = await User.forge({
+      const { name, email, password, role } = req.body
+      let user = await User.forge({
         name,
         email, 
-        password
+        password,
+        role
       }).save()
       res.send(user.toJSON())
     } catch(err) {

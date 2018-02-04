@@ -1,6 +1,6 @@
 import express  from 'express'
 import passport from 'passport'
-// import requireLogin from './middleware/require-login'
+import requireRole from './middleware/require-role'
 import postsController from './controllers/PostsController'
 import usersController from './controllers/UsersController'
 import authController from './controllers/authController'
@@ -21,7 +21,11 @@ router.get('/current-user',
   authController.currentUser
 )
 
-router.get('/users', requireToken, usersController.index)
+router.get('/users', 
+  requireToken, 
+  requireRole('ADMIN'),
+  usersController.index
+)
 router.get('/users/:id', usersController.show)
 router.post('/users', usersController.add)
 router.put('/users/:id', usersController.update)
