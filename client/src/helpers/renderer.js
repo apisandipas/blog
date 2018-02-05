@@ -23,6 +23,7 @@ export default (req, store, context) => {
       <head>
         ${helmet.title.toString()}
         ${helmet.meta.toString()}
+        <script defer src="https://use.fontawesome.com/releases/v5.0.0/js/all.js"></script>
         <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.6.2/css/bulma.css">  
       </head>
       <body>

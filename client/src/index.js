@@ -5,7 +5,7 @@ import createStore from './helpers/createStore'
 import { matchRoutes } from 'react-router-config'
 import isomorphicCookie from 'isomorphic-cookie'
 import Routes from './client/Routes'
-
+import { authUser } from './client/actions/authActions'
 
 const app = express()
 
@@ -16,7 +16,7 @@ app.get('*', (req, res) => {
 
   const cookie = isomorphicCookie.load('token', req)
   if (cookie) {
-    store.dispatch({ type: 'auth_user', payload: { token: cookie }})
+    store.dispatch(authUser(cookie))
   }
 
   const promises = matchRoutes(Routes, req.path).map(({ route }) => {

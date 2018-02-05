@@ -2,7 +2,7 @@ import React from 'react'
 import Helmet from 'react-helmet'
 import { renderRoutes } from 'react-router-config'
 import Header from './components/Header'
-import { fetchCurrentUser} from './actions';
+import { fetchCurrentUser } from './actions/authActions';
 
 const App = ({ route }) => {
   return (

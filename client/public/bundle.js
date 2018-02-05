@@ -2058,280 +2058,7 @@ emptyFunction.thatReturnsArgument = function (arg) {
 module.exports = emptyFunction;
 
 /***/ }),
-/* 43 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.authError = exports.registerUser = exports.logOut = exports.loginUser = exports.fetchPost = exports.fetchPosts = exports.fetchCurrentUser = undefined;
-
-var _types = __webpack_require__(74);
-
-var _isomorphicCookie = __webpack_require__(575);
-
-var _isomorphicCookie2 = _interopRequireDefault(_isomorphicCookie);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, arguments); return new Promise(function (resolve, reject) { function step(key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { return Promise.resolve(value).then(function (value) { step("next", value); }, function (err) { step("throw", err); }); } } return step("next"); }); }; }
-
-var fetchCurrentUser = exports.fetchCurrentUser = function fetchCurrentUser() {
-  return function () {
-    var _ref2 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee(dispatch, getState, _ref) {
-      var api = _ref.api,
-          req = _ref.req;
-      var cookie, res;
-      return regeneratorRuntime.wrap(function _callee$(_context) {
-        while (1) {
-          switch (_context.prev = _context.next) {
-            case 0:
-              _context.prev = 0;
-              cookie = _isomorphicCookie2.default.load('token', req);
-              _context.next = 4;
-              return api.get('/api/current-user', {
-                headers: { authorization: cookie }
-              });
-
-            case 4:
-              res = _context.sent;
-
-
-              dispatch({
-                type: _types.FETCH_CURRENT_USER,
-                payload: res
-              });
-              _context.next = 11;
-              break;
-
-            case 8:
-              _context.prev = 8;
-              _context.t0 = _context['catch'](0);
-
-              console.log('error', _context.t0);
-
-            case 11:
-            case 'end':
-              return _context.stop();
-          }
-        }
-      }, _callee, undefined, [[0, 8]]);
-    }));
-
-    return function (_x, _x2, _x3) {
-      return _ref2.apply(this, arguments);
-    };
-  }();
-};
-
-var fetchPosts = exports.fetchPosts = function fetchPosts() {
-  return function () {
-    var _ref4 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee2(dispatch, getState, _ref3) {
-      var api = _ref3.api,
-          req = _ref3.req;
-      var res;
-      return regeneratorRuntime.wrap(function _callee2$(_context2) {
-        while (1) {
-          switch (_context2.prev = _context2.next) {
-            case 0:
-              _context2.next = 2;
-              return api.get('/api/posts');
-
-            case 2:
-              res = _context2.sent;
-
-              dispatch({
-                type: _types.FETCH_POSTS,
-                payload: res
-              });
-
-            case 4:
-            case 'end':
-              return _context2.stop();
-          }
-        }
-      }, _callee2, undefined);
-    }));
-
-    return function (_x4, _x5, _x6) {
-      return _ref4.apply(this, arguments);
-    };
-  }();
-};
-
-var fetchPost = exports.fetchPost = function fetchPost(slug) {
-  return function () {
-    var _ref6 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee3(dispatch, getState, _ref5) {
-      var api = _ref5.api,
-          req = _ref5.req;
-      var res;
-      return regeneratorRuntime.wrap(function _callee3$(_context3) {
-        while (1) {
-          switch (_context3.prev = _context3.next) {
-            case 0:
-              _context3.prev = 0;
-              _context3.next = 3;
-              return api.get('/api/posts/' + slug);
-
-            case 3:
-              res = _context3.sent;
-
-              dispatch({
-                type: _types.FETCH_POST,
-                payload: res
-              });
-              _context3.next = 10;
-              break;
-
-            case 7:
-              _context3.prev = 7;
-              _context3.t0 = _context3['catch'](0);
-
-              console.log(_context3.t0);
-
-            case 10:
-            case 'end':
-              return _context3.stop();
-          }
-        }
-      }, _callee3, undefined, [[0, 7]]);
-    }));
-
-    return function (_x7, _x8, _x9) {
-      return _ref6.apply(this, arguments);
-    };
-  }();
-};
-
-var loginUser = exports.loginUser = function loginUser(values) {
-  return function () {
-    var _ref8 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee4(dispatch, getState, _ref7) {
-      var api = _ref7.api,
-          req = _ref7.req;
-      var res;
-      return regeneratorRuntime.wrap(function _callee4$(_context4) {
-        while (1) {
-          switch (_context4.prev = _context4.next) {
-            case 0:
-              _context4.prev = 0;
-              _context4.next = 3;
-              return api.post('/api/login', values);
-
-            case 3:
-              res = _context4.sent;
-
-              dispatch({
-                type: _types.AUTH_USER,
-                payload: res.data
-              });
-              _isomorphicCookie2.default.save('token', res.data.token, { secure: false });
-              _context4.next = 12;
-              break;
-
-            case 8:
-              _context4.prev = 8;
-              _context4.t0 = _context4['catch'](0);
-
-              console.log(_context4.t0);
-              dispatch(authError('Bad Login Info'));
-
-            case 12:
-            case 'end':
-              return _context4.stop();
-          }
-        }
-      }, _callee4, undefined, [[0, 8]]);
-    }));
-
-    return function (_x10, _x11, _x12) {
-      return _ref8.apply(this, arguments);
-    };
-  }();
-};
-
-var logOut = exports.logOut = function logOut() {
-  return function () {
-    var _ref9 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee5(dispatch) {
-      return regeneratorRuntime.wrap(function _callee5$(_context5) {
-        while (1) {
-          switch (_context5.prev = _context5.next) {
-            case 0:
-              _isomorphicCookie2.default.remove('token', null, { secure: false });
-              dispatch({
-                type: _types.UNAUTH_USER
-              });
-
-            case 2:
-            case 'end':
-              return _context5.stop();
-          }
-        }
-      }, _callee5, undefined);
-    }));
-
-    return function (_x13) {
-      return _ref9.apply(this, arguments);
-    };
-  }();
-};
-
-var registerUser = exports.registerUser = function registerUser(values) {
-  return function () {
-    var _ref11 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee6(dispatch, getState, _ref10) {
-      var api = _ref10.api,
-          req = _ref10.req;
-      var res;
-      return regeneratorRuntime.wrap(function _callee6$(_context6) {
-        while (1) {
-          switch (_context6.prev = _context6.next) {
-            case 0:
-              _context6.prev = 0;
-              _context6.next = 3;
-              return api.post('/api/register', values);
-
-            case 3:
-              res = _context6.sent;
-
-              dispatch({
-                type: _types.AUTH_USER,
-                payload: res.data
-              });
-              _isomorphicCookie2.default.save('token', res.data.token, { secure: false });
-              _context6.next = 12;
-              break;
-
-            case 8:
-              _context6.prev = 8;
-              _context6.t0 = _context6['catch'](0);
-
-              console.log(_context6.t0);
-              dispatch(authError('Bad Login Info'));
-
-            case 12:
-            case 'end':
-              return _context6.stop();
-          }
-        }
-      }, _callee6, undefined, [[0, 8]]);
-    }));
-
-    return function (_x14, _x15, _x16) {
-      return _ref11.apply(this, arguments);
-    };
-  }();
-};
-
-var authError = exports.authError = function authError(error) {
-  return {
-    type: _types.AUTH_ERROR,
-    payload: error
-  };
-};
-
-/***/ }),
+/* 43 */,
 /* 44 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -3472,10 +3199,10 @@ module.exports = function(originalModule) {
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-var FETCH_CURRENT_USER = exports.FETCH_CURRENT_USER = 'fetch_current_user';
 var FETCH_POSTS = exports.FETCH_POSTS = 'fetch_posts';
 var FETCH_POST = exports.FETCH_POST = 'fetch_post';
 
+var FETCH_CURRENT_USER = exports.FETCH_CURRENT_USER = 'fetch_current_user';
 var AUTH_USER = exports.AUTH_USER = 'auth_user';
 var UNAUTH_USER = exports.UNAUTH_USER = 'unauth_user';
 var AUTH_ERROR = exports.AUTH_ERROR = 'auth_error';
@@ -43321,7 +43048,7 @@ var _Header = __webpack_require__(574);
 
 var _Header2 = _interopRequireDefault(_Header);
 
-var _actions = __webpack_require__(43);
+var _authActions = __webpack_require__(827);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -44277,7 +44004,7 @@ var _reactRouterDom = __webpack_require__(35);
 
 var _reactRedux = __webpack_require__(16);
 
-var _actions = __webpack_require__(43);
+var _authActions = __webpack_require__(827);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -44384,7 +44111,7 @@ function mapStateToProps(_ref) {
   };
 }
 
-exports.default = (0, _reactRedux.connect)(mapStateToProps, { logOut: _actions.logOut })(Header);
+exports.default = (0, _reactRedux.connect)(mapStateToProps, { logOut: _authActions.logOut })(Header);
 
 /***/ }),
 /* 575 */
@@ -46520,7 +46247,7 @@ var _dateformat = __webpack_require__(249);
 
 var _dateformat2 = _interopRequireDefault(_dateformat);
 
-var _index = __webpack_require__(43);
+var _postActions = __webpack_require__(826);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -46689,10 +46416,10 @@ function mapStateToProps(state) {
 }
 
 exports.default = {
-  component: (0, _reactRedux.connect)(mapStateToProps, { fetchPosts: _index.fetchPosts })(HomePage),
+  component: (0, _reactRedux.connect)(mapStateToProps, { fetchPosts: _postActions.fetchPosts })(HomePage),
   loadData: function loadData(_ref) {
     var dispatch = _ref.dispatch;
-    return dispatch((0, _index.fetchPosts)());
+    return dispatch((0, _postActions.fetchPosts)());
   }
 
 };
@@ -47396,7 +47123,7 @@ var _dateformat = __webpack_require__(249);
 
 var _dateformat2 = _interopRequireDefault(_dateformat);
 
-var _index = __webpack_require__(43);
+var _postActions = __webpack_require__(826);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -47493,13 +47220,13 @@ function mapStateToProps(state) {
 }
 
 exports.default = {
-  component: (0, _reactRedux.connect)(mapStateToProps, { fetchPost: _index.fetchPost })(PostPage),
+  component: (0, _reactRedux.connect)(mapStateToProps, { fetchPost: _postActions.fetchPost })(PostPage),
   loadData: function loadData(_ref, _ref2) {
     var dispatch = _ref.dispatch;
     var path = _ref2.path;
 
     var slug = path.split('/')[2];
-    return dispatch((0, _index.fetchPost)(slug));
+    return dispatch((0, _postActions.fetchPost)(slug));
   }
 
 };
@@ -47531,7 +47258,7 @@ var _reduxForm = __webpack_require__(160);
 
 var _reactRedux = __webpack_require__(16);
 
-var _actions = __webpack_require__(43);
+var _authActions = __webpack_require__(827);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -47673,7 +47400,7 @@ var mapStateToProps = function mapStateToProps(state) {
 exports.default = {
   component: (0, _reduxForm.reduxForm)({
     form: 'loginForm'
-  })((0, _reactRedux.connect)(mapStateToProps, { loginUser: _actions.loginUser })(LoginPage))
+  })((0, _reactRedux.connect)(mapStateToProps, { loginUser: _authActions.loginUser })(LoginPage))
 };
 
 /***/ }),
@@ -55878,7 +55605,7 @@ var _reduxForm = __webpack_require__(160);
 
 var _reactRedux = __webpack_require__(16);
 
-var _actions = __webpack_require__(43);
+var _authActions = __webpack_require__(827);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -56034,7 +55761,7 @@ var mapStateToProps = function mapStateToProps(state) {
 exports.default = {
   component: (0, _reduxForm.reduxForm)({
     form: 'registrationForm'
-  })((0, _reactRedux.connect)(mapStateToProps, { registerUser: _actions.registerUser })(RegisterPage))
+  })((0, _reactRedux.connect)(mapStateToProps, { registerUser: _authActions.registerUser })(RegisterPage))
 };
 
 /***/ }),
@@ -56095,7 +55822,7 @@ var _reactRouterDom = __webpack_require__(35);
 
 var _reactRouterConfig = __webpack_require__(149);
 
-var _actions = __webpack_require__(43);
+var _authActions = __webpack_require__(827);
 
 var _Header = __webpack_require__(818);
 
@@ -56138,175 +55865,7 @@ var Backend = function (_Component) {
           _react2.default.createElement('link', { rel: 'stylesheet', type: 'text/css', href: '/admin.css' })
         ),
         _react2.default.createElement(_Header2.default, null),
-        _react2.default.createElement(
-          'div',
-          { className: 'container' },
-          _react2.default.createElement(
-            'div',
-            { className: 'columns' },
-            _react2.default.createElement(
-              'div',
-              { className: 'column is-3' },
-              _react2.default.createElement(
-                'aside',
-                { className: 'menu' },
-                _react2.default.createElement(
-                  'p',
-                  { className: 'menu-label' },
-                  'General'
-                ),
-                _react2.default.createElement(
-                  'ul',
-                  { className: 'menu-list' },
-                  _react2.default.createElement(
-                    'li',
-                    null,
-                    _react2.default.createElement(
-                      'a',
-                      { className: 'is-active' },
-                      'Dashboard'
-                    )
-                  ),
-                  _react2.default.createElement(
-                    'li',
-                    null,
-                    _react2.default.createElement(
-                      'a',
-                      null,
-                      'Customers'
-                    )
-                  )
-                ),
-                _react2.default.createElement(
-                  'p',
-                  { className: 'menu-label' },
-                  'Administration'
-                ),
-                _react2.default.createElement(
-                  'ul',
-                  { className: 'menu-list' },
-                  _react2.default.createElement(
-                    'li',
-                    null,
-                    _react2.default.createElement(
-                      'a',
-                      null,
-                      'Team Settings'
-                    )
-                  ),
-                  _react2.default.createElement(
-                    'li',
-                    null,
-                    _react2.default.createElement(
-                      'a',
-                      null,
-                      'Manage Your Team'
-                    ),
-                    _react2.default.createElement(
-                      'ul',
-                      null,
-                      _react2.default.createElement(
-                        'li',
-                        null,
-                        _react2.default.createElement(
-                          'a',
-                          null,
-                          'Members'
-                        )
-                      ),
-                      _react2.default.createElement(
-                        'li',
-                        null,
-                        _react2.default.createElement(
-                          'a',
-                          null,
-                          'Plugins'
-                        )
-                      ),
-                      _react2.default.createElement(
-                        'li',
-                        null,
-                        _react2.default.createElement(
-                          'a',
-                          null,
-                          'Add a member'
-                        )
-                      )
-                    )
-                  ),
-                  _react2.default.createElement(
-                    'li',
-                    null,
-                    _react2.default.createElement(
-                      'a',
-                      null,
-                      'Invitations'
-                    )
-                  ),
-                  _react2.default.createElement(
-                    'li',
-                    null,
-                    _react2.default.createElement(
-                      'a',
-                      null,
-                      'Cloud Storage Environment Settings'
-                    )
-                  ),
-                  _react2.default.createElement(
-                    'li',
-                    null,
-                    _react2.default.createElement(
-                      'a',
-                      null,
-                      'Authentication'
-                    )
-                  )
-                ),
-                _react2.default.createElement(
-                  'p',
-                  { className: 'menu-label' },
-                  'Transactions'
-                ),
-                _react2.default.createElement(
-                  'ul',
-                  { className: 'menu-list' },
-                  _react2.default.createElement(
-                    'li',
-                    null,
-                    _react2.default.createElement(
-                      'a',
-                      null,
-                      'Payments'
-                    )
-                  ),
-                  _react2.default.createElement(
-                    'li',
-                    null,
-                    _react2.default.createElement(
-                      'a',
-                      null,
-                      'Transfers'
-                    )
-                  ),
-                  _react2.default.createElement(
-                    'li',
-                    null,
-                    _react2.default.createElement(
-                      'a',
-                      null,
-                      'Balance'
-                    )
-                  )
-                )
-              )
-            ),
-            _react2.default.createElement(
-              'div',
-              { className: 'column is-9' },
-              (0, _reactRouterConfig.renderRoutes)(route.routes)
-            )
-          )
-        )
+        (0, _reactRouterConfig.renderRoutes)(route.routes)
       );
     }
   }]);
@@ -56315,10 +55874,10 @@ var Backend = function (_Component) {
 }(_react.Component);
 
 exports.default = {
-  component: (0, _reactRedux.connect)(null, { fetchCurrentUser: _actions.fetchCurrentUser })(Backend),
+  component: (0, _reactRedux.connect)(null, { fetchCurrentUser: _authActions.fetchCurrentUser })(Backend),
   loadData: function loadData(_ref) {
     var dispatch = _ref.dispatch;
-    return dispatch((0, _actions.fetchCurrentUser)());
+    return dispatch((0, _authActions.fetchCurrentUser)());
   }
 };
 
@@ -56343,7 +55902,7 @@ var _reactRedux = __webpack_require__(16);
 
 var _reactRouterDom = __webpack_require__(35);
 
-var _actions = __webpack_require__(43);
+var _authActions = __webpack_require__(827);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -56446,7 +56005,7 @@ var Header = function (_Component) {
   return Header;
 }(_react.Component);
 
-exports.default = (0, _reactRedux.connect)(null, { logOut: _actions.logOut })(Header);
+exports.default = (0, _reactRedux.connect)(null, { logOut: _authActions.logOut })(Header);
 
 /***/ }),
 /* 819 */
@@ -56510,9 +56069,146 @@ var Dashboard = function (_Component) {
           _react2.default.createElement('meta', { property: 'og:title', content: 'Admin' })
         ),
         _react2.default.createElement(
-          'h1',
-          null,
-          'Dashboard'
+          'div',
+          { className: 'container' },
+          _react2.default.createElement(
+            'div',
+            { className: 'columns' },
+            _react2.default.createElement(
+              'div',
+              { className: 'column is-12' },
+              _react2.default.createElement(
+                'nav',
+                { className: 'breadcrumb', 'aria-label': 'breadcrumbs' },
+                _react2.default.createElement(
+                  'ul',
+                  null,
+                  _react2.default.createElement(
+                    'li',
+                    null,
+                    _react2.default.createElement(
+                      _reactRouterDom.Link,
+                      { to: '/admin' },
+                      'Admin'
+                    )
+                  ),
+                  _react2.default.createElement(
+                    'li',
+                    { className: 'is-active' },
+                    _react2.default.createElement(
+                      _reactRouterDom.Link,
+                      { to: '/admin', 'aria-current': 'page' },
+                      'Dashboard'
+                    )
+                  )
+                )
+              ),
+              _react2.default.createElement(
+                'section',
+                { className: 'hero is-info welcome is-small' },
+                _react2.default.createElement(
+                  'div',
+                  { className: 'hero-body' },
+                  _react2.default.createElement(
+                    'div',
+                    { className: 'container' },
+                    _react2.default.createElement(
+                      'h1',
+                      { className: 'title' },
+                      'Hello, ',
+                      this.props.user.name,
+                      '.'
+                    ),
+                    _react2.default.createElement(
+                      'h2',
+                      { className: 'subtitle' },
+                      'I hope you are having a great day!'
+                    )
+                  )
+                )
+              ),
+              _react2.default.createElement(
+                'section',
+                { className: 'info-tiles' },
+                _react2.default.createElement(
+                  'div',
+                  { className: 'tile is-ancestor has-text-centered' },
+                  _react2.default.createElement(
+                    'div',
+                    { className: 'tile is-parent' },
+                    _react2.default.createElement(
+                      'article',
+                      { className: 'tile is-child box' },
+                      _react2.default.createElement(
+                        'p',
+                        { className: 'title' },
+                        '439k'
+                      ),
+                      _react2.default.createElement(
+                        'p',
+                        { className: 'subtitle' },
+                        'Users'
+                      )
+                    )
+                  ),
+                  _react2.default.createElement(
+                    'div',
+                    { className: 'tile is-parent' },
+                    _react2.default.createElement(
+                      'article',
+                      { className: 'tile is-child box' },
+                      _react2.default.createElement(
+                        'p',
+                        { className: 'title' },
+                        '59k'
+                      ),
+                      _react2.default.createElement(
+                        'p',
+                        { className: 'subtitle' },
+                        'Products'
+                      )
+                    )
+                  ),
+                  _react2.default.createElement(
+                    'div',
+                    { className: 'tile is-parent' },
+                    _react2.default.createElement(
+                      'article',
+                      { className: 'tile is-child box' },
+                      _react2.default.createElement(
+                        'p',
+                        { className: 'title' },
+                        '3.4k'
+                      ),
+                      _react2.default.createElement(
+                        'p',
+                        { className: 'subtitle' },
+                        'Open Orders'
+                      )
+                    )
+                  ),
+                  _react2.default.createElement(
+                    'div',
+                    { className: 'tile is-parent' },
+                    _react2.default.createElement(
+                      'article',
+                      { className: 'tile is-child box' },
+                      _react2.default.createElement(
+                        'p',
+                        { className: 'title' },
+                        '19'
+                      ),
+                      _react2.default.createElement(
+                        'p',
+                        { className: 'subtitle' },
+                        'Exceptions'
+                      )
+                    )
+                  )
+                )
+              )
+            )
+          )
         )
       );
     }
@@ -56521,10 +56217,17 @@ var Dashboard = function (_Component) {
   return Dashboard;
 }(_react.Component);
 
-exports.default = {
-  component: (0, _reactRedux.connect)(null, null)((0, _requireAuth2.default)(Dashboard))
-  // loadData: ({ dispatch }) => dispatch(fetchPosts())
+var mapStateToProps = function mapStateToProps(state) {
+  return {
+    user: state.user
+  };
+};
 
+exports.default = {
+  component: (0, _reactRedux.connect)(mapStateToProps, null)((0, _requireAuth2.default)(Dashboard)),
+  loadData: function loadData(_ref) {
+    var dispatch = _ref.dispatch;
+  }
 };
 
 /***/ }),
@@ -56741,6 +56444,303 @@ exports.default = function () {
     default:
       return state;
   }
+};
+
+/***/ }),
+/* 826 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.fetchPost = exports.fetchPosts = undefined;
+
+var _types = __webpack_require__(74);
+
+function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, arguments); return new Promise(function (resolve, reject) { function step(key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { return Promise.resolve(value).then(function (value) { step("next", value); }, function (err) { step("throw", err); }); } } return step("next"); }); }; }
+
+var fetchPosts = exports.fetchPosts = function fetchPosts() {
+  return function () {
+    var _ref2 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee(dispatch, getState, _ref) {
+      var api = _ref.api,
+          req = _ref.req;
+      var res;
+      return regeneratorRuntime.wrap(function _callee$(_context) {
+        while (1) {
+          switch (_context.prev = _context.next) {
+            case 0:
+              _context.next = 2;
+              return api.get('/api/posts');
+
+            case 2:
+              res = _context.sent;
+
+              dispatch({
+                type: _types.FETCH_POSTS,
+                payload: res
+              });
+
+            case 4:
+            case 'end':
+              return _context.stop();
+          }
+        }
+      }, _callee, undefined);
+    }));
+
+    return function (_x, _x2, _x3) {
+      return _ref2.apply(this, arguments);
+    };
+  }();
+};
+
+var fetchPost = exports.fetchPost = function fetchPost(slug) {
+  return function () {
+    var _ref4 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee2(dispatch, getState, _ref3) {
+      var api = _ref3.api,
+          req = _ref3.req;
+      var res;
+      return regeneratorRuntime.wrap(function _callee2$(_context2) {
+        while (1) {
+          switch (_context2.prev = _context2.next) {
+            case 0:
+              _context2.prev = 0;
+              _context2.next = 3;
+              return api.get('/api/posts/' + slug);
+
+            case 3:
+              res = _context2.sent;
+
+              dispatch({
+                type: _types.FETCH_POST,
+                payload: res
+              });
+              _context2.next = 10;
+              break;
+
+            case 7:
+              _context2.prev = 7;
+              _context2.t0 = _context2['catch'](0);
+
+              console.log(_context2.t0);
+
+            case 10:
+            case 'end':
+              return _context2.stop();
+          }
+        }
+      }, _callee2, undefined, [[0, 7]]);
+    }));
+
+    return function (_x4, _x5, _x6) {
+      return _ref4.apply(this, arguments);
+    };
+  }();
+};
+
+/***/ }),
+/* 827 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.authError = exports.authUser = exports.registerUser = exports.logOut = exports.loginUser = exports.fetchCurrentUser = undefined;
+
+var _types = __webpack_require__(74);
+
+var _isomorphicCookie = __webpack_require__(575);
+
+var _isomorphicCookie2 = _interopRequireDefault(_isomorphicCookie);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, arguments); return new Promise(function (resolve, reject) { function step(key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { return Promise.resolve(value).then(function (value) { step("next", value); }, function (err) { step("throw", err); }); } } return step("next"); }); }; }
+
+var fetchCurrentUser = exports.fetchCurrentUser = function fetchCurrentUser() {
+  return function () {
+    var _ref2 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee(dispatch, getState, _ref) {
+      var api = _ref.api,
+          req = _ref.req;
+      var cookie, res;
+      return regeneratorRuntime.wrap(function _callee$(_context) {
+        while (1) {
+          switch (_context.prev = _context.next) {
+            case 0:
+              _context.prev = 0;
+              cookie = _isomorphicCookie2.default.load('token', req);
+              _context.next = 4;
+              return api.get('/api/current-user', {
+                headers: { authorization: cookie }
+              });
+
+            case 4:
+              res = _context.sent;
+
+
+              dispatch({
+                type: _types.FETCH_CURRENT_USER,
+                payload: res
+              });
+              _context.next = 11;
+              break;
+
+            case 8:
+              _context.prev = 8;
+              _context.t0 = _context['catch'](0);
+
+              console.log('error', _context.t0);
+
+            case 11:
+            case 'end':
+              return _context.stop();
+          }
+        }
+      }, _callee, undefined, [[0, 8]]);
+    }));
+
+    return function (_x, _x2, _x3) {
+      return _ref2.apply(this, arguments);
+    };
+  }();
+};
+
+var loginUser = exports.loginUser = function loginUser(values) {
+  return function () {
+    var _ref4 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee2(dispatch, getState, _ref3) {
+      var api = _ref3.api,
+          req = _ref3.req;
+      var res;
+      return regeneratorRuntime.wrap(function _callee2$(_context2) {
+        while (1) {
+          switch (_context2.prev = _context2.next) {
+            case 0:
+              _context2.prev = 0;
+              _context2.next = 3;
+              return api.post('/api/login', values);
+
+            case 3:
+              res = _context2.sent;
+
+              dispatch({
+                type: _types.AUTH_USER,
+                payload: res.data
+              });
+              _isomorphicCookie2.default.save('token', res.data.token, { secure: false });
+              _context2.next = 12;
+              break;
+
+            case 8:
+              _context2.prev = 8;
+              _context2.t0 = _context2['catch'](0);
+
+              console.log(_context2.t0);
+              dispatch(authError('Bad Login Info'));
+
+            case 12:
+            case 'end':
+              return _context2.stop();
+          }
+        }
+      }, _callee2, undefined, [[0, 8]]);
+    }));
+
+    return function (_x4, _x5, _x6) {
+      return _ref4.apply(this, arguments);
+    };
+  }();
+};
+
+var logOut = exports.logOut = function logOut() {
+  return function () {
+    var _ref5 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee3(dispatch) {
+      return regeneratorRuntime.wrap(function _callee3$(_context3) {
+        while (1) {
+          switch (_context3.prev = _context3.next) {
+            case 0:
+              _isomorphicCookie2.default.remove('token', null, { secure: false });
+              dispatch({
+                type: _types.UNAUTH_USER
+              });
+
+            case 2:
+            case 'end':
+              return _context3.stop();
+          }
+        }
+      }, _callee3, undefined);
+    }));
+
+    return function (_x7) {
+      return _ref5.apply(this, arguments);
+    };
+  }();
+};
+
+var registerUser = exports.registerUser = function registerUser(values) {
+  return function () {
+    var _ref7 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee4(dispatch, getState, _ref6) {
+      var api = _ref6.api,
+          req = _ref6.req;
+      var res;
+      return regeneratorRuntime.wrap(function _callee4$(_context4) {
+        while (1) {
+          switch (_context4.prev = _context4.next) {
+            case 0:
+              _context4.prev = 0;
+              _context4.next = 3;
+              return api.post('/api/register', values);
+
+            case 3:
+              res = _context4.sent;
+
+              dispatch({
+                type: _types.AUTH_USER,
+                payload: res.data
+              });
+              _isomorphicCookie2.default.save('token', res.data.token, { secure: false });
+              _context4.next = 12;
+              break;
+
+            case 8:
+              _context4.prev = 8;
+              _context4.t0 = _context4['catch'](0);
+
+              console.log(_context4.t0);
+              dispatch(authError('Bad Login Info'));
+
+            case 12:
+            case 'end':
+              return _context4.stop();
+          }
+        }
+      }, _callee4, undefined, [[0, 8]]);
+    }));
+
+    return function (_x8, _x9, _x10) {
+      return _ref7.apply(this, arguments);
+    };
+  }();
+};
+
+var authUser = exports.authUser = function authUser(token) {
+  return {
+    type: _types.AUTH_USER,
+    payload: token
+  };
+};
+
+var authError = exports.authError = function authError(error) {
+  return {
+    type: _types.AUTH_ERROR,
+    payload: error
+  };
 };
 
 /***/ })

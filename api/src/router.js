@@ -26,16 +26,44 @@ router.get('/users',
   requireRole('ADMIN'),
   usersController.index
 )
-router.get('/users/:id', usersController.show)
-router.post('/users', usersController.add)
-router.put('/users/:id', usersController.update)
-router.delete('/users/:id', usersController.delete)
+router.get('/users/:id', 
+  requireToken, 
+  requireRole('ADMIN'),
+  usersController.show
+)
+router.post('/users', 
+  requireToken, 
+  requireRole('ADMIN'),
+  usersController.add
+)
+router.put('/users/:id',
+  requireToken, 
+  requireRole('ADMIN'), 
+  usersController.update
+)
+router.delete('/users/:id', 
+  requireToken, 
+  requireRole('ADMIN'),
+  usersController.delete
+)
 
 router.get('/posts', postsController.index)
 router.get('/posts/:slug', postsController.show)
-router.post('/posts', postsController.add)
-router.put('/posts/:slug', postsController.update)
-router.delete('/posts/:slug', postsController.delete)
+router.post('/posts', 
+  requireToken, 
+  requireRole('ADMIN'),
+  postsController.add
+)
+router.put('/posts/:slug', 
+  requireToken, 
+  requireRole('ADMIN'),
+  postsController.update
+)
+router.delete('/posts/:slug', 
+  requireToken, 
+  requireRole('ADMIN'),
+  postsController.delete
+)
 
 export default router
 
