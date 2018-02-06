@@ -17,7 +17,10 @@ const { PORT, COOKIE_KEY } = process.env
 const app = express()
 
 // Load middleware
-app.use(morgan('dev'))
+if (process.env.NODE_ENV !== 'test') {
+  app.use(morgan('dev'))
+}
+
 app.use(cors())
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: false }))

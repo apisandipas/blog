@@ -60,7 +60,7 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 14);
+/******/ 	return __webpack_require__(__webpack_require__.s = 15);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -88,7 +88,208 @@ module.exports = require("react-redux");
 module.exports = require("react-helmet");
 
 /***/ }),
-/* 4 */,
+/* 4 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.authError = exports.authUser = exports.registerUser = exports.logOut = exports.loginUser = exports.fetchCurrentUser = undefined;
+
+var _types = __webpack_require__(5);
+
+var _isomorphicCookie = __webpack_require__(9);
+
+var _isomorphicCookie2 = _interopRequireDefault(_isomorphicCookie);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, arguments); return new Promise(function (resolve, reject) { function step(key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { return Promise.resolve(value).then(function (value) { step("next", value); }, function (err) { step("throw", err); }); } } return step("next"); }); }; }
+
+var fetchCurrentUser = exports.fetchCurrentUser = function fetchCurrentUser() {
+  return function () {
+    var _ref2 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee(dispatch, getState, _ref) {
+      var api = _ref.api,
+          req = _ref.req;
+      var cookie, res;
+      return regeneratorRuntime.wrap(function _callee$(_context) {
+        while (1) {
+          switch (_context.prev = _context.next) {
+            case 0:
+              _context.prev = 0;
+              cookie = _isomorphicCookie2.default.load('token', req);
+              _context.next = 4;
+              return api.get('/api/current-user', {
+                headers: { authorization: cookie }
+              });
+
+            case 4:
+              res = _context.sent;
+
+
+              dispatch({
+                type: _types.FETCH_CURRENT_USER,
+                payload: res
+              });
+              _context.next = 11;
+              break;
+
+            case 8:
+              _context.prev = 8;
+              _context.t0 = _context['catch'](0);
+
+              console.log('error', _context.t0);
+
+            case 11:
+            case 'end':
+              return _context.stop();
+          }
+        }
+      }, _callee, undefined, [[0, 8]]);
+    }));
+
+    return function (_x, _x2, _x3) {
+      return _ref2.apply(this, arguments);
+    };
+  }();
+};
+
+var loginUser = exports.loginUser = function loginUser(values) {
+  return function () {
+    var _ref4 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee2(dispatch, getState, _ref3) {
+      var api = _ref3.api,
+          req = _ref3.req;
+      var res;
+      return regeneratorRuntime.wrap(function _callee2$(_context2) {
+        while (1) {
+          switch (_context2.prev = _context2.next) {
+            case 0:
+              _context2.prev = 0;
+              _context2.next = 3;
+              return api.post('/api/login', values);
+
+            case 3:
+              res = _context2.sent;
+
+              dispatch({
+                type: _types.AUTH_USER,
+                payload: res.data
+              });
+              _isomorphicCookie2.default.save('token', res.data.token, { secure: false });
+              _context2.next = 12;
+              break;
+
+            case 8:
+              _context2.prev = 8;
+              _context2.t0 = _context2['catch'](0);
+
+              console.log(_context2.t0);
+              dispatch(authError('Bad Login Info'));
+
+            case 12:
+            case 'end':
+              return _context2.stop();
+          }
+        }
+      }, _callee2, undefined, [[0, 8]]);
+    }));
+
+    return function (_x4, _x5, _x6) {
+      return _ref4.apply(this, arguments);
+    };
+  }();
+};
+
+var logOut = exports.logOut = function logOut() {
+  return function () {
+    var _ref5 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee3(dispatch) {
+      return regeneratorRuntime.wrap(function _callee3$(_context3) {
+        while (1) {
+          switch (_context3.prev = _context3.next) {
+            case 0:
+              _isomorphicCookie2.default.remove('token', null, { secure: false });
+              dispatch({
+                type: _types.UNAUTH_USER
+              });
+
+            case 2:
+            case 'end':
+              return _context3.stop();
+          }
+        }
+      }, _callee3, undefined);
+    }));
+
+    return function (_x7) {
+      return _ref5.apply(this, arguments);
+    };
+  }();
+};
+
+var registerUser = exports.registerUser = function registerUser(values) {
+  return function () {
+    var _ref7 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee4(dispatch, getState, _ref6) {
+      var api = _ref6.api,
+          req = _ref6.req;
+      var res;
+      return regeneratorRuntime.wrap(function _callee4$(_context4) {
+        while (1) {
+          switch (_context4.prev = _context4.next) {
+            case 0:
+              _context4.prev = 0;
+              _context4.next = 3;
+              return api.post('/api/register', values);
+
+            case 3:
+              res = _context4.sent;
+
+              dispatch({
+                type: _types.AUTH_USER,
+                payload: res.data
+              });
+              _isomorphicCookie2.default.save('token', res.data.token, { secure: false });
+              _context4.next = 12;
+              break;
+
+            case 8:
+              _context4.prev = 8;
+              _context4.t0 = _context4['catch'](0);
+
+              console.log(_context4.t0);
+              dispatch(authError('Bad Login Info'));
+
+            case 12:
+            case 'end':
+              return _context4.stop();
+          }
+        }
+      }, _callee4, undefined, [[0, 8]]);
+    }));
+
+    return function (_x8, _x9, _x10) {
+      return _ref7.apply(this, arguments);
+    };
+  }();
+};
+
+var authUser = exports.authUser = function authUser(token) {
+  return {
+    type: _types.AUTH_USER,
+    payload: token
+  };
+};
+
+var authError = exports.authError = function authError(error) {
+  return {
+    type: _types.AUTH_ERROR,
+    payload: error
+  };
+};
+
+/***/ }),
 /* 5 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -135,35 +336,35 @@ var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _App = __webpack_require__(20);
+var _App = __webpack_require__(21);
 
 var _App2 = _interopRequireDefault(_App);
 
-var _HomePage = __webpack_require__(22);
+var _HomePage = __webpack_require__(23);
 
 var _HomePage2 = _interopRequireDefault(_HomePage);
 
-var _PostPage = __webpack_require__(24);
+var _PostPage = __webpack_require__(25);
 
 var _PostPage2 = _interopRequireDefault(_PostPage);
 
-var _LoginPage = __webpack_require__(25);
+var _LoginPage = __webpack_require__(26);
 
 var _LoginPage2 = _interopRequireDefault(_LoginPage);
 
-var _RegisterPage = __webpack_require__(26);
+var _RegisterPage = __webpack_require__(27);
 
 var _RegisterPage2 = _interopRequireDefault(_RegisterPage);
 
-var _NotFoundPage = __webpack_require__(27);
+var _NotFoundPage = __webpack_require__(28);
 
 var _NotFoundPage2 = _interopRequireDefault(_NotFoundPage);
 
-var _Backend = __webpack_require__(28);
+var _Backend = __webpack_require__(29);
 
 var _Backend2 = _interopRequireDefault(_Backend);
 
-var _Dashboard = __webpack_require__(30);
+var _Dashboard = __webpack_require__(31);
 
 var _Dashboard2 = _interopRequireDefault(_Dashboard);
 
@@ -219,28 +420,123 @@ module.exports = require("dateformat");
 
 /***/ }),
 /* 13 */
-/***/ (function(module, exports) {
-
-module.exports = require("redux");
-
-/***/ }),
-/* 14 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-__webpack_require__(15);
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.fetchPost = exports.fetchPosts = undefined;
 
-var _express = __webpack_require__(16);
+var _types = __webpack_require__(5);
+
+function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, arguments); return new Promise(function (resolve, reject) { function step(key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { return Promise.resolve(value).then(function (value) { step("next", value); }, function (err) { step("throw", err); }); } } return step("next"); }); }; }
+
+var fetchPosts = exports.fetchPosts = function fetchPosts() {
+  return function () {
+    var _ref2 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee(dispatch, getState, _ref) {
+      var api = _ref.api,
+          req = _ref.req;
+      var res;
+      return regeneratorRuntime.wrap(function _callee$(_context) {
+        while (1) {
+          switch (_context.prev = _context.next) {
+            case 0:
+              _context.next = 2;
+              return api.get('/api/posts');
+
+            case 2:
+              res = _context.sent;
+
+              dispatch({
+                type: _types.FETCH_POSTS,
+                payload: res
+              });
+
+            case 4:
+            case 'end':
+              return _context.stop();
+          }
+        }
+      }, _callee, undefined);
+    }));
+
+    return function (_x, _x2, _x3) {
+      return _ref2.apply(this, arguments);
+    };
+  }();
+};
+
+var fetchPost = exports.fetchPost = function fetchPost(slug) {
+  return function () {
+    var _ref4 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee2(dispatch, getState, _ref3) {
+      var api = _ref3.api,
+          req = _ref3.req;
+      var res;
+      return regeneratorRuntime.wrap(function _callee2$(_context2) {
+        while (1) {
+          switch (_context2.prev = _context2.next) {
+            case 0:
+              _context2.prev = 0;
+              _context2.next = 3;
+              return api.get('/api/posts/' + slug);
+
+            case 3:
+              res = _context2.sent;
+
+              dispatch({
+                type: _types.FETCH_POST,
+                payload: res
+              });
+              _context2.next = 10;
+              break;
+
+            case 7:
+              _context2.prev = 7;
+              _context2.t0 = _context2['catch'](0);
+
+              console.log(_context2.t0);
+
+            case 10:
+            case 'end':
+              return _context2.stop();
+          }
+        }
+      }, _callee2, undefined, [[0, 7]]);
+    }));
+
+    return function (_x4, _x5, _x6) {
+      return _ref4.apply(this, arguments);
+    };
+  }();
+};
+
+/***/ }),
+/* 14 */
+/***/ (function(module, exports) {
+
+module.exports = require("redux");
+
+/***/ }),
+/* 15 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+__webpack_require__(16);
+
+var _express = __webpack_require__(17);
 
 var _express2 = _interopRequireDefault(_express);
 
-var _renderer = __webpack_require__(17);
+var _renderer = __webpack_require__(18);
 
 var _renderer2 = _interopRequireDefault(_renderer);
 
-var _createStore = __webpack_require__(32);
+var _createStore = __webpack_require__(33);
 
 var _createStore2 = _interopRequireDefault(_createStore);
 
@@ -254,7 +550,7 @@ var _Routes = __webpack_require__(8);
 
 var _Routes2 = _interopRequireDefault(_Routes);
 
-var _authActions = __webpack_require__(41);
+var _authActions = __webpack_require__(4);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -296,19 +592,19 @@ app.listen(3002, function () {
 });
 
 /***/ }),
-/* 15 */
+/* 16 */
 /***/ (function(module, exports) {
 
 module.exports = require("babel-polyfill");
 
 /***/ }),
-/* 16 */
+/* 17 */
 /***/ (function(module, exports) {
 
 module.exports = require("express");
 
 /***/ }),
-/* 17 */
+/* 18 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -322,13 +618,13 @@ var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _server = __webpack_require__(18);
+var _server = __webpack_require__(19);
 
 var _reactRouterDom = __webpack_require__(1);
 
 var _reactRouterConfig = __webpack_require__(6);
 
-var _serializeJavascript = __webpack_require__(19);
+var _serializeJavascript = __webpack_require__(20);
 
 var _serializeJavascript2 = _interopRequireDefault(_serializeJavascript);
 
@@ -363,19 +659,19 @@ exports.default = function (req, store, context) {
 };
 
 /***/ }),
-/* 18 */
+/* 19 */
 /***/ (function(module, exports) {
 
 module.exports = require("react-dom/server");
 
 /***/ }),
-/* 19 */
+/* 20 */
 /***/ (function(module, exports) {
 
 module.exports = require("serialize-javascript");
 
 /***/ }),
-/* 20 */
+/* 21 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -395,11 +691,11 @@ var _reactHelmet2 = _interopRequireDefault(_reactHelmet);
 
 var _reactRouterConfig = __webpack_require__(6);
 
-var _Header = __webpack_require__(21);
+var _Header = __webpack_require__(22);
 
 var _Header2 = _interopRequireDefault(_Header);
 
-var _authActions = __webpack_require__(41);
+var _authActions = __webpack_require__(4);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -425,7 +721,7 @@ exports.default = {
 };
 
 /***/ }),
-/* 21 */
+/* 22 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -445,7 +741,7 @@ var _reactRouterDom = __webpack_require__(1);
 
 var _reactRedux = __webpack_require__(2);
 
-var _authActions = __webpack_require__(41);
+var _authActions = __webpack_require__(4);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -555,7 +851,7 @@ function mapStateToProps(_ref) {
 exports.default = (0, _reactRedux.connect)(mapStateToProps, { logOut: _authActions.logOut })(Header);
 
 /***/ }),
-/* 22 */
+/* 23 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -577,7 +873,7 @@ var _reactRedux = __webpack_require__(2);
 
 var _reactRouterDom = __webpack_require__(1);
 
-var _lodash = __webpack_require__(23);
+var _lodash = __webpack_require__(24);
 
 var _lodash2 = _interopRequireDefault(_lodash);
 
@@ -593,7 +889,7 @@ var _dateformat = __webpack_require__(12);
 
 var _dateformat2 = _interopRequireDefault(_dateformat);
 
-var _postActions = __webpack_require__(40);
+var _postActions = __webpack_require__(13);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -771,13 +1067,13 @@ exports.default = {
 };
 
 /***/ }),
-/* 23 */
+/* 24 */
 /***/ (function(module, exports) {
 
 module.exports = require("lodash.chunk");
 
 /***/ }),
-/* 24 */
+/* 25 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -811,7 +1107,7 @@ var _dateformat = __webpack_require__(12);
 
 var _dateformat2 = _interopRequireDefault(_dateformat);
 
-var _postActions = __webpack_require__(40);
+var _postActions = __webpack_require__(13);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -920,7 +1216,7 @@ exports.default = {
 };
 
 /***/ }),
-/* 25 */
+/* 26 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -946,7 +1242,7 @@ var _reduxForm = __webpack_require__(7);
 
 var _reactRedux = __webpack_require__(2);
 
-var _authActions = __webpack_require__(41);
+var _authActions = __webpack_require__(4);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -1092,7 +1388,7 @@ exports.default = {
 };
 
 /***/ }),
-/* 26 */
+/* 27 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1118,7 +1414,7 @@ var _reduxForm = __webpack_require__(7);
 
 var _reactRedux = __webpack_require__(2);
 
-var _authActions = __webpack_require__(41);
+var _authActions = __webpack_require__(4);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -1278,7 +1574,7 @@ exports.default = {
 };
 
 /***/ }),
-/* 27 */
+/* 28 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1311,7 +1607,7 @@ exports.default = {
 };
 
 /***/ }),
-/* 28 */
+/* 29 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1335,9 +1631,9 @@ var _reactRouterDom = __webpack_require__(1);
 
 var _reactRouterConfig = __webpack_require__(6);
 
-var _authActions = __webpack_require__(41);
+var _authActions = __webpack_require__(4);
 
-var _Header = __webpack_require__(29);
+var _Header = __webpack_require__(30);
 
 var _Header2 = _interopRequireDefault(_Header);
 
@@ -1395,7 +1691,7 @@ exports.default = {
 };
 
 /***/ }),
-/* 29 */
+/* 30 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1415,7 +1711,7 @@ var _reactRedux = __webpack_require__(2);
 
 var _reactRouterDom = __webpack_require__(1);
 
-var _authActions = __webpack_require__(41);
+var _authActions = __webpack_require__(4);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -1521,7 +1817,7 @@ var Header = function (_Component) {
 exports.default = (0, _reactRedux.connect)(null, { logOut: _authActions.logOut })(Header);
 
 /***/ }),
-/* 30 */
+/* 31 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1543,7 +1839,7 @@ var _reactRedux = __webpack_require__(2);
 
 var _reactRouterDom = __webpack_require__(1);
 
-var _requireAuth = __webpack_require__(31);
+var _requireAuth = __webpack_require__(32);
 
 var _requireAuth2 = _interopRequireDefault(_requireAuth);
 
@@ -1744,7 +2040,7 @@ exports.default = {
 };
 
 /***/ }),
-/* 31 */
+/* 32 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1813,7 +2109,7 @@ exports.default = function (ChildComponent) {
 };
 
 /***/ }),
-/* 32 */
+/* 33 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1823,17 +2119,17 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _redux = __webpack_require__(13);
+var _redux = __webpack_require__(14);
 
-var _reduxThunk = __webpack_require__(33);
+var _reduxThunk = __webpack_require__(34);
 
 var _reduxThunk2 = _interopRequireDefault(_reduxThunk);
 
-var _axios = __webpack_require__(34);
+var _axios = __webpack_require__(35);
 
 var _axios2 = _interopRequireDefault(_axios);
 
-var _reducers = __webpack_require__(35);
+var _reducers = __webpack_require__(36);
 
 var _reducers2 = _interopRequireDefault(_reducers);
 
@@ -1849,19 +2145,19 @@ exports.default = function (req) {
 };
 
 /***/ }),
-/* 33 */
+/* 34 */
 /***/ (function(module, exports) {
 
 module.exports = require("redux-thunk");
 
 /***/ }),
-/* 34 */
+/* 35 */
 /***/ (function(module, exports) {
 
 module.exports = require("axios");
 
 /***/ }),
-/* 35 */
+/* 36 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1871,23 +2167,23 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _redux = __webpack_require__(13);
+var _redux = __webpack_require__(14);
 
 var _reduxForm = __webpack_require__(7);
 
-var _authReducer = __webpack_require__(36);
+var _authReducer = __webpack_require__(37);
 
 var _authReducer2 = _interopRequireDefault(_authReducer);
 
-var _postsReducer = __webpack_require__(37);
+var _postsReducer = __webpack_require__(38);
 
 var _postsReducer2 = _interopRequireDefault(_postsReducer);
 
-var _postReducer = __webpack_require__(38);
+var _postReducer = __webpack_require__(39);
 
 var _postReducer2 = _interopRequireDefault(_postReducer);
 
-var _userReducer = __webpack_require__(39);
+var _userReducer = __webpack_require__(40);
 
 var _userReducer2 = _interopRequireDefault(_userReducer);
 
@@ -1902,7 +2198,7 @@ exports.default = (0, _redux.combineReducers)({
 });
 
 /***/ }),
-/* 36 */
+/* 37 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1933,7 +2229,7 @@ exports.default = function () {
 };
 
 /***/ }),
-/* 37 */
+/* 38 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1958,7 +2254,7 @@ exports.default = function () {
 };
 
 /***/ }),
-/* 38 */
+/* 39 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1983,7 +2279,7 @@ exports.default = function () {
 };
 
 /***/ }),
-/* 39 */
+/* 40 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2005,303 +2301,6 @@ exports.default = function () {
     default:
       return state;
   }
-};
-
-/***/ }),
-/* 40 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.fetchPost = exports.fetchPosts = undefined;
-
-var _types = __webpack_require__(5);
-
-function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, arguments); return new Promise(function (resolve, reject) { function step(key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { return Promise.resolve(value).then(function (value) { step("next", value); }, function (err) { step("throw", err); }); } } return step("next"); }); }; }
-
-var fetchPosts = exports.fetchPosts = function fetchPosts() {
-  return function () {
-    var _ref2 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee(dispatch, getState, _ref) {
-      var api = _ref.api,
-          req = _ref.req;
-      var res;
-      return regeneratorRuntime.wrap(function _callee$(_context) {
-        while (1) {
-          switch (_context.prev = _context.next) {
-            case 0:
-              _context.next = 2;
-              return api.get('/api/posts');
-
-            case 2:
-              res = _context.sent;
-
-              dispatch({
-                type: _types.FETCH_POSTS,
-                payload: res
-              });
-
-            case 4:
-            case 'end':
-              return _context.stop();
-          }
-        }
-      }, _callee, undefined);
-    }));
-
-    return function (_x, _x2, _x3) {
-      return _ref2.apply(this, arguments);
-    };
-  }();
-};
-
-var fetchPost = exports.fetchPost = function fetchPost(slug) {
-  return function () {
-    var _ref4 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee2(dispatch, getState, _ref3) {
-      var api = _ref3.api,
-          req = _ref3.req;
-      var res;
-      return regeneratorRuntime.wrap(function _callee2$(_context2) {
-        while (1) {
-          switch (_context2.prev = _context2.next) {
-            case 0:
-              _context2.prev = 0;
-              _context2.next = 3;
-              return api.get('/api/posts/' + slug);
-
-            case 3:
-              res = _context2.sent;
-
-              dispatch({
-                type: _types.FETCH_POST,
-                payload: res
-              });
-              _context2.next = 10;
-              break;
-
-            case 7:
-              _context2.prev = 7;
-              _context2.t0 = _context2['catch'](0);
-
-              console.log(_context2.t0);
-
-            case 10:
-            case 'end':
-              return _context2.stop();
-          }
-        }
-      }, _callee2, undefined, [[0, 7]]);
-    }));
-
-    return function (_x4, _x5, _x6) {
-      return _ref4.apply(this, arguments);
-    };
-  }();
-};
-
-/***/ }),
-/* 41 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.authError = exports.authUser = exports.registerUser = exports.logOut = exports.loginUser = exports.fetchCurrentUser = undefined;
-
-var _types = __webpack_require__(5);
-
-var _isomorphicCookie = __webpack_require__(9);
-
-var _isomorphicCookie2 = _interopRequireDefault(_isomorphicCookie);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, arguments); return new Promise(function (resolve, reject) { function step(key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { return Promise.resolve(value).then(function (value) { step("next", value); }, function (err) { step("throw", err); }); } } return step("next"); }); }; }
-
-var fetchCurrentUser = exports.fetchCurrentUser = function fetchCurrentUser() {
-  return function () {
-    var _ref2 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee(dispatch, getState, _ref) {
-      var api = _ref.api,
-          req = _ref.req;
-      var cookie, res;
-      return regeneratorRuntime.wrap(function _callee$(_context) {
-        while (1) {
-          switch (_context.prev = _context.next) {
-            case 0:
-              _context.prev = 0;
-              cookie = _isomorphicCookie2.default.load('token', req);
-              _context.next = 4;
-              return api.get('/api/current-user', {
-                headers: { authorization: cookie }
-              });
-
-            case 4:
-              res = _context.sent;
-
-
-              dispatch({
-                type: _types.FETCH_CURRENT_USER,
-                payload: res
-              });
-              _context.next = 11;
-              break;
-
-            case 8:
-              _context.prev = 8;
-              _context.t0 = _context['catch'](0);
-
-              console.log('error', _context.t0);
-
-            case 11:
-            case 'end':
-              return _context.stop();
-          }
-        }
-      }, _callee, undefined, [[0, 8]]);
-    }));
-
-    return function (_x, _x2, _x3) {
-      return _ref2.apply(this, arguments);
-    };
-  }();
-};
-
-var loginUser = exports.loginUser = function loginUser(values) {
-  return function () {
-    var _ref4 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee2(dispatch, getState, _ref3) {
-      var api = _ref3.api,
-          req = _ref3.req;
-      var res;
-      return regeneratorRuntime.wrap(function _callee2$(_context2) {
-        while (1) {
-          switch (_context2.prev = _context2.next) {
-            case 0:
-              _context2.prev = 0;
-              _context2.next = 3;
-              return api.post('/api/login', values);
-
-            case 3:
-              res = _context2.sent;
-
-              dispatch({
-                type: _types.AUTH_USER,
-                payload: res.data
-              });
-              _isomorphicCookie2.default.save('token', res.data.token, { secure: false });
-              _context2.next = 12;
-              break;
-
-            case 8:
-              _context2.prev = 8;
-              _context2.t0 = _context2['catch'](0);
-
-              console.log(_context2.t0);
-              dispatch(authError('Bad Login Info'));
-
-            case 12:
-            case 'end':
-              return _context2.stop();
-          }
-        }
-      }, _callee2, undefined, [[0, 8]]);
-    }));
-
-    return function (_x4, _x5, _x6) {
-      return _ref4.apply(this, arguments);
-    };
-  }();
-};
-
-var logOut = exports.logOut = function logOut() {
-  return function () {
-    var _ref5 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee3(dispatch) {
-      return regeneratorRuntime.wrap(function _callee3$(_context3) {
-        while (1) {
-          switch (_context3.prev = _context3.next) {
-            case 0:
-              _isomorphicCookie2.default.remove('token', null, { secure: false });
-              dispatch({
-                type: _types.UNAUTH_USER
-              });
-
-            case 2:
-            case 'end':
-              return _context3.stop();
-          }
-        }
-      }, _callee3, undefined);
-    }));
-
-    return function (_x7) {
-      return _ref5.apply(this, arguments);
-    };
-  }();
-};
-
-var registerUser = exports.registerUser = function registerUser(values) {
-  return function () {
-    var _ref7 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee4(dispatch, getState, _ref6) {
-      var api = _ref6.api,
-          req = _ref6.req;
-      var res;
-      return regeneratorRuntime.wrap(function _callee4$(_context4) {
-        while (1) {
-          switch (_context4.prev = _context4.next) {
-            case 0:
-              _context4.prev = 0;
-              _context4.next = 3;
-              return api.post('/api/register', values);
-
-            case 3:
-              res = _context4.sent;
-
-              dispatch({
-                type: _types.AUTH_USER,
-                payload: res.data
-              });
-              _isomorphicCookie2.default.save('token', res.data.token, { secure: false });
-              _context4.next = 12;
-              break;
-
-            case 8:
-              _context4.prev = 8;
-              _context4.t0 = _context4['catch'](0);
-
-              console.log(_context4.t0);
-              dispatch(authError('Bad Login Info'));
-
-            case 12:
-            case 'end':
-              return _context4.stop();
-          }
-        }
-      }, _callee4, undefined, [[0, 8]]);
-    }));
-
-    return function (_x8, _x9, _x10) {
-      return _ref7.apply(this, arguments);
-    };
-  }();
-};
-
-var authUser = exports.authUser = function authUser(token) {
-  return {
-    type: _types.AUTH_USER,
-    payload: token
-  };
-};
-
-var authError = exports.authError = function authError(error) {
-  return {
-    type: _types.AUTH_ERROR,
-    payload: error
-  };
 };
 
 /***/ })

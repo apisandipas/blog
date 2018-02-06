@@ -20,8 +20,30 @@ module.exports = {
       host: DB_HOST || '127.0.0.1',
       port: DB_PORT || '33060',
       database: DB_NAME || 'redux_blog',
-      user:     DB_USER ||'homestead',
+      user:     DB_USER || 'homestead',
       password: DB_PASSWORD || 'secret'
+    },
+    pool: {
+      min: 2,
+      max: 10
+    },
+    migrations: {
+      directory: './db/migrations',
+      tableName: 'knex_migrations'
+    },
+    seeds: {
+      directory: './db/seeds',
+    }
+  },
+
+  test: {
+    client: 'mysql',
+    connection: {
+      host: '127.0.0.1',
+      port: '33060',
+      database: 'redux_blog_test',
+      user:     'homestead',
+      password: 'secret'
     },
     pool: {
       min: 2,
