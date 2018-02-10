@@ -42,7 +42,6 @@ describe('Posts Controller', () => {
             request(app)
             .get(`/api/posts/${post.id}`)
             .end((err, res) => {
-              // console.log('res', res)
               expect(post.attributes.id).to.equal(res.body.id)
               done()
             })
