@@ -121,34 +121,46 @@ var fetchCurrentUser = exports.fetchCurrentUser = function fetchCurrentUser() {
             case 0:
               _context.prev = 0;
               cookie = _isomorphicCookie2.default.load('token', req);
-              _context.next = 4;
+
+              if (!cookie) {
+                _context.next = 9;
+                break;
+              }
+
+              _context.next = 5;
               return api.get('/api/current-user', {
                 headers: { authorization: cookie }
               });
 
-            case 4:
+            case 5:
               res = _context.sent;
-
 
               dispatch({
                 type: _types.FETCH_CURRENT_USER,
                 payload: res
               });
-              _context.next = 11;
+              _context.next = 10;
               break;
 
-            case 8:
-              _context.prev = 8;
+            case 9:
+              console.log('Cookie not found', cookie);
+
+            case 10:
+              _context.next = 15;
+              break;
+
+            case 12:
+              _context.prev = 12;
               _context.t0 = _context['catch'](0);
 
               console.log('error', _context.t0);
 
-            case 11:
+            case 15:
             case 'end':
               return _context.stop();
           }
         }
-      }, _callee, undefined, [[0, 8]]);
+      }, _callee, undefined, [[0, 12]]);
     }));
 
     return function (_x, _x2, _x3) {
@@ -210,7 +222,7 @@ var logOut = exports.logOut = function logOut() {
         while (1) {
           switch (_context3.prev = _context3.next) {
             case 0:
-              _isomorphicCookie2.default.remove('token', null, { secure: false });
+              _isomorphicCookie2.default.remove('token', { secure: false });
               dispatch({
                 type: _types.UNAUTH_USER
               });
@@ -770,9 +782,9 @@ var Header = function (_Component) {
     value: function render() {
       var _this2 = this;
 
-      var auth = this.props.auth;
+      var isAuthenticated = this.props.isAuthenticated;
 
-      var authButton = auth && auth.token ? [_react2.default.createElement(
+      var authButton = isAuthenticated ? [_react2.default.createElement(
         _reactRouterDom.Link,
         { className: 'navbar-item', to: '/admin', key: 'admin' },
         'Admin'
@@ -844,7 +856,7 @@ function mapStateToProps(_ref) {
   var auth = _ref.auth;
 
   return {
-    auth: auth
+    isAuthenticated: !!auth.token
   };
 }
 
@@ -1843,6 +1855,8 @@ var _requireAuth = __webpack_require__(32);
 
 var _requireAuth2 = _interopRequireDefault(_requireAuth);
 
+var _authActions = __webpack_require__(4);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -1861,6 +1875,11 @@ var Dashboard = function (_Component) {
   }
 
   _createClass(Dashboard, [{
+    key: 'componentDidMount',
+    value: function componentDidMount() {
+      this.props.fetchCurrentUser();
+    }
+  }, {
     key: 'render',
     value: function render() {
 
@@ -2033,9 +2052,11 @@ var mapStateToProps = function mapStateToProps(state) {
 };
 
 exports.default = {
-  component: (0, _reactRedux.connect)(mapStateToProps, null)((0, _requireAuth2.default)(Dashboard)),
+  component: (0, _reactRedux.connect)(mapStateToProps, { fetchCurrentUser: _authActions.fetchCurrentUser })((0, _requireAuth2.default)(Dashboard)),
   loadData: function loadData(_ref) {
     var dispatch = _ref.dispatch;
+
+    return dispatch((0, _authActions.fetchCurrentUser)());
   }
 };
 
@@ -2213,7 +2234,7 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 var _types = __webpack_require__(5);
 
 exports.default = function () {
-  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : false;
+  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
   var action = arguments[1];
 
   switch (action.type) {
@@ -2222,7 +2243,7 @@ exports.default = function () {
     case _types.AUTH_USER:
       return _extends({}, state, { token: action.payload.token });
     case _types.UNAUTH_USER:
-      return false;
+      return {};
     default:
       return state;
   }

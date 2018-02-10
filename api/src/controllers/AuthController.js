@@ -4,7 +4,12 @@ import jwt from 'jwt-simple'
 const tokenForUser = (user) => {
   const timestamp = new Date().getTime()
   const secret = process.env.JWT_SECRET
-  return jwt.encode({ sub: user.id, iat: timestamp }, secret)
+  return jwt.encode({ 
+    sub: user.id,
+    name: user.name,
+    email: user.email, 
+    iat: timestamp 
+  }, secret)
 }
 
 class AuthController {

@@ -3,8 +3,13 @@ import { Helmet } from 'react-helmet'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 import requireAuth from '../../components/hocs/requireAuth'
+import { fetchCurrentUser } from '../../actions/authActions'
 
 class Dashboard extends Component {
+
+  componentDidMount (){
+    this.props.fetchCurrentUser()
+  }
 
   render() {
 
@@ -79,10 +84,10 @@ const mapStateToProps = (state) => {
 }
 
 export default {
-  component: connect(mapStateToProps, null)(
+  component: connect(mapStateToProps, { fetchCurrentUser })(
     requireAuth(Dashboard)
   ),
   loadData({ dispatch }) {
-
+    return dispatch(fetchCurrentUser())
   }
 };

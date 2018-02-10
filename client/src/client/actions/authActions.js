@@ -4,14 +4,18 @@ import isomorphicCookie from 'isomorphic-cookie'
 export const fetchCurrentUser = () => async (dispatch, getState, { api, req }) => {
   try {
     const cookie = isomorphicCookie.load('token', req)
-    const res = await api.get('/api/current-user', {
-      headers: { authorization: cookie }
-    })
-
-    dispatch({
-      type: FETCH_CURRENT_USER,
-      payload: res
-    })
+    if (cookie) {
+      const res = await api.get('/api/current-user', {
+        headers: { authorization: cookie }
+      })
+      dispatch({
+        type: FETCH_CURRENT_USER,
+        payload: res
+      })
+    } else {
+      console.log('Cookie not found', cookie)
+    }
+    
   } catch(err) {
     console.log('error', err)
   }
@@ -32,7 +36,7 @@ export const loginUser = (values) => async (dispatch, getState, { api, req }) =>
 }
 
 export const logOut = () => async (dispatch) => {
-  isomorphicCookie.remove('token', null, {secure: false})   
+  isomorphicCookie.remove('token', {secure: false})   
   dispatch({
     type: UNAUTH_USER
   })

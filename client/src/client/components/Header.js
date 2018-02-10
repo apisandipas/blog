@@ -10,8 +10,8 @@ class Header extends Component {
   }
 
   render () {
-    const { auth } = this.props
-    const authButton = auth && auth.token ? ([
+    const { isAuthenticated } = this.props
+    const authButton = isAuthenticated ? ([
           <Link className="navbar-item" to="/admin" key='admin'>  
             Admin
           </Link>,
@@ -62,7 +62,7 @@ class Header extends Component {
 
 function mapStateToProps({ auth }) {
   return {
-    auth
+    isAuthenticated: !!auth.token
   }
 }
 
