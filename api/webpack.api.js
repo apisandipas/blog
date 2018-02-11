@@ -6,6 +6,9 @@ module.exports = {
   // nodeJS, rather than for the browser
   target: 'node',
 
+  // Generate source map for sane debugging
+  devtool: 'source-map',
+
   // Tell webpack the root file of our
   // server application
   entry: './src/index.js',

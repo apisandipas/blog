@@ -1643,8 +1643,6 @@ var _reactRouterDom = __webpack_require__(1);
 
 var _reactRouterConfig = __webpack_require__(6);
 
-var _authActions = __webpack_require__(4);
-
 var _Header = __webpack_require__(30);
 
 var _Header2 = _interopRequireDefault(_Header);
@@ -1669,7 +1667,7 @@ var Backend = function (_Component) {
   _createClass(Backend, [{
     key: 'componentDidMount',
     value: function componentDidMount() {
-      this.props.fetchCurrentUser();
+      console.log(this.props.history);
     }
   }, {
     key: 'render',
@@ -1695,11 +1693,8 @@ var Backend = function (_Component) {
 }(_react.Component);
 
 exports.default = {
-  component: (0, _reactRedux.connect)(null, { fetchCurrentUser: _authActions.fetchCurrentUser })(Backend),
-  loadData: function loadData(_ref) {
-    var dispatch = _ref.dispatch;
-    return dispatch((0, _authActions.fetchCurrentUser)());
-  }
+  component: (0, _reactRedux.connect)(null, null)(Backend)
+  // loadData: ({ dispatch }) => dispatch(fetchCurrentUser())
 };
 
 /***/ }),
@@ -1854,8 +1849,6 @@ var _reactRouterDom = __webpack_require__(1);
 var _requireAuth = __webpack_require__(32);
 
 var _requireAuth2 = _interopRequireDefault(_requireAuth);
-
-var _authActions = __webpack_require__(4);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -2052,11 +2045,9 @@ var mapStateToProps = function mapStateToProps(state) {
 };
 
 exports.default = {
-  component: (0, _reactRedux.connect)(mapStateToProps, { fetchCurrentUser: _authActions.fetchCurrentUser })((0, _requireAuth2.default)(Dashboard)),
+  component: (0, _reactRedux.connect)(mapStateToProps, null)((0, _requireAuth2.default)(Dashboard)),
   loadData: function loadData(_ref) {
     var dispatch = _ref.dispatch;
-
-    return dispatch((0, _authActions.fetchCurrentUser)());
   }
 };
 
@@ -2326,3 +2317,4 @@ exports.default = function () {
 
 /***/ })
 /******/ ]);
+//# sourceMappingURL=bundle.js.map

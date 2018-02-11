@@ -1,4 +1,7 @@
 module.exports = {
+  // generate source maps for developer sanity
+  devtool: 'source-map',
+
   // Tell webpack to run babel on every file it runs through
   module: {
     rules: [

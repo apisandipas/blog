@@ -3,13 +3,12 @@ import { connect } from 'react-redux'
 import { Helmet } from 'react-helmet'
 import { Link } from 'react-router-dom'
 import { renderRoutes } from 'react-router-config'
-import { fetchCurrentUser } from '../../actions/authActions'
 import Header from './Header'
 
 class Backend extends Component {
 
   componentDidMount(){
-    this.props.fetchCurrentUser()
+    console.log(this.props.history)
   }
 
   render () {
@@ -30,6 +29,6 @@ class Backend extends Component {
 
 
 export default {
-  component: connect(null, { fetchCurrentUser })(Backend),
-  loadData: ({ dispatch }) => dispatch(fetchCurrentUser())
+  component: connect(null, null)(Backend),
+  // loadData: ({ dispatch }) => dispatch(fetchCurrentUser())
 }
