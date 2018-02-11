@@ -109,26 +109,6 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, arguments); return new Promise(function (resolve, reject) { function step(key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { return Promise.resolve(value).then(function (value) { step("next", value); }, function (err) { step("throw", err); }); } } return step("next"); }); }; }
 
-// export const fetchCurrentUser = () => async (dispatch, getState, { api, req }) => {
-//   try {
-//     const cookie = isomorphicCookie.load('token', req)
-//     if (cookie) {
-//       const res = await api.get('/api/current-user', {
-//         headers: { authorization: cookie }
-//       })
-//       dispatch({
-//         type: FETCH_CURRENT_USER,
-//         payload: res
-//       })
-//     } else {
-//       console.log('Cookie not found', cookie)
-//     }
-
-//   } catch(err) {
-//     console.log('error', err)
-//   }
-// }
-
 var loginUser = exports.loginUser = function loginUser(values) {
   return function () {
     var _ref2 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee(dispatch, getState, _ref) {
@@ -146,28 +126,27 @@ var loginUser = exports.loginUser = function loginUser(values) {
             case 3:
               res = _context.sent;
 
-              console.log('res.data', res.data);
               dispatch({
                 type: _types.AUTH_USER,
                 payload: res.data
               });
               _isomorphicCookie2.default.save('token', res.data.token, { secure: false });
-              _context.next = 13;
+              _context.next = 12;
               break;
 
-            case 9:
-              _context.prev = 9;
+            case 8:
+              _context.prev = 8;
               _context.t0 = _context['catch'](0);
 
               console.log(_context.t0);
               dispatch(authError('Bad Login Info'));
 
-            case 13:
+            case 12:
             case 'end':
               return _context.stop();
           }
         }
-      }, _callee, undefined, [[0, 9]]);
+      }, _callee, undefined, [[0, 8]]);
     }));
 
     return function (_x, _x2, _x3) {
@@ -232,7 +211,7 @@ var registerUser = exports.registerUser = function registerUser(values) {
               _context3.t0 = _context3['catch'](0);
 
               console.log(_context3.t0);
-              dispatch(authError('Bad Login Info'));
+              dispatch(authError('Bad registration info'));
 
             case 12:
             case 'end':
@@ -1256,7 +1235,12 @@ var LoginPage = function (_Component) {
             type: field.type,
             className: 'input is-large',
             placeholder: field.placeholder
-          }))
+          })),
+          field.meta.touched && field.meta.error ? _react2.default.createElement(
+            'div',
+            { className: 'tag is-danger', style: { width: '100%' } },
+            field.meta.error
+          ) : ''
         )
       );
     }
@@ -1265,7 +1249,8 @@ var LoginPage = function (_Component) {
     value: function render() {
       var _props = this.props,
           handleSubmit = _props.handleSubmit,
-          auth = _props.auth;
+          auth = _props.auth,
+          error = _props.error;
 
 
       if (auth) {
@@ -1307,9 +1292,14 @@ var LoginPage = function (_Component) {
                   { className: 'subtitle has-text-grey' },
                   'Please login to proceed.'
                 ),
+                error && _react2.default.createElement(
+                  'div',
+                  { className: 'notification is-danger' },
+                  error
+                ),
                 _react2.default.createElement(
                   'div',
-                  { className: 'box' },
+                  { className: 'box', style: { marginTop: '1rem' } },
                   _react2.default.createElement(
                     'form',
                     { onSubmit: handleSubmit(this.handleSubmit) },
@@ -1350,13 +1340,25 @@ var LoginPage = function (_Component) {
 
 var mapStateToProps = function mapStateToProps(state) {
   return {
-    auth: state.auth && state.auth.token
+    auth: state.auth && state.auth.token,
+    error: state.auth && state.auth.error
   };
+};
+
+var validate = function validate(values) {
+  var errors = {};
+
+  if (!values.email) errors.email = "Please enter your email";
+
+  if (!values.password) errors.password = "Please enter your password";
+
+  return errors;
 };
 
 exports.default = {
   component: (0, _reduxForm.reduxForm)({
-    form: 'loginForm'
+    form: 'loginForm',
+    validate: validate
   })((0, _reactRedux.connect)(mapStateToProps, { loginUser: _authActions.loginUser })(LoginPage))
 };
 
@@ -1429,7 +1431,12 @@ var RegisterPage = function (_Component) {
             type: field.type,
             className: 'input is-large',
             placeholder: field.placeholder
-          }))
+          })),
+          field.meta.touched && field.meta.error ? _react2.default.createElement(
+            'div',
+            { className: 'tag is-danger', style: { width: '100%' } },
+            field.meta.error
+          ) : ''
         )
       );
     }
@@ -1438,7 +1445,8 @@ var RegisterPage = function (_Component) {
     value: function render() {
       var _props = this.props,
           handleSubmit = _props.handleSubmit,
-          auth = _props.auth;
+          auth = _props.auth,
+          error = _props.error;
 
 
       if (auth) {
@@ -1479,6 +1487,11 @@ var RegisterPage = function (_Component) {
                   'p',
                   { className: 'subtitle has-text-grey' },
                   'Please register for an account.'
+                ),
+                error && _react2.default.createElement(
+                  'div',
+                  { className: 'notification is-danger' },
+                  error
                 ),
                 _react2.default.createElement(
                   'div',
@@ -1536,13 +1549,37 @@ var RegisterPage = function (_Component) {
 
 var mapStateToProps = function mapStateToProps(state) {
   return {
-    auth: state.auth && state.auth.token
+    auth: state.auth && state.auth.token,
+    error: state.auth && state.auth.error
   };
 };
 
+var validate = function validate(values) {
+  var errors = {};
+  // Validate name
+  if (!values.name) errors.name = "Please enter your name!";
+
+  // Validate Email
+  if (!values.email) errors.email = "Please enter your email!";
+  if (!validEmail(values.email)) errors.email = "Please enter a valid email!";
+
+  if (!values.password) errors.password = "Please enter a password!";
+  if (!values.passwordConfirm) errors.passwordConfirm = "Please enter a password confirmation!";
+
+  if (values.password !== values.passwordConfirm) errors.passwordConfirm = "Passwords do not match!";
+
+  return errors;
+};
+
+function validEmail(email) {
+  var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+  return re.test(String(email).toLowerCase());
+}
+
 exports.default = {
   component: (0, _reduxForm.reduxForm)({
-    form: 'registrationForm'
+    form: 'registrationForm',
+    validate: validate
   })((0, _reactRedux.connect)(mapStateToProps, { registerUser: _authActions.registerUser })(RegisterPage))
 };
 

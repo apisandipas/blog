@@ -28,13 +28,17 @@ class RegisterPage extends Component {
             className="input is-large" 
             placeholder={field.placeholder} 
           />
+          {field.meta.touched && field.meta.error
+            ? (<div className="tag is-danger" style={{width: '100%'}}>{field.meta.error}</div>)
+            : ''
+          }
         </div>
       </div>
     ) 
   }
 
   render() {
-    const { handleSubmit, auth } = this.props
+    const { handleSubmit, auth, error } = this.props
     
     if (auth) {
       return <Redirect to='/admin' />
@@ -53,6 +57,9 @@ class RegisterPage extends Component {
                 <div className="column is-4 is-offset-4">
                   <h3 className="title has-text-grey">Register</h3>
                   <p className="subtitle has-text-grey">Please register for an account.</p>
+                 
+                  {error && (<div className="notification is-danger">{error}</div>)}
+
                   <div className="box">
                     <form onSubmit={handleSubmit(this.handleSubmit)}>
                       <Field 
@@ -103,13 +110,37 @@ class RegisterPage extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    auth: state.auth && state.auth.token
+    auth: state.auth && state.auth.token,
+    error: state.auth && state.auth.error
   }
+}
+
+const validate = (values) => {
+  const errors = {}
+  // Validate name
+  if (!values.name) errors.name = "Please enter your name!"
+
+  // Validate Email
+  if (!values.email) errors.email = "Please enter your email!"
+  if (!validEmail(values.email)) errors.email = "Please enter a valid email!"
+
+  if (!values.password) errors.password = "Please enter a password!"  
+  if (!values.passwordConfirm) errors.passwordConfirm = "Please enter a password confirmation!"  
+
+  if (values.password !== values.passwordConfirm) errors.passwordConfirm = "Passwords do not match!"
+
+  return errors
+}
+
+function validEmail(email) {
+    var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    return re.test(String(email).toLowerCase());
 }
 
 export default {
   component: reduxForm({
-    form: 'registrationForm'
+    form: 'registrationForm',
+    validate
   })(
     connect(mapStateToProps, { registerUser })(RegisterPage)
   )

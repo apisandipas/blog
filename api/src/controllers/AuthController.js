@@ -25,14 +25,6 @@ class AuthController {
     req.logout();
   }
 
-  currentUser (req, res) {
-    if (req.isAuthenticated()) {
-      res.send(req.user)
-    } else {
-      res.serverError(new Error('Something went wrong'))
-    }
-  }
-
   async register (req, res, next) {
     req.checkBody('name', 'Name is required.').notEmpty()
     req.checkBody('email', 'Email is required.').notEmpty()
@@ -61,7 +53,7 @@ class AuthController {
         req.login(user, function(err) {
           if (err) { return next(err); }
           res.json({
-            token: tokenForUser(user)
+            token: tokenForUser(user.toJSON())
           })
         });
       }

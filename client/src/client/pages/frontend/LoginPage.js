@@ -27,6 +27,10 @@ class LoginPage extends Component {
             className="input is-large" 
             placeholder={field.placeholder} 
           />
+          {field.meta.touched && field.meta.error
+            ? (<div className="tag is-danger" style={{width: '100%'}}>{field.meta.error}</div>)
+            : ''
+          }
         </div>
       </div>
     )
@@ -35,7 +39,7 @@ class LoginPage extends Component {
   
   render () {
 
-    const { handleSubmit, auth } = this.props
+    const { handleSubmit, auth, error } = this.props
 
     if (auth) {
       return <Redirect to='/admin' />
@@ -54,7 +58,10 @@ class LoginPage extends Component {
                 <div className="column is-4 is-offset-4">
                   <h3 className="title has-text-grey">Login</h3>
                   <p className="subtitle has-text-grey">Please login to proceed.</p>
-                  <div className="box">
+                  
+                  {error && (<div className="notification is-danger">{error}</div>)}
+                  
+                  <div className="box" style={{marginTop: '1rem'}}>
                     <form onSubmit={handleSubmit(this.handleSubmit)}>
                       <Field 
                         name="email" 
@@ -90,13 +97,25 @@ class LoginPage extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    auth: state.auth && state.auth.token
+    auth: state.auth && state.auth.token,
+    error: state.auth && state.auth.error
   }
+}
+
+const validate = (values) => {
+  const errors = {}
+
+  if (!values.email) errors.email = "Please enter your email"
+
+  if (!values.password) errors.password = "Please enter your password"  
+    
+  return errors
 }
 
 export default {
   component: reduxForm({
-    form: 'loginForm'
+    form: 'loginForm',
+    validate
   })(
     connect(mapStateToProps, { loginUser })(LoginPage)
   )
