@@ -3,12 +3,11 @@ import { Helmet } from 'react-helmet'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 import requireAuth from '../../components/hocs/requireAuth'
-import { fetchCurrentUser } from '../../actions/authActions'
 
 class Dashboard extends Component {
 
   componentDidMount (){
-    this.props.fetchCurrentUser()
+    // this.props.fetchCurrentUser()
   }
 
   render() {
@@ -32,7 +31,7 @@ class Dashboard extends Component {
                 <div className="hero-body">
                   <div className="container">
                     <h1 className="title">
-                      Hello, {this.props.user.name}.
+                      Hello, {this.props.name}.
                     </h1>
                     <h2 className="subtitle">
                       I hope you are having a great day!
@@ -79,15 +78,15 @@ class Dashboard extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    user: state.user
+    name: state.auth.name
   }
 }
 
 export default {
-  component: connect(mapStateToProps, { fetchCurrentUser })(
+  component: connect(mapStateToProps, null)(
     requireAuth(Dashboard)
   ),
   loadData({ dispatch }) {
-    return dispatch(fetchCurrentUser())
+ 
   }
 };
