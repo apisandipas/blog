@@ -16,7 +16,6 @@ const tokenForUser = (user) => {
 
 class AuthController {
   login (req, res) {
-    console.log(req.user.toJSON())
     res.json({
       token: tokenForUser(req.user.toJSON())
     })

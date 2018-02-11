@@ -97,7 +97,7 @@ module.exports = require("react-helmet");
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.authError = exports.authUser = exports.registerUser = exports.logOut = exports.loginUser = exports.fetchCurrentUser = undefined;
+exports.authError = exports.authUser = exports.registerUser = exports.logOut = exports.loginUser = undefined;
 
 var _types = __webpack_require__(5);
 
@@ -109,58 +109,65 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, arguments); return new Promise(function (resolve, reject) { function step(key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { return Promise.resolve(value).then(function (value) { step("next", value); }, function (err) { step("throw", err); }); } } return step("next"); }); }; }
 
-var fetchCurrentUser = exports.fetchCurrentUser = function fetchCurrentUser() {
+// export const fetchCurrentUser = () => async (dispatch, getState, { api, req }) => {
+//   try {
+//     const cookie = isomorphicCookie.load('token', req)
+//     if (cookie) {
+//       const res = await api.get('/api/current-user', {
+//         headers: { authorization: cookie }
+//       })
+//       dispatch({
+//         type: FETCH_CURRENT_USER,
+//         payload: res
+//       })
+//     } else {
+//       console.log('Cookie not found', cookie)
+//     }
+
+//   } catch(err) {
+//     console.log('error', err)
+//   }
+// }
+
+var loginUser = exports.loginUser = function loginUser(values) {
   return function () {
     var _ref2 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee(dispatch, getState, _ref) {
       var api = _ref.api,
           req = _ref.req;
-      var cookie, res;
+      var res;
       return regeneratorRuntime.wrap(function _callee$(_context) {
         while (1) {
           switch (_context.prev = _context.next) {
             case 0:
               _context.prev = 0;
-              cookie = _isomorphicCookie2.default.load('token', req);
+              _context.next = 3;
+              return api.post('/api/login', values);
 
-              if (!cookie) {
-                _context.next = 9;
-                break;
-              }
-
-              _context.next = 5;
-              return api.get('/api/current-user', {
-                headers: { authorization: cookie }
-              });
-
-            case 5:
+            case 3:
               res = _context.sent;
 
+              console.log('res.data', res.data);
               dispatch({
-                type: _types.FETCH_CURRENT_USER,
-                payload: res
+                type: _types.AUTH_USER,
+                payload: res.data
               });
-              _context.next = 10;
+              _isomorphicCookie2.default.save('token', res.data.token, { secure: false });
+              _context.next = 13;
               break;
 
             case 9:
-              console.log('Cookie not found', cookie);
-
-            case 10:
-              _context.next = 15;
-              break;
-
-            case 12:
-              _context.prev = 12;
+              _context.prev = 9;
               _context.t0 = _context['catch'](0);
 
-              console.log('error', _context.t0);
+              console.log(_context.t0);
+              dispatch(authError('Bad Login Info'));
 
-            case 15:
+            case 13:
             case 'end':
               return _context.stop();
           }
         }
-      }, _callee, undefined, [[0, 12]]);
+      }, _callee, undefined, [[0, 9]]);
     }));
 
     return function (_x, _x2, _x3) {
@@ -169,58 +176,12 @@ var fetchCurrentUser = exports.fetchCurrentUser = function fetchCurrentUser() {
   }();
 };
 
-var loginUser = exports.loginUser = function loginUser(values) {
+var logOut = exports.logOut = function logOut() {
   return function () {
-    var _ref4 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee2(dispatch, getState, _ref3) {
-      var api = _ref3.api,
-          req = _ref3.req;
-      var res;
+    var _ref3 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee2(dispatch) {
       return regeneratorRuntime.wrap(function _callee2$(_context2) {
         while (1) {
           switch (_context2.prev = _context2.next) {
-            case 0:
-              _context2.prev = 0;
-              _context2.next = 3;
-              return api.post('/api/login', values);
-
-            case 3:
-              res = _context2.sent;
-
-              dispatch({
-                type: _types.AUTH_USER,
-                payload: res.data
-              });
-              _isomorphicCookie2.default.save('token', res.data.token, { secure: false });
-              _context2.next = 12;
-              break;
-
-            case 8:
-              _context2.prev = 8;
-              _context2.t0 = _context2['catch'](0);
-
-              console.log(_context2.t0);
-              dispatch(authError('Bad Login Info'));
-
-            case 12:
-            case 'end':
-              return _context2.stop();
-          }
-        }
-      }, _callee2, undefined, [[0, 8]]);
-    }));
-
-    return function (_x4, _x5, _x6) {
-      return _ref4.apply(this, arguments);
-    };
-  }();
-};
-
-var logOut = exports.logOut = function logOut() {
-  return function () {
-    var _ref5 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee3(dispatch) {
-      return regeneratorRuntime.wrap(function _callee3$(_context3) {
-        while (1) {
-          switch (_context3.prev = _context3.next) {
             case 0:
               _isomorphicCookie2.default.remove('token', { secure: false });
               dispatch({
@@ -229,60 +190,60 @@ var logOut = exports.logOut = function logOut() {
 
             case 2:
             case 'end':
-              return _context3.stop();
+              return _context2.stop();
           }
         }
-      }, _callee3, undefined);
+      }, _callee2, undefined);
     }));
 
-    return function (_x7) {
-      return _ref5.apply(this, arguments);
+    return function (_x4) {
+      return _ref3.apply(this, arguments);
     };
   }();
 };
 
 var registerUser = exports.registerUser = function registerUser(values) {
   return function () {
-    var _ref7 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee4(dispatch, getState, _ref6) {
-      var api = _ref6.api,
-          req = _ref6.req;
+    var _ref5 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee3(dispatch, getState, _ref4) {
+      var api = _ref4.api,
+          req = _ref4.req;
       var res;
-      return regeneratorRuntime.wrap(function _callee4$(_context4) {
+      return regeneratorRuntime.wrap(function _callee3$(_context3) {
         while (1) {
-          switch (_context4.prev = _context4.next) {
+          switch (_context3.prev = _context3.next) {
             case 0:
-              _context4.prev = 0;
-              _context4.next = 3;
+              _context3.prev = 0;
+              _context3.next = 3;
               return api.post('/api/register', values);
 
             case 3:
-              res = _context4.sent;
+              res = _context3.sent;
 
               dispatch({
                 type: _types.AUTH_USER,
                 payload: res.data
               });
               _isomorphicCookie2.default.save('token', res.data.token, { secure: false });
-              _context4.next = 12;
+              _context3.next = 12;
               break;
 
             case 8:
-              _context4.prev = 8;
-              _context4.t0 = _context4['catch'](0);
+              _context3.prev = 8;
+              _context3.t0 = _context3['catch'](0);
 
-              console.log(_context4.t0);
+              console.log(_context3.t0);
               dispatch(authError('Bad Login Info'));
 
             case 12:
             case 'end':
-              return _context4.stop();
+              return _context3.stop();
           }
         }
-      }, _callee4, undefined, [[0, 8]]);
+      }, _callee3, undefined, [[0, 8]]);
     }));
 
-    return function (_x8, _x9, _x10) {
-      return _ref7.apply(this, arguments);
+    return function (_x5, _x6, _x7) {
+      return _ref5.apply(this, arguments);
     };
   }();
 };
@@ -573,9 +534,9 @@ app.use(_express2.default.static('public'));
 app.get('*', function (req, res) {
   var store = (0, _createStore2.default)(req);
 
-  var cookie = _isomorphicCookie2.default.load('token', req);
-  if (cookie) {
-    store.dispatch((0, _authActions.authUser)(cookie));
+  var token = _isomorphicCookie2.default.load('token', req);
+  if (token) {
+    store.dispatch((0, _authActions.authUser)({ token: token }));
   }
 
   var promises = (0, _reactRouterConfig.matchRoutes)(_Routes2.default, req.path).map(function (_ref) {
@@ -1666,13 +1627,13 @@ var Backend = function (_Component) {
 
   _createClass(Backend, [{
     key: 'componentDidMount',
-    value: function componentDidMount() {
-      console.log(this.props.history);
-    }
+    value: function componentDidMount() {}
   }, {
     key: 'render',
     value: function render() {
-      var route = this.props.route;
+      var _props = this.props,
+          route = _props.route,
+          history = _props.history;
 
       return _react2.default.createElement(
         'div',
@@ -1683,7 +1644,7 @@ var Backend = function (_Component) {
           _react2.default.createElement('link', { href: 'https://fonts.googleapis.com/css?family=Open+Sans:300,400,700', rel: 'stylesheet' }),
           _react2.default.createElement('link', { rel: 'stylesheet', type: 'text/css', href: '/admin.css' })
         ),
-        _react2.default.createElement(_Header2.default, null),
+        _react2.default.createElement(_Header2.default, { history: history }),
         (0, _reactRouterConfig.renderRoutes)(route.routes)
       );
     }
@@ -1741,6 +1702,7 @@ var Header = function (_Component) {
     key: 'logOut',
     value: function logOut() {
       this.props.logOut();
+      this.props.history.push('/');
     }
   }, {
     key: 'render',
@@ -1870,7 +1832,7 @@ var Dashboard = function (_Component) {
   _createClass(Dashboard, [{
     key: 'componentDidMount',
     value: function componentDidMount() {
-      this.props.fetchCurrentUser();
+      // this.props.fetchCurrentUser()
     }
   }, {
     key: 'render',
@@ -1937,7 +1899,7 @@ var Dashboard = function (_Component) {
                       'h1',
                       { className: 'title' },
                       'Hello, ',
-                      this.props.user.name,
+                      this.props.name,
                       '.'
                     ),
                     _react2.default.createElement(
@@ -2040,7 +2002,7 @@ var Dashboard = function (_Component) {
 
 var mapStateToProps = function mapStateToProps(state) {
   return {
-    user: state.user
+    name: state.auth.name
   };
 };
 
@@ -2187,17 +2149,13 @@ var _authReducer = __webpack_require__(37);
 
 var _authReducer2 = _interopRequireDefault(_authReducer);
 
-var _postsReducer = __webpack_require__(38);
+var _postsReducer = __webpack_require__(39);
 
 var _postsReducer2 = _interopRequireDefault(_postsReducer);
 
-var _postReducer = __webpack_require__(39);
+var _postReducer = __webpack_require__(40);
 
 var _postReducer2 = _interopRequireDefault(_postReducer);
-
-var _userReducer = __webpack_require__(40);
-
-var _userReducer2 = _interopRequireDefault(_userReducer);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -2205,7 +2163,6 @@ exports.default = (0, _redux.combineReducers)({
   auth: _authReducer2.default,
   posts: _postsReducer2.default,
   post: _postReducer2.default,
-  user: _userReducer2.default,
   form: _reduxForm.reducer
 });
 
@@ -2224,15 +2181,35 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 
 var _types = __webpack_require__(5);
 
+var _jwtSimple = __webpack_require__(38);
+
+var _jwtSimple2 = _interopRequireDefault(_jwtSimple);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
 exports.default = function () {
-  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : false;
   var action = arguments[1];
 
   switch (action.type) {
     case _types.AUTH_ERROR:
       return _extends({}, state, { error: action.payload });
     case _types.AUTH_USER:
-      return _extends({}, state, { token: action.payload.token });
+      var token = action.payload.token;
+
+      var decoded = _jwtSimple2.default.decode(token, "ob7cq2p98byq45ciuacrca7ewp984qghjdsanj");
+      var id = decoded.id,
+          name = decoded.name,
+          email = decoded.email,
+          role = decoded.role;
+
+      return _extends({}, state, {
+        token: token,
+        id: id,
+        name: name,
+        email: email,
+        role: role
+      });
     case _types.UNAUTH_USER:
       return {};
     default:
@@ -2242,6 +2219,12 @@ exports.default = function () {
 
 /***/ }),
 /* 38 */
+/***/ (function(module, exports) {
+
+module.exports = require("jwt-simple");
+
+/***/ }),
+/* 39 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2266,7 +2249,7 @@ exports.default = function () {
 };
 
 /***/ }),
-/* 39 */
+/* 40 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2285,31 +2268,6 @@ exports.default = function () {
   switch (action.type) {
     case _types.FETCH_POST:
       return action.payload.data;
-    default:
-      return state;
-  }
-};
-
-/***/ }),
-/* 40 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _types = __webpack_require__(5);
-
-exports.default = function () {
-  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
-  var action = arguments[1];
-
-  switch (action.type) {
-    case _types.FETCH_CURRENT_USER:
-      return action.payload.data || false;
     default:
       return state;
   }

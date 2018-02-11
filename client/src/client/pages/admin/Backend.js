@@ -8,18 +8,17 @@ import Header from './Header'
 class Backend extends Component {
 
   componentDidMount(){
-    console.log(this.props.history)
   }
 
   render () {
-    const { route } = this.props
+    const { route, history } = this.props
     return (
       <div>
         <Helmet>
           <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700" rel="stylesheet" />
           <link rel="stylesheet" type="text/css" href="/admin.css" /> 
         </Helmet>
-        <Header/>
+        <Header history={history}/>
         {renderRoutes(route.routes)}
       </div>
     )

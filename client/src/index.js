@@ -14,9 +14,9 @@ app.use(express.static('public'))
 app.get('*', (req, res) => {
   const store = createStore(req)
 
-  const cookie = isomorphicCookie.load('token', req)
-  if (cookie) {
-    store.dispatch(authUser(cookie))
+  const token = isomorphicCookie.load('token', req)
+  if (token) {
+    store.dispatch(authUser({token}))
   }
 
   const promises = matchRoutes(Routes, req.path).map(({ route }) => {
