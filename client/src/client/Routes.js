@@ -1,13 +1,13 @@
 import React from 'react'
 import App from './App'
-import HomePage from './pages/frontend/HomePage'
-import PostPage from './pages/frontend/PostPage'
-import LoginPage from './pages/frontend/LoginPage'
-import RegisterPage from './pages/frontend/RegisterPage'
-import NotFoundPage from './pages/frontend/NotFoundPage'
+import HomePage from './components/pages/frontend/HomePage'
+import PostPage from './components/pages/frontend/PostPage'
+import LoginPage from './components/pages/frontend/LoginPage'
+import RegisterPage from './components/pages/frontend/RegisterPage'
+import NotFoundPage from './components/pages/frontend/NotFoundPage'
 
-import Backend from './pages/admin/Backend'
-import Dashboard from './pages/admin/Dashboard'
+import Backend from './components/pages/admin/Backend'
+import Dashboard from './components/pages/admin/Dashboard'
 
 export default [
   {

@@ -3,7 +3,7 @@ import { Helmet } from 'react-helmet'
 import { Link, Redirect } from 'react-router-dom'
 import { Field, reduxForm } from 'redux-form'
 import { connect } from 'react-redux'
-import { loginUser } from '../../actions/authActions'
+import { loginUser } from '../../../actions/authActions'
 
 class LoginPage extends Component {
 

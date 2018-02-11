@@ -1,7 +1,7 @@
 import React from 'react'
 import Helmet from 'react-helmet'
 import { renderRoutes } from 'react-router-config'
-import Header from './components/Header'
+import Header from './components/common/frontend/Header'
 import { fetchCurrentUser } from './actions/authActions';
 
 const App = ({ route }) => {

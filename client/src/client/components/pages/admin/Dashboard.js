@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { Helmet } from 'react-helmet'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
-import requireAuth from '../../components/hocs/requireAuth'
+import requireAuth from '../../hocs/requireAuth'
 
 class Dashboard extends Component {
 
