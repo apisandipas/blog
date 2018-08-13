@@ -59205,6 +59205,7 @@ var HomePage = function (_Component) {
       this.setState({
         page: this.state.page - 1
       }, function () {
+        _this2.props.history.push('/' + _this2.state.page);
         _this2.props.fetchPosts(_this2.state.page);
       });
     }
@@ -59268,15 +59269,11 @@ var HomePage = function (_Component) {
       return _react2.default.createElement(
         'nav',
         { className: 'pagination', role: 'navigation', 'aria-label': 'pagination', style: { marginTop: '25px' }, key: 'nav' },
-        currentPage > 1 ? _react2.default.createElement(
+        _react2.default.createElement(
           'a',
           { className: 'pagination-previous', onClick: function onClick() {
               return _this4.prevPage();
             } },
-          'Previous'
-        ) : _react2.default.createElement(
-          'a',
-          { className: 'pagination-previous', style: { cursor: 'not-allowed' } },
           'Previous'
         ),
         currentPage,

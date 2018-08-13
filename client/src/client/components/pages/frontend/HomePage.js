@@ -29,6 +29,7 @@ class HomePage extends Component {
     this.setState({
       page: this.state.page - 1
     }, () => {
+      this.props.history.push(`/${this.state.page}`)
       this.props.fetchPosts(this.state.page)
     })
   }
@@ -68,11 +69,9 @@ class HomePage extends Component {
     return (
       <nav className="pagination" role="navigation" aria-label="pagination" style={{marginTop: '25px'}} key='nav'>
 
-        { currentPage > 1
-          ? <a className="pagination-previous" onClick={() => this.prevPage()}>Previous</a>
-          : <a className="pagination-previous" style={{cursor: 'not-allowed'}}>Previous</a> }
-          {currentPage}
-          <a className="pagination-next" onClick={() => this.nextPage()}>Next page</a>
+        <a className="pagination-previous" onClick={() => this.prevPage()}>Previous</a>
+        {currentPage}
+        <a className="pagination-next" onClick={() => this.nextPage()}>Next page</a>
 
       </nav>
     )
