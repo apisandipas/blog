@@ -1,8 +1,8 @@
 import { FETCH_POSTS, FETCH_POST } from './types'
 
 
-export const fetchPosts = () => async (dispatch, getState, { api, req }) => {
-  const res = await api.get('/api/posts')
+export const fetchPosts = (page = 1) => async (dispatch, getState, { api, req }) => {
+  const res = await api.get(`/api/posts?page=${page}`)
   dispatch({
     type: FETCH_POSTS,
     payload: res

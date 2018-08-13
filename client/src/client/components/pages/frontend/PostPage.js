@@ -23,7 +23,7 @@ class PostPage extends Component {
           <title>NERDPress | Post Page</title>
           <meta property="og:title" content="NERDPress | Post Page" />
         </Helmet>
-         
+
         <section className="article">
           <div className="column is-8 is-offset-2">
             <div className="card">
@@ -39,13 +39,13 @@ class PostPage extends Component {
                 </div>
               </div>
             </div>
-          </div>  
+          </div>
         </section>
-         
+
       </div>
     );
   }
-  
+
 }
 
 function mapStateToProps(state) {

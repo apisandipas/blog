@@ -4,12 +4,12 @@ import jwt from 'jwt-simple'
 const tokenForUser = (user) => {
   const timestamp = new Date().getTime()
   const secret = process.env.JWT_SECRET
-  const payload = { 
+  const payload = {
     sub: user.id,
     name: user.name,
-    email: user.email, 
+    email: user.email,
     role: user.role,
-    iat: timestamp 
+    iat: timestamp
   }
   return jwt.encode(payload, secret)
 }
@@ -33,7 +33,7 @@ class AuthController {
     req.checkBody('password', 'Password is required.').notEmpty()
     req.checkBody('password', 'Password must be between 8 and 72 characters long.').len(8, 72)
     req.checkBody('passwordConfirm', 'Password Confirm must match password').equals(req.body.password)
-    
+
     const errors = req.validationErrors()
     if (errors.length) res.invalid(errors)
 
@@ -46,8 +46,8 @@ class AuthController {
         res.invalid("Email is already taken")
       } else {
          const user = await User.forge({
-          name, 
-          email, 
+          name,
+          email,
           password
         }).save()
         req.login(user, function(err) {

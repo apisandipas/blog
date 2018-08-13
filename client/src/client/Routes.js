@@ -19,14 +19,14 @@ export default [
       }
     ]
   },
-  { 
+  {
     path: '/',
     ...App,
     routes: [
       {
         ...HomePage,
         exact: true,
-        path: '/'
+        path: '/:page?'
       },
       {
         ...PostPage,

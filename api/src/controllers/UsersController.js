@@ -2,7 +2,7 @@ import User from '../models/user'
 
 class UsersController {
 
-  async index (req, res) { 
+  async index (req, res) {
     try {
       const users = await User.fetchAll()
       res.json(users.toJSON())
@@ -29,7 +29,7 @@ class UsersController {
     req.checkBody('password', 'Password is required.').notEmpty()
     req.checkBody('password', 'Password must be between 8 and 72 characters long.').len(8, 72)
     req.checkBody('passwordConfirm', 'Password Confirm must match password').equals(req.body.password)
-    
+
     const errors = req.validationErrors()
     if (errors.length) res.invalid(errors)
 
@@ -37,7 +37,7 @@ class UsersController {
       const { name, email, password, role } = req.body
       let user = await User.forge({
         name,
-        email, 
+        email,
         password,
         role
       }).save()

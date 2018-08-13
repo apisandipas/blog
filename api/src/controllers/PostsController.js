@@ -2,11 +2,13 @@ import Post from '../models/post'
 
 class PostsController {
 
-  async index (req, res) { 
+  async index (req, res) {
     try {
       const { page } = req.query
-      const posts = await Post.fetchAll({
-        withRelated: 'user'  
+      const posts = await Post.fetchPage({
+        page,
+        pageSize: 10,
+        withRelated: 'user'
       })
       res.json(posts.toJSON())
     } catch(err){
@@ -36,8 +38,8 @@ class PostsController {
     try {
       const { excerpt, title, body } = req.body
       const post = await Post.forge({
-        excerpt, 
-        title, 
+        excerpt,
+        title,
         body
       }).save()
       res.send(post.toJSON())
@@ -53,7 +55,7 @@ class PostsController {
       const post = await Post.where('slug', slug).fetch()
       if (post) {
         const savedModel = await post.save(body, { patch: true })
-        res.send(savedModel.toJSON())       
+        res.send(savedModel.toJSON())
       } else {
         throw new Error('Record not found!')
       }
