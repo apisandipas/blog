@@ -942,26 +942,35 @@ var HomePage = function (_Component) {
     }
   }, {
     key: 'renderPagination',
-    value: function renderPagination() {
+    value: function renderPagination(numPages) {
       var _this4 = this;
 
       var currentPage = this.state.page;
+      console.log('numPages', numPages);
+
       return _react2.default.createElement(
         'nav',
         { className: 'pagination', role: 'navigation', 'aria-label': 'pagination', style: { marginTop: '25px' }, key: 'nav' },
-        _react2.default.createElement(
+        currentPage > 1 ? _react2.default.createElement(
           'a',
           { className: 'pagination-previous', onClick: function onClick() {
               return _this4.prevPage();
             } },
           'Previous'
+        ) : _react2.default.createElement(
+          'a',
+          { className: 'pagination-previous', style: { cursor: 'not-allowed' } },
+          'Previous'
         ),
-        currentPage,
-        _react2.default.createElement(
+        currentPage < numPages ? _react2.default.createElement(
           'a',
           { className: 'pagination-next', onClick: function onClick() {
               return _this4.nextPage();
             } },
+          'Next page'
+        ) : _react2.default.createElement(
+          'a',
+          { className: 'pagination-previous', style: { cursor: 'not-allowed' } },
           'Next page'
         )
       );
@@ -969,9 +978,10 @@ var HomePage = function (_Component) {
   }, {
     key: 'render',
     value: function render() {
-      // const posts_per_page = 10
-      // const posts = chunk(this.props.posts, posts_per_page)[this.state.page - 1]
-      // const numPages = Math.round(this.props.posts.length / posts_per_page)
+      var posts_per_page = 10;
+      var postsArr = Object.values(this.props.posts);
+      var posts = (0, _lodash2.default)(postsArr, posts_per_page)[this.state.page - 1];
+      var numPages = Math.round(this.props.posts.length / posts_per_page);
 
       return _react2.default.createElement(
         'div',
@@ -986,13 +996,16 @@ var HomePage = function (_Component) {
           ),
           _react2.default.createElement('meta', { property: 'og:title', content: 'NERDPress | Home Page' })
         ),
+        Number(posts_per_page),
+        '  | ',
+        Number(numPages),
         _react2.default.createElement(
           'section',
           { className: 'articles' },
           _react2.default.createElement(
             'div',
             { className: 'column is-8 is-offset-2' },
-            this.props.posts && [, this.renderPosts(this.props.posts), this.renderPagination()]
+            posts && [, this.renderPosts(posts), this.renderPagination(numPages)]
           )
         )
       );
@@ -2281,7 +2294,7 @@ exports.default = function () {
 
   switch (action.type) {
     case _types.FETCH_POSTS:
-      return _extends({}, state, action.payload.data);
+      return _extends({}, state, action.payload.data.posts);
     default:
       return state;
   }
