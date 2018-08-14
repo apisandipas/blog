@@ -66,8 +66,6 @@ class HomePage extends Component {
 
   renderPagination (numPages) {
     const currentPage = this.state.page
-    console.log('numPages', numPages)
-
     return (
       <nav className="pagination" role="navigation" aria-label="pagination" style={{marginTop: '25px'}} key='nav'>
         { currentPage > 1
@@ -86,7 +84,7 @@ class HomePage extends Component {
     const posts_per_page = 10
     const postsArr = Object.values(this.props.posts)
     const posts = chunk(postsArr, posts_per_page)[this.state.page - 1]
-    const numPages = Math.round(this.props.posts.length / posts_per_page)
+    const numPages = this.props.pagination.pageCount
 
     return (
       <div>
@@ -94,8 +92,6 @@ class HomePage extends Component {
           <title>NERDPress | Home Page</title>
           <meta property="og:title" content="NERDPress | Home Page" />
         </Helmet>
-
-        {Number(posts_per_page)}  | {Number(numPages)}
 
         <section className="articles">
           <div className="column is-8 is-offset-2">
@@ -116,7 +112,8 @@ class HomePage extends Component {
 
 function mapStateToProps(state) {
   return {
-    posts: state.posts
+    posts: state.posts,
+    pagination: state.pagination
   }
 }
 

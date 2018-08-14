@@ -946,8 +946,6 @@ var HomePage = function (_Component) {
       var _this4 = this;
 
       var currentPage = this.state.page;
-      console.log('numPages', numPages);
-
       return _react2.default.createElement(
         'nav',
         { className: 'pagination', role: 'navigation', 'aria-label': 'pagination', style: { marginTop: '25px' }, key: 'nav' },
@@ -981,7 +979,7 @@ var HomePage = function (_Component) {
       var posts_per_page = 10;
       var postsArr = Object.values(this.props.posts);
       var posts = (0, _lodash2.default)(postsArr, posts_per_page)[this.state.page - 1];
-      var numPages = Math.round(this.props.posts.length / posts_per_page);
+      var numPages = this.props.pagination.pageCount;
 
       return _react2.default.createElement(
         'div',
@@ -996,9 +994,6 @@ var HomePage = function (_Component) {
           ),
           _react2.default.createElement('meta', { property: 'og:title', content: 'NERDPress | Home Page' })
         ),
-        Number(posts_per_page),
-        '  | ',
-        Number(numPages),
         _react2.default.createElement(
           'section',
           { className: 'articles' },
@@ -1017,7 +1012,8 @@ var HomePage = function (_Component) {
 
 function mapStateToProps(state) {
   return {
-    posts: state.posts
+    posts: state.posts,
+    pagination: state.pagination
   };
 }
 
@@ -2207,13 +2203,18 @@ var _postReducer = __webpack_require__(40);
 
 var _postReducer2 = _interopRequireDefault(_postReducer);
 
+var _paginationReducer = __webpack_require__(44);
+
+var _paginationReducer2 = _interopRequireDefault(_paginationReducer);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 exports.default = (0, _redux.combineReducers)({
   auth: _authReducer2.default,
   posts: _postsReducer2.default,
   post: _postReducer2.default,
-  form: _reduxForm.reducer
+  form: _reduxForm.reducer,
+  pagination: _paginationReducer2.default
 });
 
 /***/ }),
@@ -4726,6 +4727,32 @@ module.exports = function(module) {
 	return module;
 };
 
+
+/***/ }),
+/* 44 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _types = __webpack_require__(5);
+
+exports.default = function () {
+  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+  var action = arguments[1];
+
+  switch (action.type) {
+    case _types.FETCH_POSTS:
+      console.log('action.payload.data', action.payload.data);
+      return action.payload.data.pagination;
+    default:
+      return state;
+  }
+};
 
 /***/ })
 /******/ ]);
