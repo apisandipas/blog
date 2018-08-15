@@ -21,7 +21,8 @@ class HomePage extends Component {
 
   componentDidMount () {
     if (!this.props.posts.length) {
-      this.props.fetchPosts(this.state.page)
+      const page = this.props.location.pathname.split('/')[1]
+      this.props.fetchPosts(page || this.state.page)
     }
   }
 
@@ -119,8 +120,8 @@ function mapStateToProps(state) {
 
 export default {
   component: connect(mapStateToProps, { fetchPosts })(HomePage),
-  loadData: ({ dispatch }, req) => {
-    console.log('page', req.params['0'].split('/')[1] || 1)
-    dispatch(fetchPosts(req.params['0'].split('/')[1]))
+  loadData: ({ dispatch }, { params }) => {
+    console.log('page', params['0'].split('/')[1] || 1)
+    dispatch(fetchPosts(params['0'].split('/')[1]))
   }
 };

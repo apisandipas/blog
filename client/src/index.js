@@ -19,6 +19,7 @@ app.get('*', (req, res) => {
     store.dispatch(authUser({token}))
   }
 
+  console.log('matchRoutes(Routes, req.path)', matchRoutes(Routes, req.path))
   const promises = matchRoutes(Routes, req.path).map(({ route }) => {
     return route.loadData ? route.loadData(store, req) : Promise.resolve(null)
   })
