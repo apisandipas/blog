@@ -2,13 +2,13 @@ import React from 'react'
 import Helmet from 'react-helmet'
 import { renderRoutes } from 'react-router-config'
 import Header from './components/common/frontend/Header'
-import { fetchCurrentUser } from './actions/authActions';
+
 
 const App = ({ route }) => {
   return (
     <div className="container">
       <Helmet>
-        <link rel="stylesheet" type="text/css" href="/styles.css" /> 
+        <link rel="stylesheet" type="text/css" href="/styles.css" />
       </Helmet>
       <Header/>
       {renderRoutes(route.routes)}
@@ -19,5 +19,5 @@ const App = ({ route }) => {
 
 export default {
   component: App,
-  // loadData: ({ dispatch }) => dispatch(fetchCurrentUser())
+  loadData: ({ dispatch }) => dispatch({type:'FOO'})
 }

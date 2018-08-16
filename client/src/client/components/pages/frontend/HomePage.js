@@ -96,12 +96,12 @@ class HomePage extends Component {
 
         <section className="articles">
           <div className="column is-8 is-offset-2">
-            { posts && (
-                  [,
-                    this.renderPosts(posts),
-                    this.renderPagination(numPages)
-                  ]
-                )}
+            { posts ? (
+                [,
+                  this.renderPosts(posts),
+                  this.renderPagination(numPages)
+                ]
+              ) : <div>LOADING...</div>}
           </div>
         </section>
 
@@ -120,7 +120,7 @@ function mapStateToProps(state) {
 
 export default {
   component: connect(mapStateToProps, { fetchPosts })(HomePage),
-  loadData: ({ dispatch }, { params }) => {
+  loadData({ dispatch }, { params }) {
     console.log('page', params['0'].split('/')[1] || 1)
     dispatch(fetchPosts(params['0'].split('/')[1]))
   }

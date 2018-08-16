@@ -13,14 +13,14 @@ app.use(express.static('public'))
 
 app.get('*', (req, res) => {
   const store = createStore(req)
-
   const token = isomorphicCookie.load('token', req)
+
   if (token) {
     store.dispatch(authUser({token}))
   }
 
-  console.log('matchRoutes(Routes, req.path)', matchRoutes(Routes, req.path))
   const promises = matchRoutes(Routes, req.path).map(({ route }) => {
+    console.log('route.loadData', !!route.loadData)
     return route.loadData ? route.loadData(store, req) : Promise.resolve(null)
   })
 

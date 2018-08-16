@@ -55991,8 +55991,6 @@ var _Header = __webpack_require__(643);
 
 var _Header2 = _interopRequireDefault(_Header);
 
-var _authActions = __webpack_require__(85);
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var App = function App(_ref) {
@@ -56012,8 +56010,11 @@ var App = function App(_ref) {
 };
 
 exports.default = {
-  component: App
-  // loadData: ({ dispatch }) => dispatch(fetchCurrentUser())
+  component: App,
+  loadData: function loadData(_ref2) {
+    var dispatch = _ref2.dispatch;
+    return dispatch({ type: 'FOO' });
+  }
 };
 
 /***/ }),
@@ -59349,7 +59350,11 @@ var HomePage = function (_Component) {
           _react2.default.createElement(
             'div',
             { className: 'column is-8 is-offset-2' },
-            posts && [, this.renderPosts(posts), this.renderPagination(numPages)]
+            posts ? [, this.renderPosts(posts), this.renderPagination(numPages)] : _react2.default.createElement(
+              'div',
+              null,
+              'LOADING...'
+            )
           )
         )
       );
@@ -82017,7 +82022,6 @@ exports.default = function () {
 
   switch (action.type) {
     case _types.FETCH_POSTS:
-      console.log('action.payload.data', action.payload.data);
       return action.payload.data.pagination;
     default:
       return state;

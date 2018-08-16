@@ -513,16 +513,16 @@ app.use(_express2.default.static('public'));
 
 app.get('*', function (req, res) {
   var store = (0, _createStore2.default)(req);
-
   var token = _isomorphicCookie2.default.load('token', req);
+
   if (token) {
     store.dispatch((0, _authActions.authUser)({ token: token }));
   }
 
-  console.log('matchRoutes(Routes, req.path)', (0, _reactRouterConfig.matchRoutes)(_Routes2.default, req.path));
   var promises = (0, _reactRouterConfig.matchRoutes)(_Routes2.default, req.path).map(function (_ref) {
     var route = _ref.route;
 
+    console.log('route.loadData', !!route.loadData);
     return route.loadData ? route.loadData(store, req) : Promise.resolve(null);
   });
 
@@ -649,8 +649,6 @@ var _Header = __webpack_require__(22);
 
 var _Header2 = _interopRequireDefault(_Header);
 
-var _authActions = __webpack_require__(4);
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var App = function App(_ref) {
@@ -670,8 +668,11 @@ var App = function App(_ref) {
 };
 
 exports.default = {
-  component: App
-  // loadData: ({ dispatch }) => dispatch(fetchCurrentUser())
+  component: App,
+  loadData: function loadData(_ref2) {
+    var dispatch = _ref2.dispatch;
+    return dispatch({ type: 'FOO' });
+  }
 };
 
 /***/ }),
@@ -1002,7 +1003,11 @@ var HomePage = function (_Component) {
           _react2.default.createElement(
             'div',
             { className: 'column is-8 is-offset-2' },
-            posts && [, this.renderPosts(posts), this.renderPagination(numPages)]
+            posts ? [, this.renderPosts(posts), this.renderPagination(numPages)] : _react2.default.createElement(
+              'div',
+              null,
+              'LOADING...'
+            )
           )
         )
       );
@@ -2354,7 +2359,6 @@ exports.default = function () {
 
   switch (action.type) {
     case _types.FETCH_POSTS:
-      console.log('action.payload.data', action.payload.data);
       return action.payload.data.pagination;
     default:
       return state;
