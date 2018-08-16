@@ -59222,9 +59222,8 @@ var HomePage = function (_Component) {
   _createClass(HomePage, [{
     key: 'componentDidMount',
     value: function componentDidMount() {
-      if (!this.props.posts.length) {
-        var page = this.props.location.pathname.split('/')[1];
-        this.props.fetchPosts(page || this.state.page);
+      if (Object.keys(this.props.posts).length === 0) {
+        this.props.fetchPosts(this.state.page);
       }
     }
   }, {
@@ -59233,9 +59232,8 @@ var HomePage = function (_Component) {
       var _this2 = this;
 
       this.setState({
-        page: this.state.page - 1
+        page: Number(this.state.page) - 1
       }, function () {
-        _this2.props.history.push('/' + _this2.state.page);
         _this2.props.fetchPosts(_this2.state.page);
       });
     }
@@ -59245,9 +59243,8 @@ var HomePage = function (_Component) {
       var _this3 = this;
 
       this.setState({
-        page: this.state.page + 1
+        page: Number(this.state.page) + 1
       }, function () {
-        _this3.props.history.push('/' + _this3.state.page);
         _this3.props.fetchPosts(_this3.state.page);
       });
     }
@@ -59326,9 +59323,9 @@ var HomePage = function (_Component) {
   }, {
     key: 'render',
     value: function render() {
-      var posts_per_page = 10;
+      var postsPerPage = 10;
       var postsArr = Object.values(this.props.posts);
-      var posts = (0, _lodash2.default)(postsArr, posts_per_page)[this.state.page - 1];
+      var posts = (0, _lodash2.default)(postsArr, postsPerPage)[this.state.page - 1];
       var numPages = this.props.pagination.pageCount;
 
       return _react2.default.createElement(
@@ -59373,12 +59370,10 @@ function mapStateToProps(state) {
 
 exports.default = {
   component: (0, _reactRedux.connect)(mapStateToProps, { fetchPosts: _postActions.fetchPosts })(HomePage),
-  loadData: function loadData(_ref, _ref2) {
+  loadData: function loadData(_ref) {
     var dispatch = _ref.dispatch;
-    var params = _ref2.params;
 
-    console.log('page', params['0'].split('/')[1] || 1);
-    dispatch((0, _postActions.fetchPosts)(params['0'].split('/')[1]));
+    return dispatch((0, _postActions.fetchPosts)());
   }
 };
 

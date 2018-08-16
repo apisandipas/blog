@@ -13,33 +13,29 @@ class HomePage extends Component {
 
   constructor(props){
     super(props)
-
     this.state = {
       page: 1
     }
   }
 
   componentDidMount () {
-    if (!this.props.posts.length) {
-      const page = this.props.location.pathname.split('/')[1]
-      this.props.fetchPosts(page || this.state.page)
+    if (Object.keys(this.props.posts).length === 0) {
+      this.props.fetchPosts(this.state.page)
     }
   }
 
   prevPage () {
     this.setState({
-      page: this.state.page - 1
+      page: Number(this.state.page) - 1
     }, () => {
-      this.props.history.push(`/${this.state.page}`)
       this.props.fetchPosts(this.state.page)
     })
   }
 
   nextPage () {
     this.setState({
-      page: this.state.page + 1
+      page: Number(this.state.page) + 1
     }, () => {
-      this.props.history.push(`/${this.state.page}`)
       this.props.fetchPosts(this.state.page)
     })
   }
@@ -82,9 +78,9 @@ class HomePage extends Component {
   }
 
   render() {
-    const posts_per_page = 10
+    const postsPerPage = 10
     const postsArr = Object.values(this.props.posts)
-    const posts = chunk(postsArr, posts_per_page)[this.state.page - 1]
+    const posts = chunk(postsArr, postsPerPage)[this.state.page - 1]
     const numPages = this.props.pagination.pageCount
 
     return (
@@ -120,8 +116,7 @@ function mapStateToProps(state) {
 
 export default {
   component: connect(mapStateToProps, { fetchPosts })(HomePage),
-  loadData({ dispatch }, { params }) {
-    console.log('page', params['0'].split('/')[1] || 1)
-    dispatch(fetchPosts(params['0'].split('/')[1]))
+  loadData: ({ dispatch }) => {
+    return dispatch(fetchPosts())
   }
 };
