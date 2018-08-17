@@ -2,8 +2,6 @@ import React, { Component } from 'react'
 import { Helmet } from 'react-helmet'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
-import chunk from 'lodash.chunk'
-import map from 'lodash.map'
 import nl2br from 'react-nl2br'
 import titleCase from 'title-case'
 import dateFormat from 'dateformat'
@@ -44,7 +42,7 @@ class HomePage extends Component {
   }
 
   renderPosts (posts) {
-    return map(posts, post => {
+    return posts.map(post => {
       return (
         <div className="card article" key={post.id}>
           <div className="card-content">
@@ -81,9 +79,7 @@ class HomePage extends Component {
   }
 
   render() {
-    const postsPerPage = 10
-    const postsArr = Object.values(this.props.posts)
-    const posts = chunk(postsArr, postsPerPage)[this.state.page - 1]
+    const posts = this.props.posts
     const numPages = this.props.pagination.pageCount
     return (
       <div>
@@ -94,9 +90,9 @@ class HomePage extends Component {
 
         <section className="articles">
           <div className="column is-8 is-offset-2">
-            { postsArr ? (
+            { posts ? (
                 [,
-                  this.renderPosts(postsArr),
+                  this.renderPosts(posts),
                   this.renderPagination(numPages)
                 ]
               ) : <div>LOADING...</div>}

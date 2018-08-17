@@ -1,15 +1,5 @@
 import Post from '../models/post'
 
-const serializePostsToObj = (posts) => {
-  let postsObj = {}
-  posts.map((post) => {
-    postsObj[post.id] =  {
-      ...post
-    }
-  })
-  return postsObj
-}
-
 class PostsController {
 
   async index (req, res) {
@@ -22,7 +12,7 @@ class PostsController {
       })
 
       res.json({
-        posts: serializePostsToObj(posts.toJSON()),
+        posts: posts.toJSON(),
         pagination: posts.pagination
       })
     } catch(err){

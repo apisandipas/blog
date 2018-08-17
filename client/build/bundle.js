@@ -827,14 +827,6 @@ var _reactRedux = __webpack_require__(2);
 
 var _reactRouterDom = __webpack_require__(1);
 
-var _lodash = __webpack_require__(24);
-
-var _lodash2 = _interopRequireDefault(_lodash);
-
-var _lodash3 = __webpack_require__(25);
-
-var _lodash4 = _interopRequireDefault(_lodash3);
-
 var _reactNl2br = __webpack_require__(10);
 
 var _reactNl2br2 = _interopRequireDefault(_reactNl2br);
@@ -906,7 +898,7 @@ var HomePage = function (_Component) {
   }, {
     key: 'renderPosts',
     value: function renderPosts(posts) {
-      return (0, _lodash4.default)(posts, function (post) {
+      return posts.map(function (post) {
         return _react2.default.createElement(
           'div',
           { className: 'card article', key: post.id },
@@ -978,9 +970,7 @@ var HomePage = function (_Component) {
   }, {
     key: 'render',
     value: function render() {
-      var postsPerPage = 10;
-      var postsArr = Object.values(this.props.posts);
-      var posts = (0, _lodash2.default)(postsArr, postsPerPage)[this.state.page - 1];
+      var posts = this.props.posts;
       var numPages = this.props.pagination.pageCount;
       return _react2.default.createElement(
         'div',
@@ -1001,7 +991,7 @@ var HomePage = function (_Component) {
           _react2.default.createElement(
             'div',
             { className: 'column is-8 is-offset-2' },
-            postsArr ? [, this.renderPosts(postsArr), this.renderPagination(numPages)] : _react2.default.createElement(
+            posts ? [, this.renderPosts(posts), this.renderPagination(numPages)] : _react2.default.createElement(
               'div',
               null,
               'LOADING...'
@@ -1034,18 +1024,8 @@ exports.default = {
 };
 
 /***/ }),
-/* 24 */
-/***/ (function(module, exports) {
-
-module.exports = require("lodash.chunk");
-
-/***/ }),
-/* 25 */
-/***/ (function(module, exports) {
-
-module.exports = require("lodash.map");
-
-/***/ }),
+/* 24 */,
+/* 25 */,
 /* 26 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -2300,7 +2280,7 @@ Object.defineProperty(exports, "__esModule", {
 var _types = __webpack_require__(4);
 
 exports.default = function () {
-  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
   var action = arguments[1];
 
   switch (action.type) {
