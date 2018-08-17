@@ -13,8 +13,9 @@ class HomePage extends Component {
 
   constructor(props){
     super(props)
+    const page = Number(props.location.pathname.split('/')[1]) || 1
     this.state = {
-      page: 1
+      page
     }
   }
 
@@ -28,6 +29,7 @@ class HomePage extends Component {
     this.setState({
       page: Number(this.state.page) - 1
     }, () => {
+      this.props.history.push(`/${this.state.page}`)
       this.props.fetchPosts(this.state.page)
     })
   }
@@ -36,6 +38,7 @@ class HomePage extends Component {
     this.setState({
       page: Number(this.state.page) + 1
     }, () => {
+      this.props.history.push(`/${this.state.page}`)
       this.props.fetchPosts(this.state.page)
     })
   }
@@ -82,7 +85,6 @@ class HomePage extends Component {
     const postsArr = Object.values(this.props.posts)
     const posts = chunk(postsArr, postsPerPage)[this.state.page - 1]
     const numPages = this.props.pagination.pageCount
-
     return (
       <div>
         <Helmet>
@@ -92,9 +94,9 @@ class HomePage extends Component {
 
         <section className="articles">
           <div className="column is-8 is-offset-2">
-            { posts ? (
+            { postsArr ? (
                 [,
-                  this.renderPosts(posts),
+                  this.renderPosts(postsArr),
                   this.renderPagination(numPages)
                 ]
               ) : <div>LOADING...</div>}
@@ -116,7 +118,8 @@ function mapStateToProps(state) {
 
 export default {
   component: connect(mapStateToProps, { fetchPosts })(HomePage),
-  loadData: ({ dispatch }) => {
-    return dispatch(fetchPosts())
+  loadData: ({ dispatch }, { params }) => {
+    const page = params[0].split('/')[1] || 1
+    return dispatch(fetchPosts(page))
   }
 };

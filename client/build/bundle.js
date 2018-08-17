@@ -97,9 +97,27 @@ module.exports = require("react-helmet");
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
+var FETCH_POSTS = exports.FETCH_POSTS = 'fetch_posts';
+var FETCH_POST = exports.FETCH_POST = 'fetch_post';
+
+var FETCH_CURRENT_USER = exports.FETCH_CURRENT_USER = 'fetch_current_user';
+var AUTH_USER = exports.AUTH_USER = 'auth_user';
+var UNAUTH_USER = exports.UNAUTH_USER = 'unauth_user';
+var AUTH_ERROR = exports.AUTH_ERROR = 'auth_error';
+
+/***/ }),
+/* 5 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
 exports.authError = exports.authUser = exports.registerUser = exports.logOut = exports.loginUser = undefined;
 
-var _types = __webpack_require__(5);
+var _types = __webpack_require__(4);
 
 var _isomorphicCookie = __webpack_require__(9);
 
@@ -242,24 +260,6 @@ var authError = exports.authError = function authError(error) {
 };
 
 /***/ }),
-/* 5 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-var FETCH_POSTS = exports.FETCH_POSTS = 'fetch_posts';
-var FETCH_POST = exports.FETCH_POST = 'fetch_post';
-
-var FETCH_CURRENT_USER = exports.FETCH_CURRENT_USER = 'fetch_current_user';
-var AUTH_USER = exports.AUTH_USER = 'auth_user';
-var UNAUTH_USER = exports.UNAUTH_USER = 'unauth_user';
-var AUTH_ERROR = exports.AUTH_ERROR = 'auth_error';
-
-/***/ }),
 /* 6 */
 /***/ (function(module, exports) {
 
@@ -382,7 +382,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.fetchPost = exports.fetchPosts = undefined;
 
-var _types = __webpack_require__(5);
+var _types = __webpack_require__(4);
 
 function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, arguments); return new Promise(function (resolve, reject) { function step(key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { return Promise.resolve(value).then(function (value) { step("next", value); }, function (err) { step("throw", err); }); } } return step("next"); }); }; }
 
@@ -503,7 +503,7 @@ var _Routes = __webpack_require__(8);
 
 var _Routes2 = _interopRequireDefault(_Routes);
 
-var _authActions = __webpack_require__(4);
+var _authActions = __webpack_require__(5);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -695,7 +695,7 @@ var _reactRouterDom = __webpack_require__(1);
 
 var _reactRedux = __webpack_require__(2);
 
-var _authActions = __webpack_require__(4);
+var _authActions = __webpack_require__(5);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -865,8 +865,9 @@ var HomePage = function (_Component) {
 
     var _this = _possibleConstructorReturn(this, (HomePage.__proto__ || Object.getPrototypeOf(HomePage)).call(this, props));
 
+    var page = Number(props.location.pathname.split('/')[1]) || 1;
     _this.state = {
-      page: 1
+      page: page
     };
     return _this;
   }
@@ -886,6 +887,7 @@ var HomePage = function (_Component) {
       this.setState({
         page: Number(this.state.page) - 1
       }, function () {
+        _this2.props.history.push('/' + _this2.state.page);
         _this2.props.fetchPosts(_this2.state.page);
       });
     }
@@ -897,6 +899,7 @@ var HomePage = function (_Component) {
       this.setState({
         page: Number(this.state.page) + 1
       }, function () {
+        _this3.props.history.push('/' + _this3.state.page);
         _this3.props.fetchPosts(_this3.state.page);
       });
     }
@@ -979,7 +982,6 @@ var HomePage = function (_Component) {
       var postsArr = Object.values(this.props.posts);
       var posts = (0, _lodash2.default)(postsArr, postsPerPage)[this.state.page - 1];
       var numPages = this.props.pagination.pageCount;
-
       return _react2.default.createElement(
         'div',
         null,
@@ -999,7 +1001,7 @@ var HomePage = function (_Component) {
           _react2.default.createElement(
             'div',
             { className: 'column is-8 is-offset-2' },
-            posts ? [, this.renderPosts(posts), this.renderPagination(numPages)] : _react2.default.createElement(
+            postsArr ? [, this.renderPosts(postsArr), this.renderPagination(numPages)] : _react2.default.createElement(
               'div',
               null,
               'LOADING...'
@@ -1022,10 +1024,12 @@ function mapStateToProps(state) {
 
 exports.default = {
   component: (0, _reactRedux.connect)(mapStateToProps, { fetchPosts: _postActions.fetchPosts })(HomePage),
-  loadData: function loadData(_ref) {
+  loadData: function loadData(_ref, _ref2) {
     var dispatch = _ref.dispatch;
+    var params = _ref2.params;
 
-    return dispatch((0, _postActions.fetchPosts)());
+    var page = params[0].split('/')[1] || 1;
+    return dispatch((0, _postActions.fetchPosts)(page));
   }
 };
 
@@ -1211,7 +1215,7 @@ var _reduxForm = __webpack_require__(7);
 
 var _reactRedux = __webpack_require__(2);
 
-var _authActions = __webpack_require__(4);
+var _authActions = __webpack_require__(5);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -1406,7 +1410,7 @@ var _reduxForm = __webpack_require__(7);
 
 var _reactRedux = __webpack_require__(2);
 
-var _authActions = __webpack_require__(4);
+var _authActions = __webpack_require__(5);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -1733,7 +1737,7 @@ var _reactRedux = __webpack_require__(2);
 
 var _reactRouterDom = __webpack_require__(1);
 
-var _authActions = __webpack_require__(4);
+var _authActions = __webpack_require__(5);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -2238,7 +2242,7 @@ Object.defineProperty(exports, "__esModule", {
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
-var _types = __webpack_require__(5);
+var _types = __webpack_require__(4);
 
 var _jwtSimple = __webpack_require__(39);
 
@@ -2293,9 +2297,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-
-var _types = __webpack_require__(5);
+var _types = __webpack_require__(4);
 
 exports.default = function () {
   var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
@@ -2303,7 +2305,7 @@ exports.default = function () {
 
   switch (action.type) {
     case _types.FETCH_POSTS:
-      return _extends({}, state, action.payload.data.posts);
+      return action.payload.data.posts;
     default:
       return state;
   }
@@ -2320,7 +2322,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _types = __webpack_require__(5);
+var _types = __webpack_require__(4);
 
 exports.default = function () {
   var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
@@ -2345,7 +2347,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _types = __webpack_require__(5);
+var _types = __webpack_require__(4);
 
 exports.default = function () {
   var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
