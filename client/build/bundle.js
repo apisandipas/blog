@@ -296,27 +296,27 @@ var _HomePage = __webpack_require__(23);
 
 var _HomePage2 = _interopRequireDefault(_HomePage);
 
-var _PostPage = __webpack_require__(26);
+var _PostPage = __webpack_require__(24);
 
 var _PostPage2 = _interopRequireDefault(_PostPage);
 
-var _LoginPage = __webpack_require__(27);
+var _LoginPage = __webpack_require__(25);
 
 var _LoginPage2 = _interopRequireDefault(_LoginPage);
 
-var _RegisterPage = __webpack_require__(28);
+var _RegisterPage = __webpack_require__(26);
 
 var _RegisterPage2 = _interopRequireDefault(_RegisterPage);
 
-var _NotFoundPage = __webpack_require__(29);
+var _NotFoundPage = __webpack_require__(27);
 
 var _NotFoundPage2 = _interopRequireDefault(_NotFoundPage);
 
-var _Backend = __webpack_require__(30);
+var _Backend = __webpack_require__(28);
 
 var _Backend2 = _interopRequireDefault(_Backend);
 
-var _Dashboard = __webpack_require__(32);
+var _Dashboard = __webpack_require__(30);
 
 var _Dashboard2 = _interopRequireDefault(_Dashboard);
 
@@ -338,12 +338,7 @@ exports.default = [_extends({
     path: '/login'
   }), _extends({}, _RegisterPage2.default, {
     path: '/register'
-  }),
-  // {
-  //   ...AdminPage,
-  //   path: '/admin',
-  // },
-  _extends({}, _NotFoundPage2.default)]
+  }), _extends({}, _NotFoundPage2.default)]
 })];
 
 /***/ }),
@@ -489,7 +484,7 @@ var _renderer = __webpack_require__(18);
 
 var _renderer2 = _interopRequireDefault(_renderer);
 
-var _createStore = __webpack_require__(34);
+var _createStore = __webpack_require__(32);
 
 var _createStore2 = _interopRequireDefault(_createStore);
 
@@ -864,7 +859,7 @@ var HomePage = function (_Component) {
   _createClass(HomePage, [{
     key: 'componentDidMount',
     value: function componentDidMount() {
-      if (Object.keys(this.props.posts).length === 0) {
+      if (!this.props.posts.length) {
         this.props.fetchPosts(this.state.page);
       }
     }
@@ -1032,9 +1027,7 @@ exports.default = {
 };
 
 /***/ }),
-/* 24 */,
-/* 25 */,
-/* 26 */
+/* 24 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1177,7 +1170,7 @@ exports.default = {
 };
 
 /***/ }),
-/* 27 */
+/* 25 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1372,7 +1365,7 @@ exports.default = {
 };
 
 /***/ }),
-/* 28 */
+/* 26 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1593,7 +1586,7 @@ exports.default = {
 };
 
 /***/ }),
-/* 29 */
+/* 27 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1626,7 +1619,7 @@ exports.default = {
 };
 
 /***/ }),
-/* 30 */
+/* 28 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1650,7 +1643,7 @@ var _reactRouterDom = __webpack_require__(1);
 
 var _reactRouterConfig = __webpack_require__(6);
 
-var _Header = __webpack_require__(31);
+var _Header = __webpack_require__(29);
 
 var _Header2 = _interopRequireDefault(_Header);
 
@@ -1705,7 +1698,7 @@ exports.default = {
 };
 
 /***/ }),
-/* 31 */
+/* 29 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1832,7 +1825,7 @@ var Header = function (_Component) {
 exports.default = (0, _reactRedux.connect)(null, { logOut: _authActions.logOut })(Header);
 
 /***/ }),
-/* 32 */
+/* 30 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1854,7 +1847,7 @@ var _reactRedux = __webpack_require__(2);
 
 var _reactRouterDom = __webpack_require__(1);
 
-var _requireAuth = __webpack_require__(33);
+var _requireAuth = __webpack_require__(31);
 
 var _requireAuth2 = _interopRequireDefault(_requireAuth);
 
@@ -2060,7 +2053,7 @@ exports.default = {
 };
 
 /***/ }),
-/* 33 */
+/* 31 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2129,7 +2122,7 @@ exports.default = function (ChildComponent) {
 };
 
 /***/ }),
-/* 34 */
+/* 32 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2141,15 +2134,15 @@ Object.defineProperty(exports, "__esModule", {
 
 var _redux = __webpack_require__(14);
 
-var _reduxThunk = __webpack_require__(35);
+var _reduxThunk = __webpack_require__(33);
 
 var _reduxThunk2 = _interopRequireDefault(_reduxThunk);
 
-var _axios = __webpack_require__(36);
+var _axios = __webpack_require__(34);
 
 var _axios2 = _interopRequireDefault(_axios);
 
-var _reducers = __webpack_require__(37);
+var _reducers = __webpack_require__(35);
 
 var _reducers2 = _interopRequireDefault(_reducers);
 
@@ -2165,19 +2158,19 @@ exports.default = function (req) {
 };
 
 /***/ }),
-/* 35 */
+/* 33 */
 /***/ (function(module, exports) {
 
 module.exports = require("redux-thunk");
 
 /***/ }),
-/* 36 */
+/* 34 */
 /***/ (function(module, exports) {
 
 module.exports = require("axios");
 
 /***/ }),
-/* 37 */
+/* 35 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2191,19 +2184,19 @@ var _redux = __webpack_require__(14);
 
 var _reduxForm = __webpack_require__(7);
 
-var _authReducer = __webpack_require__(38);
+var _authReducer = __webpack_require__(36);
 
 var _authReducer2 = _interopRequireDefault(_authReducer);
 
-var _postsReducer = __webpack_require__(40);
+var _postsReducer = __webpack_require__(38);
 
 var _postsReducer2 = _interopRequireDefault(_postsReducer);
 
-var _postReducer = __webpack_require__(41);
+var _postReducer = __webpack_require__(39);
 
 var _postReducer2 = _interopRequireDefault(_postReducer);
 
-var _paginationReducer = __webpack_require__(42);
+var _paginationReducer = __webpack_require__(40);
 
 var _paginationReducer2 = _interopRequireDefault(_paginationReducer);
 
@@ -2218,7 +2211,7 @@ exports.default = (0, _redux.combineReducers)({
 });
 
 /***/ }),
-/* 38 */
+/* 36 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2232,7 +2225,7 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 
 var _types = __webpack_require__(4);
 
-var _jwtSimple = __webpack_require__(39);
+var _jwtSimple = __webpack_require__(37);
 
 var _jwtSimple2 = _interopRequireDefault(_jwtSimple);
 
@@ -2269,13 +2262,13 @@ exports.default = function () {
 };
 
 /***/ }),
-/* 39 */
+/* 37 */
 /***/ (function(module, exports) {
 
 module.exports = require("jwt-simple");
 
 /***/ }),
-/* 40 */
+/* 38 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2300,7 +2293,7 @@ exports.default = function () {
 };
 
 /***/ }),
-/* 41 */
+/* 39 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2325,7 +2318,7 @@ exports.default = function () {
 };
 
 /***/ }),
-/* 42 */
+/* 40 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";

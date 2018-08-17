@@ -18,7 +18,7 @@ class HomePage extends Component {
   }
 
   componentDidMount () {
-    if (Object.keys(this.props.posts).length === 0) {
+    if (!this.props.posts.length) {
       this.props.fetchPosts(this.state.page)
     }
   }
@@ -93,6 +93,7 @@ class HomePage extends Component {
 
         <section className="articles">
           <div className="column is-8 is-offset-2">
+
            {(this.state.page > numPages) && (
               <h1>
                 Error! Cant seem to finc what your looking for?

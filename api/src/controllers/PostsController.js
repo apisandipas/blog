@@ -15,7 +15,7 @@ class PostsController {
         posts: posts.toJSON(),
         pagination: posts.pagination
       })
-    } catch(err){
+    } catch(err) {
       res.serverError(new Error(err.message))
     }
   }

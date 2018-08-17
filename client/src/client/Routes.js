@@ -40,10 +40,6 @@ export default [
         ...RegisterPage,
         path: '/register',
       },
-      // {
-      //   ...AdminPage,
-      //   path: '/admin',
-      // },
       {
         ...NotFoundPage
       }
