@@ -64,6 +64,9 @@ class HomePage extends Component {
 
   renderPagination (numPages) {
     const currentPage = this.state.page
+
+
+
     return (
       <nav className="pagination" role="navigation" aria-label="pagination" style={{marginTop: '25px'}} key='nav'>
         { currentPage > 1
@@ -90,6 +93,13 @@ class HomePage extends Component {
 
         <section className="articles">
           <div className="column is-8 is-offset-2">
+           {(this.state.page > numPages) && (
+              <h1>
+                Error! Cant seem to finc what your looking for?
+                <Link to="/"> Go Home!</Link>
+              </h1>
+            )}
+
             { posts ? (
                 [,
                   this.renderPosts(posts),

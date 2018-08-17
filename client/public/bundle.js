@@ -56010,11 +56010,8 @@ var App = function App(_ref) {
 };
 
 exports.default = {
-  component: App,
-  loadData: function loadData(_ref2) {
-    var dispatch = _ref2.dispatch;
-    return dispatch({ type: 'FOO' });
-  }
+  component: App
+  // loadData: ({ dispatch }) => dispatch()
 };
 
 /***/ }),
@@ -59288,6 +59285,7 @@ var HomePage = function (_Component) {
       var _this4 = this;
 
       var currentPage = this.state.page;
+
       return _react2.default.createElement(
         'nav',
         { className: 'pagination', role: 'navigation', 'aria-label': 'pagination', style: { marginTop: '25px' }, key: 'nav' },
@@ -59339,6 +59337,16 @@ var HomePage = function (_Component) {
           _react2.default.createElement(
             'div',
             { className: 'column is-8 is-offset-2' },
+            this.state.page > numPages && _react2.default.createElement(
+              'h1',
+              null,
+              'Error! Cant seem to finc what your looking for?',
+              _react2.default.createElement(
+                _reactRouterDom.Link,
+                { to: '/' },
+                ' Go Home!'
+              )
+            ),
             posts ? [, this.renderPosts(posts), this.renderPagination(numPages)] : _react2.default.createElement(
               'div',
               null,
