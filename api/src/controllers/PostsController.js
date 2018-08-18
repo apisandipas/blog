@@ -5,17 +5,21 @@ class PostsController {
   async index (req, res) {
     try {
       const { page } = req.query
-      const posts = await Post.fetchPage({
-        page,
-        pageSize: 10,
-        withRelated: 'user'
-      })
+      const posts = await Post
+        .forge()
+        .orderBy('created_at', 'DESC')
+        .fetchPage({
+          page,
+          pageSize: 10,
+          withRelated: 'user'
+        })
 
       res.json({
         posts: posts.toJSON(),
         pagination: posts.pagination
       })
     } catch (err) {
+      console.log('err', JSON.stringify(err))
       res.serverError(new Error(err.message))
     }
   }
