@@ -15,7 +15,7 @@ export default [
     ...Backend,
     routes: [
       {
-         ...Dashboard
+        ...Dashboard
       }
     ]
   },

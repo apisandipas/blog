@@ -1,7 +1,6 @@
 import React from 'react'
 import Helmet from 'react-helmet'
 import { renderRoutes } from 'react-router-config'
-import Header from './components/common/frontend/Header'
 
 const App = ({ route }) => {
   return (
@@ -9,7 +8,6 @@ const App = ({ route }) => {
       <Helmet>
         <link rel="stylesheet" type="text/css" href="/styles.css" />
       </Helmet>
-      <Header/>
       {renderRoutes(route.routes)}
     </div>
   )

@@ -6,10 +6,11 @@ import nl2br from 'react-nl2br'
 import titleCase from 'title-case'
 import dateFormat from 'dateformat'
 import { fetchPosts } from "../../../actions/postActions"
+import Header from '../../../components/common/frontend/Header'
 
 class HomePage extends Component {
 
-  constructor(props){
+  constructor (props) {
     super(props)
     const page = Number(props.location.pathname.split('/')[1]) || 1
     this.state = {
@@ -26,19 +27,18 @@ class HomePage extends Component {
   prevPage () {
     this.setState({
       page: Number(this.state.page) - 1
-    }, () => {
-      this.props.history.push(`/${this.state.page}`)
-      this.props.fetchPosts(this.state.page)
-    })
+    }, this.setPage)
   }
 
   nextPage () {
     this.setState({
       page: Number(this.state.page) + 1
-    }, () => {
-      this.props.history.push(`/${this.state.page}`)
-      this.props.fetchPosts(this.state.page)
-    })
+    }, this.setPage)
+  }
+
+  setPage (page = this.state.page) {
+    this.props.history.push(`/${page}`)
+    this.props.fetchPosts(page)
   }
 
   renderPosts (posts) {
@@ -55,8 +55,8 @@ class HomePage extends Component {
             <div className="content article-body">
               {nl2br(post.excerpt)}
             </div>
-         </div>
-       </div>
+          </div>
+        </div>
       )
 
     })
@@ -64,8 +64,6 @@ class HomePage extends Component {
 
   renderPagination (numPages) {
     const currentPage = this.state.page
-
-
 
     return (
       <nav className="pagination" role="navigation" aria-label="pagination" style={{marginTop: '25px'}} key='nav'>
@@ -81,7 +79,7 @@ class HomePage extends Component {
     )
   }
 
-  render() {
+  render () {
     const posts = this.props.posts
     const numPages = this.props.pagination.pageCount
     return (
@@ -93,8 +91,9 @@ class HomePage extends Component {
 
         <section className="articles">
           <div className="column is-8 is-offset-2">
+            <Header onHomeClick={() => this.setPage(1)}/>
 
-           {(this.state.page > numPages) && (
+            {(this.state.page > numPages) && (
               <h1>
                 Error! Cant seem to finc what your looking for?
                 <Link to="/"> Go Home!</Link>
@@ -102,21 +101,21 @@ class HomePage extends Component {
             )}
 
             { posts ? (
-                [,
-                  this.renderPosts(posts),
-                  this.renderPagination(numPages)
-                ]
-              ) : <div>LOADING...</div>}
+              [
+                this.renderPosts(posts),
+                this.renderPagination(numPages)
+              ]
+            ) : <div>LOADING...</div>}
           </div>
         </section>
 
       </div>
-    );
+    )
   }
 
 }
 
-function mapStateToProps(state) {
+function mapStateToProps (state) {
   return {
     posts: state.posts,
     pagination: state.pagination
@@ -129,4 +128,4 @@ export default {
     const page = params[0].split('/')[1] || 1
     return dispatch(fetchPosts(page))
   }
-};
+}

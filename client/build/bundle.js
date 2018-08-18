@@ -60,7 +60,7 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 15);
+/******/ 	return __webpack_require__(__webpack_require__.s = 16);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -119,7 +119,7 @@ exports.authError = exports.authUser = exports.registerUser = exports.logOut = e
 
 var _types = __webpack_require__(4);
 
-var _isomorphicCookie = __webpack_require__(9);
+var _isomorphicCookie = __webpack_require__(14);
 
 var _isomorphicCookie2 = _interopRequireDefault(_isomorphicCookie);
 
@@ -288,7 +288,7 @@ var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _App = __webpack_require__(21);
+var _App = __webpack_require__(22);
 
 var _App2 = _interopRequireDefault(_App);
 
@@ -345,28 +345,22 @@ exports.default = [_extends({
 /* 9 */
 /***/ (function(module, exports) {
 
-module.exports = require("isomorphic-cookie");
+module.exports = require("react-nl2br");
 
 /***/ }),
 /* 10 */
 /***/ (function(module, exports) {
 
-module.exports = require("react-nl2br");
+module.exports = require("title-case");
 
 /***/ }),
 /* 11 */
 /***/ (function(module, exports) {
 
-module.exports = require("title-case");
-
-/***/ }),
-/* 12 */
-/***/ (function(module, exports) {
-
 module.exports = require("dateformat");
 
 /***/ }),
-/* 13 */
+/* 12 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -462,214 +456,7 @@ var fetchPost = exports.fetchPost = function fetchPost(slug) {
 };
 
 /***/ }),
-/* 14 */
-/***/ (function(module, exports) {
-
-module.exports = require("redux");
-
-/***/ }),
-/* 15 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-__webpack_require__(16);
-
-var _express = __webpack_require__(17);
-
-var _express2 = _interopRequireDefault(_express);
-
-var _renderer = __webpack_require__(18);
-
-var _renderer2 = _interopRequireDefault(_renderer);
-
-var _createStore = __webpack_require__(32);
-
-var _createStore2 = _interopRequireDefault(_createStore);
-
-var _reactRouterConfig = __webpack_require__(6);
-
-var _isomorphicCookie = __webpack_require__(9);
-
-var _isomorphicCookie2 = _interopRequireDefault(_isomorphicCookie);
-
-var _Routes = __webpack_require__(8);
-
-var _Routes2 = _interopRequireDefault(_Routes);
-
-var _authActions = __webpack_require__(5);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-var app = (0, _express2.default)();
-
-app.use(_express2.default.static('public'));
-
-app.get('*', function (req, res) {
-  var store = (0, _createStore2.default)(req);
-  var token = _isomorphicCookie2.default.load('token', req);
-
-  if (token) {
-    store.dispatch((0, _authActions.authUser)({ token: token }));
-  }
-
-  var promises = (0, _reactRouterConfig.matchRoutes)(_Routes2.default, req.path).map(function (_ref) {
-    var route = _ref.route;
-
-    return route.loadData ? route.loadData(store, req) : Promise.resolve(null);
-  });
-
-  Promise.all(promises).then(function () {
-    var context = {};
-    var content = (0, _renderer2.default)(req, store, context);
-
-    if (context.url) {
-      return res.redirect(301, context.url);
-    }
-    if (context.notFound) {
-      res.status(404);
-    }
-
-    res.send(content);
-  }).catch(function (err) {
-    return console.log(err);
-  });
-});
-
-app.listen(3002, function () {
-  console.log('listening on port 3002');
-});
-
-/***/ }),
-/* 16 */
-/***/ (function(module, exports) {
-
-module.exports = require("babel-polyfill");
-
-/***/ }),
-/* 17 */
-/***/ (function(module, exports) {
-
-module.exports = require("express");
-
-/***/ }),
-/* 18 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _react = __webpack_require__(0);
-
-var _react2 = _interopRequireDefault(_react);
-
-var _server = __webpack_require__(19);
-
-var _reactRouterDom = __webpack_require__(1);
-
-var _reactRouterConfig = __webpack_require__(6);
-
-var _serializeJavascript = __webpack_require__(20);
-
-var _serializeJavascript2 = _interopRequireDefault(_serializeJavascript);
-
-var _reactRedux = __webpack_require__(2);
-
-var _reactHelmet = __webpack_require__(3);
-
-var _Routes = __webpack_require__(8);
-
-var _Routes2 = _interopRequireDefault(_Routes);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-exports.default = function (req, store, context) {
-  var content = (0, _server.renderToString)(_react2.default.createElement(
-    _reactRedux.Provider,
-    { store: store },
-    _react2.default.createElement(
-      _reactRouterDom.StaticRouter,
-      { location: req.path, context: context },
-      _react2.default.createElement(
-        'div',
-        null,
-        (0, _reactRouterConfig.renderRoutes)(_Routes2.default)
-      )
-    )
-  ));
-
-  var helmet = _reactHelmet.Helmet.renderStatic();
-
-  return '\n    <html>\n      <head>\n        ' + helmet.title.toString() + '\n        ' + helmet.meta.toString() + '\n        <script defer src="https://use.fontawesome.com/releases/v5.0.0/js/all.js"></script>\n        <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.6.2/css/bulma.css">  \n      </head>\n      <body>\n        <div id="root">' + content + '</div>\n        <script>window.INITIAL_STATE = ' + (0, _serializeJavascript2.default)(store.getState()) + '</script>\n        <script src="/bundle.js"></script>\n       </body>\n    </html>  \n  ';
-};
-
-/***/ }),
-/* 19 */
-/***/ (function(module, exports) {
-
-module.exports = require("react-dom/server");
-
-/***/ }),
-/* 20 */
-/***/ (function(module, exports) {
-
-module.exports = require("serialize-javascript");
-
-/***/ }),
-/* 21 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _react = __webpack_require__(0);
-
-var _react2 = _interopRequireDefault(_react);
-
-var _reactHelmet = __webpack_require__(3);
-
-var _reactHelmet2 = _interopRequireDefault(_reactHelmet);
-
-var _reactRouterConfig = __webpack_require__(6);
-
-var _Header = __webpack_require__(22);
-
-var _Header2 = _interopRequireDefault(_Header);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-var App = function App(_ref) {
-  var route = _ref.route;
-
-  return _react2.default.createElement(
-    'div',
-    { className: 'container' },
-    _react2.default.createElement(
-      _reactHelmet2.default,
-      null,
-      _react2.default.createElement('link', { rel: 'stylesheet', type: 'text/css', href: '/styles.css' })
-    ),
-    _react2.default.createElement(_Header2.default, null),
-    (0, _reactRouterConfig.renderRoutes)(route.routes)
-  );
-};
-
-exports.default = {
-  component: App
-  // loadData: ({ dispatch }) => dispatch()
-};
-
-/***/ }),
-/* 22 */
+/* 13 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -747,7 +534,7 @@ var Header = function (_Component) {
           { className: 'navbar-brand' },
           _react2.default.createElement(
             _reactRouterDom.Link,
-            { className: 'navbar-item brand-text', to: '/' },
+            { className: 'navbar-item brand-text', to: '/', onClick: this.props.onHomeClick },
             'NERDPress'
           ),
           _react2.default.createElement(
@@ -766,7 +553,7 @@ var Header = function (_Component) {
             { className: 'navbar-start' },
             _react2.default.createElement(
               _reactRouterDom.Link,
-              { className: 'navbar-item', to: '/' },
+              { className: 'navbar-item', to: '/', onClick: this.props.onHomeClick },
               'Home'
             ),
             _react2.default.createElement(
@@ -799,6 +586,214 @@ function mapStateToProps(_ref) {
 exports.default = (0, _reactRedux.connect)(mapStateToProps, { logOut: _authActions.logOut })(Header);
 
 /***/ }),
+/* 14 */
+/***/ (function(module, exports) {
+
+module.exports = require("isomorphic-cookie");
+
+/***/ }),
+/* 15 */
+/***/ (function(module, exports) {
+
+module.exports = require("redux");
+
+/***/ }),
+/* 16 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+__webpack_require__(17);
+
+var _express = __webpack_require__(18);
+
+var _express2 = _interopRequireDefault(_express);
+
+var _renderer = __webpack_require__(19);
+
+var _renderer2 = _interopRequireDefault(_renderer);
+
+var _createStore = __webpack_require__(32);
+
+var _createStore2 = _interopRequireDefault(_createStore);
+
+var _reactRouterConfig = __webpack_require__(6);
+
+var _isomorphicCookie = __webpack_require__(14);
+
+var _isomorphicCookie2 = _interopRequireDefault(_isomorphicCookie);
+
+var _Routes = __webpack_require__(8);
+
+var _Routes2 = _interopRequireDefault(_Routes);
+
+var _authActions = __webpack_require__(5);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var app = (0, _express2.default)();
+
+app.use(_express2.default.static('public'));
+
+app.get('*', function (req, res) {
+  var store = (0, _createStore2.default)(req);
+  var token = _isomorphicCookie2.default.load('token', req);
+
+  if (token) {
+    store.dispatch((0, _authActions.authUser)({ token: token }));
+  }
+
+  var promises = (0, _reactRouterConfig.matchRoutes)(_Routes2.default, req.path).map(function (_ref) {
+    var route = _ref.route;
+
+    return route.loadData ? route.loadData(store, req) : Promise.resolve(null);
+  });
+
+  Promise.all(promises).then(function () {
+    var context = {};
+    var content = (0, _renderer2.default)(req, store, context);
+
+    if (context.url) {
+      return res.redirect(301, context.url);
+    }
+    if (context.notFound) {
+      res.status(404);
+    }
+
+    res.send(content);
+  }).catch(function (err) {
+    return console.log(err);
+  });
+});
+
+app.listen(3002, function () {
+  console.log('listening on port 3002');
+});
+
+/***/ }),
+/* 17 */
+/***/ (function(module, exports) {
+
+module.exports = require("babel-polyfill");
+
+/***/ }),
+/* 18 */
+/***/ (function(module, exports) {
+
+module.exports = require("express");
+
+/***/ }),
+/* 19 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _react = __webpack_require__(0);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _server = __webpack_require__(20);
+
+var _reactRouterDom = __webpack_require__(1);
+
+var _reactRouterConfig = __webpack_require__(6);
+
+var _serializeJavascript = __webpack_require__(21);
+
+var _serializeJavascript2 = _interopRequireDefault(_serializeJavascript);
+
+var _reactRedux = __webpack_require__(2);
+
+var _reactHelmet = __webpack_require__(3);
+
+var _Routes = __webpack_require__(8);
+
+var _Routes2 = _interopRequireDefault(_Routes);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+exports.default = function (req, store, context) {
+  var content = (0, _server.renderToString)(_react2.default.createElement(
+    _reactRedux.Provider,
+    { store: store },
+    _react2.default.createElement(
+      _reactRouterDom.StaticRouter,
+      { location: req.path, context: context },
+      _react2.default.createElement(
+        'div',
+        null,
+        (0, _reactRouterConfig.renderRoutes)(_Routes2.default)
+      )
+    )
+  ));
+
+  var helmet = _reactHelmet.Helmet.renderStatic();
+
+  return '\n    <html>\n      <head>\n        ' + helmet.title.toString() + '\n        ' + helmet.meta.toString() + '\n        <script defer src="https://use.fontawesome.com/releases/v5.0.0/js/all.js"></script>\n        <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.6.2/css/bulma.css">  \n      </head>\n      <body>\n        <div id="root">' + content + '</div>\n        <script>window.INITIAL_STATE = ' + (0, _serializeJavascript2.default)(store.getState()) + '</script>\n        <script src="/bundle.js"></script>\n       </body>\n    </html>  \n  ';
+};
+
+/***/ }),
+/* 20 */
+/***/ (function(module, exports) {
+
+module.exports = require("react-dom/server");
+
+/***/ }),
+/* 21 */
+/***/ (function(module, exports) {
+
+module.exports = require("serialize-javascript");
+
+/***/ }),
+/* 22 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _react = __webpack_require__(0);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _reactHelmet = __webpack_require__(3);
+
+var _reactHelmet2 = _interopRequireDefault(_reactHelmet);
+
+var _reactRouterConfig = __webpack_require__(6);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var App = function App(_ref) {
+  var route = _ref.route;
+
+  return _react2.default.createElement(
+    'div',
+    { className: 'container' },
+    _react2.default.createElement(
+      _reactHelmet2.default,
+      null,
+      _react2.default.createElement('link', { rel: 'stylesheet', type: 'text/css', href: '/styles.css' })
+    ),
+    (0, _reactRouterConfig.renderRoutes)(route.routes)
+  );
+};
+
+exports.default = {
+  component: App
+  // loadData: ({ dispatch }) => dispatch()
+};
+
+/***/ }),
 /* 23 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -821,19 +816,23 @@ var _reactRedux = __webpack_require__(2);
 
 var _reactRouterDom = __webpack_require__(1);
 
-var _reactNl2br = __webpack_require__(10);
+var _reactNl2br = __webpack_require__(9);
 
 var _reactNl2br2 = _interopRequireDefault(_reactNl2br);
 
-var _titleCase = __webpack_require__(11);
+var _titleCase = __webpack_require__(10);
 
 var _titleCase2 = _interopRequireDefault(_titleCase);
 
-var _dateformat = __webpack_require__(12);
+var _dateformat = __webpack_require__(11);
 
 var _dateformat2 = _interopRequireDefault(_dateformat);
 
-var _postActions = __webpack_require__(13);
+var _postActions = __webpack_require__(12);
+
+var _Header = __webpack_require__(13);
+
+var _Header2 = _interopRequireDefault(_Header);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -868,26 +867,24 @@ var HomePage = function (_Component) {
   }, {
     key: 'prevPage',
     value: function prevPage() {
-      var _this2 = this;
-
       this.setState({
         page: Number(this.state.page) - 1
-      }, function () {
-        _this2.props.history.push('/' + _this2.state.page);
-        _this2.props.fetchPosts(_this2.state.page);
-      });
+      }, this.setPage);
     }
   }, {
     key: 'nextPage',
     value: function nextPage() {
-      var _this3 = this;
-
       this.setState({
         page: Number(this.state.page) + 1
-      }, function () {
-        _this3.props.history.push('/' + _this3.state.page);
-        _this3.props.fetchPosts(_this3.state.page);
-      });
+      }, this.setPage);
+    }
+  }, {
+    key: 'setPage',
+    value: function setPage() {
+      var page = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : this.state.page;
+
+      this.props.history.push('/' + page);
+      this.props.fetchPosts(page);
     }
   }, {
     key: 'renderPosts',
@@ -931,7 +928,7 @@ var HomePage = function (_Component) {
   }, {
     key: 'renderPagination',
     value: function renderPagination(numPages) {
-      var _this4 = this;
+      var _this2 = this;
 
       var currentPage = this.state.page;
 
@@ -941,7 +938,7 @@ var HomePage = function (_Component) {
         currentPage > 1 ? _react2.default.createElement(
           'a',
           { className: 'pagination-previous', onClick: function onClick() {
-              return _this4.prevPage();
+              return _this2.prevPage();
             } },
           'Previous'
         ) : _react2.default.createElement(
@@ -952,7 +949,7 @@ var HomePage = function (_Component) {
         currentPage < numPages ? _react2.default.createElement(
           'a',
           { className: 'pagination-next', onClick: function onClick() {
-              return _this4.nextPage();
+              return _this2.nextPage();
             } },
           'Next page'
         ) : _react2.default.createElement(
@@ -965,6 +962,8 @@ var HomePage = function (_Component) {
   }, {
     key: 'render',
     value: function render() {
+      var _this3 = this;
+
       var posts = this.props.posts;
       var numPages = this.props.pagination.pageCount;
       return _react2.default.createElement(
@@ -986,6 +985,9 @@ var HomePage = function (_Component) {
           _react2.default.createElement(
             'div',
             { className: 'column is-8 is-offset-2' },
+            _react2.default.createElement(_Header2.default, { onHomeClick: function onHomeClick() {
+                return _this3.setPage(1);
+              } }),
             this.state.page > numPages && _react2.default.createElement(
               'h1',
               null,
@@ -996,7 +998,7 @@ var HomePage = function (_Component) {
                 ' Go Home!'
               )
             ),
-            posts ? [, this.renderPosts(posts), this.renderPagination(numPages)] : _react2.default.createElement(
+            posts ? [this.renderPosts(posts), this.renderPagination(numPages)] : _react2.default.createElement(
               'div',
               null,
               'LOADING...'
@@ -1051,19 +1053,23 @@ var _reactRedux = __webpack_require__(2);
 
 var _reactRouterDom = __webpack_require__(1);
 
-var _reactNl2br = __webpack_require__(10);
+var _reactNl2br = __webpack_require__(9);
 
 var _reactNl2br2 = _interopRequireDefault(_reactNl2br);
 
-var _titleCase = __webpack_require__(11);
+var _titleCase = __webpack_require__(10);
 
 var _titleCase2 = _interopRequireDefault(_titleCase);
 
-var _dateformat = __webpack_require__(12);
+var _dateformat = __webpack_require__(11);
 
 var _dateformat2 = _interopRequireDefault(_dateformat);
 
-var _postActions = __webpack_require__(13);
+var _postActions = __webpack_require__(12);
+
+var _Header = __webpack_require__(13);
+
+var _Header2 = _interopRequireDefault(_Header);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -1115,6 +1121,7 @@ var PostPage = function (_Component) {
           _react2.default.createElement(
             'div',
             { className: 'column is-8 is-offset-2' },
+            _react2.default.createElement(_Header2.default, null),
             _react2.default.createElement(
               'div',
               { className: 'card' },
@@ -2134,7 +2141,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _redux = __webpack_require__(14);
+var _redux = __webpack_require__(15);
 
 var _reduxThunk = __webpack_require__(33);
 
@@ -2182,7 +2189,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _redux = __webpack_require__(14);
+var _redux = __webpack_require__(15);
 
 var _reduxForm = __webpack_require__(7);
 

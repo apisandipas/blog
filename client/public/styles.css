@@ -13,7 +13,7 @@ html,body {
   font-weight: bold;
 }
 .articles {
-  margin: 5rem 0;
+  margin:  0;
 }
 .articles .content p {
     line-height: 1.9;
@@ -21,7 +21,7 @@ html,body {
 }
 
 .article, .promo-block {
-  margin-top: 3rem;
+  margin-top: 0;
 }
 div.column.is-8:first-child {
   padding-top: 0;

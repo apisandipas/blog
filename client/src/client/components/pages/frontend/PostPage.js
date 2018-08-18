@@ -6,6 +6,7 @@ import nl2br from 'react-nl2br'
 import titleCase from 'title-case'
 import dateFormat from 'dateformat'
 import { fetchPost } from "../../../actions/postActions"
+import Header from '../../../components/common/frontend/Header'
 
 class PostPage extends Component {
   componentDidMount () {
@@ -26,6 +27,7 @@ class PostPage extends Component {
 
         <section className="article">
           <div className="column is-8 is-offset-2">
+            <Header />
             <div className="card">
               <div className="card-content">
                 <p className="title article-title">

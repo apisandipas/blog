@@ -4,7 +4,7 @@ import { connect } from 'react-redux'
 import { logOut } from '../../../actions/authActions'
 
 class Header extends Component {
-  
+
   logOut(){
     this.props.logOut()
   }
@@ -12,18 +12,18 @@ class Header extends Component {
   render () {
     const { isAuthenticated } = this.props
     const authButton = isAuthenticated ? ([
-          <Link className="navbar-item" to="/admin" key='admin'>  
+          <Link className="navbar-item" to="/admin" key='admin'>
             Admin
           </Link>,
           <a onClick={() => this.logOut()} className="navbar-item" key='logout'>Logout</a>
         ]
-        
+
       ) : (
         [
-        <Link className="navbar-item" to="/register" key='register'>  
+        <Link className="navbar-item" to="/register" key='register'>
           Register
         </Link>,
-        <Link className="navbar-item" to="/login" key='login'>  
+        <Link className="navbar-item" to="/login" key='login'>
           Login
         </Link>
         ]
@@ -31,8 +31,8 @@ class Header extends Component {
     return (
       <nav className="navbar is-white">
         <div className="navbar-brand">
-          <Link className="navbar-item brand-text" to="/">  
-            NERDPress          
+          <Link className="navbar-item brand-text" to="/" onClick={this.props.onHomeClick}>
+            NERDPress
           </Link>
           <div className="navbar-burger burger" data-target="navMenu">
             <span></span>
@@ -42,10 +42,10 @@ class Header extends Component {
         </div>
         <div id="navMenu" className="navbar-menu">
           <div className="navbar-start">
-            <Link className="navbar-item" to="/">  
+            <Link className="navbar-item" to="/" onClick={this.props.onHomeClick}>
               Home
             </Link>
-            <Link className="navbar-item" to="/archives">  
+            <Link className="navbar-item" to="/archives">
               Archives
             </Link>
           </div>
@@ -57,7 +57,7 @@ class Header extends Component {
       </nav>
     )
   }
- 
+
 }
 
 function mapStateToProps({ auth }) {
