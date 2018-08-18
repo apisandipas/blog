@@ -6,7 +6,7 @@ const ExtractTextPlugin = require('extract-text-webpack-plugin')
 const config = {
   // Tell webpack the root file of our
   // server application
-  entry: './src/client/client.js',
+  entry: './src/app/client.js',
 
   // Tell webpack where to put the output file
   // that gets generated

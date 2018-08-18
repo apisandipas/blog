@@ -56053,15 +56053,15 @@ exports.default = [_extends({
 }), _extends({
   path: '/'
 }, _App2.default, {
-  routes: [_extends({}, _HomePage2.default, {
-    exact: true,
-    path: '/:page?'
-  }), _extends({}, _PostPage2.default, {
+  routes: [_extends({}, _PostPage2.default, {
     path: '/posts/:slug'
   }), _extends({}, _LoginPage2.default, {
     path: '/login'
   }), _extends({}, _RegisterPage2.default, {
     path: '/register'
+  }), _extends({}, _HomePage2.default, {
+    exact: true,
+    path: '/:page?'
   }), _extends({}, _NotFoundPage2.default)]
 })];
 
