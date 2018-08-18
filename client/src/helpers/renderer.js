@@ -5,7 +5,7 @@ import { renderRoutes } from 'react-router-config'
 import serialize from 'serialize-javascript'
 import { Provider } from 'react-redux'
 import { Helmet } from 'react-helmet'
-import Routes from '../client/Routes'
+import Routes from '../app/Routes'
 
 export default (req, store, context) => {
   const content = renderToString(
@@ -17,13 +17,11 @@ export default (req, store, context) => {
   )
 
   const helmet = Helmet.renderStatic()
-//<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.6.2/css/bulma.css">
   return `
     <html>
       <head>
         ${helmet.title.toString()}
         ${helmet.meta.toString()}
-
         <link rel="stylesheet" type="text/css" href="/style.css">
       </head>
       <body>

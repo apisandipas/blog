@@ -4,11 +4,11 @@ import renderer from './helpers/renderer'
 import createStore from './helpers/createStore'
 import { matchRoutes } from 'react-router-config'
 import isomorphicCookie from 'isomorphic-cookie'
-import Routes from './client/Routes'
-import { authUser } from './client/actions/authActions'
+import Routes from './app/Routes'
+import { authUser } from './app/actions/authActions'
 
 const app = express()
-
+const PORT = process.env.PORT || 3002
 app.use(express.static('public'))
 
 app.get('*', (req, res) => {
@@ -38,6 +38,6 @@ app.get('*', (req, res) => {
   }).catch((err) => console.log(err))
 })
 
-app.listen(3002, () => {
-  console.log('listening on port 3002')
+app.listen(PORT, () => {
+  console.log('listening on port %d', PORT)
 })

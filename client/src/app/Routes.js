@@ -24,11 +24,6 @@ export default [
     ...App,
     routes: [
       {
-        ...HomePage,
-        exact: true,
-        path: '/:page?'
-      },
-      {
         ...PostPage,
         path: '/posts/:slug'
       },
@@ -39,6 +34,11 @@ export default [
       {
         ...RegisterPage,
         path: '/register',
+      },
+      {
+        ...HomePage,
+        exact: true,
+        path: '/:page?'
       },
       {
         ...NotFoundPage

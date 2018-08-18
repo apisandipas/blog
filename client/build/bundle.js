@@ -329,15 +329,15 @@ exports.default = [_extends({
 }), _extends({
   path: '/'
 }, _App2.default, {
-  routes: [_extends({}, _HomePage2.default, {
-    exact: true,
-    path: '/:page?'
-  }), _extends({}, _PostPage2.default, {
+  routes: [_extends({}, _PostPage2.default, {
     path: '/posts/:slug'
   }), _extends({}, _LoginPage2.default, {
     path: '/login'
   }), _extends({}, _RegisterPage2.default, {
     path: '/register'
+  }), _extends({}, _HomePage2.default, {
+    exact: true,
+    path: '/:page?'
   }), _extends({}, _NotFoundPage2.default)]
 })];
 
@@ -633,7 +633,7 @@ var _authActions = __webpack_require__(5);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var app = (0, _express2.default)();
-
+var PORT = process.env.PORT || 3002;
 app.use(_express2.default.static('public'));
 
 app.get('*', function (req, res) {
@@ -667,8 +667,8 @@ app.get('*', function (req, res) {
   });
 });
 
-app.listen(3002, function () {
-  console.log('listening on port 3002');
+app.listen(PORT, function () {
+  console.log('listening on port %d', PORT);
 });
 
 /***/ }),
@@ -734,8 +734,7 @@ exports.default = function (req, store, context) {
   ));
 
   var helmet = _reactHelmet.Helmet.renderStatic();
-  //<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.6.2/css/bulma.css">
-  return '\n    <html>\n      <head>\n        ' + helmet.title.toString() + '\n        ' + helmet.meta.toString() + '\n\n        <link rel="stylesheet" type="text/css" href="/style.css">\n      </head>\n      <body>\n        <div id="root">' + content + '</div>\n        <script>window.INITIAL_STATE = ' + (0, _serializeJavascript2.default)(store.getState()) + '</script>\n        <script src="/bundle.js"></script>\n       </body>\n    </html>\n  ';
+  return '\n    <html>\n      <head>\n        ' + helmet.title.toString() + '\n        ' + helmet.meta.toString() + '\n        <link rel="stylesheet" type="text/css" href="/style.css">\n      </head>\n      <body>\n        <div id="root">' + content + '</div>\n        <script>window.INITIAL_STATE = ' + (0, _serializeJavascript2.default)(store.getState()) + '</script>\n        <script src="/bundle.js"></script>\n       </body>\n    </html>\n  ';
 };
 
 /***/ }),
