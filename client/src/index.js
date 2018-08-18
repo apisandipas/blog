@@ -35,7 +35,7 @@ app.get('*', (req, res) => {
     }
 
     res.send(content)
-  })
+  }).catch((err) => console.log(err))
 })
 
 app.listen(3002, () => {

@@ -532,6 +532,8 @@ app.get('*', function (req, res) {
     }
 
     res.send(content);
+  }).catch(function (err) {
+    return console.log(err);
   });
 });
 

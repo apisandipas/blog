@@ -15,7 +15,7 @@ class PostsController {
         posts: posts.toJSON(),
         pagination: posts.pagination
       })
-    } catch(err) {
+    } catch (err) {
       res.serverError(new Error(err.message))
     }
   }
@@ -47,7 +47,7 @@ class PostsController {
         body
       }).save()
       res.send(post.toJSON())
-    } catch(err) {
+    } catch (err) {
       res.serverError(new Error(err.message))
     }
   }
@@ -63,7 +63,7 @@ class PostsController {
       } else {
         throw new Error('Record not found!')
       }
-    } catch(err) {
+    } catch (err) {
       res.serverError(new Error(err.message))
     }
   }
@@ -73,7 +73,7 @@ class PostsController {
     try {
       const post = await Post.where('slug', slug).destroy()
       res.send(post.toJSON())
-    } catch(err) {
+    } catch (err) {
       res.serverError(new Error(err.message))
     }
   }

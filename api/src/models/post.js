@@ -2,7 +2,6 @@ import db from '../database'
 import User from './user'
 import { slugify } from '../services/utils'
 
-
 const Post = db.Model.extend({
   tableName: 'posts',
   hasTimestamps: ['created_at', 'updated_at'],
