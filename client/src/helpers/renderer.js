@@ -17,21 +17,21 @@ export default (req, store, context) => {
   )
 
   const helmet = Helmet.renderStatic()
-  
+//<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.6.2/css/bulma.css">
   return `
     <html>
       <head>
         ${helmet.title.toString()}
         ${helmet.meta.toString()}
-        <script defer src="https://use.fontawesome.com/releases/v5.0.0/js/all.js"></script>
-        <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.6.2/css/bulma.css">  
+
+        <link rel="stylesheet" type="text/css" href="/style.css">
       </head>
       <body>
         <div id="root">${content}</div>
         <script>window.INITIAL_STATE = ${serialize(store.getState())}</script>
         <script src="/bundle.js"></script>
        </body>
-    </html>  
+    </html>
   `
 
 }

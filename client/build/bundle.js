@@ -734,8 +734,8 @@ exports.default = function (req, store, context) {
   ));
 
   var helmet = _reactHelmet.Helmet.renderStatic();
-
-  return '\n    <html>\n      <head>\n        ' + helmet.title.toString() + '\n        ' + helmet.meta.toString() + '\n        <script defer src="https://use.fontawesome.com/releases/v5.0.0/js/all.js"></script>\n        <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.6.2/css/bulma.css">  \n      </head>\n      <body>\n        <div id="root">' + content + '</div>\n        <script>window.INITIAL_STATE = ' + (0, _serializeJavascript2.default)(store.getState()) + '</script>\n        <script src="/bundle.js"></script>\n       </body>\n    </html>  \n  ';
+  //<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.6.2/css/bulma.css">
+  return '\n    <html>\n      <head>\n        ' + helmet.title.toString() + '\n        ' + helmet.meta.toString() + '\n\n        <link rel="stylesheet" type="text/css" href="/style.css">\n      </head>\n      <body>\n        <div id="root">' + content + '</div>\n        <script>window.INITIAL_STATE = ' + (0, _serializeJavascript2.default)(store.getState()) + '</script>\n        <script src="/bundle.js"></script>\n       </body>\n    </html>\n  ';
 };
 
 /***/ }),
@@ -779,11 +779,7 @@ var App = function App(_ref) {
   return _react2.default.createElement(
     'div',
     { className: 'container' },
-    _react2.default.createElement(
-      _reactHelmet2.default,
-      null,
-      _react2.default.createElement('link', { rel: 'stylesheet', type: 'text/css', href: '/styles.css' })
-    ),
+    _react2.default.createElement(_reactHelmet2.default, null),
     (0, _reactRouterConfig.renderRoutes)(route.routes)
   );
 };

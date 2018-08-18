@@ -6,7 +6,7 @@ const App = ({ route }) => {
   return (
     <div className="container">
       <Helmet>
-        <link rel="stylesheet" type="text/css" href="/styles.css" />
+        {/* <link rel="stylesheet" type="text/css" href="/styles.css" /> */}
       </Helmet>
       {renderRoutes(route.routes)}
     </div>

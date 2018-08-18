@@ -25608,12 +25608,14 @@ var _reducers = __webpack_require__(888);
 
 var _reducers2 = _interopRequireDefault(_reducers);
 
+__webpack_require__(987);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-// Startup point for client application
 var api = _axios2.default.create({
   baseURL: 'http://localhost:3001'
-});
+}); // Startup point for client application
+
 
 var store = (0, _redux.createStore)(_reducers2.default, window.INITIAL_STATE, (0, _reduxDevtoolsExtension.composeWithDevTools)((0, _redux.applyMiddleware)(_reduxThunk2.default.withExtraArgument({ api: api, req: false }))));
 
@@ -56092,11 +56094,7 @@ var App = function App(_ref) {
   return _react2.default.createElement(
     'div',
     { className: 'container' },
-    _react2.default.createElement(
-      _reactHelmet2.default,
-      null,
-      _react2.default.createElement('link', { rel: 'stylesheet', type: 'text/css', href: '/styles.css' })
-    ),
+    _react2.default.createElement(_reactHelmet2.default, null),
     (0, _reactRouterConfig.renderRoutes)(route.routes)
   );
 };
@@ -79170,6 +79168,12 @@ exports.default = function () {
       return state;
   }
 };
+
+/***/ }),
+/* 987 */
+/***/ (function(module, exports) {
+
+// removed by extract-text-webpack-plugin
 
 /***/ })
 /******/ ]);

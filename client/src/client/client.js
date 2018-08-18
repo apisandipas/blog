@@ -13,6 +13,8 @@ import axios from 'axios'
 import Routes from './Routes'
 import reducers from './reducers'
 
+import './style.sass'
+
 const api = axios.create({
   baseURL: 'http://localhost:3001'
 })
