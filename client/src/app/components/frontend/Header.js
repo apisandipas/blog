@@ -4,8 +4,7 @@ import { connect } from 'react-redux'
 import { logOut } from '../../actions/authActions'
 
 class Header extends Component {
-
-  logOut(){
+  logOut () {
     this.props.logOut()
   }
 
@@ -53,10 +52,9 @@ class Header extends Component {
       </nav>
     )
   }
-
 }
 
-function mapStateToProps({ auth }) {
+const mapStateToProps = ({ auth }) => {
   return {
     isAuthenticated: !!auth.token
   }

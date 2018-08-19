@@ -34,7 +34,7 @@ class PostPage extends Component {
                   {titleCase(post.title)}
                 </p>
                 <p className="subtitle is-6 article-subtitle">
-                  <a href="#">{user && user.name}</a> on {dateFormat('post.created_at, dddd, mmmm dS, yyyy, h:MM:ss TT')}
+                  <a href="#">{user && user.name}</a> on {dateFormat(post.created_at, 'dddd, mmmm dS, yyyy, h:MM:ss TT')}
                 </p>
                 <div className="content article-body">
                   {nl2br(post.body)}
@@ -49,7 +49,7 @@ class PostPage extends Component {
   }
 }
 
-function mapStateToProps (state) {
+const mapStateToProps = (state) => {
   return {
     post: state.post
   }

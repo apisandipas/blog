@@ -1,12 +1,11 @@
 import React, { Component } from 'react'
 import { Helmet } from 'react-helmet'
 import { connect } from 'react-redux'
-import { Link } from 'react-router-dom'
-import nl2br from 'react-nl2br'
-import titleCase from 'title-case'
-import dateFormat from 'dateformat'
+
 import { fetchPosts } from 'actions/postActions'
 import Header from 'components/frontend/Header'
+import Pagination from 'components/frontend/Pagination'
+import PostPreview from 'components/frontend/PostPreview'
 
 class HomePage extends Component {
   constructor (props) {
@@ -43,43 +42,15 @@ class HomePage extends Component {
   renderPosts (posts) {
     return posts.map(post => {
       return (
-        <div className="card article" key={post.id}>
-          <div className="card-content">
-            <p className="title article-title">
-              <Link to={`/posts/${post.slug}`}>{titleCase(post.title)}</Link>
-            </p>
-            <p className="subtitle is-6 article-subtitle">
-              <a href="#">{post.user.name}</a> on {dateFormat(post.created_at, 'dddd, mmmm dS, yyyy, h:MM:ss TT')}
-            </p>
-            <div className="content article-body">
-              {nl2br(post.excerpt)}
-            </div>
-          </div>
-        </div>
+        <PostPreview post={post} key={post.id} />
       )
     })
-  }
-
-  renderPagination (numPages) {
-    const currentPage = this.state.page
-
-    return (
-      <nav className="pagination" role="navigation" aria-label="pagination" style={{marginTop: '25px'}} key='nav'>
-        { currentPage > 1
-          ? <a className="pagination-previous" onClick={() => this.prevPage()}>Previous</a>
-          : <a className="pagination-previous" style={{cursor: 'not-allowed'}}>Previous</a> }
-
-        { currentPage < numPages
-          ? <a className="pagination-next" onClick={() => this.nextPage()}>Next page</a>
-          : <a className="pagination-previous" style={{cursor: 'not-allowed'}}>Next page</a> }
-
-      </nav>
-    )
   }
 
   render () {
     const posts = this.props.posts
     const numPages = this.props.pagination.pageCount
+    const currentPage = this.state.page
     return (
       <div>
         <Helmet>
@@ -87,26 +58,25 @@ class HomePage extends Component {
           <meta property="og:title" content="NERDPress | Home Page" />
         </Helmet>
 
+        <Header onHomeClick={() => this.setPage(1)}/>
+
+        {(this.state.page > numPages) && (
+          <h1>
+            Error! Can't seem to find what your looking for?
+            <Link to="/" onClick={() => this.setPage(1)}> Go Home!</Link>
+          </h1>
+        )}
+
         <section className="articles">
-          <div className="column is-8 is-offset-2">
-            <Header onHomeClick={() => this.setPage(1)}/>
-
-            {(this.state.page > numPages) && (
-              <h1>
-                Error! Can't seem to find what your looking for?
-                <Link to="/" onClick={() => this.setPage(1)}> Go Home!</Link>
-              </h1>
-            )}
-
-            { posts ? (
-              [
-                this.renderPosts(posts),
-                this.renderPagination(numPages)
-              ]
-            ) : <div>LOADING...</div>}
-          </div>
+          { posts && this.renderPosts(posts) }
         </section>
 
+        <Pagination
+          numPages={numPages}
+          currentPage={currentPage}
+          onPreviousClick={this.prevPage.bind(this)}
+          onNextClick={this.nextPage.bind(this)}
+        />
       </div>
     )
   }
