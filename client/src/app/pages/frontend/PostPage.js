@@ -6,7 +6,7 @@ import nl2br from 'react-nl2br'
 import titleCase from 'title-case'
 import dateFormat from 'dateformat'
 import { fetchPost } from 'actions/postActions'
-import Header from 'components/common/frontend/Header'
+import Header from 'components/frontend/Header'
 
 class PostPage extends Component {
   componentDidMount () {
