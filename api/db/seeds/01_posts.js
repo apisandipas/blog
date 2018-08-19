@@ -8,17 +8,17 @@ exports.seed = function(knex, Promise) {
     .then(function () {
       const posts = map(range(1, 100, 1), (i) => {
         const user_id = random(1, 9)
-        return  {
-          id: i, 
+        return {
+          id: i,
           user_id,
-          title: i + ' ' + faker.lorem.words(), 
+          title: i + ' ' + faker.lorem.words(),
           slug: faker.lorem.slug(),
           excerpt: faker.lorem.paragraphs(2),
           body: faker.lorem.paragraphs(5),
-          created_at: new Date(),
+          created_at: new Date(new Date() - (360000  * (i * -1))),
           updated_at: new Date()
         }
       })
-      return knex('posts').insert(posts);
-    });
-};
+      return knex('posts').insert(posts)
+    })
+}
