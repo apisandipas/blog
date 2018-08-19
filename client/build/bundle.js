@@ -284,10 +284,6 @@ Object.defineProperty(exports, "__esModule", {
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
-var _react = __webpack_require__(0);
-
-var _react2 = _interopRequireDefault(_react);
-
 var _App = __webpack_require__(22);
 
 var _App2 = _interopRequireDefault(_App);
@@ -909,7 +905,7 @@ var HomePage = function (_Component) {
                 post.user.name
               ),
               ' on ',
-              (0, _dateformat2.default)(post.created_at, "dddd, mmmm dS, yyyy, h:MM:ss TT")
+              (0, _dateformat2.default)(post.created_at, 'dddd, mmmm dS, yyyy, h:MM:ss TT')
             ),
             _react2.default.createElement(
               'div',
@@ -986,10 +982,12 @@ var HomePage = function (_Component) {
             this.state.page > numPages && _react2.default.createElement(
               'h1',
               null,
-              'Error! Cant seem to finc what your looking for?',
+              'Error! Can\'t seem to find what your looking for?',
               _react2.default.createElement(
                 _reactRouterDom.Link,
-                { to: '/' },
+                { to: '/', onClick: function onClick() {
+                    return _this3.setPage(1);
+                  } },
                 ' Go Home!'
               )
             ),
@@ -1137,7 +1135,7 @@ var PostPage = function (_Component) {
                     user && user.name
                   ),
                   ' on ',
-                  (0, _dateformat2.default)(post.created_at, "dddd, mmmm dS, yyyy, h:MM:ss TT")
+                  (0, _dateformat2.default)('post.created_at, dddd, mmmm dS, yyyy, h:MM:ss TT')
                 ),
                 _react2.default.createElement(
                   'div',
@@ -1170,7 +1168,6 @@ exports.default = {
     var slug = path.split('/')[2];
     return dispatch((0, _postActions.fetchPost)(slug));
   }
-
 };
 
 /***/ }),
@@ -1331,6 +1328,11 @@ var LoginPage = function (_Component) {
                     _reactRouterDom.Link,
                     { to: '/register' },
                     'Register'
+                  ),
+                  _react2.default.createElement(
+                    _reactRouterDom.Link,
+                    { to: '#' },
+                    'Forgot Password'
                   )
                 )
               )
@@ -1354,9 +1356,9 @@ var mapStateToProps = function mapStateToProps(state) {
 var validate = function validate(values) {
   var errors = {};
 
-  if (!values.email) errors.email = "Please enter your email";
+  if (!values.email) errors.email = 'Please enter your email';
 
-  if (!values.password) errors.password = "Please enter your password";
+  if (!values.password) errors.password = 'Please enter your password';
 
   return errors;
 };
@@ -1873,14 +1875,8 @@ var Dashboard = function (_Component) {
   }
 
   _createClass(Dashboard, [{
-    key: 'componentDidMount',
-    value: function componentDidMount() {
-      // this.props.fetchCurrentUser()
-    }
-  }, {
     key: 'render',
     value: function render() {
-
       return _react2.default.createElement(
         'div',
         null,
@@ -2116,12 +2112,10 @@ exports.default = function (ChildComponent) {
     return RequireAuth;
   }(_react.Component);
 
-  function mapStateToProps(_ref) {
+  var mapStateToProps = function mapStateToProps(_ref) {
     var auth = _ref.auth;
-
     return { auth: auth };
-  }
-
+  };
   return (0, _reactRedux.connect)(mapStateToProps)(RequireAuth);
 };
 

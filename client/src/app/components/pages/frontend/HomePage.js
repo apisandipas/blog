@@ -5,11 +5,10 @@ import { Link } from 'react-router-dom'
 import nl2br from 'react-nl2br'
 import titleCase from 'title-case'
 import dateFormat from 'dateformat'
-import { fetchPosts } from "../../../actions/postActions"
-import Header from '../../../components/common/frontend/Header'
+import { fetchPosts } from 'actions/postActions'
+import Header from 'components/common/frontend/Header'
 
 class HomePage extends Component {
-
   constructor (props) {
     super(props)
     const page = Number(props.location.pathname.split('/')[1]) || 1
@@ -50,7 +49,7 @@ class HomePage extends Component {
               <Link to={`/posts/${post.slug}`}>{titleCase(post.title)}</Link>
             </p>
             <p className="subtitle is-6 article-subtitle">
-              <a href="#">{post.user.name}</a> on {dateFormat(post.created_at, "dddd, mmmm dS, yyyy, h:MM:ss TT")}
+              <a href="#">{post.user.name}</a> on {dateFormat(post.created_at, 'dddd, mmmm dS, yyyy, h:MM:ss TT')}
             </p>
             <div className="content article-body">
               {nl2br(post.excerpt)}
@@ -58,7 +57,6 @@ class HomePage extends Component {
           </div>
         </div>
       )
-
     })
   }
 
@@ -95,8 +93,8 @@ class HomePage extends Component {
 
             {(this.state.page > numPages) && (
               <h1>
-                Error! Cant seem to finc what your looking for?
-                <Link to="/"> Go Home!</Link>
+                Error! Can't seem to find what your looking for?
+                <Link to="/" onClick={() => this.setPage(1)}> Go Home!</Link>
               </h1>
             )}
 
@@ -112,7 +110,6 @@ class HomePage extends Component {
       </div>
     )
   }
-
 }
 
 function mapStateToProps (state) {

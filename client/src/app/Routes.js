@@ -1,4 +1,3 @@
-import React from 'react'
 import App from './App'
 import HomePage from './components/pages/frontend/HomePage'
 import PostPage from './components/pages/frontend/PostPage'
@@ -29,11 +28,11 @@ export default [
       },
       {
         ...LoginPage,
-        path: '/login',
+        path: '/login'
       },
       {
         ...RegisterPage,
-        path: '/register',
+        path: '/register'
       },
       {
         ...HomePage,
@@ -43,6 +42,6 @@ export default [
       {
         ...NotFoundPage
       }
-    ],
+    ]
   }
 ]

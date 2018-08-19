@@ -5,13 +5,7 @@ import { Link } from 'react-router-dom'
 import requireAuth from '../../hocs/requireAuth'
 
 class Dashboard extends Component {
-
-  componentDidMount (){
-    // this.props.fetchCurrentUser()
-  }
-
-  render() {
-
+  render () {
     return (
       <div>
         <Helmet>
@@ -70,10 +64,9 @@ class Dashboard extends Component {
             </div>
           </div>
         </div>
-    </div>
-    );
+      </div>
+    )
   }
-  
 }
 
 const mapStateToProps = (state) => {
@@ -86,7 +79,7 @@ export default {
   component: connect(mapStateToProps, null)(
     requireAuth(Dashboard)
   ),
-  loadData({ dispatch }) {
- 
+  loadData ({ dispatch }) {
+
   }
-};
+}

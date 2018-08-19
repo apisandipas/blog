@@ -3,7 +3,6 @@ import { connect } from 'react-redux'
 import { Redirect } from 'react-router-dom'
 
 export default (ChildComponent) => {
-
   class RequireAuth extends Component {
     render () {
       switch (this.props.auth) {
@@ -17,9 +16,6 @@ export default (ChildComponent) => {
     }
   }
 
-  function mapStateToProps({ auth }) {
-    return { auth }
-  }
-
+  const mapStateToProps = ({ auth }) => ({ auth })
   return connect(mapStateToProps)(RequireAuth)
 }

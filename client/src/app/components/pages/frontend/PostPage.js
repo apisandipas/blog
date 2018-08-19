@@ -5,8 +5,8 @@ import { Link } from 'react-router-dom'
 import nl2br from 'react-nl2br'
 import titleCase from 'title-case'
 import dateFormat from 'dateformat'
-import { fetchPost } from "../../../actions/postActions"
-import Header from '../../../components/common/frontend/Header'
+import { fetchPost } from 'actions/postActions'
+import Header from 'components/common/frontend/Header'
 
 class PostPage extends Component {
   componentDidMount () {
@@ -14,7 +14,7 @@ class PostPage extends Component {
     this.props.fetchPost(slug)
   }
 
-  render() {
+  render () {
     const { post } = this.props
     const user = post.user
 
@@ -34,7 +34,7 @@ class PostPage extends Component {
                   {titleCase(post.title)}
                 </p>
                 <p className="subtitle is-6 article-subtitle">
-                  <a href="#">{user && user.name}</a> on {dateFormat(post.created_at, "dddd, mmmm dS, yyyy, h:MM:ss TT")}
+                  <a href="#">{user && user.name}</a> on {dateFormat('post.created_at, dddd, mmmm dS, yyyy, h:MM:ss TT')}
                 </p>
                 <div className="content article-body">
                   {nl2br(post.body)}
@@ -45,9 +45,8 @@ class PostPage extends Component {
         </section>
 
       </div>
-    );
+    )
   }
-
 }
 
 function mapStateToProps (state) {
@@ -62,5 +61,4 @@ export default {
     const slug = path.split('/')[2]
     return dispatch(fetchPost(slug))
   }
-
-};
+}
