@@ -1,7 +1,16 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
+import styled from 'styled-components'
 import { logOut } from '../../actions/authActions'
+
+const HeaderWrapper = styled.nav`
+  display: flex;
+  a {
+    text-decoration: none;
+  }
+
+`
 
 class Header extends Component {
   logOut () {
@@ -24,7 +33,7 @@ class Header extends Component {
       </Link>
     ])
     return (
-      <nav className="navbar is-white">
+      <HeaderWrapper>
         <div className="navbar-brand">
           <Link className="navbar-item brand-text" to="/" onClick={this.props.onHomeClick}>
             NERDPress
@@ -49,7 +58,7 @@ class Header extends Component {
             {authButton}
           </div>
         </div>
-      </nav>
+      </HeaderWrapper>
     )
   }
 }
