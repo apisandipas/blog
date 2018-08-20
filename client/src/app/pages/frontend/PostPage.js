@@ -7,6 +7,7 @@ import titleCase from 'title-case'
 import dateFormat from 'dateformat'
 import { fetchPost } from 'actions/postActions'
 import Header from 'components/frontend/Header'
+import Footer from 'components/frontend/Footer'
 
 class PostPage extends Component {
   componentDidMount () {
@@ -54,6 +55,8 @@ class PostPage extends Component {
               </aside>
             </main>
 
+
+            <Footer />
 
           </div>
         </section>

@@ -23,12 +23,15 @@ class LoginPage extends Component {
             {...field.input}
             name={field.name}
             type={field.type}
-            className="input is-large"
+            className="input"
             placeholder={field.placeholder}
           />
           {field.meta.touched && field.meta.error
-            ? (<div className="tag is-danger" style={{width: '100%'}}>{field.meta.error}</div>)
-            : ''
+            && (
+              <div className="tag error" style={{width: '100%'}}>
+                {field.meta.error}
+              </div>
+            )
           }
         </div>
       </div>
@@ -49,43 +52,37 @@ class LoginPage extends Component {
           <meta property="og:title" content="NERDPress | Login" />
         </Helmet>
 
-        <section className="hero is-success is-fullheight">
-          <div className="hero-body">
-            <div className="container has-text-centered">
-              <div className="column is-4 is-offset-4">
-                <h3 className="title has-text-grey">Login</h3>
-                <p className="subtitle has-text-grey">Please login to proceed.</p>
 
-                {error && (<div className="notification is-danger">{error}</div>)}
+        <div className="login-page">
+          <h3 className="title">Login</h3>
+          <p className="subtitle">Please login to proceed.</p>
 
-                <div className="box" style={{marginTop: '1rem'}}>
-                  <form onSubmit={handleSubmit(this.handleSubmit)}>
-                    <Field
-                      name="email"
-                      component={this.renderField}
-                      type="email"
-                      placeholder="Your Email"
-                    />
+          {error && (<div className="notification is-danger">{error}</div>)}
 
-                    <Field
-                      name="password"
-                      component={this.renderField}
-                      type="password"
-                      placeholder="Your Password"
-                    />
+          <div className="box">
+            <form onSubmit={handleSubmit(this.handleSubmit)}>
+              <Field
+                name="email"
+                component={this.renderField}
+                type="email"
+                placeholder="Your Email"
+              />
 
-                    <input type="submit" value="Login" className="button is-block is-info is-large" style={{width: '100%'}} />
-                  </form>
-                </div>
-                <p className="has-text-grey">
-                  <Link to="/register">Register</Link>
-                  <Link to="#">Forgot Password</Link>
-                </p>
-              </div>
-            </div>
+              <Field
+                name="password"
+                component={this.renderField}
+                type="password"
+                placeholder="Your Password"
+              />
+
+              <input type="submit" value="Login" className="btn" style={{width: '100%'}} />
+            </form>
           </div>
-        </section>
-
+          <p className="has-text-grey">
+            <Link to="/register">Register</Link>
+            {/* <Link to="#">Forgot Password</Link> */}
+          </p>
+        </div>
       </div>
     )
   }

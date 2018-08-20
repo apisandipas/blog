@@ -729,7 +729,7 @@ exports.default = function (req, store, context) {
   ));
 
   var helmet = _reactHelmet.Helmet.renderStatic();
-  return '\n    <html>\n      <head>\n        ' + helmet.title.toString() + '\n        ' + helmet.meta.toString() + '\n        <link rel="stylesheet" type="text/css" href="/style.css">\n      </head>\n      <body>\n        <div id="root">' + content + '</div>\n        <script>window.INITIAL_STATE = ' + (0, _serializeJavascript2.default)(store.getState()) + '</script>\n        <script src="/bundle.js"></script>\n       </body>\n    </html>\n  ';
+  return '\n    <html>\n      <head>\n        <meta charset="utf-8">\n        <meta http-equiv="x-ua-compatible" content="ie=edge">\n        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">\n        ' + helmet.title.toString() + '\n        ' + helmet.meta.toString() + '\n        <link rel="stylesheet" type="text/css" href="/style.css">\n      </head>\n      <body>\n        <div id="root">' + content + '</div>\n        <script>window.INITIAL_STATE = ' + (0, _serializeJavascript2.default)(store.getState()) + '</script>\n        <script src="/bundle.js"></script>\n       </body>\n    </html>\n  ';
 };
 
 /***/ }),
@@ -809,6 +809,10 @@ var _postActions = __webpack_require__(9);
 var _Header = __webpack_require__(10);
 
 var _Header2 = _interopRequireDefault(_Header);
+
+var _Footer = __webpack_require__(54);
+
+var _Footer2 = _interopRequireDefault(_Footer);
 
 var _Pagination = __webpack_require__(24);
 
@@ -952,11 +956,7 @@ var HomePage = function (_Component) {
           onPreviousClick: this.prevPage.bind(this),
           onNextClick: this.nextPage.bind(this)
         }),
-        _react2.default.createElement(
-          'footer',
-          null,
-          '\xA9 2018 Bryan Paronto'
-        )
+        _react2.default.createElement(_Footer2.default, null)
       );
     }
   }]);
@@ -1143,6 +1143,10 @@ var _Header = __webpack_require__(10);
 
 var _Header2 = _interopRequireDefault(_Header);
 
+var _Footer = __webpack_require__(54);
+
+var _Footer2 = _interopRequireDefault(_Footer);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -1250,7 +1254,8 @@ var PostPage = function (_Component) {
                   'Aperiam quos aut atque temporibus at. Saepe deserunt asperiores in voluptas sunt sit et possimus aut. Recusandae vero consequatur. '
                 )
               )
-            )
+            ),
+            _react2.default.createElement(_Footer2.default, null)
           )
         )
       );
@@ -1343,14 +1348,14 @@ var LoginPage = function (_Component) {
           _react2.default.createElement('input', _extends({}, field.input, {
             name: field.name,
             type: field.type,
-            className: 'input is-large',
+            className: 'input',
             placeholder: field.placeholder
           })),
-          field.meta.touched && field.meta.error ? _react2.default.createElement(
+          field.meta.touched && field.meta.error && _react2.default.createElement(
             'div',
-            { className: 'tag is-danger', style: { width: '100%' } },
+            { className: 'tag error', style: { width: '100%' } },
             field.meta.error
-          ) : ''
+          )
         )
       );
     }
@@ -1381,68 +1386,51 @@ var LoginPage = function (_Component) {
           _react2.default.createElement('meta', { property: 'og:title', content: 'NERDPress | Login' })
         ),
         _react2.default.createElement(
-          'section',
-          { className: 'hero is-success is-fullheight' },
+          'div',
+          { className: 'login-page' },
+          _react2.default.createElement(
+            'h3',
+            { className: 'title' },
+            'Login'
+          ),
+          _react2.default.createElement(
+            'p',
+            { className: 'subtitle' },
+            'Please login to proceed.'
+          ),
+          error && _react2.default.createElement(
+            'div',
+            { className: 'notification is-danger' },
+            error
+          ),
           _react2.default.createElement(
             'div',
-            { className: 'hero-body' },
+            { className: 'box' },
             _react2.default.createElement(
-              'div',
-              { className: 'container has-text-centered' },
-              _react2.default.createElement(
-                'div',
-                { className: 'column is-4 is-offset-4' },
-                _react2.default.createElement(
-                  'h3',
-                  { className: 'title has-text-grey' },
-                  'Login'
-                ),
-                _react2.default.createElement(
-                  'p',
-                  { className: 'subtitle has-text-grey' },
-                  'Please login to proceed.'
-                ),
-                error && _react2.default.createElement(
-                  'div',
-                  { className: 'notification is-danger' },
-                  error
-                ),
-                _react2.default.createElement(
-                  'div',
-                  { className: 'box', style: { marginTop: '1rem' } },
-                  _react2.default.createElement(
-                    'form',
-                    { onSubmit: handleSubmit(this.handleSubmit) },
-                    _react2.default.createElement(_reduxForm.Field, {
-                      name: 'email',
-                      component: this.renderField,
-                      type: 'email',
-                      placeholder: 'Your Email'
-                    }),
-                    _react2.default.createElement(_reduxForm.Field, {
-                      name: 'password',
-                      component: this.renderField,
-                      type: 'password',
-                      placeholder: 'Your Password'
-                    }),
-                    _react2.default.createElement('input', { type: 'submit', value: 'Login', className: 'button is-block is-info is-large', style: { width: '100%' } })
-                  )
-                ),
-                _react2.default.createElement(
-                  'p',
-                  { className: 'has-text-grey' },
-                  _react2.default.createElement(
-                    _reactRouterDom.Link,
-                    { to: '/register' },
-                    'Register'
-                  ),
-                  _react2.default.createElement(
-                    _reactRouterDom.Link,
-                    { to: '#' },
-                    'Forgot Password'
-                  )
-                )
-              )
+              'form',
+              { onSubmit: handleSubmit(this.handleSubmit) },
+              _react2.default.createElement(_reduxForm.Field, {
+                name: 'email',
+                component: this.renderField,
+                type: 'email',
+                placeholder: 'Your Email'
+              }),
+              _react2.default.createElement(_reduxForm.Field, {
+                name: 'password',
+                component: this.renderField,
+                type: 'password',
+                placeholder: 'Your Password'
+              }),
+              _react2.default.createElement('input', { type: 'submit', value: 'Login', className: 'btn', style: { width: '100%' } })
+            )
+          ),
+          _react2.default.createElement(
+            'p',
+            { className: 'has-text-grey' },
+            _react2.default.createElement(
+              _reactRouterDom.Link,
+              { to: '/register' },
+              'Register'
             )
           )
         )
@@ -1544,14 +1532,14 @@ var RegisterPage = function (_Component) {
           _react2.default.createElement('input', _extends({}, field.input, {
             name: field.name,
             type: field.type,
-            className: 'input is-large',
+            className: 'input',
             placeholder: field.placeholder
           })),
-          field.meta.touched && field.meta.error ? _react2.default.createElement(
+          field.meta.touched && field.meta.error && _react2.default.createElement(
             'div',
-            { className: 'tag is-danger', style: { width: '100%' } },
+            { className: 'tag error', style: { width: '100%' } },
             field.meta.error
-          ) : ''
+          )
         )
       );
     }
@@ -1583,76 +1571,64 @@ var RegisterPage = function (_Component) {
         ),
         _react2.default.createElement(
           'section',
-          { className: 'hero is-success is-fullheight' },
+          { className: 'register-page' },
+          _react2.default.createElement(
+            'h3',
+            { className: 'title ' },
+            'Register'
+          ),
+          _react2.default.createElement(
+            'p',
+            { className: 'subtitle ' },
+            'Please register for an account.'
+          ),
+          error && _react2.default.createElement(
+            'div',
+            { className: 'notification is-danger' },
+            error
+          ),
           _react2.default.createElement(
             'div',
-            { className: 'hero-body' },
+            { className: 'box' },
             _react2.default.createElement(
-              'div',
-              { className: 'container has-text-centered' },
-              _react2.default.createElement(
-                'div',
-                { className: 'column is-4 is-offset-4' },
-                _react2.default.createElement(
-                  'h3',
-                  { className: 'title has-text-grey' },
-                  'Register'
-                ),
-                _react2.default.createElement(
-                  'p',
-                  { className: 'subtitle has-text-grey' },
-                  'Please register for an account.'
-                ),
-                error && _react2.default.createElement(
-                  'div',
-                  { className: 'notification is-danger' },
-                  error
-                ),
-                _react2.default.createElement(
-                  'div',
-                  { className: 'box' },
-                  _react2.default.createElement(
-                    'form',
-                    { onSubmit: handleSubmit(this.handleSubmit) },
-                    _react2.default.createElement(_reduxForm.Field, {
-                      name: 'name',
-                      component: this.renderField,
-                      type: 'text',
-                      placeholder: 'Your Name'
-                    }),
-                    _react2.default.createElement(_reduxForm.Field, {
-                      name: 'email',
-                      component: this.renderField,
-                      type: 'email',
-                      placeholder: 'Your Email'
-                    }),
-                    _react2.default.createElement(_reduxForm.Field, {
-                      name: 'password',
-                      component: this.renderField,
-                      type: 'password',
-                      placeholder: 'Your Password'
-                    }),
-                    _react2.default.createElement(_reduxForm.Field, {
-                      name: 'passwordConfirm',
-                      component: this.renderField,
-                      type: 'password',
-                      placeholder: 'Confirm Password'
-                    }),
-                    _react2.default.createElement('input', { type: 'submit', value: 'Register', className: 'button is-block is-info is-large', style: { width: '100%' } })
-                  )
-                ),
-                _react2.default.createElement(
-                  'p',
-                  { className: 'has-text-grey' },
-                  _react2.default.createElement(
-                    _reactRouterDom.Link,
-                    { to: '/login' },
-                    'Login'
-                  ),
-                  ' \xA0\xB7\xA0'
-                )
-              )
+              'form',
+              { onSubmit: handleSubmit(this.handleSubmit) },
+              _react2.default.createElement(_reduxForm.Field, {
+                name: 'name',
+                component: this.renderField,
+                type: 'text',
+                placeholder: 'Your Name'
+              }),
+              _react2.default.createElement(_reduxForm.Field, {
+                name: 'email',
+                component: this.renderField,
+                type: 'email',
+                placeholder: 'Your Email'
+              }),
+              _react2.default.createElement(_reduxForm.Field, {
+                name: 'password',
+                component: this.renderField,
+                type: 'password',
+                placeholder: 'Your Password'
+              }),
+              _react2.default.createElement(_reduxForm.Field, {
+                name: 'passwordConfirm',
+                component: this.renderField,
+                type: 'password',
+                placeholder: 'Confirm Password'
+              }),
+              _react2.default.createElement('input', { type: 'submit', value: 'Register', className: 'btn', style: { width: '100%' } })
             )
+          ),
+          _react2.default.createElement(
+            'p',
+            { className: 'has-text-grey' },
+            _react2.default.createElement(
+              _reactRouterDom.Link,
+              { to: '/login' },
+              'Login'
+            ),
+            ' \xA0\xB7\xA0'
           )
         )
       );
@@ -2446,6 +2422,44 @@ exports.default = function () {
       return state;
   }
 };
+
+/***/ }),
+/* 43 */,
+/* 44 */,
+/* 45 */,
+/* 46 */,
+/* 47 */,
+/* 48 */,
+/* 49 */,
+/* 50 */,
+/* 51 */,
+/* 52 */,
+/* 53 */,
+/* 54 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _react = __webpack_require__(0);
+
+var _react2 = _interopRequireDefault(_react);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var Footer = function Footer() {
+  return _react2.default.createElement(
+    'footer',
+    null,
+    '\xA9 2018 Bryan Paronto'
+  );
+};
+
+exports.default = Footer;
 
 /***/ })
 /******/ ]);

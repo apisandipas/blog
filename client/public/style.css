@@ -73,4 +73,43 @@ footer {
   margin: 0 auto;
   padding: 1rem 0 1rem; }
 
+.login-page,
+.register-page {
+  display: flex;
+  width: 100vw;
+  height: 100vh;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column; }
+  .login-page .box,
+  .register-page .box {
+    marginTop: 1rem;
+    display: flex;
+    width: 320px;
+    justify-content: center;
+    align-items: center; }
+  .login-page .field,
+  .register-page .field {
+    width: 320px;
+    min-height: 60px; }
+    .login-page .field .tag.error,
+    .register-page .field .tag.error {
+      background: red;
+      color: #fff;
+      font-size: 80%;
+      border-radius: 10px;
+      padding: 0.25rem; }
+    .login-page .field .input,
+    .register-page .field .input {
+      width: 100%;
+      padding: 0.75rem; }
+
+button.btn, a.btn, [type=submit].btn {
+  background: #03A9F4;
+  color: #fff;
+  border: 0;
+  padding: 1rem;
+  border-radius: 25px;
+  font-size: 16px; }
+
 /*# sourceMappingURL=style.css.map*/

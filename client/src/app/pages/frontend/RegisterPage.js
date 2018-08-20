@@ -6,7 +6,7 @@ import { connect } from 'react-redux'
 import { registerUser } from '../../actions/authActions'
 
 class RegisterPage extends Component {
-  
+
   constructor (props) {
     super(props)
     this.handleSubmit = this.handleSubmit.bind(this)
@@ -21,91 +21,89 @@ class RegisterPage extends Component {
     return (
       <div className="field">
         <div className="control">
-          <input 
+          <input
             {...field.input}
-            name={field.name}  
-            type={field.type} 
-            className="input is-large" 
-            placeholder={field.placeholder} 
+            name={field.name}
+            type={field.type}
+            className="input"
+            placeholder={field.placeholder}
           />
           {field.meta.touched && field.meta.error
-            ? (<div className="tag is-danger" style={{width: '100%'}}>{field.meta.error}</div>)
-            : ''
+            && (
+              <div className="tag error" style={{width: '100%'}}>
+                  {field.meta.error}
+              </div>
+            )
           }
         </div>
       </div>
-    ) 
+    )
   }
 
   render() {
     const { handleSubmit, auth, error } = this.props
-    
+
     if (auth) {
       return <Redirect to='/admin' />
     }
- 
+
     return (
       <div>
         <Helmet>
           <title>NERDPress | Register</title>
           <meta property="og:title" content="NERDPress | Register" />
         </Helmet>
-         
-        <section className="hero is-success is-fullheight">
-            <div className="hero-body">
-              <div className="container has-text-centered">
-                <div className="column is-4 is-offset-4">
-                  <h3 className="title has-text-grey">Register</h3>
-                  <p className="subtitle has-text-grey">Please register for an account.</p>
-                 
-                  {error && (<div className="notification is-danger">{error}</div>)}
 
-                  <div className="box">
-                    <form onSubmit={handleSubmit(this.handleSubmit)}>
-                      <Field 
-                        name="name" 
-                        component={this.renderField} 
-                        type="text" 
-                        placeholder="Your Name" 
-                      />
+        <section className="register-page">
+          <h3 className="title ">Register</h3>
+          <p className="subtitle ">Please register for an account.</p>
 
-                      <Field 
-                        name="email" 
-                        component={this.renderField} 
-                        type="email" 
-                        placeholder="Your Email" 
-                      />
+          {error && (<div className="notification is-danger">{error}</div>)}
 
-                      <Field 
-                        name="password" 
-                        component={this.renderField} 
-                        type="password" 
-                        placeholder="Your Password" 
-                      />
+          <div className="box">
+            <form onSubmit={handleSubmit(this.handleSubmit)}>
+              <Field
+                name="name"
+                component={this.renderField}
+                type="text"
+                placeholder="Your Name"
+              />
 
-                      <Field 
-                        name="passwordConfirm" 
-                        component={this.renderField} 
-                        type="password" 
-                        placeholder="Confirm Password" 
-                      />
+              <Field
+                name="email"
+                component={this.renderField}
+                type="email"
+                placeholder="Your Email"
+              />
 
-                      <input type="submit" value="Register" className="button is-block is-info is-large" style={{width: '100%'}} />
-                    </form>
-                  </div>
-                  <p className="has-text-grey">
-                    <Link to="/login">Login</Link> &nbsp;·&nbsp;
-                    {/*<Link to="#">Forgot PLinkssword</Link> &nbsp;·&nbsp;*/}
-                  </p>
-                </div>
-              </div>
-            </div>
-          </section>
-         
+              <Field
+                name="password"
+                component={this.renderField}
+                type="password"
+                placeholder="Your Password"
+              />
+
+              <Field
+                name="passwordConfirm"
+                component={this.renderField}
+                type="password"
+                placeholder="Confirm Password"
+              />
+
+              <input type="submit" value="Register" className="btn" style={{width: '100%'}} />
+            </form>
+          </div>
+          <p className="has-text-grey">
+            <Link to="/login">Login</Link> &nbsp;·&nbsp;
+            {/*<Link to="#">Forgot PLinkssword</Link> &nbsp;·&nbsp;*/}
+          </p>
+        </section>
+
+
       </div>
     );
   }
-  
+
 }
 
 const mapStateToProps = (state) => {
@@ -124,8 +122,8 @@ const validate = (values) => {
   if (!values.email) errors.email = "Please enter your email!"
   if (!validEmail(values.email)) errors.email = "Please enter a valid email!"
 
-  if (!values.password) errors.password = "Please enter a password!"  
-  if (!values.passwordConfirm) errors.passwordConfirm = "Please enter a password confirmation!"  
+  if (!values.password) errors.password = "Please enter a password!"
+  if (!values.passwordConfirm) errors.passwordConfirm = "Please enter a password confirmation!"
 
   if (values.password !== values.passwordConfirm) errors.passwordConfirm = "Passwords do not match!"
 

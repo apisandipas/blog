@@ -1,4 +1,6 @@
-@import './styles/sanitize.scss'
+@import ./styles/sanitize.scss
+
+$primary: #03A9F4
 
 html, body
   height: 100%
@@ -13,7 +15,7 @@ body
 a
   color: #fff
   &:hover
-    color: #03A9F4
+    color: $primary
 
 .site-body
   margin: 0 auto
@@ -24,11 +26,6 @@ a
     display: grid
     grid-gap: 30px
     grid-template-columns: 70% 30%
-
-// .articles
-//   border: 1px solid red
-// aside
-//   border: 1px solid orange
 
 .navbar
   margin-bottom: 4rem
@@ -73,9 +70,9 @@ a
   border-radius: 2px
   box-shadow: 1px 1px 3px #111
   a
-    color: #03A9F4
+    color: $primary
     &:hover
-      color: #03A9F4
+      color: $primary
   &-title
     margin: 0
 
@@ -86,3 +83,38 @@ footer
   max-width: 980px
   margin: 0 auto
   padding: 1rem 0 1rem
+
+.login-page,
+.register-page
+  display: flex
+  width: 100vw
+  height: 100vh
+  justify-content: center
+  align-items: center
+  flex-direction: column
+  .box
+    marginTop: 1rem
+    display: flex
+    width: 320px
+    justify-content: center
+    align-items: center
+  .field
+    width: 320px
+    min-height: 60px
+    .tag.error
+      background: red
+      color: #fff
+      font-size: 80%
+      border-radius: 10px
+      padding: 0.25rem
+    .input
+      width: 100%
+      padding: 0.75rem
+
+button.btn, a.btn, [type=submit].btn
+  background: $primary
+  color: #fff
+  border: 0
+  padding: 1rem
+  border-radius: 25px
+  font-size: 16px

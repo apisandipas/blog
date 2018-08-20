@@ -4,6 +4,7 @@ import { connect } from 'react-redux'
 
 import { fetchPosts } from 'actions/postActions'
 import Header from 'components/frontend/Header'
+import Footer from 'components/frontend/Footer'
 import Pagination from 'components/frontend/Pagination'
 import PostPreview from 'components/frontend/PostPreview'
 
@@ -87,9 +88,7 @@ class HomePage extends Component {
           onNextClick={this.nextPage.bind(this)}
         />
 
-        <footer>
-          &copy; 2018 Bryan Paronto
-        </footer>
+        <Footer />
 
       </div>
     )
