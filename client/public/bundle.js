@@ -59693,37 +59693,65 @@ var PostPage = function (_Component) {
         ),
         _react2.default.createElement(
           'section',
-          { className: 'article' },
+          { className: 'single-article' },
           _react2.default.createElement(
             'div',
             { className: 'column is-8 is-offset-2' },
             _react2.default.createElement(_Header2.default, null),
             _react2.default.createElement(
-              'div',
-              { className: 'card' },
+              'main',
+              { className: 'site-body' },
               _react2.default.createElement(
-                'div',
-                { className: 'card-content' },
-                _react2.default.createElement(
-                  'p',
-                  { className: 'title article-title' },
-                  (0, _titleCase2.default)(post.title)
-                ),
-                _react2.default.createElement(
-                  'p',
-                  { className: 'subtitle is-6 article-subtitle' },
-                  _react2.default.createElement(
-                    'a',
-                    { href: '#' },
-                    user && user.name
-                  ),
-                  ' on ',
-                  (0, _dateformat2.default)(post.created_at, 'dddd, mmmm dS, yyyy, h:MM:ss TT')
-                ),
+                'section',
+                { className: 'article' },
                 _react2.default.createElement(
                   'div',
-                  { className: 'content article-body' },
-                  (0, _reactNl2br2.default)(post.body)
+                  { className: 'card' },
+                  _react2.default.createElement(
+                    'h1',
+                    { className: 'title article-title' },
+                    (0, _titleCase2.default)(post.title)
+                  ),
+                  _react2.default.createElement(
+                    'p',
+                    { className: 'subtitle is-6 article-subtitle' },
+                    _react2.default.createElement(
+                      'a',
+                      { href: '#' },
+                      user && user.name
+                    ),
+                    ' on ',
+                    (0, _dateformat2.default)(post.created_at, 'dddd, mmmm dS, yyyy, h:MM:ss TT')
+                  ),
+                  _react2.default.createElement(
+                    'div',
+                    { className: 'content article-body' },
+                    (0, _reactNl2br2.default)(post.body)
+                  )
+                )
+              ),
+              _react2.default.createElement(
+                'aside',
+                { className: 'sidebar' },
+                _react2.default.createElement(
+                  'h3',
+                  null,
+                  'Sidebar'
+                ),
+                _react2.default.createElement(
+                  'p',
+                  null,
+                  'Aperiam quos aut atque temporibus at. Saepe deserunt asperiores in voluptas sunt sit et possimus aut. Recusandae vero consequatur. '
+                ),
+                _react2.default.createElement(
+                  'p',
+                  null,
+                  'Aperiam quos aut atque temporibus at. Saepe deserunt asperiores in voluptas sunt sit et possimus aut. Recusandae vero consequatur. '
+                ),
+                _react2.default.createElement(
+                  'p',
+                  null,
+                  'Aperiam quos aut atque temporibus at. Saepe deserunt asperiores in voluptas sunt sit et possimus aut. Recusandae vero consequatur. '
                 )
               )
             )

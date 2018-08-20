@@ -25,22 +25,36 @@ class PostPage extends Component {
           <meta property="og:title" content="NERDPress | Post Page" />
         </Helmet>
 
-        <section className="article">
+        <section className="single-article">
           <div className="column is-8 is-offset-2">
             <Header />
-            <div className="card">
-              <div className="card-content">
-                <p className="title article-title">
-                  {titleCase(post.title)}
-                </p>
-                <p className="subtitle is-6 article-subtitle">
-                  <a href="#">{user && user.name}</a> on {dateFormat(post.created_at, 'dddd, mmmm dS, yyyy, h:MM:ss TT')}
-                </p>
-                <div className="content article-body">
-                  {nl2br(post.body)}
+
+            <main className="site-body">
+              <section className="article">
+                <div className="card">
+
+                  <h1 className="title article-title">
+                    {titleCase(post.title)}
+                  </h1>
+                  <p className="subtitle is-6 article-subtitle">
+                    <a href="#">{user && user.name}</a> on {dateFormat(post.created_at, 'dddd, mmmm dS, yyyy, h:MM:ss TT')}
+                  </p>
+                  <div className="content article-body">
+                    {nl2br(post.body)}
+                  </div>
+
                 </div>
-              </div>
-            </div>
+              </section>
+
+              <aside className="sidebar">
+                <h3>Sidebar</h3>
+                <p>Aperiam quos aut atque temporibus at. Saepe deserunt asperiores in voluptas sunt sit et possimus aut. Recusandae vero consequatur. </p>
+                <p>Aperiam quos aut atque temporibus at. Saepe deserunt asperiores in voluptas sunt sit et possimus aut. Recusandae vero consequatur. </p>
+                <p>Aperiam quos aut atque temporibus at. Saepe deserunt asperiores in voluptas sunt sit et possimus aut. Recusandae vero consequatur. </p>
+              </aside>
+            </main>
+
+
           </div>
         </section>
 

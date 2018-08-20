@@ -7,7 +7,13 @@ html, body
 
 body
   font-family: Helvetica, sans-serif
-  background: #ccc
+  background: #607D8B
+  color: #fff;
+
+a
+  color: #fff
+  &:hover
+    color: #03A9F4
 
 .site-body
   margin: 0 auto
@@ -46,8 +52,6 @@ body
 
   .navbar-item
     padding: 1rem 1rem 1rem
-    &:hover
-      background: cornflowerblue
 
 .pagination
   display: flex;
@@ -64,9 +68,14 @@ body
 
 .article
   background: #fff
+  color: #111
   padding: 1rem
   border-radius: 2px
   box-shadow: 1px 1px 3px #111
+  a
+    color: #03A9F4
+    &:hover
+      color: #03A9F4
   &-title
     margin: 0
 
