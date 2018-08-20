@@ -3,14 +3,65 @@ html, body {
   margin: 0;
   padding: 0; }
 
-*, *:before, *:after {
-  box-sizing: border-box; }
-
 body {
-  font-family: Helvetica, sans-serif; }
+  font-family: Helvetica, sans-serif;
+  background: #ccc; }
 
-.container {
+.site-body {
+  margin: 0 auto;
+  max-width: 980px;
+  display: block; }
+  @media all and (min-width: 700px) {
+    .site-body {
+      display: grid;
+      grid-gap: 30px;
+      grid-template-columns: 70% 30%; } }
+
+.navbar {
+  margin-bottom: 4rem; }
+  .navbar a {
+    text-decoration: none; }
+  .navbar .navbar-inner {
+    margin: 0 auto;
+    max-width: 980px;
+    display: flex;
+    align-items: center;
+    height: 50px; }
+  .navbar .navbar-brand {
+    margin-right: 1rem; }
+  .navbar .navbar-menu {
+    display: flex;
+    flex: 1; }
+  .navbar .navbar-end {
+    margin-left: auto; }
+  .navbar .navbar-item {
+    padding: 1rem 1rem 1rem; }
+    .navbar .navbar-item:hover {
+      background: cornflowerblue; }
+
+.pagination {
+  display: flex;
   max-width: 980px;
   margin: 0 auto; }
+  .pagination > a {
+    padding: 1rem;
+    cursor: pointer; }
+  .pagination .pagination-next {
+    margin-left: auto; }
+
+.article {
+  background: #fff;
+  padding: 1rem;
+  border-radius: 2px;
+  box-shadow: 1px 1px 3px #111; }
+  .article-title {
+    margin: 0; }
+  .article + .article {
+    margin-top: 2rem; }
+
+footer {
+  max-width: 980px;
+  margin: 0 auto;
+  padding: 1rem 0 1rem; }
 
 /*# sourceMappingURL=style.css.map*/

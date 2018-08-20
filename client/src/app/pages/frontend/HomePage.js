@@ -67,9 +67,18 @@ class HomePage extends Component {
           </h1>
         )}
 
-        <section className="articles">
-          { posts && this.renderPosts(posts) }
-        </section>
+        <main className="site-body">
+          <section className="articles">
+            { posts && this.renderPosts(posts) }
+          </section>
+
+          <aside className="sidebar">
+            <h3>Sidebar</h3>
+            <p>Aperiam quos aut atque temporibus at. Saepe deserunt asperiores in voluptas sunt sit et possimus aut. Recusandae vero consequatur. </p>
+            <p>Aperiam quos aut atque temporibus at. Saepe deserunt asperiores in voluptas sunt sit et possimus aut. Recusandae vero consequatur. </p>
+            <p>Aperiam quos aut atque temporibus at. Saepe deserunt asperiores in voluptas sunt sit et possimus aut. Recusandae vero consequatur. </p>
+          </aside>
+        </main>
 
         <Pagination
           numPages={numPages}
@@ -77,6 +86,11 @@ class HomePage extends Component {
           onPreviousClick={this.prevPage.bind(this)}
           onNextClick={this.nextPage.bind(this)}
         />
+
+        <footer>
+          &copy; 2018 Bryan Paronto
+        </footer>
+
       </div>
     )
   }

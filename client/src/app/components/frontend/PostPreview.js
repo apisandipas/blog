@@ -8,9 +8,9 @@ const PostPreview = ({ post }) => {
   return (
     <div className="card article" key={post.id}>
       <div className="card-content">
-        <p className="title article-title">
+        <h1 className="title article-title">
           <Link to={`/posts/${post.slug}`}>{titleCase(post.title)}</Link>
-        </p>
+        </h1>
         <p className="subtitle is-6 article-subtitle">
           <a href="#">{post.user.name}</a> on {dateFormat(post.created_at, 'dddd, mmmm dS, yyyy, h:MM:ss TT')}
         </p>
@@ -21,6 +21,5 @@ const PostPreview = ({ post }) => {
     </div>
   )
 }
-
 
 export default PostPreview
