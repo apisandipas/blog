@@ -45,7 +45,7 @@ class AuthController {
       if (existingUser) {
         res.invalid("Email is already taken")
       } else {
-         const user = await User.forge({
+        const user = await User.forge({
           name,
           email,
           password

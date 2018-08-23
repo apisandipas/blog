@@ -2,7 +2,8 @@ import React, { Component } from 'react'
 import { Helmet } from 'react-helmet'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
-import requireAuth from '../../hocs/requireAuth'
+import requireAuth from 'hocs/requireAuth'
+import requireRole from 'hocs/requireRole'
 
 class Dashboard extends Component {
   render () {
@@ -77,7 +78,10 @@ const mapStateToProps = (state) => {
 
 export default {
   component: connect(mapStateToProps, null)(
-    requireAuth(Dashboard)
+    requireRole(
+      requireAuth(Dashboard),
+      ['ADMIN']
+    )
   ),
   loadData ({ dispatch }) {
 
