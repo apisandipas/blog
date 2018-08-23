@@ -1,7 +1,8 @@
 import { AUTH_ERROR, AUTH_USER, UNAUTH_USER } from "../actions/types"
 import jwt from 'jwt-simple'
 
-export default (state = false, action) => {
+const defaultState = { error: '' }
+export default (state = defaultState, action) => {
   switch (action.type) {
     case AUTH_ERROR:
       return { ...state, error: action.payload }
@@ -9,13 +10,14 @@ export default (state = false, action) => {
       const { token }  = action.payload
       const decoded = jwt.decode(token, JWT_SECRET)
       const { id, name, email, role } = decoded
-      return { 
-        ...state, 
-        token, 
+      return {
+        ...state,
+        token,
         id,
         name,
         email,
-        role 
+        role,
+        error: null
       }
     case UNAUTH_USER:
       return {}

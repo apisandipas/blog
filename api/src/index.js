@@ -41,7 +41,7 @@ app.use('/api', router);
 // will print stacktrace
 if (app.get('env') === 'development') {
   app.use(function(err, req, res, next) {
-    res.serverError(new Error("Something went terribly wrong!"));
+    res.serverError(new Error(err.message));
   });
 }
 

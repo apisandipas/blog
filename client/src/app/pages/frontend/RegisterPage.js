@@ -94,8 +94,8 @@ class RegisterPage extends Component {
             </form>
           </div>
           <p className="has-text-grey">
-            <Link to="/login">Login</Link> &nbsp;·&nbsp;
-            {/*<Link to="#">Forgot PLinkssword</Link> &nbsp;·&nbsp;*/}
+            <Link to="/login">Login</Link> {' '}·{' '}
+            <Link to="/forgot-password">Forgot Password</Link>
           </p>
         </section>
 

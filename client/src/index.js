@@ -1,9 +1,9 @@
 import 'babel-polyfill'
-import express from 'express';
-import renderer from './helpers/renderer'
-import createStore from './helpers/createStore'
+import express from 'express'
 import { matchRoutes } from 'react-router-config'
 import isomorphicCookie from 'isomorphic-cookie'
+import renderer from './helpers/renderer'
+import createStore from './helpers/createStore'
 import Routes from './app/Routes'
 import { authUser } from './app/actions/authActions'
 

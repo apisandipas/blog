@@ -4,19 +4,16 @@ import isomorphicCookie from 'isomorphic-cookie'
 export const loginUser = (values) => async (dispatch, getState, { api, req }) => {
   try {
     const res = await api.post('/api/login', values)
-    dispatch({
-      type: AUTH_USER,
-      payload: res.data
-    })
+    dispatch(authUser({token: res.data.token}))
     isomorphicCookie.save('token', res.data.token, {secure: false})
   } catch(err) {
-    console.log(err)
+    console.log('error', err)
     dispatch(authError('Bad Login Info'));
   }
 }
 
 export const logOut = () => async (dispatch) => {
-  isomorphicCookie.remove('token', {secure: false})   
+  isomorphicCookie.remove('token', {secure: false})
   dispatch({
     type: UNAUTH_USER
   })
@@ -25,10 +22,7 @@ export const logOut = () => async (dispatch) => {
 export const registerUser = (values) => async (dispatch, getState, { api, req }) => {
   try {
     const res = await api.post('/api/register', values)
-    dispatch({
-      type: AUTH_USER,
-      payload: res.data
-    })
+    dispatch(authUser({token: res.data.token}))
     isomorphicCookie.save('token', res.data.token, {secure: false})
   } catch(err) {
     console.log(err)

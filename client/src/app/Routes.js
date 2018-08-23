@@ -4,6 +4,8 @@ import PostPage from './pages/frontend/PostPage'
 import LoginPage from './pages/frontend/LoginPage'
 import RegisterPage from './pages/frontend/RegisterPage'
 import NotFoundPage from './pages/frontend/NotFoundPage'
+import ForgotPasswordPage from './pages/frontend/ForgotPasswordPage'
+import ResetPasswordPage from './pages/frontend/ResetPasswordPage'
 
 import Backend from './pages/admin/Backend'
 import Dashboard from './pages/admin/Dashboard'
@@ -33,6 +35,14 @@ export default [
       {
         ...RegisterPage,
         path: '/register'
+      },
+      {
+        ...ForgotPasswordPage,
+        path: '/forgot-password'
+      },
+      {
+        ...ResetPasswordPage,
+        path: '/reset-password'
       },
       {
         ...HomePage,

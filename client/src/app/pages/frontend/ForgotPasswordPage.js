@@ -1,18 +1,18 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
 import { Helmet } from 'react-helmet'
 import { Link, Redirect } from 'react-router-dom'
 import { Field, reduxForm } from 'redux-form'
 import { connect } from 'react-redux'
-import { loginUser } from 'actions/authActions'
 
-class LoginPage extends Component {
+class ForgotPasswordPage extends Component {
   constructor (props) {
     super(props)
     this.handleSubmit = this.handleSubmit.bind(this)
   }
 
   handleSubmit (values) {
-    this.props.loginUser(values)
+    console.log('values!!', values)
+    // this.props.loginUser(values)
   }
 
   renderField (field) {
@@ -41,21 +41,16 @@ class LoginPage extends Component {
   render () {
     const { handleSubmit, auth, error } = this.props
 
-    if (auth) {
-      return <Redirect to='/admin' />
-    }
-
     return (
       <div>
         <Helmet>
-          <title>NERDPress | Login</title>
-          <meta property="og:title" content="NERDPress | Login" />
+          <title>NERDPress | Forgot Password</title>
+          <meta property="og:title" content="NERDPress | Forgot Password" />
         </Helmet>
 
-
-        <div className="login-page">
-          <h3 className="title">Login</h3>
-          <p className="subtitle">Please login to proceed.</p>
+        <section className="forgot-password-page">
+          <h3 className="title">Forgot Password</h3>
+          <p className="subtitle">Please enter your email for a password reset.</p>
 
           {error && (<div className="notification is-danger">{error}</div>)}
 
@@ -68,30 +63,16 @@ class LoginPage extends Component {
                 placeholder="Your Email"
               />
 
-              <Field
-                name="password"
-                component={this.renderField}
-                type="password"
-                placeholder="Your Password"
-              />
-
-              <input type="submit" value="Login" className="btn" style={{width: '100%'}} />
+              <input type="submit" value="Send Reset Email" className="btn" style={{width: '100%'}} />
             </form>
           </div>
           <p className="has-text-grey">
             <Link to="/register">Register</Link> {' '}·{' '}
-            <Link to="/forgot-password">Forgot Password</Link>
+            <Link to="/">Return Home</Link>
           </p>
-        </div>
+        </section>
       </div>
     )
-  }
-}
-
-const mapStateToProps = (state) => {
-  return {
-    auth: state.auth && state.auth.token,
-    error: state.auth && state.auth.error
   }
 }
 
@@ -100,16 +81,14 @@ const validate = (values) => {
 
   if (!values.email) errors.email = 'Please enter your email'
 
-  if (!values.password) errors.password = 'Please enter your password'
-
   return errors
 }
 
 export default {
   component: reduxForm({
-    form: 'loginForm',
+    form: 'forgotPasswordForm',
     validate
   })(
-    connect(mapStateToProps, { loginUser })(LoginPage)
+    connect(null, null)(ForgotPasswordPage)
   )
 }
