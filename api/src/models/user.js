@@ -1,4 +1,3 @@
-import bcrypt from 'bcrypt'
 import db from '../database'
 import Post from './post'
 

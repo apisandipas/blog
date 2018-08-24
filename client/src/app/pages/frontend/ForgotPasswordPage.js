@@ -4,6 +4,7 @@ import { Link, Redirect } from 'react-router-dom'
 import { Field, reduxForm } from 'redux-form'
 import { connect } from 'react-redux'
 import { forgotPassword } from 'actions/authActions'
+import { validEmail } from 'helpers'
 
 class ForgotPasswordPage extends Component {
   constructor (props) {
@@ -40,7 +41,7 @@ class ForgotPasswordPage extends Component {
   }
 
   render () {
-    const { handleSubmit, auth, error } = this.props
+    const { handleSubmit, error, message } = this.props
 
     return (
       <div>
@@ -54,6 +55,7 @@ class ForgotPasswordPage extends Component {
           <p className="subtitle">Please enter your email for a password reset.</p>
 
           {error && (<div className="notification is-danger">{error}</div>)}
+          {message && (<div className="notification is-alert">{message}</div>)}
 
           <div className="box">
             <form onSubmit={handleSubmit(this.handleSubmit)}>
@@ -81,8 +83,15 @@ const validate = (values) => {
   const errors = {}
 
   if (!values.email) errors.email = 'Please enter your email'
+  if (!validEmail(values.email)) errors.email = "Please enter a valid email!"
 
   return errors
+}
+
+const mapStateToProps = (state) => {
+  return {
+    message: state.auth && state.auth.message
+  }
 }
 
 export default {
@@ -90,6 +99,6 @@ export default {
     form: 'forgotPasswordForm',
     validate
   })(
-    connect(null, { forgotPassword })(ForgotPasswordPage)
+    connect(mapStateToProps, { forgotPassword })(ForgotPasswordPage)
   )
 }

@@ -8851,6 +8851,7 @@ var UNAUTH_USER = exports.UNAUTH_USER = 'unauth_user';
 var AUTH_ERROR = exports.AUTH_ERROR = 'auth_error';
 
 var FORGOT_PASSWORD = exports.FORGOT_PASSWORD = 'forgot_password';
+var RESET_PASSWORD = exports.RESET_PASSWORD = 'reset_password';
 
 /***/ }),
 /* 77 */
@@ -10270,7 +10271,7 @@ var Symbol = __WEBPACK_IMPORTED_MODULE_0__root_js__["a" /* default */].Symbol;
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.forgotPassword = exports.authError = exports.authUser = exports.registerUser = exports.logOut = exports.loginUser = undefined;
+exports.resetPassword = exports.forgotPassword = exports.authError = exports.authUser = exports.registerUser = exports.logOut = exports.loginUser = undefined;
 
 var _types = __webpack_require__(76);
 
@@ -10428,7 +10429,7 @@ var forgotPassword = exports.forgotPassword = function forgotPassword(email) {
 
               dispatch({
                 type: _types.FORGOT_PASSWORD,
-                payload: { message: 'Please check your email for a password reset link.' }
+                payload: res.data
               });
               _context4.next = 11;
               break;
@@ -10450,6 +10451,51 @@ var forgotPassword = exports.forgotPassword = function forgotPassword(email) {
 
     return function (_x8, _x9, _x10) {
       return _ref7.apply(this, arguments);
+    };
+  }();
+};
+
+var resetPassword = exports.resetPassword = function resetPassword(payload) {
+  return function () {
+    var _ref9 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee5(dispatch, getState, _ref8) {
+      var api = _ref8.api,
+          req = _ref8.req;
+      var res;
+      return regeneratorRuntime.wrap(function _callee5$(_context5) {
+        while (1) {
+          switch (_context5.prev = _context5.next) {
+            case 0:
+              _context5.prev = 0;
+              _context5.next = 3;
+              return api.post('/api/reset-password', payload);
+
+            case 3:
+              res = _context5.sent;
+
+              dispatch({
+                type: _types.RESET_PASSWORD,
+                payload: res.data
+              });
+              _context5.next = 11;
+              break;
+
+            case 7:
+              _context5.prev = 7;
+              _context5.t0 = _context5['catch'](0);
+
+              console.log('error', _context5.t0);
+              dispatch(authError('Something went wrong'));
+
+            case 11:
+            case 'end':
+              return _context5.stop();
+          }
+        }
+      }, _callee5, undefined, [[0, 7]]);
+    }));
+
+    return function (_x11, _x12, _x13) {
+      return _ref9.apply(this, arguments);
     };
   }();
 };
@@ -68263,6 +68309,8 @@ var _reactRedux = __webpack_require__(20);
 
 var _authActions = __webpack_require__(114);
 
+var _helpers = __webpack_require__(998);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -68429,7 +68477,7 @@ var validate = function validate(values) {
 
   // Validate Email
   if (!values.email) errors.email = "Please enter your email!";
-  if (!validEmail(values.email)) errors.email = "Please enter a valid email!";
+  if (!(0, _helpers.validEmail)(values.email)) errors.email = "Please enter a valid email!";
 
   if (!values.password) errors.password = "Please enter a password!";
   if (!values.passwordConfirm) errors.passwordConfirm = "Please enter a password confirmation!";
@@ -68439,10 +68487,10 @@ var validate = function validate(values) {
   return errors;
 };
 
-function validEmail(email) {
-  var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-  return re.test(String(email).toLowerCase());
-}
+// function validEmail(email) {
+//     var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+//     return re.test(String(email).toLowerCase());
+// }
 
 exports.default = {
   component: (0, _reduxForm.reduxForm)({
@@ -68513,6 +68561,8 @@ var _reactRedux = __webpack_require__(20);
 
 var _authActions = __webpack_require__(114);
 
+var _helpers = __webpack_require__(998);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -68567,8 +68617,8 @@ var ForgotPasswordPage = function (_Component) {
     value: function render() {
       var _props = this.props,
           handleSubmit = _props.handleSubmit,
-          auth = _props.auth,
-          error = _props.error;
+          error = _props.error,
+          message = _props.message;
 
 
       return _react2.default.createElement(
@@ -68601,6 +68651,11 @@ var ForgotPasswordPage = function (_Component) {
             'div',
             { className: 'notification is-danger' },
             error
+          ),
+          message && _react2.default.createElement(
+            'div',
+            { className: 'notification is-alert' },
+            message
           ),
           _react2.default.createElement(
             'div',
@@ -68647,15 +68702,22 @@ var validate = function validate(values) {
   var errors = {};
 
   if (!values.email) errors.email = 'Please enter your email';
+  if (!(0, _helpers.validEmail)(values.email)) errors.email = "Please enter a valid email!";
 
   return errors;
+};
+
+var mapStateToProps = function mapStateToProps(state) {
+  return {
+    message: state.auth && state.auth.message
+  };
 };
 
 exports.default = {
   component: (0, _reduxForm.reduxForm)({
     form: 'forgotPasswordForm',
     validate: validate
-  })((0, _reactRedux.connect)(null, { forgotPassword: _authActions.forgotPassword })(ForgotPasswordPage))
+  })((0, _reactRedux.connect)(mapStateToProps, { forgotPassword: _authActions.forgotPassword })(ForgotPasswordPage))
 };
 
 /***/ }),
@@ -68685,6 +68747,8 @@ var _reduxForm = __webpack_require__(120);
 
 var _reactRedux = __webpack_require__(20);
 
+var _authActions = __webpack_require__(114);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -68708,8 +68772,9 @@ var ResetPasswordPage = function (_Component) {
   _createClass(ResetPasswordPage, [{
     key: 'handleSubmit',
     value: function handleSubmit(values) {
-      console.log('values!!', values);
-      // this.props.loginUser(values)
+      var token = this.props.location.search.split('=')[1];
+      values.token = token;
+      this.props.resetPassword(values);
     }
   }, {
     key: 'renderField',
@@ -68739,9 +68804,11 @@ var ResetPasswordPage = function (_Component) {
     value: function render() {
       var _props = this.props,
           handleSubmit = _props.handleSubmit,
-          auth = _props.auth,
-          error = _props.error;
+          error = _props.error,
+          doRedirect = _props.doRedirect;
 
+
+      if (doRedirect) return _react2.default.createElement(_reactRouterDom.Redirect, { to: '/login' });
 
       return _react2.default.createElement(
         'div',
@@ -68823,20 +68890,23 @@ var ResetPasswordPage = function (_Component) {
 
 var validate = function validate(values) {
   var errors = {};
-
-  if (!values.email) errors.email = 'Please enter a email';
+  if (!values.password) errors.password = 'Please enter a password!';
   if (!values.passwordConfirm) errors.passwordConfirm = 'Please enter a password confirmation!';
-
   if (values.password !== values.passwordConfirm) errors.passwordConfirm = 'Passwords do not match!';
-
   return errors;
+};
+
+var mapStateToProps = function mapStateToProps(state) {
+  return {
+    doRedirect: state.auth && state.auth.message
+  };
 };
 
 exports.default = {
   component: (0, _reduxForm.reduxForm)({
     form: 'resetPasswordForm',
     validate: validate
-  })((0, _reactRedux.connect)(null, null)(ResetPasswordPage))
+  })((0, _reactRedux.connect)(mapStateToProps, { resetPassword: _authActions.resetPassword })(ResetPasswordPage))
 };
 
 /***/ }),
@@ -69488,6 +69558,11 @@ exports.default = function () {
         email: email,
         role: role,
         error: null
+      });
+    case _types.RESET_PASSWORD:
+    case _types.FORGOT_PASSWORD:
+      return _extends({}, state, {
+        message: action.payload.message
       });
     case _types.UNAUTH_USER:
       return {};
@@ -79774,6 +79849,25 @@ exports.default = function () {
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
+
+/***/ }),
+/* 994 */,
+/* 995 */,
+/* 996 */,
+/* 997 */,
+/* 998 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+var validEmail = exports.validEmail = function validEmail(email) {
+  var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+  return re.test(String(email).toLowerCase());
+};
 
 /***/ })
 /******/ ]);

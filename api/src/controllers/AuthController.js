@@ -2,6 +2,7 @@ import User from '../models/user'
 import jwt from 'jwt-simple'
 import { promisify } from 'util'
 import crypto from 'crypto'
+import mailer from '../services/mailer'
 
 const tokenForUser = (user) => {
   const timestamp = new Date().getTime()
@@ -64,22 +65,66 @@ class AuthController {
     }
   }
 
-  async forgotPassword(req, res, next) {
+  async forgotPassword (req, res, next) {
     try {
       const email = req.body.email
       let user = await User.where('email', email).fetch()
+      if (!user) res.send({ message: 'Email address not found.' })
       const randomBytes = promisify(crypto.randomBytes)
       const buffer = await randomBytes(20)
       const token = buffer.toString('hex')
       user.set('password_reset_token', token)
       user.set('password_reset_expires', Date.now() + 86400000)
       await user.save()
-      console.log('email', email)
-      console.log('token', token)
-      console.log('user', user.toJSON())
-      res.send(token)
 
+      let data = {
+        to: user.get('email'),
+        from: 'no-reply@localhost.com',
+        template: 'forgot-password-email',
+        subject: 'Password help has arrived!',
+        context: {
+          url: 'http://localhost:3002/reset-password?token=' + token,
+          name: user.get('name').split(' ')[0]
+        }
+      }
+
+      await mailer.sendMail(data)
+      res.send({ message: 'Password reset email has been sent.' })
     } catch (err) {
+      console.error(err.message)
+      res.serverError(new Error(err.message))
+    }
+  }
+
+  async resetPassword (req, res, next) {
+    try {
+      const { token, password, passwordConfirm } = req.body
+      let user = await User.where({
+        password_reset_token: token
+      })
+        .where('password_reset_expires', '>', Date.now())
+        .fetch()
+      if (!user) throw new Error('Invalid password reset token!')
+      if (password !== passwordConfirm) throw new Error("Passwords don't match!")
+
+      user.set('password', password)
+      user.set('password_reset_token', null)
+      user.set('password_reset_expires', null)
+      await user.save()
+      let data = {
+        to: user.get('email'),
+        from: 'no-reply@localhost.com',
+        template: 'reset-password-email',
+        subject: 'Password Reset Confirmation',
+        context: {
+          name: user.get('name').split(' ')[0]
+        }
+      }
+
+      await mailer.sendMail(data)
+      res.send({ message: true })
+    } catch (err) {
+      console.error(err.message)
       res.serverError(new Error(err.message))
     }
   }

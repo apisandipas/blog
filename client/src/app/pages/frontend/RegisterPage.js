@@ -3,7 +3,8 @@ import { Helmet } from 'react-helmet'
 import { Link, Redirect } from 'react-router-dom'
 import { Field, reduxForm } from 'redux-form'
 import { connect } from 'react-redux'
-import { registerUser } from '../../actions/authActions'
+import { registerUser } from 'actions/authActions'
+import { validEmail } from 'helpers'
 
 class RegisterPage extends Component {
 
@@ -130,10 +131,10 @@ const validate = (values) => {
   return errors
 }
 
-function validEmail(email) {
-    var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-    return re.test(String(email).toLowerCase());
-}
+// function validEmail(email) {
+//     var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+//     return re.test(String(email).toLowerCase());
+// }
 
 export default {
   component: reduxForm({

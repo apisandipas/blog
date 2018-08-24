@@ -15,7 +15,7 @@ passport.deserializeUser(async (id, done) => {
 passport.use(new LocalStrategy({ usernameField: 'email' }, async (email, password, done) => {
   try {
     const user = await User.where('email', email).fetch()
-    if (!user){
+    if (!user) {
       console.log('user = false')
       return done(null, false)
     }
@@ -40,12 +40,12 @@ const jwtOptions = {
 passport.use(new JwtStrategy(jwtOptions, async (payload, done) => {
   try {
     const user = await User.where('id', payload.sub).fetch()
-    if (!user){
+    if (!user) {
       return done(null, false)
     }
 
     return done(null, user)
-  } catch(err) {
+  } catch (err) {
     done(err)
   }
 }))

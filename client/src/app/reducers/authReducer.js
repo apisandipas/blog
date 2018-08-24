@@ -1,4 +1,4 @@
-import { AUTH_ERROR, AUTH_USER, UNAUTH_USER } from "../actions/types"
+import { AUTH_ERROR, AUTH_USER, UNAUTH_USER, FORGOT_PASSWORD, RESET_PASSWORD } from "../actions/types"
 import jwt from 'jwt-simple'
 
 const defaultState = { error: '' }
@@ -18,6 +18,12 @@ export default (state = defaultState, action) => {
         email,
         role,
         error: null
+      }
+    case RESET_PASSWORD:
+    case FORGOT_PASSWORD:
+      return {
+        ...state,
+        message: action.payload.message
       }
     case UNAUTH_USER:
       return {}

@@ -1,4 +1,4 @@
-import { AUTH_USER, UNAUTH_USER, AUTH_ERROR, FORGOT_PASSWORD } from './types'
+import { AUTH_USER, UNAUTH_USER, AUTH_ERROR, FORGOT_PASSWORD, RESET_PASSWORD } from './types'
 import isomorphicCookie from 'isomorphic-cookie'
 
 export const loginUser = (values) => async (dispatch, getState, { api, req }) => {
@@ -50,7 +50,20 @@ export const forgotPassword = (email) => async (dispatch, getState, { api, req }
     const res = await api.post('/api/forgot-password', email)
     dispatch({
       type: FORGOT_PASSWORD,
-      payload: { message: 'Please check your email for a password reset link.' }
+      payload: res.data
+    })
+  } catch (err) {
+    console.log('error', err)
+    dispatch(authError('Something went wrong'))
+  }
+}
+
+export const resetPassword = (payload) => async (dispatch, getState, { api, req }) => {
+  try {
+    const res = await api.post('/api/reset-password', payload)
+    dispatch({
+      type: RESET_PASSWORD,
+      payload: res.data
     })
   } catch (err) {
     console.log('error', err)

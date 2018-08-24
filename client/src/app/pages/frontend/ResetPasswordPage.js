@@ -3,6 +3,7 @@ import { Helmet } from 'react-helmet'
 import { Link, Redirect } from 'react-router-dom'
 import { Field, reduxForm } from 'redux-form'
 import { connect } from 'react-redux'
+import { resetPassword } from 'actions/authActions'
 
 class ResetPasswordPage extends Component {
   constructor (props) {
@@ -11,8 +12,9 @@ class ResetPasswordPage extends Component {
   }
 
   handleSubmit (values) {
-    console.log('values!!', values)
-    // this.props.loginUser(values)
+    const token = this.props.location.search.split('=')[1]
+    values.token = token
+    this.props.resetPassword(values)
   }
 
   renderField (field) {
@@ -39,7 +41,9 @@ class ResetPasswordPage extends Component {
   }
 
   render () {
-    const { handleSubmit, auth, error } = this.props
+    const { handleSubmit, error, doRedirect } = this.props
+
+    if (doRedirect) return <Redirect to='/login' />
 
     return (
       <div>
@@ -84,14 +88,16 @@ class ResetPasswordPage extends Component {
 
 const validate = (values) => {
   const errors = {}
-
-  if (!values.email) errors.email = 'Please enter a email'
+  if (!values.password) errors.password = 'Please enter a password!'
   if (!values.passwordConfirm) errors.passwordConfirm = 'Please enter a password confirmation!'
-
   if (values.password !== values.passwordConfirm) errors.passwordConfirm = 'Passwords do not match!'
-
-
   return errors
+}
+
+const mapStateToProps = (state) => {
+  return {
+    doRedirect: state.auth && state.auth.message
+  }
 }
 
 export default {
@@ -99,6 +105,6 @@ export default {
     form: 'resetPasswordForm',
     validate
   })(
-    connect(null, null)(ResetPasswordPage)
+    connect(mapStateToProps, { resetPassword })(ResetPasswordPage)
   )
 }

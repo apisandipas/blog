@@ -15,6 +15,9 @@
     "knex": "^0.14.2",
     "morgan": "^1.9.0",
     "mysql": "^2.15.0",
+    "nodemailer": "^4.6.8",
+    "nodemailer-express-handlebars": "^3.0.0",
+    "nodemailer-mailgun-transport": "^1.4.0",
     "passport": "^0.4.0",
     "passport-jwt": "^3.0.1",
     "passport-local": "^1.0.0"
@@ -51,7 +54,7 @@
   "main": "src/index.js",
   "scripts": {
     "dev": "npm-run-all --parallel dev:*",
-    "dev:server": "nodemon --watch build --exec \"node build/bundle.js\"",
+    "dev:server": "nodemon --watch build --exec \"node build/bundle.js --inspect\"",
     "dev:build-server": "webpack --config webpack.api.js --watch",
     "test": "export NODE_ENV=test && mocha --require babel-core/register --recursive",
     "test-watch": "nodemon --exec 'npm test'"
