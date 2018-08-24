@@ -1,5 +1,7 @@
 import User from '../models/user'
 import jwt from 'jwt-simple'
+import { promisify } from 'util'
+import crypto from 'crypto'
 
 const tokenForUser = (user) => {
   const timestamp = new Date().getTime()
@@ -58,6 +60,26 @@ class AuthController {
         });
       }
     } catch(err) {
+      res.serverError(new Error(err.message))
+    }
+  }
+
+  async forgotPassword(req, res, next) {
+    try {
+      const email = req.body.email
+      let user = await User.where('email', email).fetch()
+      const randomBytes = promisify(crypto.randomBytes)
+      const buffer = await randomBytes(20)
+      const token = buffer.toString('hex')
+      user.set('password_reset_token', token)
+      user.set('password_reset_expires', Date.now() + 86400000)
+      await user.save()
+      console.log('email', email)
+      console.log('token', token)
+      console.log('user', user.toJSON())
+      res.send(token)
+
+    } catch (err) {
       res.serverError(new Error(err.message))
     }
   }

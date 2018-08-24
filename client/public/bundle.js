@@ -8850,6 +8850,8 @@ var AUTH_USER = exports.AUTH_USER = 'auth_user';
 var UNAUTH_USER = exports.UNAUTH_USER = 'unauth_user';
 var AUTH_ERROR = exports.AUTH_ERROR = 'auth_error';
 
+var FORGOT_PASSWORD = exports.FORGOT_PASSWORD = 'forgot_password';
+
 /***/ }),
 /* 77 */
 /***/ (function(module, exports, __webpack_require__) {
@@ -10268,7 +10270,7 @@ var Symbol = __WEBPACK_IMPORTED_MODULE_0__root_js__["a" /* default */].Symbol;
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.authError = exports.authUser = exports.registerUser = exports.logOut = exports.loginUser = undefined;
+exports.forgotPassword = exports.authError = exports.authUser = exports.registerUser = exports.logOut = exports.loginUser = undefined;
 
 var _types = __webpack_require__(76);
 
@@ -10285,7 +10287,7 @@ var loginUser = exports.loginUser = function loginUser(values) {
     var _ref2 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee(dispatch, getState, _ref) {
       var api = _ref.api,
           req = _ref.req;
-      var res;
+      var res, token;
       return regeneratorRuntime.wrap(function _callee$(_context) {
         while (1) {
           switch (_context.prev = _context.next) {
@@ -10296,25 +10298,26 @@ var loginUser = exports.loginUser = function loginUser(values) {
 
             case 3:
               res = _context.sent;
+              token = res.data.token;
 
-              dispatch(authUser({ token: res.data.token }));
-              _isomorphicCookie2.default.save('token', res.data.token, { secure: false });
-              _context.next = 12;
+              dispatch(authUser({ token: token }));
+              _isomorphicCookie2.default.save('token', token, { secure: false });
+              _context.next = 13;
               break;
 
-            case 8:
-              _context.prev = 8;
+            case 9:
+              _context.prev = 9;
               _context.t0 = _context['catch'](0);
 
               console.log('error', _context.t0);
               dispatch(authError('Bad Login Info'));
 
-            case 12:
+            case 13:
             case 'end':
               return _context.stop();
           }
         }
-      }, _callee, undefined, [[0, 8]]);
+      }, _callee, undefined, [[0, 9]]);
     }));
 
     return function (_x, _x2, _x3) {
@@ -10404,6 +10407,51 @@ var authError = exports.authError = function authError(error) {
     type: _types.AUTH_ERROR,
     payload: error
   };
+};
+
+var forgotPassword = exports.forgotPassword = function forgotPassword(email) {
+  return function () {
+    var _ref7 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee4(dispatch, getState, _ref6) {
+      var api = _ref6.api,
+          req = _ref6.req;
+      var res;
+      return regeneratorRuntime.wrap(function _callee4$(_context4) {
+        while (1) {
+          switch (_context4.prev = _context4.next) {
+            case 0:
+              _context4.prev = 0;
+              _context4.next = 3;
+              return api.post('/api/forgot-password', email);
+
+            case 3:
+              res = _context4.sent;
+
+              dispatch({
+                type: _types.FORGOT_PASSWORD,
+                payload: { message: 'Please check your email for a password reset link.' }
+              });
+              _context4.next = 11;
+              break;
+
+            case 7:
+              _context4.prev = 7;
+              _context4.t0 = _context4['catch'](0);
+
+              console.log('error', _context4.t0);
+              dispatch(authError('Something went wrong'));
+
+            case 11:
+            case 'end':
+              return _context4.stop();
+          }
+        }
+      }, _callee4, undefined, [[0, 7]]);
+    }));
+
+    return function (_x8, _x9, _x10) {
+      return _ref7.apply(this, arguments);
+    };
+  }();
 };
 
 /***/ }),
@@ -68463,6 +68511,8 @@ var _reduxForm = __webpack_require__(120);
 
 var _reactRedux = __webpack_require__(20);
 
+var _authActions = __webpack_require__(114);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -68487,7 +68537,7 @@ var ForgotPasswordPage = function (_Component) {
     key: 'handleSubmit',
     value: function handleSubmit(values) {
       console.log('values!!', values);
-      // this.props.loginUser(values)
+      this.props.forgotPassword(values);
     }
   }, {
     key: 'renderField',
@@ -68605,7 +68655,7 @@ exports.default = {
   component: (0, _reduxForm.reduxForm)({
     form: 'forgotPasswordForm',
     validate: validate
-  })((0, _reactRedux.connect)(null, null)(ForgotPasswordPage))
+  })((0, _reactRedux.connect)(null, { forgotPassword: _authActions.forgotPassword })(ForgotPasswordPage))
 };
 
 /***/ }),

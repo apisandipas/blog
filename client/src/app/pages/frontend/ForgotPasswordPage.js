@@ -3,6 +3,7 @@ import { Helmet } from 'react-helmet'
 import { Link, Redirect } from 'react-router-dom'
 import { Field, reduxForm } from 'redux-form'
 import { connect } from 'react-redux'
+import { forgotPassword } from 'actions/authActions'
 
 class ForgotPasswordPage extends Component {
   constructor (props) {
@@ -12,7 +13,7 @@ class ForgotPasswordPage extends Component {
 
   handleSubmit (values) {
     console.log('values!!', values)
-    // this.props.loginUser(values)
+    this.props.forgotPassword(values)
   }
 
   renderField (field) {
@@ -89,6 +90,6 @@ export default {
     form: 'forgotPasswordForm',
     validate
   })(
-    connect(null, null)(ForgotPasswordPage)
+    connect(null, { forgotPassword })(ForgotPasswordPage)
   )
 }
