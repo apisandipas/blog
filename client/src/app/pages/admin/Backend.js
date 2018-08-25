@@ -12,7 +12,7 @@ class Backend extends Component {
   render () {
     const { route, history } = this.props
     return (
-      <div>
+      <div id="admin" className="container">
         <Helmet>
           <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700" rel="stylesheet" />
           <link rel="stylesheet" type="text/css" href="/admin.css" />

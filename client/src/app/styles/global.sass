@@ -1,0 +1,26 @@
+html, body
+  height: 100%
+  margin: 0
+  padding: 0
+  box-sizing: border-box
+
+
+
+#frontend
+  font-family: Helvetica, sans-serif
+  background: #607D8B
+  color: #fff
+  a
+    color: #fff
+    &:hover
+      color: $primary
+
+  .site-body
+    margin: 0 auto
+    max-width: 980px
+    display: block
+
+    @media all and (min-width: 700px)
+      display: grid
+      grid-gap: 30px
+      grid-template-columns: 70% 30%

@@ -899,7 +899,7 @@ var App = function App(_ref) {
 
   return _react2.default.createElement(
     'div',
-    { className: 'container' },
+    { id: 'frontend', className: 'container' },
     _react2.default.createElement(_reactHelmet2.default, null),
     (0, _reactRouterConfig.renderRoutes)(route.routes)
   );
@@ -2286,7 +2286,7 @@ var Backend = function (_Component) {
 
       return _react2.default.createElement(
         'div',
-        null,
+        { id: 'admin', className: 'container' },
         _react2.default.createElement(
           _reactHelmet.Helmet,
           null,

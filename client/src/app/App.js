@@ -4,9 +4,8 @@ import { renderRoutes } from 'react-router-config'
 
 const App = ({ route }) => {
   return (
-    <div className="container">
+    <div id="frontend" className="container">
       <Helmet>
-        {/* <link rel="stylesheet" type="text/css" href="/styles.css" /> */}
       </Helmet>
       {renderRoutes(route.routes)}
     </div>

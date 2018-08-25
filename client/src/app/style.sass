@@ -1,123 +1,13 @@
 @import './styles/sanitize.scss'
+@import './styles/variables'
+@import './styles/global'
 
-$primary: #03A9F4
+@import './styles/components/navbar'
+@import './styles/components/pagination'
+@import './styles/components/article'
+@import './styles/components/footer'
+@import './styles/components/button'
 
-html, body
-  height: 100%
-  margin: 0
-  padding: 0
-  box-sizing: border-box
-
-body
-  font-family: Helvetica, sans-serif
-  background: #607D8B
-  color: #fff
-
-a
-  color: #fff
-  &:hover
-    color: $primary
-
-.site-body
-  margin: 0 auto
-  max-width: 980px
-  display: block
-
-  @media all and (min-width: 700px)
-    display: grid
-    grid-gap: 30px
-    grid-template-columns: 70% 30%
-
-.navbar
-  margin-bottom: 4rem
-  a
-    text-decoration: none
-
-  .navbar-inner
-    margin: 0 auto
-    max-width: 980px
-    display: flex
-    align-items: center
-    height: 50px
-  .navbar-brand
-    margin-right: 1rem
-  .navbar-menu
-    display: flex
-    flex: 1
-
-  .navbar-end
-    margin-left: auto
-
-  .navbar-item
-    padding: 1rem 1rem 1rem
-
-.pagination
-  display: flex
-  max-width: 980px
-  margin: 0 auto
-
-  > a
-    padding: 1rem
-    cursor: pointer
-
-  .pagination-next
-    margin-left: auto
+@import './styles/pages/auth-pages'
 
 
-.article
-  background: #fff
-  color: #111
-  padding: 1rem
-  border-radius: 2px
-  box-shadow: 1px 1px 3px #111
-  a
-    color: $primary
-    &:hover
-      color: $primary
-  &-title
-    margin: 0
-
-  & + .article
-    margin-top: 2rem
-
-footer
-  max-width: 980px
-  margin: 0 auto
-  padding: 1rem 0 1rem
-
-.login-page,
-.register-page,
-.forgot-password-page,
-.reset-password-page
-  display: flex
-  width: 100vw
-  height: 100vh
-  justify-content: center
-  align-items: center
-  flex-direction: column
-  .box
-    marginTop: 1rem
-    display: flex
-    width: 320px
-    justify-content: center
-    align-items: center
-  .field
-    width: 320px
-    min-height: 60px
-    .tag.error
-      background: red
-      color: #fff
-      font-size: 80%
-      border-radius: 10px
-      padding: 0.25rem
-    .input
-      width: 100%
-      padding: 0.75rem
-
-button.btn, a.btn, [type=submit].btn
-  background: $primary
-  color: #fff
-  border: 0
-  padding: 1rem
-  border-radius: 25px
-  font-size: 16px
