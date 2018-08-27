@@ -36,7 +36,7 @@ class HomePage extends Component {
   }
 
   setPage (page = this.state.page) {
-    this.props.history.push(`/${page}`)
+    this.props.history.push(`/page/${page}`)
     this.props.fetchPosts(page)
   }
 
@@ -105,7 +105,9 @@ function mapStateToProps (state) {
 export default {
   component: connect(mapStateToProps, { fetchPosts })(HomePage),
   loadData: ({ dispatch }, { params }) => {
-    const page = params[0].split('/')[1] || 1
+    console.log('params', params)
+    console.log("params[0].split('/')[1]", params[0].split('/')[2])
+    const page = params[0].split('/')[2] || 1
     return dispatch(fetchPosts(page))
   }
 }

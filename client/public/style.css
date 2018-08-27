@@ -526,9 +526,9 @@ html, body {
   border-radius: 2px;
   box-shadow: 1px 1px 3px #111; }
   .article a {
-    color: #03A9F4; }
+    color: #03A9F4 !important; }
     .article a:hover {
-      color: #03A9F4; }
+      color: #03A9F4 !important; }
   .article-title {
     margin: 0; }
   .article + .article {

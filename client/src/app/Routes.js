@@ -46,8 +46,12 @@ export default [
       },
       {
         ...HomePage,
+        path: '/page/:page?'
+      },
+      {
+        ...HomePage,
         exact: true,
-        path: '/:page?'
+        path: '/'
       },
       {
         ...NotFoundPage

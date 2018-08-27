@@ -12,9 +12,10 @@ class Backend extends Component {
   render () {
     const { route, history } = this.props
     return (
-      <div id="admin" className="container">
+      <div id="admin">
         <Helmet>
           <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700" rel="stylesheet" />
+          <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.1/css/bulma.css" />
           <link rel="stylesheet" type="text/css" href="/admin.css" />
         </Helmet>
         <Header history={history}/>

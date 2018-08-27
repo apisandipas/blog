@@ -432,8 +432,10 @@ exports.default = [_extends({
   }), _extends({}, _ResetPasswordPage2.default, {
     path: '/reset-password'
   }), _extends({}, _HomePage2.default, {
+    path: '/page/:page?'
+  }), _extends({}, _HomePage2.default, {
     exact: true,
-    path: '/:page?'
+    path: '/'
   }), _extends({}, _NotFoundPage2.default)]
 })];
 
@@ -907,7 +909,6 @@ var App = function App(_ref) {
 
 exports.default = {
   component: App
-  // loadData: ({ dispatch }) => dispatch()
 };
 
 /***/ }),
@@ -998,7 +999,7 @@ var HomePage = function (_Component) {
     value: function setPage() {
       var page = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : this.state.page;
 
-      this.props.history.push('/' + page);
+      this.props.history.push('/page/' + page);
       this.props.fetchPosts(page);
     }
   }, {
@@ -1104,7 +1105,9 @@ exports.default = {
     var dispatch = _ref.dispatch;
     var params = _ref2.params;
 
-    var page = params[0].split('/')[1] || 1;
+    console.log('params', params);
+    console.log("params[0].split('/')[1]", params[0].split('/')[2]);
+    var page = params[0].split('/')[2] || 1;
     return dispatch((0, _postActions.fetchPosts)(page));
   }
 };
@@ -2286,11 +2289,12 @@ var Backend = function (_Component) {
 
       return _react2.default.createElement(
         'div',
-        { id: 'admin', className: 'container' },
+        { id: 'admin' },
         _react2.default.createElement(
           _reactHelmet.Helmet,
           null,
           _react2.default.createElement('link', { href: 'https://fonts.googleapis.com/css?family=Open+Sans:300,400,700', rel: 'stylesheet' }),
+          _react2.default.createElement('link', { rel: 'stylesheet', type: 'text/css', href: 'https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.1/css/bulma.css' }),
           _react2.default.createElement('link', { rel: 'stylesheet', type: 'text/css', href: '/admin.css' })
         ),
         _react2.default.createElement(_Header2.default, { history: history }),
