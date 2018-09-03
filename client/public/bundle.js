@@ -56182,10 +56182,10 @@ exports.default = [_extends({
   }), _extends({}, _ResetPasswordPage2.default, {
     path: '/reset-password'
   }), _extends({}, _HomePage2.default, {
-    path: '/page/:page?'
-  }), _extends({}, _HomePage2.default, {
     exact: true,
     path: '/'
+  }), _extends({}, _HomePage2.default, {
+    path: '/page/:page?'
   }), _extends({}, _NotFoundPage2.default)]
 })];
 
@@ -57331,8 +57331,6 @@ exports.default = {
     var dispatch = _ref.dispatch;
     var params = _ref2.params;
 
-    console.log('params', params);
-    console.log("params[0].split('/')[1]", params[0].split('/')[2]);
     var page = params[0].split('/')[2] || 1;
     return dispatch((0, _postActions.fetchPosts)(page));
   }
@@ -68517,6 +68515,8 @@ var _react = __webpack_require__(1);
 
 var _react2 = _interopRequireDefault(_react);
 
+var _reactRouterDom = __webpack_require__(42);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var NotFoundPage = function NotFoundPage(_ref) {
@@ -68525,9 +68525,19 @@ var NotFoundPage = function NotFoundPage(_ref) {
 
   staticContext.notFound = true;
   return _react2.default.createElement(
-    'h1',
-    { className: 'center-align', style: { marginTop: '200px' } },
-    'Not Found'
+    'div',
+    { style: { height: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', flexDirection: 'column' } },
+    _react2.default.createElement(
+      'h1',
+      null,
+      'Not Found'
+    ),
+    _react2.default.createElement('br', null),
+    _react2.default.createElement(
+      _reactRouterDom.Link,
+      { to: '/' },
+      '\u2190 Go Home'
+    )
   );
 };
 

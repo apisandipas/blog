@@ -105,8 +105,6 @@ function mapStateToProps (state) {
 export default {
   component: connect(mapStateToProps, { fetchPosts })(HomePage),
   loadData: ({ dispatch }, { params }) => {
-    console.log('params', params)
-    console.log("params[0].split('/')[1]", params[0].split('/')[2])
     const page = params[0].split('/')[2] || 1
     return dispatch(fetchPosts(page))
   }
