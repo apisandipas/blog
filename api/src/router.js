@@ -18,6 +18,7 @@ router.get('/logout', authController.logout)
 router.post('/register', authController.register)
 router.post('/forgot-password', authController.forgotPassword)
 router.post('/reset-password', authController.resetPassword)
+router.post('/username-available', authController.isUsernameAvailable)
 
 router.get('/users',
   requireToken,

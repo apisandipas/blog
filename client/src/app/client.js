@@ -9,15 +9,11 @@ import { Provider } from 'react-redux'
 import { renderRoutes } from 'react-router-config'
 import { composeWithDevTools } from 'redux-devtools-extension'
 
-import axios from 'axios'
 import Routes from './Routes'
 import reducers from './reducers'
+import { api } from './helpers'
 
 import './style.sass'
-
-const api = axios.create({
-  baseURL: 'http://localhost:3001'
-})
 
 const store = createStore(
   reducers,

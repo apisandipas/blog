@@ -26,6 +26,7 @@ class UsersController {
     req.checkBody('email', 'Email is required.').notEmpty()
     req.checkBody('email', 'Email must be a valid email address').isEmail()
     req.checkBody('email', 'Email must be between 4 and 100 characters long').len(4, 100)
+    req.checkBody('username', 'Username much be between 4 and 100 characters long').len(4, 100)
     req.checkBody('password', 'Password is required.').notEmpty()
     req.checkBody('password', 'Password must be between 8 and 72 characters long.').len(8, 72)
     req.checkBody('passwordConfirm', 'Password Confirm must match password').equals(req.body.password)
@@ -34,10 +35,12 @@ class UsersController {
     if (errors.length) res.invalid(errors)
 
     try {
-      const { name, email, password, role } = req.body
+      const { name, email, username, password, role } = req.body
+
       let user = await User.forge({
         name,
         email,
+        username,
         password,
         role
       }).save()
@@ -48,11 +51,11 @@ class UsersController {
   }
 
   async update (req, res) {
-
+    throw new Error('Not implemented!')
   }
 
   async delete (req, res) {
-
+    throw new Error('Not implemented!')
   }
 
 }

@@ -33,6 +33,7 @@ class AuthController {
     req.checkBody('email', 'Email is required.').notEmpty()
     req.checkBody('email', 'Email must be a valid email address').isEmail()
     req.checkBody('email', 'Email must be between 4 and 100 characters long').len(4, 100)
+    req.checkBody('username', 'Username much be between 4 and 100 characters long').len(4, 100)
     req.checkBody('password', 'Password is required.').notEmpty()
     req.checkBody('password', 'Password must be between 8 and 72 characters long.').len(8, 72)
     req.checkBody('passwordConfirm', 'Password Confirm must match password').equals(req.body.password)
@@ -41,7 +42,7 @@ class AuthController {
     if (errors.length) res.invalid(errors)
 
     try {
-      const { name, email, password } = req.body
+      const { name, email, username, password } = req.body
 
       // Check for existing account with email
       const existingUser = await User.where('email', email).fetch()
@@ -51,6 +52,7 @@ class AuthController {
         const user = await User.forge({
           name,
           email,
+          username,
           password
         }).save()
         req.login(user, function(err) {
@@ -127,6 +129,20 @@ class AuthController {
       console.error(err.message)
       res.serverError(new Error(err.message))
     }
+  }
+
+  async isUsernameAvailable (req, res, next) {
+    try {
+      const username = req.body.username
+      const user = await User.where({
+        username: username
+      }).fetch()
+      res.send({ message: !user })
+    } catch (err) {
+      console.error(err.message)
+      res.serverError(new Error(err.message))
+    }
+
   }
 }
 
